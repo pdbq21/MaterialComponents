@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import App from './App';
 import './index.css';
+import './'
 
 import configureStore from './app/store/configureStore';
 
@@ -14,8 +15,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-/*
- ReactDOM.render(
- <BuilderContainer />,
- document.getElementById('root-app-pb')
- );*/
