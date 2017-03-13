@@ -1,14 +1,35 @@
 /**
  * Created by ruslan on 08.03.17.
  */
+import React from 'react';
+import {Checkbox} from '../../app/lib'
+import {Ripple} from '../../app/lib'
 
-import React, {PureComponent} from 'react';
+export default function Checkboxes() {
 
-//import '@material/checkbox/dist/mdc.checkbox.css';
-//import {checkbox as mdcCheckbox} from 'material-components-web';
-//const {MDCCheckbox, MDCCheckboxFoundation} = mdcCheckbox;
-import '@material/checkbox/dist/mdc.checkbox.css';
-//dist/mdc.COMPONENT.min.js.
+    return (
+        <div>
+            <fieldset>
+                <legend>Checkbox</legend>
+                <Ripple>
+                    <Checkbox />
+                </Ripple>
+            </fieldset>
+            <fieldset>
+                <legend>Only CSS Checkbox</legend>
+                <Checkbox />
+            </fieldset>
+            <fieldset>
+                <legend>Disabled Checkbox</legend>
+                <Checkbox disabled/>
+            </fieldset>
+        </div>
+    );
+}
+
+/*import React, {PureComponent} from 'react';
+
+
 export default class Checkbox extends PureComponent {
 
 
@@ -35,4 +56,4 @@ export default class Checkbox extends PureComponent {
             </div>
         );
     }
-}
+}*/

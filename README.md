@@ -323,7 +323,7 @@ export default Button; // Don’t forget to use export default!
 
 ```js
 import React, { Component } from 'react';
-import Button from './Button'; // Import a component from another file
+import Button from Button.jsx; // Import a component from another file
 
 class DangerButton extends Component {
   render() {
@@ -362,7 +362,7 @@ This project setup uses [Webpack](https://webpack.github.io/) for handling all a
 
 ```js
 import React, { Component } from 'react';
-import './Button.css'; // Tell Webpack that Button.js uses these styles
+import Button.jsx; Button.jsx
 
 class Button extends Component {
   render() {
@@ -600,7 +600,7 @@ Import Bootstrap CSS and optionally Bootstrap theme CSS in the beginning of your
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 // Put any other imports below so that CSS from your
-// components takes precedence over default styles.
+lib
 ```
 
 Import required React Bootstrap components within ```src/App.js``` file or your custom component files:

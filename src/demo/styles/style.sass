@@ -1,0 +1,30 @@
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+
+.App fieldset>*
+  margin: 1em
+
+.navigation
+  padding: 0
+
+.navigation-item
+  margin: 0.5em 0
+  padding: 0.25em 1em
+  background-color: aquamarine
+  cursor: pointer
+  &:hover
+    background-color: #63c5a4
+    color: #f8f8f8
+  &.active
+    color: crimson
+
+.elevation>div
+  width: 10em
+  height: 6em
+  margin: 2em
+  display: inline-block

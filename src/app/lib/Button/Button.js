@@ -13,6 +13,10 @@ const propTypes = {
     dense: PropTypes.bool,
     primary: PropTypes.bool,
     raised: PropTypes.bool,
+    elementType: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.string
+    ]),
 };
 const Button = ({
     accent,
@@ -22,6 +26,7 @@ const Button = ({
     dense,
     primary,
     raised,
+    elementType,
     ...otherProp
 }) => {
     const classes = classnames(
@@ -32,12 +37,13 @@ const Button = ({
             'mdc-button--primary': primary,
             'mdc-button--raised': raised,
         }, className);
+    const ElementType =  elementType || 'button';
     return (
-        <button className={classes}
+        <ElementType className={classes}
                 {...otherProp}
         >
             {children}
-        </button>);
+        </ElementType>);
 };
 
 Button.propTypes = propTypes;
