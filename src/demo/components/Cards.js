@@ -118,7 +118,7 @@ export default function Cards() {
                     <CardHorizontalBlock>
                         <CardPrimary>
                             <CardPrimaryTitle large>Title</CardPrimaryTitle>
-                            <CardPrimarySubtitle large>Subtitle</CardPrimarySubtitle>
+                            <CardPrimarySubtitle>Subtitle</CardPrimarySubtitle>
                         </CardPrimary>
                         <CardMediaItem src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
@@ -132,7 +132,7 @@ export default function Cards() {
                     <CardHorizontalBlock>
                         <CardPrimary>
                             <CardPrimaryTitle large >Title</CardPrimaryTitle>
-                            <CardPrimarySubtitle large >Subtitle</CardPrimarySubtitle>
+                            <CardPrimarySubtitle>Subtitle</CardPrimarySubtitle>
                         </CardPrimary>
                         <CardMediaItem size='1.5' src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
@@ -145,7 +145,7 @@ export default function Cards() {
                     <CardHorizontalBlock>
                         <CardPrimary>
                             <CardPrimaryTitle large >Title</CardPrimaryTitle>
-                            <CardPrimarySubtitle large >Subtitle</CardPrimarySubtitle>
+                            <CardPrimarySubtitle>Subtitle</CardPrimarySubtitle>
                         </CardPrimary>
                         <CardMediaItem size='2' src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
