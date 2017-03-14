@@ -11,10 +11,3 @@ export {
     CardPrimaryTitle, CardPrimarySubtitle, CardActions, CardActionItem
 } from './Card';
 
-/*export {
-    Card as Card,
-    CardHorizontalBlock as CardHorizontalBlock,
-    CardMedia as CardMedia,
-    CardMediaItem as CardMediaItem,
-    CardSupportingText as CardSupportingText
-}*/

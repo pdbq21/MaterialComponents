@@ -18,9 +18,9 @@ const MediaItem = ({
     const ElementType =  elementType || 'img';
     const classes = classnames(
         'mdc-card__media-item', {
-            'mdc-card__media-item--1dot5x': size.toString() === '1.5',
-            'mdc-card__media-item--2x': size.toString() === '2',
-            'mdc-card__media-item--3x': size.toString() === '3',
+            'mdc-card__media-item--1dot5x': size === '1.5',
+            'mdc-card__media-item--2x': size === '2',
+            'mdc-card__media-item--3x': size === '3',
 
         },className);
     return (
