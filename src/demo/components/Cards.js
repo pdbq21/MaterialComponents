@@ -154,8 +154,6 @@ export default function Cards() {
                         <CardActionItem>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
-
-
                 <Card className='mdc-card--demo'>
                     <CardHorizontalBlock>
                         <CardMediaItem size='3' src="http://material-components-web.appspot.com/images/1-1.jpg" />

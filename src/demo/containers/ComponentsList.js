@@ -13,6 +13,8 @@ import Buttons from '../components/Buttons'
 import Checkbox from '../components/Checkboxes'
 import Elevations from '../components/Elevations'
 import Cards from '../components/Cards'
+import Radio from '../components/Radio'
+import Typography from '../components/Typography'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -46,6 +48,10 @@ class ComponentsList extends Component {
                 return (<Elevations />);
             case 'Card':
                 return (<Cards />);
+            case 'Radio':
+                return (<Radio />);
+            case 'Typography':
+                return (<Typography />);
 
             default:
                 return null;
@@ -65,6 +71,8 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Checkbox') ? 'active' : ''}`}>Checkbox</li>
                     <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>Card</li>
                     <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>Elevation</li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Radio') ? 'active' : ''}`}>Radio</li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Typography') ? 'active' : ''}`}>Typography</li>
                 </ul>
 
                 <div>
