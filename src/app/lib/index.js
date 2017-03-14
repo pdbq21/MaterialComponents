@@ -5,3 +5,16 @@ export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as Elevation } from './Elevation';
 export { default as Ripple } from './Ripple';
+//export { default as Card } from './Card';
+export {
+    Card, CardHorizontalBlock, CardMedia, CardMediaItem, CardSupportingText , CardPrimary,
+    CardPrimaryTitle, CardPrimarySubtitle, CardActions, CardActionItem
+} from './Card';
+
+/*export {
+    Card as Card,
+    CardHorizontalBlock as CardHorizontalBlock,
+    CardMedia as CardMedia,
+    CardMediaItem as CardMediaItem,
+    CardSupportingText as CardSupportingText
+}*/

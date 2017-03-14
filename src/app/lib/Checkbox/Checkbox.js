@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 13.03.17.
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
 
 const propTypes = {};
 

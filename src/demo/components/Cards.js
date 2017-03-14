@@ -3,8 +3,11 @@
  */
 import React from 'react';
 import '@material/card/dist/mdc.card.css';
-export default function Cards() {
+import * as test from '../../app/lib'
 
+export default function Cards() {
+console.log(test);
+const {CardActions, CardActionItem} = test;
     return (
         <div>
             <fieldset>
@@ -25,6 +28,20 @@ export default function Cards() {
                         <button className="mdc-button mdc-button--compact mdc-card__action">Action 2</button>
                     </section>
                 </div>
+
+                <div className="mdc-card mdc-card__horizontal-block">
+                    <section className="mdc-card__primary">
+                        <h1 className="mdc-card__title mdc-card__title--large">Title here</h1>
+                        <h2 className="mdc-card__subtitle">Subtitle here</h2>
+                    </section>
+                    <section className="mdc-card__actions">
+                        <button className="mdc-button mdc-button--compact mdc-card__action">Action</button>
+                    </section>
+                </div>
+                <CardActions>
+                    <CardActionItem>1</CardActionItem>
+                    <CardActionItem>2</CardActionItem>
+                </CardActions>
             </fieldset>
         </div>
     );

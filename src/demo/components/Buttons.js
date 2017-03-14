@@ -11,7 +11,7 @@ export default function Buttons() {
     return (
         <div>
             <Elevation
-                elementTyps=''
+                elementType=''
                 className=''
                 zSpace='2'
                 id=''
@@ -19,8 +19,8 @@ export default function Buttons() {
                 <fieldset>
                     <legend>Buttons with Ripple</legend>
                     <Ripple><Button>default</Button></Ripple>
-                    <Ripple><Button raised>raised</Button></Ripple>
-                    <Ripple><Button dense>dense</Button></Ripple>
+                    <Ripple><Button raised >raised</Button></Ripple>
+                    <Ripple><Button dense >dense</Button></Ripple>
                     <Ripple><Button dense raised>dense raised</Button></Ripple>
                     <Ripple><Button compact>compact</Button></Ripple>
                     <Ripple><Button compact raised>compact raised</Button></Ripple>

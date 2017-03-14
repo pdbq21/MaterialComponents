@@ -13,10 +13,6 @@ const propTypes = {
     dense: PropTypes.bool,
     primary: PropTypes.bool,
     raised: PropTypes.bool,
-    elementType: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.string
-    ]),
 };
 const Button = ({
     accent,
