@@ -14,7 +14,7 @@ export default function LayoutGrids() {
         <div className="layout-grid--demo">
             <fieldset>
                 <legend>Layout Grid</legend>
-                <LayoutGrid>
+                <LayoutGrid margin='100px'>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>

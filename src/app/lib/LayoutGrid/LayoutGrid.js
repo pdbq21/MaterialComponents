@@ -25,17 +25,18 @@ const LayoutGrid = ({
         '--mdc-layout-grid-gutter': '16px'
     };
 
-    if (margin && !isNaN(Number(margin))){
+
+    if (margin){
         styles = {
             ...styles,
-            '--mdc-layout-grid-margin': margin+'px'
+            '--mdc-layout-grid-margin': margin
         };
     }
 
-    if (gutter && !isNaN(Number(gutter))){
+    if (gutter){
         styles = {
             ...styles,
-            '--mdc-layout-grid-gutter': gutter+'px'
+            '--mdc-layout-grid-gutter': gutter
         };
     }
 
