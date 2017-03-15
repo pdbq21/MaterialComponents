@@ -20,11 +20,11 @@ const LayoutGrid = ({
     const classes = classnames(
         'mdc-layout-grid', className);
     const ElementType =  elementType || 'div';
+
     let styles = {
         '--mdc-layout-grid-margin': '16px',
         '--mdc-layout-grid-gutter': '16px'
     };
-
 
     if (margin){
         styles = {
