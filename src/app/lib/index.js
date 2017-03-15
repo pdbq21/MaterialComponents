@@ -11,3 +11,12 @@ export {
     CardPrimaryTitle, CardPrimarySubtitle, CardActions, CardActionItem
 } from './Card';
 
+export {
+    Typography,
+    TypographyDisplay,
+    TypographyHeadline,
+    TypographyTitle,
+    TypographySubheading,
+    TypographyBody,
+    TypographyCaption
+} from './Typography'

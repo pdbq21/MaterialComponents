@@ -14,7 +14,7 @@ import Checkbox from '../components/Checkboxes'
 import Elevations from '../components/Elevations'
 import Cards from '../components/Cards'
 import Radio from '../components/Radio'
-import Typography from '../components/Typography'
+import TypographyComponent from '../components/TypographyComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -51,7 +51,7 @@ class ComponentsList extends Component {
             case 'Radio':
                 return (<Radio />);
             case 'Typography':
-                return (<Typography />);
+                return (<TypographyComponent />);
 
             default:
                 return null;

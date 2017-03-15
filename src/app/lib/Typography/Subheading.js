@@ -9,17 +9,20 @@ const propTypes = {
     className: PropTypes.string,
     adjustMargin: PropTypes.bool,
 };
-const Caption = ({
+const Subheading = ({
     children,
     className,
-    adjustMargin,
     elementType,
+    size,
+    adjustMargin,
     ...otherProp
 }) => {
-    const ElementType =  elementType || 'p';
+    const ElementType =  elementType || ((size)? ((size === '1')? 'h4' : 'h3') : 'h4');
     const classes = classnames(
-        'mdc-typography--caption', {
-            'adjust-margin': adjustMargin
+        {
+            'mdc-typography--subheading2': size === '2',
+            'mdc-typography--subheading1': !size || size === '1',
+            'adjust-margin': adjustMargin,
         }, className);
     return (
         <ElementType
@@ -30,5 +33,5 @@ const Caption = ({
         </ElementType>);
 };
 
-Caption.propTypes = propTypes;
-export default Caption;
+Subheading.propTypes = propTypes;
+export default Subheading;
