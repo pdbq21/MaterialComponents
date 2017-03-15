@@ -20,7 +20,7 @@ export default function TypographyComponent() {
             <fieldset>
                 <legend>Typography</legend>
 
-                <Typography>
+                <Typography >
                     <TypographyDisplay size="4">Display 4</TypographyDisplay>
                     <TypographyDisplay size="3">Display 3</TypographyDisplay>
                     <TypographyDisplay size="2">Display 2</TypographyDisplay>
