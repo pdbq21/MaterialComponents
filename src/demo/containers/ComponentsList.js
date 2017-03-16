@@ -17,6 +17,8 @@ import Radio from '../components/Radio'
 import TypographyComponent from '../components/TypographyComponent'
 import LayoutGrids from '../components/LayoutGrids'
 import Lists from '../components/Lists'
+import MenuComponent from '../components/MenuComponent'
+import FABComponent from '../components/FABComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -41,7 +43,6 @@ class ComponentsList extends Component {
 
     renderListItem(name) {
         switch (name) {
-
             case 'Button':
                 return (<Buttons />);
             case 'Checkbox':
@@ -58,6 +59,10 @@ class ComponentsList extends Component {
                 return (<LayoutGrids />);
             case 'List':
                 return (<Lists />);
+            case 'Menu':
+                return (<MenuComponent />);
+            case 'FAB':
+                return (<FABComponent />);
 
             default:
                 return null;
@@ -73,14 +78,36 @@ class ComponentsList extends Component {
                     className="navigation"
                     onClick={this.handelNavigation}
                 >
-                    <li className={`navigation-item ${(activeMenuItem === 'Button') ? 'active' : ''}`}>Button</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Checkbox') ? 'active' : ''}`}>Checkbox</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>Card</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>Elevation</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Radio') ? 'active' : ''}`}>Radio</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Typography') ? 'active' : ''}`}>Typography</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'LayoutGrid') ? 'active' : ''}`}>LayoutGrid</li>
-                    <li className={`navigation-item ${(activeMenuItem === 'List') ? 'active' : ''}`}>List</li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Button') ? 'active' : ''}`}>
+                        Button
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Checkbox') ? 'active' : ''}`}>
+                        Checkbox
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>
+                        Card
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>
+                        Elevation
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Radio') ? 'active' : ''}`}>
+                        Radio
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Typography') ? 'active' : ''}`}>
+                        Typography
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'LayoutGrid') ? 'active' : ''}`}>
+                        LayoutGrid
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'List') ? 'active' : ''}`}>
+                        List
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Menu') ? 'active' : ''}`}>
+                        Menu
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
+                        FAB
+                    </li>
                 </ul>
 
                 <div>

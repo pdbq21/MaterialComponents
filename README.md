@@ -9,3 +9,11 @@
     - Margins and gutters
 - List
     - ripples for interactive lists
+- component for only material-icons need or not?
+- Add README.md with instruction for all lib elements
+- Create Select
+    - with JS
+- Create Menu
+- FAB
+    - FAB and FABIcon or only one component FAB (inside mdc-fab__icon)?
+    - FAB Ripple

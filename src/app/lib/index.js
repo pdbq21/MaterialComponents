@@ -32,4 +32,5 @@ export {
     ListItemTextPrimary,
     ListItemTextSecondary,
     ListItemDetail
-} from './List'
+} from './List';
+export { default as FAB} from './FAB';

@@ -1,5 +1,5 @@
 // src: https://github.com/rwu823/react-ripples/blob/master/src/index.js
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 
 const rippleStyle = {
     position: 'absolute',
@@ -17,7 +17,7 @@ const wrapStyle = {
     overflow: 'hidden',
 };
 
-class Ripple extends React.Component {
+class Ripple extends Component {
     static propTypes = {
         during: PropTypes.number,
         color: PropTypes.string,
