@@ -17,3 +17,4 @@
 - FAB
     - FAB and FABIcon or only one component FAB (inside mdc-fab__icon)?
     - FAB Ripple
+- create Switch

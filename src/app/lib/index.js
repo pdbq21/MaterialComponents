@@ -40,3 +40,7 @@ export {
     ToolbarTitle,
     ToolbarMain
 } from './Toolbar'
+export {
+    Switch,
+    SwitchLabel
+} from './Switch'

@@ -20,6 +20,7 @@ import Lists from '../components/Lists'
 import MenuComponent from '../components/MenuComponent'
 import FABComponent from '../components/FABComponent'
 import ToolbarComponent from '../components/ToolbarComponent'
+import SwitchComponent from '../components/SwitchComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -64,8 +65,10 @@ class ComponentsList extends Component {
                 return (<MenuComponent />);
             case 'FAB':
                 return (<FABComponent />);
-    case 'Toolbar':
+            case 'Toolbar':
                 return (<ToolbarComponent />);
+            case 'Switch':
+                return (<SwitchComponent />);
 
             default:
                 return null;
@@ -113,6 +116,9 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Toolbar') ? 'active' : ''}`}>
                         Toolbar
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Switch') ? 'active' : ''}`}>
+                        Switch
                     </li>
                 </ul>
 
