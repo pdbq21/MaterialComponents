@@ -15,7 +15,7 @@ const TextSecondary = ({
     ...otherProp
 }) => {
     const classes = classnames(
-        'mdc-list-item__text_secondary',  className);
+        'mdc-list-item__text__secondary',  className);
     const ElementType =  elementType || 'span';
     return (
         <ElementType className={classes}

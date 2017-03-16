@@ -25,7 +25,7 @@ const StartDetail = ({
         'mdc-list-item__start-detail': start,
         'mdc-list-item__end-detail': end
     }, className);
-    const ElementType = elementType || 'i';
+    const ElementType = elementType || 'span';
     return (
         <ElementType className={classes}
                      {...otherProp}

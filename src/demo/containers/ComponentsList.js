@@ -16,6 +16,7 @@ import Cards from '../components/Cards'
 import Radio from '../components/Radio'
 import TypographyComponent from '../components/TypographyComponent'
 import LayoutGrids from '../components/LayoutGrids'
+import Lists from '../components/Lists'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -55,6 +56,8 @@ class ComponentsList extends Component {
                 return (<TypographyComponent />);
             case 'LayoutGrid':
                 return (<LayoutGrids />);
+            case 'List':
+                return (<Lists />);
 
             default:
                 return null;
@@ -77,6 +80,7 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Radio') ? 'active' : ''}`}>Radio</li>
                     <li className={`navigation-item ${(activeMenuItem === 'Typography') ? 'active' : ''}`}>Typography</li>
                     <li className={`navigation-item ${(activeMenuItem === 'LayoutGrid') ? 'active' : ''}`}>LayoutGrid</li>
+                    <li className={`navigation-item ${(activeMenuItem === 'List') ? 'active' : ''}`}>List</li>
                 </ul>
 
                 <div>
