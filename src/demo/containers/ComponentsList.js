@@ -19,6 +19,7 @@ import LayoutGrids from '../components/LayoutGrids'
 import Lists from '../components/Lists'
 import MenuComponent from '../components/MenuComponent'
 import FABComponent from '../components/FABComponent'
+import ToolbarComponent from '../components/ToolbarComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -63,6 +64,8 @@ class ComponentsList extends Component {
                 return (<MenuComponent />);
             case 'FAB':
                 return (<FABComponent />);
+    case 'Toolbar':
+                return (<ToolbarComponent />);
 
             default:
                 return null;
@@ -107,6 +110,9 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Toolbar') ? 'active' : ''}`}>
+                        Toolbar
                     </li>
                 </ul>
 

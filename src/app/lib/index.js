@@ -34,3 +34,9 @@ export {
     ListItemDetail
 } from './List';
 export { default as FAB} from './FAB';
+export {
+    Toolbar,
+    ToolbarSection,
+    ToolbarTitle,
+    ToolbarMain
+} from './Toolbar'
