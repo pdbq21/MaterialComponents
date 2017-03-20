@@ -21,6 +21,8 @@ import MenuComponent from '../components/MenuComponent'
 import FABComponent from '../components/FABComponent'
 import ToolbarComponent from '../components/ToolbarComponent'
 import SwitchComponent from '../components/SwitchComponent'
+import DrawerComponent from '../components/DrawerComponent'
+import TextfieldComponent from '../components/TextfieldComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -69,6 +71,10 @@ class ComponentsList extends Component {
                 return (<ToolbarComponent />);
             case 'Switch':
                 return (<SwitchComponent />);
+            case 'Drawer':
+                return (<DrawerComponent />);
+            case 'Textfield':
+                return (<TextfieldComponent />);
 
             default:
                 return null;
@@ -119,6 +125,12 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Switch') ? 'active' : ''}`}>
                         Switch
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Drawer') ? 'active' : ''}`}>
+                        Drawer
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
+                        Textfield
                     </li>
                 </ul>
 
