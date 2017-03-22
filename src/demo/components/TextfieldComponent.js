@@ -3,9 +3,6 @@
  */
 import React from 'react';
 
-import {textfield as test}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfield, MDCTextfieldFoundation} = test;
-
 import {FormField} from '../../app/lib'
 import {
     Textfield,
@@ -13,17 +10,22 @@ import {
     TextfieldLabel,
     TextfieldHelprext
 } from '../../app/lib'
-export default class DrawerComponent extends React.Component {
+import {textfield as test}  from 'material-components-web/dist/material-components-web';
+const {MDCTextfield, MDCTextfieldFoundation} = test;
+
+import TestFoundation from './testFoundation'
+
+export default class TextfieldComponent extends React.Component {
     componentDidMount() {
-        MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
+        //MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
     }
 
     render() {
         return (
             <div >
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-                {/*
-                <fieldset>
+
+                 <fieldset>
                     <legend>Textfield Only CSS</legend>
                     <div>
                         <h3>Only CSS</h3>
@@ -69,14 +71,26 @@ export default class DrawerComponent extends React.Component {
                     </div>
 
                 </fieldset>
-*/}
+
                 <fieldset>
                     <legend>Textfield JS</legend>
+                    /*test*/
                     <div>
                         <div className="mdc-textfield">
-                            <input type="text" id="my-textfield" className="mdc-textfield__input" />
-                            <label className="mdc-textfield__label" htmlFor="my-textfield">Hint text</label>
+                            <input type="text" id="my-textfield-1" className="mdc-textfield__input" />
+                            <label className="mdc-textfield__label" htmlFor="my-textfield-1">Hint text</label>
                         </div>
+                    </div>
+
+                    <div>
+                        <div className="mdc-textfield mdc-textfield--focused">
+                            <input type="text" id="my-textfield-2" className="mdc-textfield__input" />
+                            <label className="mdc-textfield__label mdc-textfield__label--float-above" htmlFor="my-textfield-2">Hint text</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <TestFoundation />
                     </div>
                 </fieldset>
             </div>
