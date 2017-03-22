@@ -24,7 +24,7 @@ export default class TextfieldComponent extends React.Component {
         return (
             <div >
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-
+                {/*
                  <fieldset>
                     <legend>Textfield Only CSS</legend>
                     <div>
@@ -71,10 +71,19 @@ export default class TextfieldComponent extends React.Component {
                     </div>
 
                 </fieldset>
-
+*/}
                 <fieldset>
                     <legend>Textfield JS</legend>
+                    <div>
+                        <h3>Label float above</h3>
+                        <Textfield>
+                            <TextfieldInput id="demo-label-above" type="text"/>
+                            <TextfieldLabel htmlFor="demo-label-above">Label float above</TextfieldLabel>
+                        </Textfield>
+                    </div>
+
                     /*test*/
+                    {/*
                     <div>
                         <div className="mdc-textfield">
                             <input type="text" id="my-textfield-1" className="mdc-textfield__input" />
@@ -88,7 +97,12 @@ export default class TextfieldComponent extends React.Component {
                             <label className="mdc-textfield__label mdc-textfield__label--float-above" htmlFor="my-textfield-2">Hint text</label>
                         </div>
                     </div>
-
+                     */}
+                    <div>
+                        <TestFoundation >
+                            <TestFoundation />
+                        </TestFoundation>
+                    </div>
                     <div>
                         <TestFoundation />
                     </div>

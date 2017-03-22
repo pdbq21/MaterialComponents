@@ -6,6 +6,53 @@ import '@material/textfield/dist/mdc.textfield.min.css';
 import {textfield as test}  from 'material-components-web/dist/material-components-web';
 const {MDCTextfield, MDCTextfieldFoundation} = test;
 import classnames from 'classnames';
+
+
+class Testlabel extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            classNamesLabel: [],
+        };
+        //console.log(MDCTextfieldFoundation);
+        this.foundation_ = new MDCTextfieldFoundation({
+            // label
+            addClassToLabel: className => this.setState(({classNamesLabel}) => ({
+                classNamesLabel: classNamesLabel.concat([className])
+            })),
+            removeClassFromLabel: className => this.setState(({classNamesLabel}) => ({
+                classNamesLabel: classNamesLabel.filter(cn => cn !== className)
+            })),
+
+        });
+    }
+
+    /* getInitialState() {
+     return {
+     classNames: [],
+     classNamesLabel: [],
+     classNamesHelpText: [],
+     value: '25'
+     };
+     }*/
+
+    componentDidMount() {
+        this.foundation_.init();
+    }
+
+    componentWillUnmount() {
+        this.foundation_.destroy();
+    }
+
+    render() {
+        // console.log(this.state.classNames);
+        return (
+                    <label className={['mdc-textfield__label'].concat(this.state.classNamesLabel).join(' ')}
+                           htmlFor="my-textfield">Hint text</label>
+
+        );
+    }
+}
 export default class TestFoundation extends Component {
     constructor(props, context) {
         super(props, context);
@@ -16,7 +63,7 @@ export default class TestFoundation extends Component {
             value: '',
             nameHelpText: []
         };
-        console.log(MDCTextfieldFoundation);
+        //console.log(MDCTextfieldFoundation);
         this.foundation_ = new MDCTextfieldFoundation({
             /// textfield
             addClass: className => this.setState(({classNames}) => ({
@@ -40,18 +87,18 @@ export default class TestFoundation extends Component {
                 classNamesHelpText: classNamesHelpText.filter(cn => cn !== className)
             })),
             // Todo: helpText functions
-            // removeClassFromHelptext: (_className: string) {}
+           // removeClassFromHelptext: (_className: string) {}
             /*helptextHasClass: className: boolean {
-             return false;
-             }*/
+                return false;
+            }*/
 
             //setHelptextAttr (_name: string, _value: string) {}
             removeHelptextAttr: name => this.setState(({nameHelpText}) => ({
                 nameHelpText: nameHelpText.filter(cn => cn !== name)
             })),
-            /*helptextHasClass
-             setHelptextAttr
-             removeHelptextAttr*/
+                /*helptextHasClass
+                setHelptextAttr
+                removeHelptextAttr*/
             // input
             registerInputFocusHandler: handler => {
                 if (this.refs.rootInput) {
@@ -93,7 +140,7 @@ export default class TestFoundation extends Component {
                     this.refs.rootInput.removeEventListener('keydown', handler)
                 }
             },
-            getNativeInput: () => {
+            getNativeInput: () =>  {
                 if (!this.refs.rootInput) {
                     throw new Error('Invalid state for operation');
                 }
@@ -102,14 +149,14 @@ export default class TestFoundation extends Component {
         });
     }
 
-    /* getInitialState() {
-     return {
-     classNames: [],
-     classNamesLabel: [],
-     classNamesHelpText: [],
-     value: '25'
-     };
-     }*/
+   /* getInitialState() {
+        return {
+            classNames: [],
+            classNamesLabel: [],
+            classNamesHelpText: [],
+            value: '25'
+        };
+    }*/
 
     componentDidMount() {
         this.foundation_.init();
@@ -120,45 +167,34 @@ export default class TestFoundation extends Component {
     }
 
     render() {
-        //console.log(this.state.classNames);
+        console.log(this.props);
         return (
-
-            <section>
-                <h2>Password field with validation</h2>
-
-                <div>
-                    <div ref="root" className={classnames('mdc-textfield', this.state.classNames)}>
-                        <input
-                            pattern=".{8,}"
-                            type="password"
-                            required=""
-                            ref="rootInput"
-                            id="my-textfield"
-                            aria-controls="pw-validation-msg"
-                            //value={this.state.value}
-                            autoComplete="current-password"
-                            className="mdc-textfield__input"
-                            onChange={() => {
-                                this.setState({
-                                    value: this.refs.rootInput.value
-                                });
-                                //this.props.onChange(evt);
-                            }}
-                        />
-                        <label className={['mdc-textfield__label'].concat(this.state.classNamesLabel).join(' ')}
-                               htmlFor="my-textfield">Choose password</label>
-                    </div>
-                    <p id="pw-validation-msg"
-                       className={
-                           ['mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg']
-                               .concat(this.state.classNamesHelpText).join(' ')}
-                    >
-                        Must be at least 8 characters long
-                    </p>
-
-
+            <div>
+                <div ref="root" className={classnames('mdc-textfield', this.state.classNames)}>
+                    <input
+                        ref="rootInput"
+                        type="text"
+                        id="my-textfield"
+                        //value={this.state.value}
+                        className="mdc-textfield__input"
+                        onChange={() => {
+                            this.setState({
+                                value: this.refs.rootInput.value
+                            });
+                            //this.props.onChange(evt);
+                        }}
+                    />
+                    <Testlabel />
+                    {/* Todo: need fix this */}
+                    {React.cloneElement(this.props.children, {...this.state})}
+                   {/* <label className={['mdc-textfield__label'].concat(this.state.classNamesLabel).join(' ')}
+                           htmlFor="my-textfield">Hint text</label>*/}
                 </div>
-            </section>
+{/*                <p id="my-textfield-helptext" className="mdc-textfield-helptext" aria-hidden="true">
+                    Help Text (possibly validation message)
+                </p>*/}
+
+            </div>
         );
     }
 }
