@@ -3,9 +3,7 @@
  */
 import React, {PropTypes, PureComponent} from 'react';
 import classnames from 'classnames';
-import {textfield as MDCTextfield}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfieldFoundation} = MDCTextfield;
-/*
+
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -14,6 +12,7 @@ const propTypes = {
 const Label = ({
     children,
     className,
+    classNamesLabel,
     elementType,
     floatAbove,
     ...otherProp
@@ -21,7 +20,7 @@ const Label = ({
     const classes = classnames(
         'mdc-textfield__label', {
             'mdc-textfield__label--float-above': floatAbove
-        }, className);
+        }, classNamesLabel, className);
     const ElementType = elementType || 'label';
     return (
         <ElementType className={classes}
@@ -32,7 +31,8 @@ const Label = ({
 };
 
 Label.propTypes = propTypes;
-export default Label;*/
+export default Label;
+/*
 export default class Label extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
@@ -76,3 +76,4 @@ export default class Label extends PureComponent {
     }
 
 }
+*/

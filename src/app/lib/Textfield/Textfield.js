@@ -50,14 +50,16 @@ export default class Textfield extends PureComponent {
         upgraded: PropTypes.bool,
         multiline: PropTypes.bool,
         fullwidth: PropTypes.bool,
-    }
+    };
 
     constructor(props, context) {
         super(props, context);
         this.state = {
             classNames: [],
+            classNamesLabel: [],
+            classNamesHelpText: [],
+            nameHelpText: []
         };
-        console.log(this);
         this.foundation = new MDCTextfieldFoundation({
             /// textfield
             addClass: className => this.setState(({classNames}) => ({
@@ -66,19 +68,113 @@ export default class Textfield extends PureComponent {
             removeClass: className => this.setState(({classNames}) => ({
                 classNames: classNames.filter(cn => cn !== className)
             })),
+            // label
+            addClassToLabel: className => this.setState(({classNamesLabel}) => ({
+                classNamesLabel: classNamesLabel.concat([className])
+            })),
+            removeClassFromLabel: className => this.setState(({classNamesLabel}) => ({
+                classNamesLabel: classNamesLabel.filter(cn => cn !== className)
+            })),
+            // help text
+            addClassToHelptext: className => this.setState(({classNamesHelpText}) => ({
+                classNamesHelpText: classNamesHelpText.concat([className])
+            })),
+            removeClassFromHelptext: className => this.setState(({classNamesHelpText}) => ({
+                classNamesHelpText: classNamesHelpText.filter(cn => cn !== className)
+            })),
+            // Todo: helpText functions
+            // removeClassFromHelptext: (_className: string) {}
+            /*helptextHasClass: className: boolean {
+             return false;
+             }*/
+
+            //setHelptextAttr (_name: string, _value: string) {}
+            removeHelptextAttr: name => this.setState(({nameHelpText}) => ({
+                nameHelpText: nameHelpText.filter(cn => cn !== name)
+            })),
+            /*helptextHasClass
+             setHelptextAttr
+             removeHelptextAttr*/
+            // input
+            registerInputFocusHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.addEventListener('focus', handler)
+                }
+            },
+            deregisterInputFocusHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.removeEventListener('focus', handler)
+                }
+            },
+            registerInputBlurHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.addEventListener('blur', handler)
+                }
+            },
+            deregisterInputBlurHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.removeEventListener('blur', handler)
+                }
+            },
+            registerInputInputHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.addEventListener('input', handler)
+                }
+            },
+            deregisterInputInputHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.removeEventListener('input', handler)
+                }
+            },
+            registerInputKeydownHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.addEventListener('keydown', handler)
+                }
+            },
+            deregisterInputKeydownHandler: handler => {
+                if (this.child.refs.rootInput) {
+                    this.child.refs.rootInput.removeEventListener('keydown', handler)
+                }
+            },
+            getNativeInput: () => {
+                if (!this.child.refs.rootInput) {
+                    throw new Error('Invalid state for operation');
+                }
+                return this.child.refs.rootInput;
+            },
         });
     }
 
     componentDidMount() {
-        this.foundation.init();
+        if (!this.props['data-only-css']) {
+            this.foundation.init();
+        }
     }
 
     componentWillUnmount() {
-        this.foundation.destroy();
+        if (!this.props['data-only-css']) {
+            this.foundation.destroy();
+        }
     }
 
     render() {
-        const {disabled, upgraded, multiline, fullwidth, children, elementType, className, ...otherProp} = this.props;
+        const {classNamesLabel} = this.state;
+        const childElement = child => {
+            if (child.type.name === 'Input') {
+                return React.cloneElement(child, {
+                    onRef: (ref) => (this.child = ref)
+                })
+            } else if (child.type.name === 'Label') {
+                return React.cloneElement(child, {
+                    'classNamesLabel': classNamesLabel
+                })
+            } else {
+                return child
+            }
+        };
+
+        let renderChildren = React.Children.map(this.props.children, childElement);
+        const {disabled, upgraded, multiline, fullwidth, elementType, className, ...otherProp} = this.props;
         const classes = classnames(
             'mdc-textfield', {
                 'mdc-textfield--disabled': disabled,
@@ -91,7 +187,7 @@ export default class Textfield extends PureComponent {
             <ElementType ref="root" className={classes}
                          {...otherProp}
             >
-                {children}
+                {renderChildren}
             </ElementType>);
     }
 

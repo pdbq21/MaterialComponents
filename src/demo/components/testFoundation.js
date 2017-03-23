@@ -64,46 +64,12 @@ class TestInput extends Component {
     }
 }
 class Testlabel extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            classNamesLabel: [],
-        };
-        //console.log(MDCTextfieldFoundation);
-        this.foundation_ = new MDCTextfieldFoundation({
-            // label
-            addClassToLabel: className => this.setState(({classNamesLabel}) => ({
-                classNamesLabel: classNamesLabel.concat([className])
-            })),
-            removeClassFromLabel: className => this.setState(({classNamesLabel}) => ({
-                classNamesLabel: classNamesLabel.filter(cn => cn !== className)
-            })),
-
-        });
-    }
-
-    /* getInitialState() {
-     return {
-     classNames: [],
-     classNamesLabel: [],
-     classNamesHelpText: [],
-     value: '25'
-     };
-     }*/
-
-    componentDidMount() {
-        // this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        // this.props.onRef(null)
-    }
-
     render() {
-        console.log(this);
         return (
-            <label ref='rootLabel' className={['mdc-textfield__label'].concat(this.props.classNamesLabel).join(' ')}
-                   htmlFor="my-textfield">Hint text</label>
+            <label ref='rootLabel'
+                   className={['mdc-textfield__label'].concat(this.props.classNamesLabel).join(' ')}
+                   htmlFor="my-textfield"
+            >Hint text</label>
 
         );
     }

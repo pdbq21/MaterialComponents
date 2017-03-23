@@ -24,14 +24,14 @@ export default class TextfieldComponent extends React.Component {
         return (
             <div >
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-                {/*
+
                  <fieldset>
                     <legend>Textfield Only CSS</legend>
                     <div>
                         <h3>Only CSS</h3>
                         <FormField alignEnd>
                             <label style={{'alignSelf': 'flex-start'}} htmlFor="textfield-only-css">Hint text: </label>
-                            <Textfield>
+                            <Textfield data-only-css>
                                 <TextfieldInput id="textfield-only-css" placeholder="Hint text"/>
                             </Textfield>
                         </FormField>
@@ -40,7 +40,10 @@ export default class TextfieldComponent extends React.Component {
                     <div>
                         <h3>Multi-line Textfields - CSS Only</h3>
                         <label htmlFor="css-only-multiline">About you:</label>
-                        <Textfield multiline>
+                        <Textfield
+                            multiline
+                            data-only-css
+                        >
                             <TextfieldInput
                                 elementType="textarea"
                                 id="css-only-multiline"
@@ -52,14 +55,14 @@ export default class TextfieldComponent extends React.Component {
                     </div>
                     <div>
                         <h3>Full-Width Textfields</h3>
-                        <Textfield upgraded fullwidth>
+                        <Textfield upgraded fullwidth data-only-css>
                             <TextfieldInput
                                 type="text"
                                 placeholder="Subject"
                                 aria-label="Subject"
                             />
                         </Textfield>
-                        <Textfield multiline upgraded fullwidth>
+                        <Textfield multiline upgraded fullwidth data-only-css>
                             <TextfieldInput
                                 elementType="textarea"
                                 rows="8"
@@ -71,7 +74,7 @@ export default class TextfieldComponent extends React.Component {
                     </div>
 
                 </fieldset>
-*/}
+
                 <fieldset>
                     <legend>Textfield JS</legend>
                     <div>
@@ -82,7 +85,6 @@ export default class TextfieldComponent extends React.Component {
                         </Textfield>
                     </div>
 
-                    /*test*/
                     {/*
                     <div>
                         <div className="mdc-textfield">
@@ -98,14 +100,7 @@ export default class TextfieldComponent extends React.Component {
                         </div>
                     </div>
                      */}
-                    <div>
-                        <TestFoundation >
-                            <TestFoundation />
-                        </TestFoundation>
-                    </div>
-                    <div>
-                        <TestFoundation />
-                    </div>
+
                 </fieldset>
             </div>
         );
