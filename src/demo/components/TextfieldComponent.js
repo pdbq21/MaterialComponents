@@ -13,7 +13,7 @@ import {
 import {textfield as test}  from 'material-components-web/dist/material-components-web';
 const {MDCTextfield, MDCTextfieldFoundation} = test;
 
-import TestFoundation from './testFoundation'
+import {default as TestFoundation} from './testFoundation'
 
 export default class TextfieldComponent extends React.Component {
     componentDidMount() {
