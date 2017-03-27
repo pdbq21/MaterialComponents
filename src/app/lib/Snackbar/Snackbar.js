@@ -1,49 +1,12 @@
 /**
- * Created by ruslan on 20.03.17.
+ * Created by ruslan on 27.03.17.
  */
 import React, {PropTypes, PureComponent} from 'react';
 import classnames from 'classnames';
-import {textfield as mdcTextfield}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfieldFoundation} = mdcTextfield;
-/*
- const propTypes = {
- children: PropTypes.node,
- className: PropTypes.string,
- disabled: PropTypes.bool,
- upgraded: PropTypes.bool,
- multiline: PropTypes.bool,
- fullwidth: PropTypes.bool,
- };
- const Textfield = ({
- children,
- className,
- elementType,
- disabled,
- upgraded,
- multiline,
- fullwidth,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-textfield', {
- 'mdc-textfield--disabled': disabled,
- 'mdc-textfield--upgraded': upgraded,
- 'mdc-textfield--multiline': multiline,
- 'mdc-textfield--fullwidth': fullwidth
- }, className);
- const ElementType = elementType || 'div';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
+import {snackbar as mdcSnackbar}  from 'material-components-web/dist/material-components-web';
+const {MDCSnackbarFoundation} = mdcSnackbar;
 
- Textfield.propTypes = propTypes;
- export default Textfield;*/
-
-export default class Textfield extends PureComponent {
+export default class Snackbar extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
         disabled: PropTypes.bool,
@@ -60,7 +23,7 @@ export default class Textfield extends PureComponent {
             classNamesHelpText: [],
             nameHelpText: []
         };
-        this.foundation = new MDCTextfieldFoundation({
+        this.foundation = new MDCSnackbarFoundation({
             /// textfield
             addClass: className => this.setState(({classNames}) => ({
                 classNames: classNames.concat([className])
@@ -174,14 +137,9 @@ export default class Textfield extends PureComponent {
         };
 
         let renderChildren = React.Children.map(this.props.children, childElement);
-        const {disabled, upgraded, multiline, fullwidth, elementType, className, ...otherProp} = this.props;
+        const {elementType, className, ...otherProp} = this.props;
         const classes = classnames(
-            'mdc-textfield', {
-                'mdc-textfield--disabled': disabled,
-                'mdc-textfield--upgraded': upgraded,
-                'mdc-textfield--multiline': multiline,
-                'mdc-textfield--fullwidth': fullwidth
-            }, this.state.classNames, className);
+            'mdc-snackbar', this.state.classNames, className);
         const ElementType = elementType || 'div';
         return (
             <ElementType ref="root" className={classes}

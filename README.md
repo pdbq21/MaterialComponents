@@ -26,4 +26,6 @@
         - helptextHasClass (_className: string)
         - setHelptextAttr (_name: string, _value: string)
         - removeHelptextAttr (_name: string)
+- create Snackbar
+
     

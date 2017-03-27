@@ -1,66 +1,83 @@
 /**
- * Created by ruslan on 20.03.17.
+ * Created by ruslan on 27.03.17.
  */
-import React, {PropTypes, PureComponent} from 'react';
+import React, {Component} from 'react';
+import '@material/textfield/dist/mdc.textfield.min.css';
+import {textfield as test}  from 'material-components-web/dist/material-components-web';
+const {MDCTextfieldFoundation} = test;
 import classnames from 'classnames';
-import {textfield as mdcTextfield}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfieldFoundation} = mdcTextfield;
-/*
- const propTypes = {
- children: PropTypes.node,
- className: PropTypes.string,
- disabled: PropTypes.bool,
- upgraded: PropTypes.bool,
- multiline: PropTypes.bool,
- fullwidth: PropTypes.bool,
- };
- const Textfield = ({
- children,
- className,
- elementType,
- disabled,
- upgraded,
- multiline,
- fullwidth,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-textfield', {
- 'mdc-textfield--disabled': disabled,
- 'mdc-textfield--upgraded': upgraded,
- 'mdc-textfield--multiline': multiline,
- 'mdc-textfield--fullwidth': fullwidth
- }, className);
- const ElementType = elementType || 'div';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
 
- Textfield.propTypes = propTypes;
- export default Textfield;*/
 
-export default class Textfield extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        disabled: PropTypes.bool,
-        upgraded: PropTypes.bool,
-        multiline: PropTypes.bool,
-        fullwidth: PropTypes.bool,
-    };
+class TestInput extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            value: '',
+        };
+    }
 
+
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(null)
+    }
+
+    render() {
+        console.log(MDCTextfieldFoundation);
+        return (
+            <input
+                ref="rootInput"
+                type="text"
+                id="my-textfield"
+                //value={this.state.value}
+                className="mdc-textfield__input"
+                onChange={() => {
+                    this.setState({
+                        value: this.refs.rootInput.value
+                    });
+                    //this.props.onChange(evt);
+                }}
+            />
+
+        );
+    }
+}
+class Testlabel extends Component {
+    render() {
+        return (
+            <label ref='rootLabel'
+                   className={['mdc-textfield__label'].concat(this.props.classNamesLabel).join(' ')}
+                   htmlFor="my-textfield"
+            >Hint text</label>
+
+        );
+    }
+}
+class Helptext extends Component {
+    render() {
+        return (
+            <p className="mdc-textfield-helptext mdc-textfield-helptext--persistent">
+                We will <em>never</em> share your email address with third parties
+            </p>
+
+        );
+    }
+}
+class TestFoundation extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             classNames: [],
             classNamesLabel: [],
             classNamesHelpText: [],
+            value: '',
             nameHelpText: []
         };
-        this.foundation = new MDCTextfieldFoundation({
+        //console.log(MDCTextfieldFoundation);
+        this.foundation_ = new MDCTextfieldFoundation({
             /// textfield
             addClass: className => this.setState(({classNames}) => ({
                 classNames: classNames.concat([className])
@@ -89,8 +106,11 @@ export default class Textfield extends PureComponent {
              }*/
 
             //setHelptextAttr (_name: string, _value: string) {}
+            setHelptextAttr: (name, value) => this.setState(({nameHelpText}) => ({
+                nameHelpText: nameHelpText.filter(_name => _name !== name)
+            })),
             removeHelptextAttr: name => this.setState(({nameHelpText}) => ({
-                nameHelpText: nameHelpText.filter(cn => cn !== name)
+                nameHelpText: nameHelpText.filter(_name => _name !== name)
             })),
             /*helptextHasClass
              setHelptextAttr
@@ -145,50 +165,55 @@ export default class Textfield extends PureComponent {
         });
     }
 
+
     componentDidMount() {
-        if (!this.props['data-only-css']) {
-            this.foundation.init();
-        }
+        this.foundation_.init();
     }
 
     componentWillUnmount() {
-        if (!this.props['data-only-css']) {
-            this.foundation.destroy();
-        }
+        this.foundation_.destroy();
+    }
+
+    componentDidUpdate() {
+        console.log('did update');
     }
 
     render() {
+        //console.log(this);
+//const self = this.refs.rootInput;
         const {classNamesLabel} = this.state;
-        const childElement = child => {
-            if (child.type.name === 'Input') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else if (child.type.name === 'Label') {
-                return React.cloneElement(child, {
-                    'classNamesLabel': classNamesLabel
-                })
-            } else {
-                return child
-            }
-        };
+        const testFunc = child => React.cloneElement(child, {
+            onRef: (ref) => (this.child = ref),
+            'classNamesLabel': classNamesLabel
+        });
 
-        let renderChildren = React.Children.map(this.props.children, childElement);
-        const {disabled, upgraded, multiline, fullwidth, elementType, className, ...otherProp} = this.props;
-        const classes = classnames(
-            'mdc-textfield', {
-                'mdc-textfield--disabled': disabled,
-                'mdc-textfield--upgraded': upgraded,
-                'mdc-textfield--multiline': multiline,
-                'mdc-textfield--fullwidth': fullwidth
-            }, this.state.classNames, className);
-        const ElementType = elementType || 'div';
+        let renderChildren = React.Children.map(this.props.children, testFunc);
         return (
-            <ElementType ref="root" className={classes}
-                         {...otherProp}
-            >
-                {renderChildren}
-            </ElementType>);
-    }
+            <div>
+                <div ref="root" className={classnames('mdc-textfield', this.state.classNames)}>
+                    {renderChildren}
+                    {/*      <TestInput />
+                     <Testlabel />*/}
 
+                    {/* Todo: need fix this */}
+
+                    {/* <label className={['mdc-textfield__label'].concat(this.state.classNamesLabel).join(' ')}
+                     htmlFor="my-textfield">Hint text</label>*/}
+                </div>
+                <p id="my-textfield-helptext" className="mdc-textfield-helptext" aria-hidden="true">
+                    Help Text (possibly validation message)
+                </p>
+
+            </div>
+        );
+    }
+}
+
+export default function (props) {
+    return (
+        <TestFoundation>
+            <TestInput />
+            <Testlabel />
+        </TestFoundation>
+    )
 }
