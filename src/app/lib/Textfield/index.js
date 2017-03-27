@@ -6,4 +6,4 @@ export { default as Textfield} from './Textfield';
 //export { default as Textfield} from './container';
 export { default as TextfieldInput} from './Input';
 export { default as TextfieldLabel} from './Label';
-export { default as TextfieldHelprext} from './Helptext';
+export { default as TextfieldHelptext} from './Helptext';

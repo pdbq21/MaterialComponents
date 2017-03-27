@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 20.03.17.
  */
-import React, {PropTypes, PureComponent} from 'react';
+import React, {PropTypes} from 'react';
 import classnames from 'classnames';
 
 const propTypes = {

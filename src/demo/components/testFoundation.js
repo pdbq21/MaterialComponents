@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import '@material/textfield/dist/mdc.textfield.min.css';
 import {textfield as test}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfield, MDCTextfieldFoundation} = test;
+const {MDCTextfieldFoundation} = test;
 import classnames from 'classnames';
 
 
@@ -44,7 +44,7 @@ class TestInput extends Component {
     }
 
     render() {
-        // console.log(this);
+        console.log(MDCTextfieldFoundation);
         return (
             <input
                 ref="rootInput"
@@ -70,6 +70,16 @@ class Testlabel extends Component {
                    className={['mdc-textfield__label'].concat(this.props.classNamesLabel).join(' ')}
                    htmlFor="my-textfield"
             >Hint text</label>
+
+        );
+    }
+}
+class Helptext extends Component {
+    render() {
+        return (
+            <p className="mdc-textfield-helptext mdc-textfield-helptext--persistent">
+                We will <em>never</em> share your email address with third parties
+            </p>
 
         );
     }
@@ -114,8 +124,11 @@ class TestFoundation extends Component {
              }*/
 
             //setHelptextAttr (_name: string, _value: string) {}
+            setHelptextAttr: (name, value) => this.setState(({nameHelpText}) => ({
+                nameHelpText: nameHelpText.filter(_name => _name !== name)
+            })),
             removeHelptextAttr: name => this.setState(({nameHelpText}) => ({
-                nameHelpText: nameHelpText.filter(cn => cn !== name)
+                nameHelpText: nameHelpText.filter(_name => _name !== name)
             })),
             /*helptextHasClass
              setHelptextAttr
@@ -213,9 +226,9 @@ class TestFoundation extends Component {
                     {/* <label className={['mdc-textfield__label'].concat(this.state.classNamesLabel).join(' ')}
                      htmlFor="my-textfield">Hint text</label>*/}
                 </div>
-                {/*                <p id="my-textfield-helptext" className="mdc-textfield-helptext" aria-hidden="true">
+                <p id="my-textfield-helptext" className="mdc-textfield-helptext" aria-hidden="true">
                  Help Text (possibly validation message)
-                 </p>*/}
+                 </p>
 
             </div>
         );

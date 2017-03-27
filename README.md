@@ -22,5 +22,8 @@
     - Adapter
     - Ripple
 - create Textfield
-    - add functionality JS
+    - add functionality JS:
+        - helptextHasClass (_className: string)
+        - setHelptextAttr (_name: string, _value: string)
+        - removeHelptextAttr (_name: string)
     

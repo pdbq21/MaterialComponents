@@ -8,24 +8,19 @@ import {
     Textfield,
     TextfieldInput,
     TextfieldLabel,
-    TextfieldHelprext
+    TextfieldHelptext
 } from '../../app/lib'
-import {textfield as test}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfield, MDCTextfieldFoundation} = test;
 
-import {default as TestFoundation} from './testFoundation'
+//import {default as TestFoundation} from './testFoundation'
 
 export default class TextfieldComponent extends React.Component {
-    componentDidMount() {
-        //MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
-    }
 
     render() {
         return (
             <div >
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
-                 <fieldset>
+                <fieldset>
                     <legend>Textfield Only CSS</legend>
                     <div>
                         <h3>Only CSS</h3>
@@ -85,20 +80,57 @@ export default class TextfieldComponent extends React.Component {
                         </Textfield>
                     </div>
 
+                    <div>
+                        <h3>Multi-line Textfields</h3>
+                        <Textfield
+                            multiline
+                            upgraded
+                        >
+                            <TextfieldInput
+                                elementType="textarea"
+                                rows="8"
+                                cols="40"
+                                id="multi-line-demo"
+                            />
+                            <TextfieldLabel htmlFor="multi-line-demo">Multi-line Label</TextfieldLabel>
+                        </Textfield>
+                    </div>
+                    <div>
+                        <h3>Password field with validation</h3>
+                        <Textfield
+                            upgraded
+                        >
+                            <TextfieldInput
+                                type="password"
+                                id="password-validation-demo"
+                                aria-controls="pw-validation-msg"
+                                required
+                                pattern=".{8,}"
+                            />
+                            <TextfieldLabel htmlFor="password-validation-demo">Choose password</TextfieldLabel>
+                        </Textfield>
+                        <TextfieldHelptext
+                            persistent
+                            validation
+                            id="pw-validation-msg"
+                        >
+                            Must be at least 8 characters long
+                        </TextfieldHelptext>
+                    </div>
                     {/*
-                    <div>
-                        <div className="mdc-textfield">
-                            <input type="text" id="my-textfield-1" className="mdc-textfield__input" />
-                            <label className="mdc-textfield__label" htmlFor="my-textfield-1">Hint text</label>
-                        </div>
-                    </div>
+                     <div>
+                     <div className="mdc-textfield">
+                     <input type="text" id="my-textfield-1" className="mdc-textfield__input" />
+                     <label className="mdc-textfield__label" htmlFor="my-textfield-1">Hint text</label>
+                     </div>
+                     </div>
 
-                    <div>
-                        <div className="mdc-textfield mdc-textfield--focused">
-                            <input type="text" id="my-textfield-2" className="mdc-textfield__input" />
-                            <label className="mdc-textfield__label mdc-textfield__label--float-above" htmlFor="my-textfield-2">Hint text</label>
-                        </div>
-                    </div>
+                     <div>
+                     <div className="mdc-textfield mdc-textfield--focused">
+                     <input type="text" id="my-textfield-2" className="mdc-textfield__input" />
+                     <label className="mdc-textfield__label mdc-textfield__label--float-above" htmlFor="my-textfield-2">Hint text</label>
+                     </div>
+                     </div>
                      */}
 
                 </fieldset>

@@ -48,6 +48,6 @@ export {
     Textfield,
     TextfieldInput,
     TextfieldLabel,
-    TextfieldHelprext
+    TextfieldHelptext
 } from './Textfield';
 export { FormField } from './FormField'

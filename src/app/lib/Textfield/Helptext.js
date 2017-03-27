@@ -10,7 +10,7 @@ const propTypes = {
     persistent: PropTypes.bool,
     validation: PropTypes.bool,
 };
-const Helprext = ({
+const Helptext = ({
     children,
     className,
     elementType,
@@ -32,5 +32,5 @@ const Helprext = ({
         </ElementType>);
 };
 
-Helprext.propTypes = propTypes;
-export default Helprext;
+Helptext.propTypes = propTypes;
+export default Helptext;
