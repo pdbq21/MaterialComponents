@@ -3,3 +3,5 @@
  */
 import '@material/radio/dist/mdc.radio.css';
 export {default as Radio} from './Radio';
+export {default as RadioInput} from './Input';
+export {default as RadioLabel} from './Label';

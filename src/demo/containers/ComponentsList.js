@@ -13,7 +13,7 @@ import Buttons from '../components/Buttons'
 import Checkbox from '../components/Checkboxes'
 import Elevations from '../components/Elevations'
 import Cards from '../components/Cards'
-import Radio from '../components/Radio'
+import RadioComponent from '../components/RadioComponent'
 import TypographyComponent from '../components/TypographyComponent'
 import LayoutGrids from '../components/LayoutGrids'
 import Lists from '../components/Lists'
@@ -58,7 +58,7 @@ class ComponentsList extends Component {
             case 'Card':
                 return (<Cards />);
             case 'Radio':
-                return (<Radio />);
+                return (<RadioComponent />);
             case 'Typography':
                 return (<TypographyComponent />);
             case 'LayoutGrid':

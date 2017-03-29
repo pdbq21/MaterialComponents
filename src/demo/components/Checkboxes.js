@@ -1,30 +1,52 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-import React from 'react';
-import {Checkbox} from '../../app/lib'
+import React from 'react'
 import {Ripple} from '../../app/lib'
+import {
+    CheckboxLabel,
+    Checkbox
+} from '../../app/lib'
+export default class Checkboxes extends React.Component{
 
-export default function Checkboxes() {
+    state = {
+        checked: false,
+        disabled: false,
+        indeterminate: false
+    }
 
-    return (
-        <div>
-            <fieldset>
-                <legend>Checkbox</legend>
-                <Ripple>
+    render(){
+        const {disabled, indeterminate} = this.state;
+        return (
+            <div>
+                <fieldset>
+                    <legend>Checkbox</legend>
+                    <div>
+                        <Checkbox id="my-checkbox"
+                                  labelId="my-checkbox-label"
+                                  disabled={disabled}
+                                  indeterminate={indeterminate}
+                                  onChange={({target}) => this.setState({
+                                      checked: target.checked,
+                                      indeterminate: false
+                                  })}/>
+                        <CheckboxLabel id="my-checkbox-label" for="my-checkbox">
+                            The checkbox is currently
+                        </CheckboxLabel>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Only CSS Checkbox</legend>
                     <Checkbox />
-                </Ripple>
-            </fieldset>
-            <fieldset>
-                <legend>Only CSS Checkbox</legend>
-                <Checkbox />
-            </fieldset>
-            <fieldset>
-                <legend>Disabled Checkbox</legend>
-                <Checkbox disabled/>
-            </fieldset>
-        </div>
-    );
+                </fieldset>
+                <fieldset>
+                    <legend>Disabled Checkbox</legend>
+                    <Checkbox disabled/>
+                </fieldset>
+            </div>
+        );
+    }
+
 }
 
 /*import React, {PureComponent} from 'react';

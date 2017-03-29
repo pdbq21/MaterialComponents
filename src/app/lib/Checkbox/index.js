@@ -3,4 +3,5 @@
  */
 import '@material/checkbox/dist/mdc.checkbox.css';
 
-export { default } from './Checkbox';
+export { default as Checkbox } from './Checkbox';
+export { default as CheckboxLabel } from './Label';
