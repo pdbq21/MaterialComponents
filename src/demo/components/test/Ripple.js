@@ -75,9 +75,9 @@ class RippleSelect extends Component {
                 height: DIM,
             };
         },
-        getWindowPageOffset: () => {
+        /*getWindowPageOffset: () => {
 
-        },
+        },*/
     }));
 
 
