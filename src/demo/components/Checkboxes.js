@@ -15,8 +15,15 @@ export default class Checkboxes extends React.Component{
         indeterminate: false
     }
 
+    handelClick(){
+        console.log('test click')
+    }
+    handelKeyDown(){
+        console.log('test key down')
+    }
     render(){
         const {disabled, indeterminate} = this.state;
+
         return (
             <div>
                 <fieldset>
@@ -29,7 +36,20 @@ export default class Checkboxes extends React.Component{
                                   onChange={({target}) => this.setState({
                                       checked: target.checked,
                                       indeterminate: false
-                                  })}/>
+                                  })}
+                                  parentProps={{
+                                      onClick: this.handelClick,
+                                      id: 'testId',
+                                      className: 'testClassName',
+                                      onKeyDown: this.handelKeyDown
+                                  }}
+                                  childrenProps={{
+                                      onClick: this.handelClick,
+                                      id: 'testIdChild',
+                                      className: 'testClassNameChild',
+                                      onKeyDown: this.handelKeyDown
+                                  }}
+                        />
                         <CheckboxLabel id="my-checkbox-label" for="my-checkbox">
                             The checkbox is currently
                         </CheckboxLabel>

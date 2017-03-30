@@ -24,6 +24,8 @@ import SwitchComponent from '../components/SwitchComponent'
 import DrawerComponent from '../components/DrawerComponent'
 import TextfieldComponent from '../components/TextfieldComponent'
 import SnackbarComponent from '../components/SnackbarComponent'
+import SelectComponent from '../components/SelectComponent'
+import RippleComponent from '../components/RippleComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -79,6 +81,10 @@ class ComponentsList extends Component {
                 return (<TextfieldComponent />);
             case 'Snackbar':
                 return (<SnackbarComponent />);
+            case 'Select':
+                return (<SelectComponent />);
+            case 'Ripple':
+                return (<RippleComponent />);
 
             default:
                 return null;
@@ -138,6 +144,12 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''}`}>
                         Snackbar
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''}`}>
+                        Select
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''}`}>
+                        Ripple
                     </li>
                 </ul>
 

@@ -132,7 +132,8 @@ class Checkbox extends PureComponent {
     });
 
     render() {
-        console.log(importTest);
+
+        console.log(this.props);
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.
         return (
             <div ref="root" className={classnames('mdc-checkbox', this.state.classes)}>

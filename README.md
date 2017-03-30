@@ -1,6 +1,7 @@
 ##ToDo
 - Create Radio in lib
     - add this demo
+    - add Ripple
 - Create Checkbox
     - add this demo
 - fix Ripple
