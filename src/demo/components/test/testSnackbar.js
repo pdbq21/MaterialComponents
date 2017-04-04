@@ -6,6 +6,9 @@ import '@material/textfield/dist/mdc.textfield.min.css';
 import {snackbar as test}  from 'material-components-web/dist/material-components-web';
 const {MDCSnackbarFoundation} = test;
 import classnames from 'classnames';
+import '@material/ripple/dist/mdc.ripple.min.css';
+import {ripple as test1}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = test1;
 
 class Text extends Component {
     render() {
@@ -40,6 +43,7 @@ class TestSnackbar extends Component {
         this.state = {
             classNames: []
         };
+
 
         this.foundation_ = new MDCSnackbarFoundation({
 

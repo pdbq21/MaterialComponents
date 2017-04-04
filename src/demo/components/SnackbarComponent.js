@@ -2,7 +2,7 @@
  * Created by ruslan on 27.03.17.
  */
 import React from 'react';
-//import {default as TestComponent} from './test/testSnackbar'
+import {default as TestComponent} from './test/testSnackbar'
 import '@material/snackbar/dist/mdc.snackbar.min.css';
 export default class SnackbarComponent extends React.Component {
     render() {
@@ -25,7 +25,7 @@ export default class SnackbarComponent extends React.Component {
                     </div>
                 </div>*/}
 
-                {/*<TestComponent />*/}
+                <TestComponent />
             </div>
         );
     }

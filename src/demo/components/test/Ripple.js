@@ -20,8 +20,8 @@ function getMatchesProperty(HTMLElementPrototype) {
 }
 
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
-// todo: this!!
-export function supportsCssVariables (windowObj: any): boolean {
+
+export function supportsCssVariables (windowObj) {
     const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
     if (!supportsFunctionPresent) {
         return false;
@@ -51,7 +51,8 @@ class RippleSelect extends Component {
 
 
     foundation = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
-        isUnbounded: () => true,
+        // for FAB this. === true \ for other component === false
+        isUnbounded: () => false,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
         },
@@ -83,10 +84,10 @@ class RippleSelect extends Component {
             }
         })),
         computeBoundingRect: () => {
-            console.log(this.refs.root);
-            const {left, top} = this.refs.root.getBoundingClientRect();
+            console.log(this.refs.root.getBoundingClientRect());
+           /* const {left, top} = this.refs.root.getBoundingClientRect();
             console.log(left, top);
-            const DIM = 100;
+            const DIM = 100;*/
             return this.refs.root.getBoundingClientRect();
         },
         getWindowPageOffset: () => {
@@ -102,18 +103,18 @@ class RippleSelect extends Component {
     render() {
        // console.log(test, MDCRippleFoundation);
         return (
-            <div ref="root" className={classnames('mdc-ripple-surface', this.state.classNames)}>
-                <div ref="nativeCb"
-                     style={{    'width': '10em',
-                    'height': '6em',
-                    'backgroundColor': 'deepskyblue'
-                }} />
+            <div ref="root"  style={{    'width': '10em',
+                'height': '6em',
+                'backgroundColor': 'deepskyblue'
+            }}  className={classnames('mdc-ripple-surface', this.state.classNames)}>
+
             </div>
         );
     }
 
     componentDidMount() {
         this.foundation.init();
+        console.log(this.foundation)
     }
 
     componentWillUnmount() {
@@ -121,7 +122,6 @@ class RippleSelect extends Component {
     }
 
     componentDidUpdate(props) {
-        console.log(this.state.XY);
         if (this.refs.root) {
             for (let key in this.state.rippleCss){
                 this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
