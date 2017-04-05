@@ -6,6 +6,7 @@ import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple as test}  from 'material-components-web/dist/material-components-web';
 const {MDCRipple, MDCRippleFoundation} = test;
 import classnames from 'classnames';
+import '@material/fab/dist/mdc.fab.min.css';
 
 export default function (props) {
     return (
@@ -21,7 +22,7 @@ function getMatchesProperty(HTMLElementPrototype) {
 
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
 
-export function supportsCssVariables (windowObj) {
+export function supportsCssVariables(windowObj) {
     const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
     if (!supportsFunctionPresent) {
         return false;
@@ -52,7 +53,7 @@ class RippleSelect extends Component {
 
     foundation = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
         // for FAB this. === true \ for other component === false
-        isUnbounded: () => false,
+        isUnbounded: () => true,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
         },
@@ -84,11 +85,20 @@ class RippleSelect extends Component {
             }
         })),
         computeBoundingRect: () => {
-            console.log(this.refs.root.getBoundingClientRect());
-           /* const {left, top} = this.refs.root.getBoundingClientRect();
-            console.log(left, top);
-            const DIM = 100;*/
-            return this.refs.root.getBoundingClientRect();
+            //console.log(this.refs.root.getBoundingClientRect());
+            
+             const {left, top} = this.refs.root.getBoundingClientRect();
+             console.log(left, top);
+             const DIM = 40;
+            /*return this.refs.root.getBoundingClientRect();*/
+            return {
+                top,
+                left,
+                right: left + DIM,
+                bottom: top + DIM,
+                width: DIM,
+                height: DIM,
+            };
         },
         getWindowPageOffset: () => {
             return {
@@ -101,12 +111,17 @@ class RippleSelect extends Component {
 
 
     render() {
-       // console.log(test, MDCRippleFoundation);
+        // console.log(test, MDCRippleFoundation);
         return (
-            <div ref="root"  style={{    'width': '10em',
-                'height': '6em',
-                'backgroundColor': 'deepskyblue'
-            }}  className={classnames('mdc-ripple-surface', this.state.classNames)}>
+            <div
+                ref="root"
+                className={
+                    classnames('material-icons','mdc-ripple-surface', this.state.classNames)
+                }
+                aria-label="Favorite"
+            >
+
+                favorite
 
             </div>
         );
@@ -114,7 +129,6 @@ class RippleSelect extends Component {
 
     componentDidMount() {
         this.foundation.init();
-        console.log(this.foundation)
     }
 
     componentWillUnmount() {
@@ -123,8 +137,10 @@ class RippleSelect extends Component {
 
     componentDidUpdate(props) {
         if (this.refs.root) {
-            for (let key in this.state.rippleCss){
-                this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
+            for (let key in this.state.rippleCss) {
+                if (this.state.rippleCss.hasOwnProperty(key)) {
+                    this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
+                }
             }
         }
     }

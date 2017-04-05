@@ -44,18 +44,7 @@ import '@material/checkbox/dist/mdc.checkbox.css';
 import classnames from 'classnames';
 import {checkbox as test}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = test;
-import * as importTest  from 'material-components-web/dist/material-components-web';
 
-
-function getMatchesProperty(HTMLElementPrototype) {
-    return [
-        'webkitMatchesSelector', 'msMatchesSelector', 'matches',
-    ].filter((p) => p in HTMLElementPrototype).pop();
-}
-
-const {ANIM_END_EVENT_NAME} = MDCCheckboxFoundation.strings;
-
-const MATCHES = getMatchesProperty(HTMLElement.prototype);
 
 class Checkbox extends PureComponent {
     static propTypes = {

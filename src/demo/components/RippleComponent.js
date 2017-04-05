@@ -10,6 +10,7 @@ export default class RippleComponent extends React.PureComponent {
     render() {
         return (
             <div >
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
                 <fieldset>
                     <legend>Ripple Component</legend>
                     <div>
@@ -26,5 +27,4 @@ export default class RippleComponent extends React.PureComponent {
             </div>
         );
     }
-
 }
