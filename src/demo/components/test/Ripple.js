@@ -119,6 +119,9 @@ class RippleSelect extends Component {
                     classnames('material-icons','mdc-ripple-surface', this.state.classNames)
                 }
                 aria-label="Favorite"
+                data-mdc-ripple-is-unbounded
+                tabIndex="0"
+
             >
 
                 favorite

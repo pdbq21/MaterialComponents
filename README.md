@@ -4,7 +4,8 @@
     - add Ripple
 - Create Checkbox
     - add this demo
-- fix Ripple
+- Ripple:
+    - add ripple for material-icons
 - Create Theme
 - Layout Grid
     - Margins and gutters
