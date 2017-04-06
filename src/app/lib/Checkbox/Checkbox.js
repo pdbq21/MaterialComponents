@@ -38,12 +38,14 @@ export default Checkbox;*/
 
 
 import React, {PureComponent, PropTypes} from 'react';
-
-//import {MDCCheckboxFoundation} from '@material/checkbox/dist/mdc.checkbox';
-import '@material/checkbox/dist/mdc.checkbox.css';
 import classnames from 'classnames';
 import {checkbox as test}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = test;
+
+
+function getCorrectEventName() {
+    
+}
 
 
 class Checkbox extends PureComponent {

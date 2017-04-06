@@ -1,97 +1,137 @@
-// src: https://github.com/rwu823/react-ripples/blob/master/src/index.js
-import React, { PropTypes, Component } from 'react'
+/**
+ * Created by ruslan on 30.03.17.
+ */
+import React, {Component, PropTypes} from 'react';
+import {ripple as test}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = test;
+import classnames from 'classnames';
 
-const rippleStyle = {
-    position: 'absolute',
-    borderRadius: '50%',
-    opacity: 0,
-    width: 35,
-    height: 35,
-    transform: 'translate(-50%, -50%)',
-    pointerEvents: 'none',
-};
-
-const wrapStyle = {
-    position: 'relative',
-    display: 'inline-block',
-    overflow: 'hidden',
-};
-
-class Ripple extends Component {
-    static propTypes = {
-        during: PropTypes.number,
-        color: PropTypes.string,
-    };
-
-    static defaultProps = {
-        during: 600,
-        color: 'rgba(0, 0, 0, .3)',
-    };
-
-    state = {
-        rippleStyle: {},
-    };
-
-    handleClick = (event) => {
-        event.stopPropagation();
-
-        const { onClick, color, during } = this.props;
-        const {
-            pageX, pageY, currentTarget: {
-            offsetLeft, offsetTop,
-            offsetWidth, offsetHeight
-        }
-        } = event;
-
-        const left = pageX - offsetLeft;
-        const top = pageY - offsetTop;
-
-        this.setState({
-            rippleStyle: {
-                top, left,
-                opacity: 1,
-                backgroundColor: color,
-            }
-        });
-
-        setTimeout(() => {
-            const size = Math.max(offsetWidth, offsetHeight);
-
-            this.setState({
-                rippleStyle: {
-                    top, left,
-                    backgroundColor: color,
-                    transition: `all ${during}ms`,
-                    transform: `${rippleStyle.transform} scale(${size / 9})`,
-                    opacity: 0,
-                }
-            })
-        }, 50);
-
-        if (typeof onClick === 'function') {
-            onClick(event)
-        }
-    };
-
-    render() {
-        const { children, style, during, ...props } = this.props;
-        const { state, handleClick } = this;
-
-        const s = {
-            ...style,
-            ...wrapStyle,
-        };
-
-        return (
-            <div {...props} style={s} onClick={handleClick}>
-                { children }
-                <s style={{
-                    ...rippleStyle,
-                    ...state.rippleStyle,
-                }} />
-            </div>
-        )
-    }
+function getMatchesProperty(HTMLElementPrototype) {
+    return [
+        'webkitMatchesSelector', 'msMatchesSelector', 'matches',
+    ].filter((p) => p in HTMLElementPrototype).pop();
 }
 
-export default Ripple
+const MATCHES = getMatchesProperty(HTMLElement.prototype);
+
+function supportsCssVariables(windowObj) {
+    const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
+    if (!supportsFunctionPresent) {
+        return false;
+    }
+
+    const explicitlySupportsCssVars = windowObj.CSS.supports("--css-vars", "yes");
+    // See: https://bugs.webkit.org/show_bug.cgi?id=154669
+    // See: README section on Safari
+    const weAreFeatureDetectingSafari10plus = (
+        windowObj.CSS.supports("(--css-vars: yes)") &&
+        windowObj.CSS.supports("color", "#00000000")
+    );
+    return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
+}
+
+export default class extends Component {
+    static propTypes = {
+        id: PropTypes.string,
+    }
+
+
+    state = {
+        classNames: [],
+        rippleCss: {},
+    }
+
+
+    foundation = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+        // for FAB this. === true \ for other component === false
+        isUnbounded: () => false,
+        browserSupportsCssVars: () => {
+            return supportsCssVariables(window);
+        },
+        isSurfaceActive: () => this.refs.root[MATCHES](':active'),
+        addClass: className => this.setState(({classNames}) => ({
+            classNames: classNames.concat([className])
+        })),
+        removeClass: className => this.setState(({classNames}) => ({
+            classNames: classNames.filter(cn => cn !== className)
+        })),
+        registerInteractionHandler: (evtType, handler) => {
+            this.refs.root.addEventListener(evtType, handler);
+        },
+        deregisterInteractionHandler: (evtType, handler) => {
+            this.refs.root.removeEventListener(evtType, handler);
+        },
+        registerResizeHandler: handler => {
+            window.addEventListener('resize', handler);
+        },
+        deregisterResizeHandler: handler => {
+            window.removeEventListener('resize', handler);
+        },
+
+
+        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
+            rippleCss: {
+                ...rippleCss,
+                [varName]: value
+            }
+        })),
+        computeBoundingRect: () => {
+            //console.log(this.refs.root.getBoundingClientRect());
+
+            /*const {left, top} = this.refs.root.getBoundingClientRect();
+            console.log(left, top);
+            const DIM = 40;*/
+            return this.refs.root.getBoundingClientRect();
+            /*return {
+                top,
+                left,
+                right: left + DIM,
+                bottom: top + DIM,
+                width: DIM,
+                height: DIM,
+            };*/
+        },
+        getWindowPageOffset: () => {
+            return {
+                x: window.pageXOffset,
+                y: window.pageYOffset
+            }
+        },
+
+    }));
+
+
+    render() {
+        return (
+            <div
+                ref="root"
+                className={
+                    classnames('material-icons','mdc-ripple-surface', this.state.classNames)
+                }
+                aria-label="Favorite"
+                data-mdc-ripple-is-unbounded
+                tabIndex="0"
+            >
+
+            </div>
+        );
+    }
+
+    componentDidMount() {
+        this.foundation.init();
+    }
+
+    componentWillUnmount() {
+        this.foundation.destroy();
+    }
+
+    componentDidUpdate() {
+        if (this.refs.root) {
+            for (let key in this.state.rippleCss) {
+                if (this.state.rippleCss.hasOwnProperty(key)) {
+                    this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
+                }
+            }
+        }
+    }
+}
