@@ -4,7 +4,8 @@
 import React from 'react';
 
 import {
-    FAB
+    FAB,
+    FABIcon
 } from '../../app/lib'
 
 export default function FABComponent() {
@@ -15,29 +16,36 @@ export default function FABComponent() {
             <fieldset>
                 <legend>FAB only CSS</legend>
                 <h3>FAB Default</h3>
-                <FAB icon>favorite</FAB>
+                <FAB icon><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB mini</h3>
-                <FAB icon mini>favorite</FAB>
+                <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB plain</h3>
-                <FAB icon plain>favorite</FAB>
+                <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB plain + mini</h3>
-                <FAB icon plain mini>favorite</FAB>
+                <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
             </fieldset>
             <fieldset>
                 <legend>FAB Disabled</legend>
                 <h3>FAB Default</h3>
-                <FAB icon disabled>favorite</FAB>
+                <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB mini</h3>
-                <FAB icon mini disabled>favorite</FAB>
+                <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB plain</h3>
-                <FAB icon plain disabled>favorite</FAB>
+                <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB plain + mini</h3>
-                <FAB icon plain mini disabled>favorite</FAB>
+                <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
             </fieldset>
             <fieldset>
                 <legend>FAB Ripple</legend>
                 <h3>Coming...</h3>
-
+                <h3>FAB Default</h3>
+                <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB mini</h3>
+                <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB plain</h3>
+                <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB plain + mini</h3>
+                <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
             </fieldset>
         </div>
     );

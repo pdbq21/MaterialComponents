@@ -32,7 +32,7 @@ export {
     ListItemTextSecondary,
     ListItemDetail
 } from './List';
-export { default as FAB} from './FAB';
+export { FAB, FABIcon } from './FAB';
 export {
     Toolbar,
     ToolbarSection,

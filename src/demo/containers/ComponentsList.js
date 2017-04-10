@@ -85,6 +85,8 @@ class ComponentsList extends Component {
                 return (<SelectComponent />);
             case 'Ripple':
                 return (<RippleComponent />);
+            case 'Dialog':
+                return (<div />);
 
             default:
                 return null;
@@ -108,6 +110,9 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>
                         Card
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Dialog') ? 'active' : ''}`}>
+                        /* Todo: Dialog */
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>
                         Elevation
@@ -137,7 +142,7 @@ class ComponentsList extends Component {
                         Switch
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Drawer') ? 'active' : ''}`}>
-                        Drawer
+                        /* Todo: Drawer */
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield

@@ -203,9 +203,6 @@ class Button extends PureComponent {
         }
     }
 
-
-
-
     componentDidUpdate() {
 
         if (this.props.ripple && this.refs.root) {
