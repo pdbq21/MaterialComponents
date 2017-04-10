@@ -809,6 +809,16 @@ export default function Lists() {
                     </ListGroup>
                 </section>
             </fieldset>
+            <fieldset>
+            <legend>Interactive Lists (with ink ripple)</legend>
+                <section>
+<h2>Example - Interactive List</h2>
+                    <List>
+
+                    </List>
+
+                </section>
+            </fieldset>
         </div>
     );
 }

@@ -2,13 +2,13 @@
 - Create Radio in lib
     - add this demo
     - add Ripple
-- Create Checkbox
-    - add this demo
++ Create Checkbox
+    + add this demo
 - Ripple:
     - add ripple for material-icons
 - Create Theme
-- Layout Grid
-    - Margins and gutters
++ Layout Grid
+    + Margins and gutters
 - List
     - ripples for interactive lists
 - component for only material-icons need or not?
