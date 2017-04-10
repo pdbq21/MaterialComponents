@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import {Button} from '../../app/lib'
-import {Ripple} from '../../app/lib'
 import {Elevation} from '../../app/lib'
 
 export default function Buttons() {
@@ -18,18 +17,19 @@ export default function Buttons() {
             >
                 <fieldset>
                     <legend>Buttons with Ripple</legend>
-                    <Ripple><Button>default</Button></Ripple>
-                    <Ripple><Button raised >raised</Button></Ripple>
-                    <Ripple><Button dense >dense</Button></Ripple>
-                    <Ripple><Button dense raised>dense raised</Button></Ripple>
-                    <Ripple><Button compact>compact</Button></Ripple>
-                    <Ripple><Button compact raised>compact raised</Button></Ripple>
-                    <Ripple><Button primary>primary</Button></Ripple>
-                    <Ripple><Button primary raised>primary raised</Button></Ripple>
-                    <Ripple><Button accent>accent</Button></Ripple>
-                    <Ripple><Button accent raised>accent raised</Button></Ripple>
-                    <Ripple><Button elementType="div">div</Button></Ripple>
-                    <Ripple><Button elementType="div" raised>div raised</Button></Ripple>
+                    <Button ripple>default</Button>
+                    <Button ripple raised >raised</Button>
+                    <Button ripple dense >dense</Button>
+                    <Button ripple dense raised>dense raised</Button>
+                    <Button ripple compact>compact</Button>
+                    <Button ripple compact raised>compact raised</Button>
+                    <Button ripple primary>primary</Button>
+                    <Button ripple primary raised>primary raised</Button>
+                    <Button ripple accent>accent</Button>
+                    <Button ripple accent raised>accent raised</Button>
+                    <Button ripple elementType="div">div</Button>
+                    <Button ripple elementType="div" raised>div raised</Button>
+
                 </fieldset>
                 <fieldset>
                     <legend>Buttons with Only CSS</legend>
@@ -76,6 +76,7 @@ export default function Buttons() {
                     <Button disabled elementType="div">div</Button>
                     <Button disabled elementType="div" raised>div raised</Button>
                 </fieldset>
+                /*Todo: Dark Theme*/
             </Elevation>
         </div>
     );
