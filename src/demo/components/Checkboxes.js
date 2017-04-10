@@ -7,27 +7,41 @@ import {
     CheckboxLabel,
     Checkbox
 } from '../../app/lib'
-export default class Checkboxes extends React.Component{
+export default class Checkboxes extends React.Component {
 
-    state = {
-        checked: false,
-        disabled: false,
-        indeterminate: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: false,
+            disabled: false,
+            indeterminate: false
+        }
+
+        this.handelIndeterminate = this.handelIndeterminate.bind(this);
+        this.handelDisabled = this.handelDisabled.bind(this);
     }
 
-    handelClick(){
-        console.log('test click')
+
+    handelIndeterminate() {
+        this.setState({
+            indeterminate: true
+        })
     }
-    handelKeyDown(){
-        console.log('test key down')
+    handelDisabled() {
+        this.setState({
+            disabled: !this.state.disabled
+        })
     }
-    render(){
+
+    render() {
         const {disabled, indeterminate} = this.state;
 
         return (
             <div>
                 <fieldset>
                     <legend>Checkbox</legend>
+                    <button onClick={this.handelIndeterminate}>Make indeterminate</button>
+                    <button onClick={this.handelDisabled}>Toggle Disabled</button>
                     <div>
                         <Checkbox id="my-checkbox"
                                   labelId="my-checkbox-label"
@@ -37,18 +51,8 @@ export default class Checkboxes extends React.Component{
                                       checked: target.checked,
                                       indeterminate: false
                                   })}
-                                  parentProps={{
-                                      onClick: this.handelClick,
-                                      id: 'testId',
-                                      className: 'testClassName',
-                                      onKeyDown: this.handelKeyDown
-                                  }}
-                                  childrenProps={{
-                                      onClick: this.handelClick,
-                                      id: 'testIdChild',
-                                      className: 'testClassNameChild',
-                                      onKeyDown: this.handelKeyDown
-                                  }}
+
+                                  ripple
                         />
                         <CheckboxLabel id="my-checkbox-label" for="my-checkbox">
                             The checkbox is currently
@@ -57,45 +61,15 @@ export default class Checkboxes extends React.Component{
                 </fieldset>
                 <fieldset>
                     <legend>Only CSS Checkbox</legend>
-                    <Checkbox />
+                    <Checkbox indeterminate={indeterminate} disabled={disabled} />
                 </fieldset>
                 <fieldset>
                     <legend>Disabled Checkbox</legend>
-                    <Checkbox disabled/>
+                    <Checkbox disabled />
                 </fieldset>
+                /* todo: Dark Theme*/
             </div>
         );
     }
 
 }
-
-/*import React, {PureComponent} from 'react';
-
-
-export default class Checkbox extends PureComponent {
-
-
-    render() {
-        return (
-            <div className={`mdc-checkbox`}>
-                <input
-                    type="checkbox"
-                    className="mdc-checkbox__native-control"
-
-                />
-                <div className="mdc-checkbox__background">
-                    <svg version="1.1"
-                         className="mdc-checkbox__checkmark"
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                        <path className="mdc-checkbox__checkmark__path"
-                              fill="none"
-                              stroke="white"
-                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                    </svg>
-                    <div className="mdc-checkbox__mixedmark"></div>
-                </div>
-            </div>
-        );
-    }
-}*/

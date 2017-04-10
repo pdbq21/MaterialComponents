@@ -39,12 +39,12 @@
 
 import React, {PureComponent, PropTypes} from 'react';
 import classnames from 'classnames';
-import {checkbox as test}  from 'material-components-web/dist/material-components-web';
-const {MDCCheckboxFoundation} = test;
+import {checkbox as checkbox}  from 'material-components-web/dist/material-components-web';
+const {MDCCheckboxFoundation} = checkbox;
 
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple as testRipple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = testRipple;
+import {ripple as ripple}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripple;
 
 const eventTypeMap = {
     animationstart: {
@@ -225,7 +225,6 @@ class Checkbox extends PureComponent {
         isAttachedToDOM: () => Boolean(this.refs.nativeCb),
     });
 
-
     foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
         // for FAB this. === true \ for other component === false
         isUnbounded: () => true,
@@ -264,17 +263,17 @@ class Checkbox extends PureComponent {
             //console.log(this.refs.root.getBoundingClientRect());
 
             const {left, top} = this.refs.root.getBoundingClientRect();
-             console.log(left, top);
-             const DIM = 40;
+            console.log(left, top);
+            const DIM = 40;
             //return this.refs.root.getBoundingClientRect();
             return {
-             top,
-             left,
-             right: left + DIM,
-             bottom: top + DIM,
-             width: DIM,
-             height: DIM,
-             };
+                top,
+                left,
+                right: left + DIM,
+                bottom: top + DIM,
+                width: DIM,
+                height: DIM,
+            };
         },
         getWindowPageOffset: () => {
             return {
@@ -286,10 +285,14 @@ class Checkbox extends PureComponent {
     }));
 
     render() {
-
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.
         return (
-            <div ref="root" className={classnames('mdc-checkbox', this.state.classes, this.state.classNamesRipple)}>
+            <div ref="root" className={
+                classnames(
+                    'mdc-checkbox',
+                    this.state.classes,
+                    this.state.classNamesRipple
+                )}>
                 <input ref="nativeCb"
                        id={this.props.id}
                        type="checkbox"
@@ -324,11 +327,16 @@ class Checkbox extends PureComponent {
     // so that proper work can be performed.
     componentDidMount() {
         this.foundation.init();
-        this.foundationRipple.init();
+
+        if (this.props.ripple) {
+            this.foundationRipple.init();
+        }
     }
 
     componentWillUnmount() {
-        this.foundationRipple.destroy();
+        if (this.props.ripple) {
+            this.foundationRipple.destroy();
+        }
         this.foundation.destroy();
     }
 
@@ -353,7 +361,7 @@ class Checkbox extends PureComponent {
             this.refs.nativeCb.indeterminate = this.state.indeterminateInternal;
         }
 
-        if (this.refs.root) {
+        if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {
                     this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
