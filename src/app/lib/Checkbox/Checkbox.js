@@ -2,39 +2,39 @@
  * Created by ruslan on 13.03.17.
  */
 /*
-import React from 'react';
+ import React from 'react';
 
-const propTypes = {};
+ const propTypes = {};
 
-const Checkbox = ({
-    ...otherProp
-}) => {
+ const Checkbox = ({
+ ...otherProp
+ }) => {
 
-    return (
-        <div className={`mdc-checkbox`}
-             {...otherProp}
-        >
-            <input
-                type="checkbox"
-                className="mdc-checkbox__native-control"
-            />
-            <div className="mdc-checkbox__background">
-                <svg version="1.1"
-                     className="mdc-checkbox__checkmark"
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24">
-                    <path className="mdc-checkbox__checkmark__path"
-                          fill="none"
-                          stroke="white"
-                          d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                </svg>
-                <div className="mdc-checkbox__mixedmark"></div>
-            </div>
-        </div>);
-};
+ return (
+ <div className={`mdc-checkbox`}
+ {...otherProp}
+ >
+ <input
+ type="checkbox"
+ className="mdc-checkbox__native-control"
+ />
+ <div className="mdc-checkbox__background">
+ <svg version="1.1"
+ className="mdc-checkbox__checkmark"
+ xmlns="http://www.w3.org/2000/svg"
+ viewBox="0 0 24 24">
+ <path className="mdc-checkbox__checkmark__path"
+ fill="none"
+ stroke="white"
+ d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+ </svg>
+ <div className="mdc-checkbox__mixedmark"></div>
+ </div>
+ </div>);
+ };
 
-Checkbox.propTypes = propTypes;
-export default Checkbox;*/
+ Checkbox.propTypes = propTypes;
+ export default Checkbox;*/
 
 
 import React, {PureComponent, PropTypes} from 'react';
@@ -42,9 +42,108 @@ import classnames from 'classnames';
 import {checkbox as test}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = test;
 
+import '@material/ripple/dist/mdc.ripple.min.css';
+import {ripple as testRipple}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = testRipple;
 
-function getCorrectEventName() {
-    
+const eventTypeMap = {
+    animationstart: {
+        noPrefix: 'animationstart',
+        webkitPrefix: 'webkitAnimationStart',
+    },
+    animationend: {
+        noPrefix: 'animationend',
+        webkitPrefix: 'webkitAnimationEnd',
+    },
+    animationiteration: {
+        noPrefix: 'animationiteration',
+        webkitPrefix: 'webkitAnimationIteration',
+    },
+    transitionend: {
+        noPrefix: 'transitionend',
+        webkitPrefix: 'webkitTransitionEnd',
+    },
+};
+
+const cssPropertyMap = {
+    animation: {
+        noPrefix: 'animation',
+        webkitPrefix: '-webkit-animation',
+    },
+    transform: {
+        noPrefix: 'transform',
+        webkitPrefix: '-webkit-transform',
+    },
+    transition: {
+        noPrefix: 'transition',
+        webkitPrefix: '-webkit-transition',
+    },
+};
+
+// If 'animation' or 'transition' exist as style property, webkit prefix isn't necessary. Since we are unable to
+// see the event types on the element, we must rely on the corresponding style properties.
+function getJavaScriptEventName(eventType, map, el) {
+    switch (eventType) {
+        case 'animationstart':
+        case 'animationend':
+        case 'animationiteration':
+            return 'animation' in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
+        case 'transitionend':
+            return 'transition' in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
+        default:
+            return map[eventType].noPrefix;
+    }
+}
+
+function eventFoundInMaps(eventType) {
+    return eventType in eventTypeMap || eventType in cssPropertyMap;
+}
+
+function hasProperShape(windowObj) {
+    return (windowObj.document !== undefined && typeof windowObj.document.createElement === 'function');
+}
+
+function getCorrectEventName(windowObj, eventType) {
+    if (!hasProperShape(windowObj) || !eventFoundInMaps(eventType)) {
+        return eventType;
+    }
+
+    let map = eventType in eventTypeMap ? eventTypeMap : cssPropertyMap;
+    let el = windowObj.document.createElement('div');
+    let eventName = '';
+
+    if (map === eventTypeMap) {
+        eventName = getJavaScriptEventName(eventType, map, el);
+    } else {
+        eventName = map[eventType].noPrefix in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
+    }
+
+    return eventName;
+}
+
+//Ripple
+function getMatchesProperty(HTMLElementPrototype) {
+    return [
+        'webkitMatchesSelector', 'msMatchesSelector', 'matches',
+    ].filter((p) => p in HTMLElementPrototype).pop();
+}
+
+const MATCHES = getMatchesProperty(HTMLElement.prototype);
+
+function supportsCssVariables(windowObj) {
+    const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
+    if (!supportsFunctionPresent) {
+        return false;
+    }
+
+    const explicitlySupportsCssVars = windowObj.CSS.supports("--css-vars", "yes");
+    // See: https://bugs.webkit.org/show_bug.cgi?id=154669
+    // See: README section on Safari
+    const weAreFeatureDetectingSafari10plus = (
+        windowObj.CSS.supports("(--css-vars: yes)") &&
+        windowObj.CSS.supports("color", "#00000000")
+    );
+    return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
 
@@ -62,14 +161,18 @@ class Checkbox extends PureComponent {
         checked: false,
         disabled: false,
         indeterminate: false,
-        onChange: () => {}
+        onChange: () => {
+        }
     }
 
     state = {
         classes: [],
         checkedInternal: this.props.checked,
         disabledInternal: this.props.disabled,
-        indeterminateInternal: this.props.indeterminate
+        indeterminateInternal: this.props.indeterminate,
+
+        classNamesRipple: [],
+        rippleCss: {},
     }
 
 
@@ -83,7 +186,7 @@ class Checkbox extends PureComponent {
             classes: classes.filter(cn => cn !== className)
         })),
         //this for Ripple
-        /*registerAnimationEndHandler: handler => {
+        registerAnimationEndHandler: handler => {
             if (this.refs.root) {
                 this.refs.root.addEventListener(getCorrectEventName(window, 'animationend'), handler);
             }
@@ -92,7 +195,7 @@ class Checkbox extends PureComponent {
             if (this.refs.root) {
                 this.refs.root.removeEventListener(getCorrectEventName(window, 'animationend'), handler)
             }
-        },*/
+        },
         registerChangeHandler: handler => {
             // Note that this could also be handled outside of using the native DOM API.
             // For example, onChange within render could delegate to a function which calls
@@ -122,12 +225,70 @@ class Checkbox extends PureComponent {
         isAttachedToDOM: () => Boolean(this.refs.nativeCb),
     });
 
-    render() {
 
-        console.log(this.props);
+    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+        // for FAB this. === true \ for other component === false
+        isUnbounded: () => true,
+        browserSupportsCssVars: () => {
+            return supportsCssVariables(window);
+        },
+        isSurfaceActive: () => this.refs.root[MATCHES](':active'),
+        addClass: className => this.setState(({classNamesRipple}) => ({
+            classNamesRipple: classNamesRipple.concat([className])
+        })),
+        removeClass: className => this.setState(({classNamesRipple}) => ({
+            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+        })),
+        // root / nativeCb
+        registerInteractionHandler: (evtType, handler) => {
+            this.refs.nativeCb.addEventListener(evtType, handler);
+        },
+        deregisterInteractionHandler: (evtType, handler) => {
+            this.refs.nativeCb.removeEventListener(evtType, handler);
+        },
+        registerResizeHandler: handler => {
+            window.addEventListener('resize', handler);
+        },
+        deregisterResizeHandler: handler => {
+            window.removeEventListener('resize', handler);
+        },
+
+
+        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
+            rippleCss: {
+                ...rippleCss,
+                [varName]: value
+            }
+        })),
+        computeBoundingRect: () => {
+            //console.log(this.refs.root.getBoundingClientRect());
+
+            const {left, top} = this.refs.root.getBoundingClientRect();
+             console.log(left, top);
+             const DIM = 40;
+            //return this.refs.root.getBoundingClientRect();
+            return {
+             top,
+             left,
+             right: left + DIM,
+             bottom: top + DIM,
+             width: DIM,
+             height: DIM,
+             };
+        },
+        getWindowPageOffset: () => {
+            return {
+                x: window.pageXOffset,
+                y: window.pageYOffset
+            }
+        },
+
+    }));
+
+    render() {
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.
         return (
-            <div ref="root" className={classnames('mdc-checkbox', this.state.classes)}>
+            <div ref="root" className={classnames('mdc-checkbox', this.state.classes, this.state.classNamesRipple)}>
                 <input ref="nativeCb"
                        id={this.props.id}
                        type="checkbox"
@@ -140,7 +301,7 @@ class Checkbox extends PureComponent {
                                checkedInternal: this.refs.nativeCb.checked,
                                indeterminateInternal: false
                            });
-                            this.props.onChange(evt);
+                           this.props.onChange(evt);
                        }}/>
                 <div className="mdc-checkbox__background">
                     <svg version="1.1"
@@ -162,8 +323,11 @@ class Checkbox extends PureComponent {
     // so that proper work can be performed.
     componentDidMount() {
         this.foundation.init();
+        this.foundationRipple.init();
     }
+
     componentWillUnmount() {
+        this.foundationRipple.destroy();
         this.foundation.destroy();
     }
 
@@ -186,6 +350,14 @@ class Checkbox extends PureComponent {
     componentDidUpdate() {
         if (this.refs.nativeCb) {
             this.refs.nativeCb.indeterminate = this.state.indeterminateInternal;
+        }
+
+        if (this.refs.root) {
+            for (let key in this.state.rippleCss) {
+                if (this.state.rippleCss.hasOwnProperty(key)) {
+                    this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
+                }
+            }
         }
     }
 }
