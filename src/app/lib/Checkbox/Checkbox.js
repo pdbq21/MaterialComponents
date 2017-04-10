@@ -286,6 +286,7 @@ class Checkbox extends PureComponent {
     }));
 
     render() {
+
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.
         return (
             <div ref="root" className={classnames('mdc-checkbox', this.state.classes, this.state.classNamesRipple)}>

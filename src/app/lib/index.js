@@ -59,3 +59,8 @@ export {
     Checkbox,
     CheckboxLabel
 } from './Checkbox';
+
+
+/* Test Ripple Adapter */
+
+export { Adapter } from './Ripple'
