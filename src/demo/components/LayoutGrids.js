@@ -14,7 +14,8 @@ export default function LayoutGrids() {
         <div className="layout-grid--demo">
             <fieldset>
                 <legend>Layout Grid</legend>
-                <LayoutGrid margin='100px'>
+                /*margin='40px'*/
+                <LayoutGrid margin='40px'>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
@@ -28,7 +29,8 @@ export default function LayoutGrids() {
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                     <LayoutGridCell columns="1" >1</LayoutGridCell>
                 </LayoutGrid>
-                <LayoutGrid>
+                /*gutter='40px'*/
+                <LayoutGrid gutter="40px">
                     <LayoutGridCell columns="4" >4</LayoutGridCell>
                     <LayoutGridCell columns="4" >4</LayoutGridCell>
                     <LayoutGridCell columns="4" >4</LayoutGridCell>

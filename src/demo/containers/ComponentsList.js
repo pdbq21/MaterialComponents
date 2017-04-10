@@ -135,6 +135,12 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
                     </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'GridList') ? 'active' : ''}`}>
+                        /*Todo: Grid List*/
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'IconToggle') ? 'active' : ''}`}>
+                        /*Todo: Icon Toggle*/
+                    </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Toolbar') ? 'active' : ''}`}>
                         Toolbar
                     </li>
