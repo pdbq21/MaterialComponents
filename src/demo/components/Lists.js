@@ -492,36 +492,36 @@ export default function Lists() {
                             </ListItemDetail>
                         </ListItem>
                         <ListItem>
-                        <ListItemDetail
-                            start
-                            role="presentation"
-                            style={{
-                                'backgroundColor': 'grey',
-                                'display': 'inline-flex',
-                                'alignItems': 'center',
-                                'justifyContent': 'center',
-                                'color': 'white'
-                            }}>
-                            <i className="material-icons" aria-hidden="true">folder</i>
-                        </ListItemDetail>
-                        <ListItemText>
-                            <ListItemTextPrimary>
-                                Photos
-                            </ListItemTextPrimary>
-                            <ListItemTextSecondary>
-                                Jan 13, 2017
-                            </ListItemTextSecondary>
-                        </ListItemText>
-                        <ListItemDetail
-                            end
-                            icon
-                            elementType='a'
-                            href='#'
-                            style={{'textDecoration': 'none', 'color': 'rgba(0, 0, 0, .26)'}}
-                        >
-                            info
-                        </ListItemDetail>
-                    </ListItem><ListItem>
+                            <ListItemDetail
+                                start
+                                role="presentation"
+                                style={{
+                                    'backgroundColor': 'grey',
+                                    'display': 'inline-flex',
+                                    'alignItems': 'center',
+                                    'justifyContent': 'center',
+                                    'color': 'white'
+                                }}>
+                                <i className="material-icons" aria-hidden="true">folder</i>
+                            </ListItemDetail>
+                            <ListItemText>
+                                <ListItemTextPrimary>
+                                    Photos
+                                </ListItemTextPrimary>
+                                <ListItemTextSecondary>
+                                    Jan 13, 2017
+                                </ListItemTextSecondary>
+                            </ListItemText>
+                            <ListItemDetail
+                                end
+                                icon
+                                elementType='a'
+                                href='#'
+                                style={{'textDecoration': 'none', 'color': 'rgba(0, 0, 0, .26)'}}
+                            >
+                                info
+                            </ListItemDetail>
+                        </ListItem><ListItem>
                         <ListItemDetail
                             start
                             role="presentation"
@@ -775,46 +775,57 @@ export default function Lists() {
                                     info
                                 </ListItemDetail>
                             </ListItem><ListItem>
-                                <ListItemDetail
-                                    start
-                                    role="presentation"
-                                    style={{
-                                        'backgroundColor': 'grey',
-                                        'display': 'inline-flex',
-                                        'alignItems': 'center',
-                                        'justifyContent': 'center',
-                                        'color': 'white'
-                                    }}>
-                                    <i className="material-icons" aria-hidden="true">insert_drive_file</i>
-                                </ListItemDetail>
-                                <ListItemText>
-                                    <ListItemTextPrimary>
-                                        Photos
-                                    </ListItemTextPrimary>
-                                    <ListItemTextSecondary>
-                                        Jan 13, 2017
-                                    </ListItemTextSecondary>
-                                </ListItemText>
-                                <ListItemDetail
-                                    end
-                                    icon
-                                    elementType='a'
-                                    href='#'
-                                    style={{'textDecoration': 'none', 'color': 'rgba(0, 0, 0, .26)'}}
-                                >
-                                    info
-                                </ListItemDetail>
-                            </ListItem>
+                            <ListItemDetail
+                                start
+                                role="presentation"
+                                style={{
+                                    'backgroundColor': 'grey',
+                                    'display': 'inline-flex',
+                                    'alignItems': 'center',
+                                    'justifyContent': 'center',
+                                    'color': 'white'
+                                }}>
+                                <i className="material-icons" aria-hidden="true">insert_drive_file</i>
+                            </ListItemDetail>
+                            <ListItemText>
+                                <ListItemTextPrimary>
+                                    Photos
+                                </ListItemTextPrimary>
+                                <ListItemTextSecondary>
+                                    Jan 13, 2017
+                                </ListItemTextSecondary>
+                            </ListItemText>
+                            <ListItemDetail
+                                end
+                                icon
+                                elementType='a'
+                                href='#'
+                                style={{'textDecoration': 'none', 'color': 'rgba(0, 0, 0, .26)'}}
+                            >
+                                info
+                            </ListItemDetail>
+                        </ListItem>
                         </List>
                     </ListGroup>
                 </section>
             </fieldset>
             <fieldset>
-            <legend>Interactive Lists (with ink ripple)</legend>
+                <legend>Interactive Lists (with ink ripple)</legend>
                 <section>
-<h2>Example - Interactive List</h2>
+                    <h2>Example - Interactive List</h2>
                     <List>
-
+                        <ListItem ripple>
+                            <ListItemDetail start icon aria-hidden='true'>
+                                network_wifi
+                            </ListItemDetail>Single-line item</ListItem>
+                        <ListItem ripple>
+                            <ListItemDetail start icon aria-hidden='true'>
+                                bluetooth
+                            </ListItemDetail>Single-line item</ListItem>
+                        <ListItem ripple>
+                            <ListItemDetail start icon aria-hidden='true'>
+                                data_usage
+                            </ListItemDetail>Single-line item</ListItem>
                     </List>
 
                 </section>

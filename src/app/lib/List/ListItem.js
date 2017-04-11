@@ -3,6 +3,10 @@
  */
 import React, {PureComponent, PropTypes} from 'react';
 import classnames from 'classnames';
+
+import '@material/ripple/dist/mdc.ripple.min.css';
+import { ripple }  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripple;
 /*
 const propTypes = {
     children: PropTypes.node,
@@ -29,16 +33,35 @@ ListItem.propTypes = propTypes;
 export default ListItem;
 */
 
+function getMatchesProperty(HTMLElementPrototype) {
+    return [
+        'webkitMatchesSelector', 'msMatchesSelector', 'matches',
+    ].filter((p) => p in HTMLElementPrototype).pop();
+}
+
+const MATCHES = getMatchesProperty(HTMLElement.prototype);
+
+function supportsCssVariables(windowObj) {
+    const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
+    if (!supportsFunctionPresent) {
+        return false;
+    }
+
+    const explicitlySupportsCssVars = windowObj.CSS.supports("--css-vars", "yes");
+    // See: https://bugs.webkit.org/show_bug.cgi?id=154669
+    // See: README section on Safari
+    const weAreFeatureDetectingSafari10plus = (
+        windowObj.CSS.supports("(--css-vars: yes)") &&
+        windowObj.CSS.supports("color", "#00000000")
+    );
+    return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
+}
+
 
 class ListItem extends PureComponent {
     static propTypes = {
-        accent: PropTypes.bool,
         children: PropTypes.node,
         className: PropTypes.string,
-        compact: PropTypes.bool,
-        dense: PropTypes.bool,
-        primary: PropTypes.bool,
-        raised: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -110,30 +133,22 @@ class ListItem extends PureComponent {
     }));
 
     render() {
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.ripple;
         const {
-            elementType,
-            className,
-            accent,
-            compact,
-            dense,
-            primary,
-            raised,
             children,
+            className,
+            elementType,
             ...otherProp
-        } = this.props;
-        const ElementType = elementType || 'button';
+        } = ownProps;
+
+        const ElementType = elementType || 'li';
         return (
             <ElementType
                 ref="root"
                 className={
                     classnames(
-                        'mdc-button', {
-                            'mdc-button--accent': accent,
-                            'mdc-button--compact': compact,
-                            'mdc-button--dense': dense,
-                            'mdc-button--primary': primary,
-                            'mdc-button--raised': raised,
-                        },
+                        'mdc-list-item',
                         this.state.classNamesRipple,
                         className
                     )}
