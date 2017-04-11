@@ -50,6 +50,7 @@ export default class Textfield extends PureComponent {
         upgraded: PropTypes.bool,
         multiline: PropTypes.bool,
         fullwidth: PropTypes.bool,
+        dense: PropTypes.bool,
     };
 
     constructor(props, context) {
@@ -174,13 +175,23 @@ export default class Textfield extends PureComponent {
         };
 
         let renderChildren = React.Children.map(this.props.children, childElement);
-        const {disabled, upgraded, multiline, fullwidth, elementType, className, ...otherProp} = this.props;
+        const {
+            disabled,
+            upgraded,
+            multiline,
+            fullwidth,
+            dense,
+            elementType,
+            className,
+            ...otherProp
+        } = this.props;
         const classes = classnames(
             'mdc-textfield', {
                 'mdc-textfield--disabled': disabled,
                 'mdc-textfield--upgraded': upgraded,
                 'mdc-textfield--multiline': multiline,
-                'mdc-textfield--fullwidth': fullwidth
+                'mdc-textfield--fullwidth': fullwidth,
+                'mdc-textfield--dense': dense,
             }, this.state.classNames, className);
         const ElementType = elementType || 'div';
         return (

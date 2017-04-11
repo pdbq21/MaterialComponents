@@ -26,6 +26,7 @@ import TextfieldComponent from '../components/TextfieldComponent'
 import SnackbarComponent from '../components/SnackbarComponent'
 import SelectComponent from '../components/SelectComponent'
 import RippleComponent from '../components/RippleComponent'
+import DialogComponent from '../components/DialogComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -86,7 +87,7 @@ class ComponentsList extends Component {
             case 'Ripple':
                 return (<RippleComponent />);
             case 'Dialog':
-                return (<div />);
+                return (<DialogComponent />);
 
             default:
                 return null;
@@ -154,7 +155,7 @@ class ComponentsList extends Component {
                         Textfield
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''}`}>
-                        Snackbar
+                        /* Todo: Snackbar */
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''}`}>
                         /* Todo: Select */
