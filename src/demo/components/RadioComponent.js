@@ -23,9 +23,36 @@ export default class RadioComponent extends React.PureComponent {
             <div >
                 <fieldset>
                     <legend>Radio with JS</legend>
-<div>
-
-</div>
+                    <div>
+                        <Radio
+                            ripple
+                            disabled={disabled}
+                        >
+                            <RadioInput
+                                id="my-radio-demo"
+                                name="radios"
+                                disabled={disabled}
+                                onChange={({target}) => this.setState({
+                                    checked: target.checked,
+                                })}
+                            />
+                        </Radio>
+                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 1</RadioLabel>
+                        <Radio
+                            ripple
+                            disabled={disabled}
+                        >
+                            <RadioInput
+                                id="my-radio-demo"
+                                name="radios"
+                                disabled={disabled}
+                                onChange={({target}) => this.setState({
+                                    checked: target.checked,
+                                })}
+                            />
+                        </Radio>
+                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 2</RadioLabel>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Only CSS</legend>

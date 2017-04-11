@@ -130,7 +130,7 @@ class ComponentsList extends Component {
                         List
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Menu') ? 'active' : ''}`}>
-                        Menu
+                        /* Todo: Menu */
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
@@ -157,7 +157,7 @@ class ComponentsList extends Component {
                         Snackbar
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''}`}>
-                        Select
+                        /* Todo: Select */
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''}`}>
                         Ripple
