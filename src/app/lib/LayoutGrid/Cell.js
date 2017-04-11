@@ -1,8 +1,8 @@
 /**
  * Created by ruslan on 15.03.17.
  */
-import React, {PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,

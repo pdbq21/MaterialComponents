@@ -149,7 +149,7 @@ class ComponentsList extends Component {
                         Switch
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Drawer') ? 'active' : ''}`}>
-                        /* Todo: Drawer */
+                        Drawer
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield

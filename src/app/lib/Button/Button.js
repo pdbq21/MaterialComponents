@@ -2,8 +2,10 @@
  * Created by ruslan on 08.03.17.
  */
 
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
 import classnames from 'classnames';
+// After (15.5)
+import PropTypes from 'prop-types';
 
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple as ripple}  from 'material-components-web/dist/material-components-web';

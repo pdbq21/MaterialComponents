@@ -2,7 +2,6 @@
  * Created by ruslan on 08.03.17.
  */
 import React from 'react'
-import {Ripple} from '../../app/lib'
 import {
     CheckboxLabel,
     Checkbox

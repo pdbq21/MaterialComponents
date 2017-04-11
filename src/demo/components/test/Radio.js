@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 29.03.17.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import '@material/radio/dist/mdc.radio.min.css';
 import {radio as test}  from 'material-components-web/dist/material-components-web';
 const {MDCRadioFoundation} = test;

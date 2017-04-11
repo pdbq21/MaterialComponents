@@ -4,6 +4,8 @@
 import React from 'react';
 
 import '@material/drawer/dist/mdc.drawer.css';
+import DrawerComponentTest from './test/Drawer'
+/*
 export default function DrawerComponent() {
 
     return (
@@ -13,7 +15,7 @@ export default function DrawerComponent() {
                 <legend>Permanent Drawer</legend>
                 <div>
                     <nav className="mdc-permanent-drawer mdc-typography">
-                        <div className="mdc-permanent-drawer__toolbar-spacer"></div>
+                        <div className="mdc-permanent-drawer__toolbar-spacer"/>
                         <div className="mdc-permanent-drawer__content">
                             <nav id="icon-with-text-demo" className="mdc-list">
                                 <a className="mdc-list-item mdc-permanent-drawer--selected" href="#">
@@ -47,6 +49,51 @@ export default function DrawerComponent() {
                     </div>
                 </div>
             </fieldset>
+            <fieldset>
+                <legend>Permanent Drawer</legend>
+                <div>
+                    <button>Open</button>
+                    <DrawerComponentTest />
+                </div>
+            </fieldset>
         </div>
     );
+}*/
+
+
+export default class DrawerComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false,
+        }
+
+        this.handel = this.handel.bind(this);
+    }
+
+
+    handel() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+
+    render() {
+        const {isOpen} = this.state;
+
+        return (
+            <div>
+                <fieldset>
+                    <legend>Checkbox</legend>
+                    <button onClick={this.handel}>Open</button>
+                    <div>
+                        <button>Open</button>
+                        <DrawerComponentTest isOpen/>
+                    </div>
+                </fieldset>
+            </div>
+        );
+    }
+
 }

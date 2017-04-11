@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 30.03.17.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple as test}  from 'material-components-web/dist/material-components-web';
 const {MDCRipple, MDCRippleFoundation} = test;
