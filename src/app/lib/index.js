@@ -60,6 +60,20 @@ export {
     CheckboxLabel
 } from './Checkbox';
 
+export {
+    DrawerTemporary,
+    TemporaryContent,
+    TemporaryToolbarSpacer,
+    TemporaryDrawer,
+    TemporaryHeader,
+    TemporaryHeaderContent,
+    TemporaryListItem,
+    DrawerPermanent,
+    PermanentContent,
+    PermanentList,
+    PermanentToolbarSpacer,
+    DrawerListItemDetail
+} from './Drawer'
 
 /* Test Ripple Adapter */
 

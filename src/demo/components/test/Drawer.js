@@ -131,17 +131,28 @@ export default class DrawerComponentTest extends Component {
                     <nav className="mdc-temporary-drawer__content mdc-list-group">
                         <div id="icon-with-text-demo" className="mdc-list">
                             <a className="mdc-list-item mdc-temporary-drawer--selected" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    inbox
+                                </i>
+                                Inbox
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    star
+                                </i>
+                                Star
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">send</i>Sent
-                                Mail
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    send
+                                </i>
+                                Sent Mail
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">drafts</i>Drafts
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    drafts
+                                </i>
+                                Drafts
                             </a>
                         </div>
 
@@ -149,14 +160,22 @@ export default class DrawerComponentTest extends Component {
 
                         <div className="mdc-list">
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All
-                                Mail
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    email
+                                </i>
+                                All Mail
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    delete
+                                </i>
+                                Trash
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">
+                                    report
+                                </i>
+                                Spam
                             </a>
                         </div>
                     </nav>
