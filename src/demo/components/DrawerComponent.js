@@ -88,7 +88,6 @@ export default class DrawerComponent extends React.Component {
                     <legend>Checkbox</legend>
                     <button onClick={this.handel}>Open</button>
                     <div>
-                        <button>Open</button>
                         <DrawerComponentTest isOpen/>
                     </div>
                 </fieldset>

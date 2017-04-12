@@ -1,11 +1,11 @@
 /**
- * Created by ruslan on 20.03.17.
+ * Created by ruslan on 12.04.17.
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-class Drawer extends PureComponent {
+class ToolbarSpacer extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
         children: PropTypes.node,
@@ -25,8 +25,8 @@ class Drawer extends PureComponent {
             <ElementType ref="root" className={
                 classnames(
                     {
-                        'mdc-temporary-drawer': temporary,
-                        'mdc-permanent-drawer': permanent
+                        'mdc-temporary-drawer__toolbar-spacer': temporary,
+                        'mdc-permanent-drawer__toolbar-spacer': permanent
                     },
                     this.state.classes,
                     this.props.className
@@ -37,4 +37,4 @@ class Drawer extends PureComponent {
     }
 }
 
-export default Drawer;
+export default ToolbarSpacer;

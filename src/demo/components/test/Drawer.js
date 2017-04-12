@@ -73,34 +73,33 @@ export default class DrawerComponentTest extends Component {
         // Todo: below methods
 
 
+        /*        saveElementTabState: function saveElementTabState(el) {
+         return __WEBPACK_IMPORTED_MODULE_2__util__["e" /!* saveElementTabState *!/](el);
+         },
+         restoreElementTabState: function restoreElementTabState(el) {
+         return __WEBPACK_IMPORTED_MODULE_2__util__["f" /!* restoreElementTabState *!/](el);
+         },
+         makeElementUntabbable: function makeElementUntabbable(el) {
+         return el.setAttribute('tabindex', -1);
+         },
 
-/*        saveElementTabState: function saveElementTabState(el) {
-            return __WEBPACK_IMPORTED_MODULE_2__util__["e" /!* saveElementTabState *!/](el);
-        },
-        restoreElementTabState: function restoreElementTabState(el) {
-            return __WEBPACK_IMPORTED_MODULE_2__util__["f" /!* restoreElementTabState *!/](el);
-        },
-        makeElementUntabbable: function makeElementUntabbable(el) {
-            return el.setAttribute('tabindex', -1);
-        },
-
-        isDrawer: function isDrawer(el) {
-            return el === _this2.drawer;
-        }
-
+         isDrawer: function isDrawer(el) {
+         return el === _this2.drawer;
+         }
 
 
-        },
-        saveElementTabState: function saveElementTabState() /!* el: Element *!/ {
-        },
-        restoreElementTabState: function restoreElementTabState() /!* el: Element *!/ {
-        },
-        makeElementUntabbable: function makeElementUntabbable() /!* el: Element *!/ {
-        },
-        isDrawer: function isDrawer() {
-            return (/!* el: Element *!/ /!* boolean *!/false
-            );
-        }*/
+
+         },
+         saveElementTabState: function saveElementTabState() /!* el: Element *!/ {
+         },
+         restoreElementTabState: function restoreElementTabState() /!* el: Element *!/ {
+         },
+         makeElementUntabbable: function makeElementUntabbable() /!* el: Element *!/ {
+         },
+         isDrawer: function isDrawer() {
+         return (/!* el: Element *!/ /!* boolean *!/false
+         );
+         }*/
     });
 
     componentDidMount() {
@@ -110,19 +109,22 @@ export default class DrawerComponentTest extends Component {
     componentWillUnmount() {
         this.foundation.destroy();
     }
+
     componentDidUpdate() {
-        if (this.props.isOpen){
+        if (this.props.isOpen) {
             let drawer = new MDCTemporaryDrawer(this.refs.root);
             drawer.open = true;
         }
     }
+
     render() {
-console.log(this.foundation);
+        console.log(this.foundation);
         return (
-            <aside ref="root" className="mdc-temporary-drawer" >
+            <aside ref="root" className="mdc-temporary-drawer">
                 <nav ref='drawer' className="mdc-temporary-drawer__drawer">
                     <header className="mdc-temporary-drawer__header">
-                        <div className="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
+                        <div
+                            className="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
                             Header here
                         </div>
                     </header>
@@ -135,26 +137,28 @@ console.log(this.foundation);
                                 <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
-                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">send</i>Sent Mail
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">send</i>Sent
+                                Mail
                             </a>
                             <a className="mdc-list-item" href="#" tabIndex="-1">
                                 <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">drafts</i>Drafts
                             </a>
                         </div>
 
-                        <hr className="mdc-list-divider" />
+                        <hr className="mdc-list-divider"/>
 
-                            <div className="mdc-list">
-                                <a className="mdc-list-item" href="#" tabIndex="-1">
-                                    <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All Mail
-                                </a>
-                                <a className="mdc-list-item" href="#" tabIndex="-1">
-                                    <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
-                                </a>
-                                <a className="mdc-list-item" href="#" tabIndex="-1">
-                                    <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
-                                </a>
-                            </div>
+                        <div className="mdc-list">
+                            <a className="mdc-list-item" href="#" tabIndex="-1">
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All
+                                Mail
+                            </a>
+                            <a className="mdc-list-item" href="#" tabIndex="-1">
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
+                            </a>
+                            <a className="mdc-list-item" href="#" tabIndex="-1">
+                                <i className="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
+                            </a>
+                        </div>
                     </nav>
                 </nav>
             </aside>

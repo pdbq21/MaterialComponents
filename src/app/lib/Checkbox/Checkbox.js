@@ -291,7 +291,8 @@ class Checkbox extends PureComponent {
                 classnames(
                     'mdc-checkbox',
                     this.state.classes,
-                    this.state.classNamesRipple
+                    this.state.classNamesRipple,
+                    this.props.className
                 )}>
                 <input ref="nativeCb"
                        id={this.props.id}

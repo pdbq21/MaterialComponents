@@ -76,7 +76,7 @@ class ComponentsList extends Component {
                 return (<ToolbarComponent />);
             case 'Switch':
                 return (<SwitchComponent />);
-            case 'Drawer':
+            case 'Drawer (Temporary)':
                 return (<DrawerComponent />);
             case 'Textfield':
                 return (<TextfieldComponent />);
@@ -148,8 +148,8 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Switch') ? 'active' : ''}`}>
                         Switch
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Drawer') ? 'active' : ''}`}>
-                        Drawer
+                    <li className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''}`}>
+                        Drawer (Temporary)
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield
