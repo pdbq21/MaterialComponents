@@ -112,8 +112,8 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>
                         Card
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Dialog') ? 'active' : ''}`}>
-                        /* Todo: Dialog */
+                    <li className={`navigation-item ${(activeMenuItem === 'Dialog') ? 'active' : ''} todo`}>
+                        Dialog
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>
                         Elevation
@@ -130,17 +130,17 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'List') ? 'active' : ''}`}>
                         List
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Menu') ? 'active' : ''}`}>
-                        /* Todo: Menu */
+                    <li className={`navigation-item ${(activeMenuItem === 'Menu') ? 'active' : ''} todo`}>
+                        Menu
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'GridList') ? 'active' : ''}`}>
-                        /*Todo: Grid List*/
+                    <li className={`navigation-item ${(activeMenuItem === 'GridList') ? 'active' : ''} todo`}>
+                        Grid List
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'IconToggle') ? 'active' : ''}`}>
-                        /*Todo: Icon Toggle*/
+                    <li className={`navigation-item ${(activeMenuItem === 'IconToggle') ? 'active' : ''} todo`}>
+                        Icon Toggle
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Toolbar') ? 'active' : ''}`}>
                         Toolbar
@@ -148,17 +148,18 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Switch') ? 'active' : ''}`}>
                         Switch
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''}`}>
+                    <li
+                        className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''} todo-lite`}>
                         Drawer (Temporary)
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''}`}>
-                        /* Todo: Snackbar */
+                    <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''} todo`}>
+                        Snackbar
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''}`}>
-                        /* Todo: Select */
+                    <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} todo`}>
+                       Select
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''}`}>
                         Ripple

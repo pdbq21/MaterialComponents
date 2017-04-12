@@ -9,29 +9,29 @@ const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
 };
-const Anchor = ({
+const Simple = ({
     children,
     className,
     elementType,
     ...otherProp
 }) => {
     const classes = classnames(
-        'mdc-menu-anchor', className);
+        'mdc-simple-menu', className);
     const ElementType =  elementType || 'div';
     return (
-        <ElementType className={classes}
-                     tabindex='-1'
+        <ElementType
+            className={classes}
+            tabindex='-1'
                      {...otherProp}
         >
             {children}
         </ElementType>);
 };
 
-Anchor.propTypes = propTypes;
-export default Anchor;*/
+Simple.propTypes = propTypes;
+export default Simple;*/
 
-
-class Anchor extends PureComponent {
+class Menu extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
@@ -39,7 +39,7 @@ class Anchor extends PureComponent {
 
     render() {
         const {
-            elementType, children, className,
+            elementType, children, className, tabIndex,
             ...otherProps
         } = this.props;
         const ElementType = elementType || 'div';
@@ -47,9 +47,10 @@ class Anchor extends PureComponent {
             <ElementType
                 className={
                     classnames(
-                        'mdc-menu-anchor',
+                        'mdc-simple-menu',
                         className
                     )}
+                tabIndex={tabIndex || '-1'}
                 {...otherProps}
             >
                 {children}
@@ -58,4 +59,4 @@ class Anchor extends PureComponent {
     }
 }
 
-export default Anchor;
+export default Menu;

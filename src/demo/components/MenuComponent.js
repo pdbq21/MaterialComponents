@@ -3,33 +3,42 @@
  */
 import React from 'react';
 import '@material/menu/dist/mdc.menu.min.css';
+import MenuComponentTest from './test/Menu'
 
-export default function MenuComponent() {
 
-    return (
-        <div >
-            <div className="mdc-simple-menu mdc-simple-menu--open" tabIndex="-1">
-                <ul className="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-                    <li className="mdc-list-item" role="menuitem" tabIndex="0">
-                        A Menu Item
-                    </li>
-                    <li className="mdc-list-item" role="menuitem" tabIndex="0">
-                        Another Menu Item
-                    </li>
-                </ul>
+export default class MenuComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false,
+        }
+
+        this.handel = this.handel.bind(this);
+    }
+
+
+    handel() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+
+    render() {
+        const {isOpen} = this.state;
+
+        return (
+            <div>
+
+                <fieldset>
+                    <legend>Sample Menu</legend>
+                    <button onClick={this.handel}>Open</button>
+                    <div>
+                        <MenuComponentTest isOpen={isOpen} />
+                    </div>
+                </fieldset>
             </div>
-            <div className="toolbar mdc-menu-anchor">
-                <div className="mdc-simple-menu">
-                    <ul className="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-                        <li className="mdc-list-item" role="menuitem" tabIndex="0">
-                            A Menu Item
-                        </li>
-                        <li className="mdc-list-item" role="menuitem" tabIndex="0">
-                            Another Menu Item
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    );
+        );
+    }
+
 }
