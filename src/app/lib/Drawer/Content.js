@@ -15,24 +15,24 @@ class Content extends PureComponent {
         list: PropTypes.bool,
     };
 
-    state = {
-        classes: [],
-    };
-
     render() {
-        const {elementType, children, temporary, permanent, list} = this.props;
-        const ElementType =  elementType || 'div';
+        const {
+            elementType, children, className, temporary, permanent, list,
+            ...otherProps
+        } = this.props;
+        const ElementType = elementType || 'div';
         return (
-            <ElementType ref="root" className={
+            <ElementType className={
                 classnames(
                     {
                         'mdc-temporary-drawer__content': temporary,
                         'mdc-permanent-drawer__content': permanent,
                         'mdc-list': list,
                     },
-                    this.state.classes,
-                    this.props.className
-                )}>
+                    className
+                )}
+                         {...otherProps}
+            >
                 {children}
             </ElementType>
         );
