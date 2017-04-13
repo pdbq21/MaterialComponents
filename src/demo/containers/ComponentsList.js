@@ -27,6 +27,7 @@ import SnackbarComponent from '../components/SnackbarComponent'
 import SelectComponent from '../components/SelectComponent'
 import RippleComponent from '../components/RippleComponent'
 import DialogComponent from '../components/DialogComponent'
+import IconToggleComponent from '../components/IconToggleComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -88,6 +89,8 @@ class ComponentsList extends Component {
                 return (<RippleComponent />);
             case 'Dialog':
                 return (<DialogComponent />);
+            case 'Icon Toggle':
+                return (<IconToggleComponent />);
 
             default:
                 return null;
@@ -139,7 +142,7 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'GridList') ? 'active' : ''} todo`}>
                         Grid List
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'IconToggle') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Icon Toggle') ? 'active' : ''} todo`}>
                         Icon Toggle
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Toolbar') ? 'active' : ''}`}>
