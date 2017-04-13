@@ -18,8 +18,6 @@ export default class IconToggleComponent extends React.Component {
                     <h3>Icon Toggle</h3>
                     <legend>Using material-icons</legend>
                     <div>
-                        <IconToggleComponentTest
-                        />
                     </div>
                 </fieldset>
             </div>

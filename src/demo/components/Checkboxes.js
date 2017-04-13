@@ -50,7 +50,6 @@ export default class Checkboxes extends React.Component {
                                       checked: target.checked,
                                       indeterminate: false
                                   })}
-
                                   ripple
                         />
                         <CheckboxLabel id="my-checkbox-label" for="my-checkbox">

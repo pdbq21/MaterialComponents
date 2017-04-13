@@ -263,7 +263,6 @@ class Checkbox extends PureComponent {
             //console.log(this.refs.root.getBoundingClientRect());
 
             const {left, top} = this.refs.root.getBoundingClientRect();
-            console.log(left, top);
             const DIM = 40;
             //return this.refs.root.getBoundingClientRect();
             return {
