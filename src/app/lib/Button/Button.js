@@ -157,6 +157,8 @@ class Button extends PureComponent {
     }));
 
     render() {
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.ripple;
         const {
             elementType,
             className,
@@ -167,7 +169,8 @@ class Button extends PureComponent {
             raised,
             children,
             ...otherProp
-        } = this.props;
+        } = ownProps;
+
         const ElementType = elementType || 'button';
         return (
             <ElementType
