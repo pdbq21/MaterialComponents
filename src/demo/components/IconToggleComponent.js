@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import '@material/icon-toggle/dist/mdc.icon-toggle.min.css';
-import IconToggleComponentTest from './test/IconToggle'
+//import IconToggleComponentTest from './test/IconToggle'
 
 
 export default class IconToggleComponent extends React.Component {

@@ -8,8 +8,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple as ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+import {ripple as ripples}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripples;
 
 /*
  const propTypes = {

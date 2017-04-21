@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 11.04.17.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import '@material/dialog/dist/mdc.dialog.min.css';
 import * as dialog  from 'material-components-web/dist/material-components-web';
 //const { * as test } = dialog;

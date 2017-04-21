@@ -7,7 +7,9 @@ import {snackbar as test}  from 'material-components-web/dist/material-component
 const {MDCSnackbarFoundation} = test;
 import classnames from 'classnames';
 import '@material/ripple/dist/mdc.ripple.min.css';
+/*
 import {ripple as test1}  from 'material-components-web/dist/material-components-web';
+
 const {MDCRipple, MDCRippleFoundation} = test1;
 
 class Text extends Component {
@@ -35,7 +37,7 @@ class ActionButton extends Component {
             <button type="button" className="mdc-button mdc-snackbar__action-button">{children}</button>
         );
     }
-}
+}*/
 
 class TestSnackbar extends Component {
     constructor(props, context) {

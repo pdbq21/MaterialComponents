@@ -1,12 +1,13 @@
 /**
  * Created by ruslan on 16.03.17.
  */
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple as ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+import {ripple as ripples}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripples;
+
 /*
 const propTypes = {
     children: PropTypes.node,

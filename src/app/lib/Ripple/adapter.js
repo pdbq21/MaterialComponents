@@ -1,10 +1,12 @@
-/**
+/*
+/!**
  * Created by ruslan on 10.04.17.
- */
-import React, {Component, PropTypes} from 'react';
-import {ripple as test}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = test;
-import classnames from 'classnames';
+ *!/
+import {Component} from 'react';
+import PropTypes from 'prop-types';
+import {ripple}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripple;
+//import classnames from 'classnames';
 
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -170,18 +172,18 @@ class Ripple extends Component {
         computeBoundingRect: () => {
             //console.log(this.refs.root.getBoundingClientRect());
 
-            /*const {left, top} = this.refs.root.getBoundingClientRect();
+            /!*const {left, top} = this.refs.root.getBoundingClientRect();
              console.log(left, top);
-             const DIM = 40;*/
+             const DIM = 40;*!/
             return this.refs.root.getBoundingClientRect();
-            /*return {
+            /!*return {
              top,
              left,
              right: left + DIM,
              bottom: top + DIM,
              width: DIM,
              height: DIM,
-             };*/
+             };*!/
         },
         getWindowPageOffset: () => {
             return {
@@ -192,7 +194,7 @@ class Ripple extends Component {
 
     }));
 
-/*
+/!*
     render() {
         return (
                 className={
@@ -202,7 +204,7 @@ class Ripple extends Component {
                 //data-mdc-ripple-is-unbounded
 
         );
-    }*/
+    }*!/
 
     componentDidMount() {
         this.foundation.init();
@@ -222,3 +224,4 @@ class Ripple extends Component {
         }
     }
 }
+*/
