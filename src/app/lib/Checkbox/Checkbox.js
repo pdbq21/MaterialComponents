@@ -217,12 +217,10 @@ class Checkbox extends PureComponent {
             }
             return this.refs.nativeCb;
         },
-        forceLayout: () => {
-            if (this.refs.nativeCb) {
-                this.refs.nativeCb.offsetWidth;
-            }
-        },
-        isAttachedToDOM: () => Boolean(this.refs.nativeCb),
+        //this.refs.nativeCb.offsetWidth / this.refs.root.offsetWidth
+        forceLayout: () => this.refs.root.offsetWidth,
+        //this.refs.nativeCb / this.refs.root.parentNode
+        isAttachedToDOM: () => Boolean(this.refs.root.parentNode),
     });
 
     foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
@@ -285,19 +283,31 @@ class Checkbox extends PureComponent {
 
     render() {
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.ripple;
+        delete ownProps.indeterminate;
+        delete ownProps.disabled;
+        delete ownProps.checked;
+        const {
+            id,
+            labelId,
+            onChange,
+            className,
+            ...otherProp
+        } = ownProps;
         return (
             <div ref="root" className={
                 classnames(
                     'mdc-checkbox',
                     this.state.classes,
                     this.state.classNamesRipple,
-                    this.props.className
+                    className
                 )}>
                 <input ref="nativeCb"
-                       id={this.props.id}
+                       id={id}
                        type="checkbox"
                        className="mdc-checkbox__native-control"
-                       aria-labelledby={this.props.labelId}
+                       aria-labelledby={labelId}
                        checked={this.state.checkedInternal}
                        disabled={this.state.disabledInternal}
                        onChange={evt => {
@@ -305,8 +315,10 @@ class Checkbox extends PureComponent {
                                checkedInternal: this.refs.nativeCb.checked,
                                indeterminateInternal: false
                            });
-                           this.props.onChange(evt);
-                       }}/>
+                           onChange(evt);
+                       }}
+                       {...otherProp}
+                />
                 <div className="mdc-checkbox__background">
                     <svg version="1.1"
                          className="mdc-checkbox__checkmark"
