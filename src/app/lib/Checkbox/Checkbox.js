@@ -37,7 +37,8 @@
  export default Checkbox;*/
 
 
-import React, {PureComponent, PropTypes} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {checkbox}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = checkbox;

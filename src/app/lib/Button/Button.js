@@ -2,7 +2,7 @@
  * Created by ruslan on 08.03.17.
  */
 
-import React, {PureComponent} from 'react';
+import React, {PureComponent}from 'react';
 import classnames from 'classnames';
 // After (15.5)
 import PropTypes from 'prop-types';
