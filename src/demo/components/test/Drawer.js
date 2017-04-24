@@ -5,7 +5,20 @@ import React, {Component} from 'react';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
 const {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation} = drawer;
+/*
+let storedTransformPropertyName_ = void 0;
+function getTransformPropertyName() {
+    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
+    const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
+    if (storedTransformPropertyName_ === undefined || forceRefresh) {
+        const el = globalObj.document.createElement('div');
+        const transformPropertyName = 'transform' in el.style ? 'transform' : '-webkit-transform';
+        storedTransformPropertyName_ = transformPropertyName;
+    }
+
+    return storedTransformPropertyName_;
+}*/
 
 export default class DrawerComponentTest extends Component {
 
