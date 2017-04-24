@@ -161,7 +161,7 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''} todo-lite`}>
                         Snackbar
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} todo`}>

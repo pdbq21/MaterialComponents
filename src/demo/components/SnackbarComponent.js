@@ -2,30 +2,113 @@
  * Created by ruslan on 27.03.17.
  */
 import React from 'react';
-import {default as TestComponent} from './test/testSnackbar'
-import '@material/snackbar/dist/mdc.snackbar.min.css';
+import TestSnackbar from './test/testSnackbar'
 export default class SnackbarComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false,
+            checkedMultiline: false,
+            checkedAction: false,
+            valueMessage: '',
+            valueAction: '',
+            valueTimeout: '2750',//default
+        };
+
+        this.handel = this.handel.bind(this);
+        this.handelAction = this.handelAction.bind(this);
+        this.handleChangeMessage = this.handleChangeMessage.bind(this);
+        this.handleChangeAction = this.handleChangeAction.bind(this);
+        this.handleChangeTimeout = this.handleChangeTimeout.bind(this);
+        this.handleChangeCheckedMultiline = this.handleChangeCheckedMultiline.bind(this);
+        this.handleChangeCheckedAction = this.handleChangeCheckedAction.bind(this);
+    }
+
+
+    handel() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+
+    handleChangeMessage({target}) {
+        this.setState({
+            valueMessage: target.value
+        })
+    }
+
+    handleChangeAction({target}) {
+        this.setState({
+            valueAction: target.value
+        })
+    }
+
+    handleChangeTimeout({target}) {
+        this.setState({
+            valueTimeout: target.value
+        })
+    }
+
+    handleChangeCheckedMultiline() {
+        this.setState({
+            checkedMultiline: !this.state.checkedMultiline
+        })
+    }
+
+    handleChangeCheckedAction() {
+        this.setState({
+            checkedAction: !this.state.checkedAction
+        })
+    }
+
+    handelAction() {
+        console.log('action')
+    }
+
     render() {
+        const {isOpen} = this.state;
         return (
             <div >
-                <h3>Snackbar</h3>
-                {/*<div>
-                    <label htmlFor="message">Message Text</label>
-                    <input type="text" id="message" value="Message deleted"/>
-                </div>
-                <div>
-                    <label htmlFor="action">Action Text</label>
-                    <input type="text" id="action" value="Undo"/>
-                </div>
-                <button>Show</button>
-                <div className="mdc-snackbar mdc-snackbar--active">
-                    <div className="mdc-snackbar__text">fgfdgf</div>
-                    <div className="mdc-snackbar__action-wrapper">
-                        <button type="button" className="mdc-button mdc-snackbar__action-button">dgfd</button>
-                    </div>
-                </div>*/}
+                <fieldset>
+                    <legend>Snackbar</legend>
+                    <div>
+                        <span>Multiline</span>
+                        <input type="checkbox" checked={this.state.checkedMultiline}
+                               onChange={this.handleChangeCheckedMultiline}/>
+                        <span>Action On Bottom</span>
+                        <input type="checkbox" checked={this.state.checkedAction}
+                               onChange={this.handleChangeCheckedAction}/>
 
-                <TestComponent />
+                    </div>
+                    <div>
+                        <span>Message Text:</span>
+                        <input type="text" value={this.state.valueMessage || ''} onChange={this.handleChangeMessage}/>
+                    </div>
+                    <div>
+                        <span>Action Text:</span>
+                        <input type="text" value={this.state.valueAction || ''} onChange={this.handleChangeAction}/>
+                    </div>
+                    <div>
+                        <span>timeout:</span>
+                        <input type="text" value={this.state.valueTimeout || ''} onChange={this.handleChangeTimeout}/>
+                    </div>
+
+
+                    <button onClick={this.handel}>Open</button>
+                    <div>
+                        <TestSnackbar
+                            isOpen={isOpen}
+
+                            message={this.state.valueMessage}
+                            timeout={this.state.valueTimeout}
+                            actionHandler={this.handelAction}
+                            actionText={this.state.valueAction}
+                            multiline={this.state.checkedMultiline}
+                            actionOnBottom={this.state.checkedAction}
+                        />
+                    </div>
+                </fieldset>
             </div>
         );
     }

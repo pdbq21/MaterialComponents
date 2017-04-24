@@ -113,6 +113,7 @@ export default class DrawerComponentTest extends Component {
     componentDidUpdate() {
         if (this.props.isOpen) {
             let drawer = new MDCTemporaryDrawer(this.refs.root);
+            console.log(drawer)
             drawer.open = true;
         }
     }
