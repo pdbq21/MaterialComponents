@@ -29,6 +29,7 @@ import RippleComponent from '../components/RippleComponent'
 import DialogComponent from '../components/DialogComponent'
 import IconToggleComponent from '../components/IconToggleComponent'
 import GridListComponent from '../components/GridListComponent'
+import PersistentDrawerComponent from '../components/PersistentDrawerComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -94,6 +95,8 @@ class ComponentsList extends Component {
                 return (<IconToggleComponent />);
             case 'Grid List':
                 return (<GridListComponent />);
+case 'Drawer (Persistent)':
+                return (<PersistentDrawerComponent />);
 
             default:
                 return null;
@@ -157,6 +160,10 @@ class ComponentsList extends Component {
                     <li
                         className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''} todo-lite`}>
                         Drawer (Temporary)
+                    </li>
+                    <li
+                        className={`navigation-item ${(activeMenuItem === 'Drawer (Persistent)') ? 'active' : ''} todo`}>
+                        Drawer (Persistent)
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
                         Textfield
