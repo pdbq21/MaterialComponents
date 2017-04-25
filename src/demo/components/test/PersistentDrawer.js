@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react';
+import classnames from 'classnames';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
 const {MDCPersistentDrawer, MDCPersistentDrawerFoundation} = drawer;
@@ -38,15 +39,18 @@ function applyPassive() {
     if (supportsPassive_ === undefined || forceRefresh) {
         let isSupported = false;
         try {
-            globalObj.document.addEventListener('test', null, { get passive() {
-                isSupported = true;
-            } });
-        } catch (e) {}
+            globalObj.document.addEventListener('test', null, {
+                get passive() {
+                    isSupported = true;
+                }
+            });
+        } catch (e) {
+        }
 
         supportsPassive_ = isSupported;
     }
 
-    return supportsPassive_ ? { passive: true } : false;
+    return supportsPassive_ ? {passive: true} : false;
 }
 // Choose the correct transform property to use on the current browser.
 function getTransformPropertyName() {
@@ -60,15 +64,7 @@ function getTransformPropertyName() {
 
     return storedTransformPropertyName_;
 }
-// Determine whether the current browser supports CSS properties.
-function supportsCssCustomProperties() {
-    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
 
-    if ('CSS' in globalObj) {
-        return globalObj.CSS.supports('(--color: red)');
-    }
-    return false;
-}
 // Save the tab state for an element.
 function saveElementTabState(el) {
     if (el.hasAttribute('tabindex')) {
@@ -95,7 +91,72 @@ export default class DrawerComponentTest extends Component {
         classNameDrawer: []
     };
 
-    foundation = new MDCPersistentDrawerFoundation();
+    foundation = new MDCPersistentDrawerFoundation({
+        addClass: className => this.setState(({classNameDrawer}) => ({
+            classNameDrawer: classNameDrawer.concat([className])
+        })),
+        removeClass: className => this.setState(({classNameDrawer}) => ({
+            classNameDrawer: classNameDrawer.filter(cn => cn !== className)
+        })),
+        hasClass: className => (this.refs.root.classList.contains(className)),
+        hasNecessaryDom: () => Boolean(this.refs.drawer),
+        registerInteractionHandler: (evtType, handler) => {
+            this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
+        },
+        deregisterInteractionHandler: (evtType, handler) => {
+            this.refs.root.removeEventListener(remapEvent(evtType), handler, applyPassive());
+        },
+        registerDrawerInteractionHandler: (evtType, handler) => {
+            this.refs.drawer.addEventListener(remapEvent(evtType), handler);
+        },
+        deregisterDrawerInteractionHandler: (evtType, handler) => {
+            this.refs.drawer.removeEventListener(remapEvent(evtType), handler);
+        },
+        registerTransitionEndHandler: handler => {
+            this.refs.root.addEventListener('transitionend', handler);
+        },
+        deregisterTransitionEndHandler: handler => {
+            this.refs.root.removeEventListener('transitionend', handler);
+        },
+        registerDocumentKeydownHandler: handler => {
+            document.addEventListener('keydown', handler);
+        },
+        deregisterDocumentKeydownHandler: handler => {
+            document.removeEventListener('keydown', handler);
+        },
+        getDrawerWidth: () => {
+            if (this.refs.drawer) {
+                return this.refs.drawer.offsetWidth;
+            }
+        },
+        setTranslateX: value => {
+            if (this.refs.drawer) {
+                return this.refs.drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
+            }
+        },
+        getFocusableElements: () => {
+            if (this.refs.drawer) {
+                return this.refs.drawer.querySelectorAll(
+                    'a[href], area[href], input:not([disabled]), select:not([disabled]), ' +
+                    'textarea:not([disabled]), button:not([disabled]), iframe, object, embed, ' +
+                    '[tabindex], [contenteditable]'
+                );
+            }
+        },
+        saveElementTabState: el => {
+            return saveElementTabState(el);
+        },
+        restoreElementTabState: el => {
+            return restoreElementTabState(el);
+        },
+        makeElementUntabbable: el => {
+            return el.setAttribute('tabindex', -1);
+        },
+        isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
+        isDrawer: el => {
+            return el === this.refs.drawer;
+        }
+    });
 
     componentDidMount() {
         this.foundation.init();
@@ -115,8 +176,13 @@ export default class DrawerComponentTest extends Component {
     render() {
         console.log(drawer);
         return (
-            <aside className="mdc-persistent-drawer mdc-typography">
-                <nav className="mdc-persistent-drawer__drawer">
+            <aside
+                ref='root'
+                className={classnames('mdc-persistent-drawer mdc-typography', this.state.classNameDrawer)}
+            >
+                <nav
+                    ref='drawer'
+                    className="mdc-persistent-drawer__drawer">
                     <header className="mdc-persistent-drawer__header">
                         <div className="mdc-persistent-drawer__header-content">
                             Header here

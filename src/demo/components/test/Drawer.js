@@ -2,6 +2,7 @@
  * Created by ruslan on 11.04.17.
  */
 import React, {Component} from 'react';
+import classnames from 'classnames';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
 const {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation} = drawer;
@@ -188,7 +189,11 @@ export default class DrawerComponentTest extends Component {
     render() {
         console.log(this.foundation);
         return (
-            <aside ref="root" className="mdc-temporary-drawer">
+            <aside
+                ref="root"
+                className={classnames('mdc-temporary-drawer', this.state.classNameDrawer)}
+
+            >
                 <nav ref='drawer' className="mdc-temporary-drawer__drawer">
                     <header className="mdc-temporary-drawer__header">
                         <div
