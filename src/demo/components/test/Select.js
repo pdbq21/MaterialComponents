@@ -1,29 +1,14 @@
 /**
  * Created by ruslan on 30.03.17.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import '@material/select/dist/mdc.select.min.css';
-import {select as test}  from 'material-components-web/dist/material-components-web';
-const {MDCSelectFoundation} = test;
+import {select}  from 'material-components-web/dist/material-components-web';
+const {MDCSelectFoundation} = select;
 import classnames from 'classnames';
 
-export default function (props) {
-    return (
-        <TestSelect />
-    )
-}
 
-
-class TestSelect extends Component {
-    static propTypes = {
-        id: PropTypes.string,
-        disabled: PropTypes.bool,
-        onChange: PropTypes.func
-    }
-
-    static defaultProps = {
-        disabled: false,
-    }
+export default class TestSelect extends Component {
 
     state = {
         classNames: [],
@@ -38,17 +23,21 @@ class TestSelect extends Component {
         removeClass: className => this.setState(({classNames}) => ({
             classNames: classNames.filter(cn => cn !== className)
         })),
-        setAttr: (attr, value) => this.setState(({attrRoot}) => ({
-            attrRoot: {
-                attr: value
-        },
-        })),
-        rmAttr: (attr, value) => this.setState(({attrRoot}) => ({
-            attrRoot: () => {
-                delete attrRoot[attr];
-                return attrRoot
+        setAttr: (attr, value) => {
+            if (this.refs.root) {
+                this.refs.root.setAttribute(attr, value);
             }
-        })),
+        },
+        rmAttr: attr => {
+            if (this.refs.root) {
+                this.refs.root.removeAttribute(attr);
+            }
+        },
+        computeBoundingRect: () => {
+            if (this.refs.root) {
+                return this.refs.root.getBoundingClientRect();
+            }
+        },
 
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
@@ -65,6 +54,32 @@ class TestSelect extends Component {
                 this.refs.root.focus()
             }
         },
+
+        makeTabbable: () => {
+            if (this.refs.root) {
+                this.refs.root.tabIndex = 0;
+            }
+        },
+        makeUntabbable: () => {
+            if (this.refs.root) {
+                this.refs.root.tabIndex = -1;
+            }
+        },
+        getComputedStyleValue: prop => {
+            if (this.refs.root) {
+                return window.getComputedStyle(this.refs.root).getPropertyValue(prop);
+            }
+
+        },
+        setStyle: (propertyName, value) => {
+            if (this.refs.root) {
+                this.refs.root.style.setProperty(propertyName, value);
+            }
+        },
+        create2dRenderingContext: () => {
+            return document.createElement('canvas').getContext('2d');
+        },
+
         registerMenuInteractionHandler: (type, handler) => {
             if (this.refs.root) {
                 this.refs.root.addEventListener(type, handler)
@@ -75,75 +90,77 @@ class TestSelect extends Component {
                 this.refs.root.removeEventListener(type, handler)
             }
         },
-        /*return {
+        setMenuElStyle: (propertyName, value) => {
+            if (this.refs.menu) {
+                this.refs.menu.style.setProperty(propertyName, value);
+            }
+        },
+        setMenuElAttr: (attr, value) => {
+            if (this.refs.menu) {
+                this.refs.menu.style.setAttribute(attr, value);
+            }
+        },
+        rmMenuElAttr: attr => {
+            if (this.refs.menu) {
+                this.refs.menu.style.removeAttribute(attr);
+            }
+        },
+        getMenuElOffsetHeight: () => {
+            if (this.refs.menu) {
+                return this.refs.menu.offsetHeight;
+            }
+        },
 
-         setAttr: function setAttr() /!* attr: string, value: string *!/{},
-         rmAttr: function rmAttr() /!* attr: string *!/{},
-         computeBoundingRect: function computeBoundingRect() {
-         return (/!* {left: number, top: number} *!/{ left: 0, top: 0 }
-         );
-         },
-         focus: function focus() {},
-         makeTabbable: function makeTabbable() {},
-         makeUntabbable: function makeUntabbable() {},
-         getComputedStyleValue: function getComputedStyleValue() {
-         return (/!* propertyName: string *!/ /!* string *!/''
-         );
-         },
-         setStyle: function setStyle() /!* propertyName: string, value: string *!/{},
-         create2dRenderingContext: function create2dRenderingContext() {
-         return (/!* {font: string, measureText: (string) => {width: number}} *!/{
-         font: '',
-         measureText: function measureText() {
-         return { width: 0 };
-         }
-         }
-         );
-         },
-         setMenuElStyle: function setMenuElStyle() /!* propertyName: string, value: string *!/{},
-         setMenuElAttr: function setMenuElAttr() /!* attr: string, value: string *!/{},
-         rmMenuElAttr: function rmMenuElAttr() /!* attr: string *!/{},
-         getMenuElOffsetHeight: function getMenuElOffsetHeight() {
-         return (/!* number *!/0
-         );
-         },
-         openMenu: function openMenu() /!* focusIndex: number *!/{},
-         isMenuOpen: function isMenuOpen() {
-         return (/!* boolean *!/false
-         );
-         },
-         setSelectedTextContent: function setSelectedTextContent() /!* textContent: string *!/{},
-         getNumberOfOptions: function getNumberOfOptions() {
-         return (/!* number *!/0
-         );
-         },
-         getTextForOptionAtIndex: function getTextForOptionAtIndex() {
-         return (/!* index: number *!/ /!* string *!/''
-         );
-         },
-         getValueForOptionAtIndex: function getValueForOptionAtIndex() {
-         return (/!* index: number *!/ /!* string *!/''
-         );
-         },
-         setAttrForOptionAtIndex: function setAttrForOptionAtIndex() /!* index: number, attr: string, value: string *!/{},
-         rmAttrForOptionAtIndex: function rmAttrForOptionAtIndex() /!* index: number, attr: string *!/{},
-         getOffsetTopForOptionAtIndex: function getOffsetTopForOptionAtIndex() {
-         return (/!* index: number *!/ /!* number *!/0
-         );
-         },
-         registerMenuInteractionHandler: function registerMenuInteractionHandler() /!* type: string, handler: EventListener *!/{},
-         deregisterMenuInteractionHandler: function deregisterMenuInteractionHandler() /!* type: string, handler: EventListener *!/{},
-         notifyChange: function notifyChange() {},
-         getWindowInnerHeight: function getWindowInnerHeight() {
-         return (/!* number *!/0
-         );
-         }
-         };*/
+        setSelectedTextContent: selectedTextContent => {
+            if (this.refs.selectedText) {
+                return this.refs.selectedText.textContent = selectedTextContent;
+            }
+        },
+        getWindowInnerHeight: () => window.innerHeight,
+        getNumberOfOptions: () => {
+            if (this.options){
+                return this.options.length;
+            }
+        },
+        getTextForOptionAtIndex: index => this.options[index].textContent,
+        getValueForOptionAtIndex: index => (
+            this.options[index].id || this.options[index].textContent
+        ),
+        setAttrForOptionAtIndex: (index, attr, value) => (
+            this.options[index].setAttribute(attr, value)
+        ),
+        rmAttrForOptionAtIndex: (index, attr) => (
+            this.options[index].removeAttribute(attr)
+        ),
+        getOffsetTopForOptionAtIndex: index => (
+            this.options[index].offsetTop
+        ),
+        /* todo below */
+
+/*
+        openMenu: function openMenu(focusIndex) {
+            return _this2.menu_.show({focusIndex: focusIndex});
+        },
+        isMenuOpen: function isMenuOpen() {
+            return _this2.menu_.open;
+        },
+
+
+        registerMenuInteractionHandler: function registerMenuInteractionHandler(type, handler) {
+            return _this2.menu_.listen(type, handler);
+        },
+        deregisterMenuInteractionHandler: function deregisterMenuInteractionHandler(type, handler) {
+            return _this2.menu_.unlisten(type, handler);
+        },
+        notifyChange: function notifyChange() {
+            return _this2.emit('MDCSelect:change', _this2);
+        },*/
+
     });
 
 
     render() {
-        console.log(test, MDCSelectFoundation);
+        console.log(MDCSelectFoundation);
         return (
             <div>
                 <div
@@ -151,10 +168,13 @@ class TestSelect extends Component {
                     className={classnames('mdc-select', this.state.classNames)}
                     role="listbox"
                     tabIndex="0"
-                    {...this.state.attrRoot}
                 >
-                    <span className="mdc-select__selected-text">Pick a food group</span>
-                    <div className="mdc-simple-menu mdc-select__menu">
+                    <span
+                        ref='selectedText'
+                        className="mdc-select__selected-text">Pick a food group</span>
+                    <div
+                        ref='menu'
+                        className="mdc-simple-menu mdc-select__menu">
                         <ul className="mdc-list mdc-simple-menu__items">
                             <li className="mdc-list-item" role="option" id="grains" tabIndex="0">
                                 Bread, Cereal, Rice, and Pasta

@@ -3,8 +3,7 @@
  */
 import React from 'react';
 
-import '@material/select/dist/mdc.select.css';
-import {default as TestSelect} from './test/Select'
+import TestSelect from './test/Select'
 
 export default class SelectComponent extends React.PureComponent {
 
