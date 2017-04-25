@@ -14,13 +14,22 @@ function getTransformPropertyName() {
 
     if (storedTransformPropertyName_ === undefined || forceRefresh) {
         const el = globalObj.document.createElement('div');
-        const transformPropertyName = 'transform' in el.style ? 'transform' : '-webkit-transform';
-        storedTransformPropertyName_ = transformPropertyName;
+        storedTransformPropertyName_ = 'transform' in el.style ? 'transform' : '-webkit-transform';
     }
 
     return storedTransformPropertyName_;
 }
+function emit(root, evtType, evtData) {
+    let evt = void 0;
+    if (typeof CustomEvent === 'function') {
+        evt = new CustomEvent(evtType, { detail: evtData });
+    } else {
+        evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(evtType, false, false, evtData);
+    }
 
+    root.dispatchEvent(evt);
+}
 export default class MenuComponentTest extends Component {
 
     state = {
@@ -81,7 +90,7 @@ export default class MenuComponentTest extends Component {
             getWindowDimensions: () => {
                 return {width: window.innerWidth, height: window.innerHeight};
             },
-            getNumberOfItems: function getNumberOfItems() {
+            getNumberOfItems: () => {
                 if (this.refs.items) {
                     const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
                     return items.length;
@@ -135,26 +144,42 @@ export default class MenuComponentTest extends Component {
                 this.refs.root.style.top = 'top' in position ? position.top : null;
                 this.refs.root.style.bottom = 'bottom' in position ? position.bottom : null;
             },
-
-            /**** todo below *****/
-
-
             setScale: (x, y) => {
                 if (this.refs.root) {
-                    this.refs.root.style = 'scale(' + x + ', ' + y + ')';
+                    this.refs.root.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
                 }
             },
-
-
-
-            setInnerScale: function setInnerScale(x, y) {
-                _this2.itemsContainer_.style[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util__["a" /* getTransformPropertyName */])(window)] = 'scale(' + x + ', ' + y + ')';
+            setInnerScale: (x, y) => {
+                if (this.refs.items) {
+                    this.refs.items.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
+                }
             },
+            setTransformOrigin: origin => {
+                if (this.refs.root) {
+                    this.refs.root.style[getTransformPropertyName(window) + '-origin'] = origin;
+                }
+            },
+            saveFocus: () => {
+                this.previousFocus_ = document.activeElement;
+            },
+            restoreFocus: () => {
+                if (this.previousFocus_) {
+                    this.previousFocus_.focus();
+                }
+            },
+            notifySelected: evtData => {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return emit(this.refs.root, 'MDCSimpleMenu:selected', {
+                    index: evtData.index,
+                    item: items[evtData.index]
+                });
+            },
+            notifyCancel: () => {
+                return emit(this.refs.root, 'MDCSimpleMenu:cancel');
+            },
+            /**** todo below *****/
 
-
-
-
-
+/*
             notifySelected: function notifySelected(evtData) {
                 return _this2.emit('MDCSimpleMenu:selected', {
                     index: evtData.index,
@@ -164,155 +189,8 @@ export default class MenuComponentTest extends Component {
             notifyCancel: function notifyCancel() {
                 return _this2.emit('MDCSimpleMenu:cancel');
             },
-            saveFocus: function saveFocus() {
-                _this2.previousFocus_ = document.activeElement;
-            },
-            restoreFocus: function restoreFocus() {
-                if (_this2.previousFocus_) {
-                    _this2.previousFocus_.focus();
-                }
-            },
-
-
-
-
-            setTransformOrigin: function setTransformOrigin(origin) {
-                _this2.root_.style[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util__["a" /* getTransformPropertyName */])(window) + '-origin'] = origin;
-            },
-             /*
-             hasClass: function hasClass() /!* className: string *!/{},
-             hasNecessaryDom: function hasNecessaryDom() {
-             return (/!* boolean *!/false
-             );
-             },
-             getInnerDimensions: function getInnerDimensions() {
-             return (/!* { width: number, height: number } *!/{}
-             );
-             },
-             hasAnchor: function hasAnchor() {
-             return (/!* boolean *!/false
-             );
-             },
-             getAnchorDimensions: function getAnchorDimensions() {
-             return (
-             /!* { width: number, height: number, top: number, right: number, bottom: number, left: number } *!/{}
-             );
-             },
-             getWindowDimensions: function getWindowDimensions() {
-             return (/!* { width: number, height: number } *!/{}
-             );
-             },
-             setScale: function setScale() /!* x: number, y: number *!/{},
-             setInnerScale: function setInnerScale() /!* x: number, y: number *!/{},
-             getNumberOfItems: function getNumberOfItems() {
-             return (/!* number *!/0
-             );
-             },
-             registerInteractionHandler: function registerInteractionHandler() /!* type: string, handler: EventListener *!/{},
-             deregisterInteractionHandler: function deregisterInteractionHandler() /!* type: string, handler: EventListener *!/{},
-             registerDocumentClickHandler: function registerDocumentClickHandler() /!* handler: EventListener *!/{},
-             deregisterDocumentClickHandler: function deregisterDocumentClickHandler() /!* handler: EventListener *!/{},
-             getYParamsForItemAtIndex: function getYParamsForItemAtIndex() {
-             return (/!* index: number *!/ /!* {top: number, height: number} *!/{}
-             );
-             },
-             setTransitionDelayForItemAtIndex: function setTransitionDelayForItemAtIndex() /!* index: number, value: string *!/{},
-             getIndexForEventTarget: function getIndexForEventTarget() {
-             return (/!* target: EventTarget *!/ /!* number *!/0
-             );
-             },
-             notifySelected: function notifySelected() /!* evtData: {index: number} *!/{},
-             notifyCancel: function notifyCancel() {},
-             saveFocus: function saveFocus() {},
-             restoreFocus: function restoreFocus() {},
-             isFocused: function isFocused() {
-             return (/!* boolean *!/false
-             );
-             },
-             focus: function focus() {},
-             getFocusedItemIndex: function getFocusedItemIndex() {
-             return (/!* number *!/-1
-             );
-             },
-             focusItemAtIndex: function focusItemAtIndex() /!* index: number *!/{},
-             isRtl: function isRtl() {
-             return (/!* boolean *!/false
-             );
-             },
-             setTransformOrigin: function setTransformOrigin() /!* origin: string *!/{},
-             setPosition: function setPosition() /!* position: { top: string, right: string, bottom: string, left: string } *!/{},
-             getAccurateTime: function getAccurateTime() {
-             return (/!* number *!/0
-             );*/
-
-
-
+*/
         }
-        /*
-         hasClass: function hasClass() /!* className: string *!/{},
-         hasNecessaryDom: function hasNecessaryDom() {
-         return (/!* boolean *!/false
-         );
-         },
-         getInnerDimensions: function getInnerDimensions() {
-         return (/!* { width: number, height: number } *!/{}
-         );
-         },
-         hasAnchor: function hasAnchor() {
-         return (/!* boolean *!/false
-         );
-         },
-         getAnchorDimensions: function getAnchorDimensions() {
-         return (
-         /!* { width: number, height: number, top: number, right: number, bottom: number, left: number } *!/{}
-         );
-         },
-         getWindowDimensions: function getWindowDimensions() {
-         return (/!* { width: number, height: number } *!/{}
-         );
-         },
-         setScale: function setScale() /!* x: number, y: number *!/{},
-         setInnerScale: function setInnerScale() /!* x: number, y: number *!/{},
-         getNumberOfItems: function getNumberOfItems() {
-         return (/!* number *!/0
-         );
-         },
-         registerInteractionHandler: function registerInteractionHandler() /!* type: string, handler: EventListener *!/{},
-         deregisterInteractionHandler: function deregisterInteractionHandler() /!* type: string, handler: EventListener *!/{},
-         registerDocumentClickHandler: function registerDocumentClickHandler() /!* handler: EventListener *!/{},
-         deregisterDocumentClickHandler: function deregisterDocumentClickHandler() /!* handler: EventListener *!/{},
-         getYParamsForItemAtIndex: function getYParamsForItemAtIndex() {
-         return (/!* index: number *!/ /!* {top: number, height: number} *!/{}
-         );
-         },
-         setTransitionDelayForItemAtIndex: function setTransitionDelayForItemAtIndex() /!* index: number, value: string *!/{},
-         getIndexForEventTarget: function getIndexForEventTarget() {
-         return (/!* target: EventTarget *!/ /!* number *!/0
-         );
-         },
-         notifySelected: function notifySelected() /!* evtData: {index: number} *!/{},
-         notifyCancel: function notifyCancel() {},
-         saveFocus: function saveFocus() {},
-         restoreFocus: function restoreFocus() {},
-         isFocused: function isFocused() {
-         return (/!* boolean *!/false
-         );
-         },
-         focus: function focus() {},
-         getFocusedItemIndex: function getFocusedItemIndex() {
-         return (/!* number *!/-1
-         );
-         },
-         focusItemAtIndex: function focusItemAtIndex() /!* index: number *!/{},
-         isRtl: function isRtl() {
-         return (/!* boolean *!/false
-         );
-         },
-         setTransformOrigin: function setTransformOrigin() /!* origin: string *!/{},
-         setPosition: function setPosition() /!* position: { top: string, right: string, bottom: string, left: string } *!/{},
-         getAccurateTime: function getAccurateTime() {
-         return (/!* number *!/0
-         );*/
     );
 
     componentDidMount() {
@@ -324,8 +202,10 @@ export default class MenuComponentTest extends Component {
     }
 
     componentDidUpdate() {
+        //todo: fix this if
         if (this.props.isOpen) {
             let drawer = new MDCSimpleMenu(this.refs.root);
+            console.log(drawer);
             drawer.open = true;
         }
     }
@@ -336,7 +216,6 @@ export default class MenuComponentTest extends Component {
             <div
                 ref='root'
                 className={classnames('mdc-simple-menu', this.state.classNames)}
-
                 tabIndex="-1"
             >
                 <ul
