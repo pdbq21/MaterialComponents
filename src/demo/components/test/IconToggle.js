@@ -39,6 +39,17 @@ function supportsCssVariables(windowObj) {
 }
 
 
+function emit(root, evtType, evtData) {
+    let evt;
+    if (typeof CustomEvent === 'function') {
+        evt = new CustomEvent(evtType, { detail: evtData });
+    } else {
+        evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(evtType, false, false, evtData);
+    }
+
+    root.dispatchEvent(evt);
+}
 
 export default class IconToggleComponentTest extends Component {
 
@@ -95,12 +106,13 @@ export default class IconToggleComponentTest extends Component {
                 this.refs.root.removeAttribute(name);
             }
         },
-        /*
+
         notifyChange: evtData => {
             if (this.refs.root) {
-                this.refs.root.emit('MDCIconToggle:change', evtData);
+                console.log(this.refs.root);
+                return emit(this.refs.root, 'MDCIconToggle:change', evtData);
             }
-        },*/
+        },
 
  /*Todo: fix error emit() not a function
         notifyChange: function notifyChange(evtData) {

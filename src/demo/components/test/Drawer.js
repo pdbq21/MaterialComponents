@@ -5,21 +5,89 @@ import React, {Component} from 'react';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
 const {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation} = drawer;
-/*
-let storedTransformPropertyName_ = void 0;
+
+// Remap touch events to pointer events, if the browser doesn't support touch events.
+function remapEvent(eventName) {
+    const globalObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+
+    if (!('ontouchstart' in globalObj.document)) {
+        switch (eventName) {
+            case 'touchstart':
+                return 'pointerdown';
+            case 'touchmove':
+                return 'pointermove';
+            case 'touchend':
+                return 'pointerup';
+            default:
+                return eventName;
+        }
+    }
+
+    return eventName;
+}
+const TAB_DATA = 'data-mdc-tabindex';
+const TAB_DATA_HANDLED = 'data-mdc-tabindex-handled';
+let supportsPassive_;
+let storedTransformPropertyName_;
+// Determine whether the current browser supports passive event listeners, and if so, use them.
+function applyPassive() {
+    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
+    const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    if (supportsPassive_ === undefined || forceRefresh) {
+        let isSupported = false;
+        try {
+            globalObj.document.addEventListener('test', null, { get passive() {
+                isSupported = true;
+            } });
+        } catch (e) {}
+
+        supportsPassive_ = isSupported;
+    }
+
+    return supportsPassive_ ? { passive: true } : false;
+}
+// Choose the correct transform property to use on the current browser.
 function getTransformPropertyName() {
     const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
     const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     if (storedTransformPropertyName_ === undefined || forceRefresh) {
         const el = globalObj.document.createElement('div');
-        const transformPropertyName = 'transform' in el.style ? 'transform' : '-webkit-transform';
-        storedTransformPropertyName_ = transformPropertyName;
+        storedTransformPropertyName_ = 'transform' in el.style ? 'transform' : '-webkit-transform';
     }
 
     return storedTransformPropertyName_;
-}*/
+}
+// Determine whether the current browser supports CSS properties.
+function supportsCssCustomProperties() {
+    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
 
+    if ('CSS' in globalObj) {
+        return globalObj.CSS.supports('(--color: red)');
+    }
+    return false;
+}
+// Save the tab state for an element.
+function saveElementTabState(el) {
+    if (el.hasAttribute('tabindex')) {
+        el.setAttribute(TAB_DATA, el.getAttribute('tabindex'));
+    }
+    el.setAttribute(TAB_DATA_HANDLED, true);
+}
+// Restore the tab state for an element, if it was saved.
+function restoreElementTabState(el) {
+    // Only modify elements we've already handled, in case anything was dynamically added since we saved state.
+    if (el.hasAttribute(TAB_DATA_HANDLED)) {
+        if (el.hasAttribute(TAB_DATA)) {
+            el.setAttribute('tabindex', el.getAttribute(TAB_DATA));
+            el.removeAttribute(TAB_DATA);
+        } else {
+            el.removeAttribute('tabindex');
+        }
+        el.removeAttribute(TAB_DATA_HANDLED);
+    }
+}
 export default class DrawerComponentTest extends Component {
 
     state = {
@@ -38,16 +106,16 @@ export default class DrawerComponentTest extends Component {
         hasNecessaryDom: () => Boolean(this.refs.drawer),
 
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(evtType, handler);
+            this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(evtType, handler);
+            this.refs.root.removeEventListener(remapEvent(evtType), handler, applyPassive());
         },
         registerDrawerInteractionHandler: (evtType, handler) => {
-            this.refs.drawer.addEventListener(evtType, handler);
+            this.refs.drawer.addEventListener(remapEvent(evtType), handler);
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
-            this.refs.drawer.removeEventListener(evtType, handler);
+            this.refs.drawer.removeEventListener(remapEvent(evtType), handler);
         },
         registerTransitionEndHandler: handler => {
             this.refs.drawer.addEventListener('transitionend', handler);
@@ -68,10 +136,15 @@ export default class DrawerComponentTest extends Component {
         },
         setTranslateX: value => {
             if (this.refs.drawer) {
-                return this.refs.drawer.style.setProperty(value === null ? null : 'translateX(' + value + 'px)');
+                return this.refs.drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
             }
         },
-        updateCssVariable: value => this.refs.root.style.setProperty('--mdc-temporary-drawer-opacity', value),
+        updateCssVariable: value => {
+            if (supportsCssCustomProperties()){
+                this.refs.root.style.setProperty('--mdc-temporary-drawer-opacity', value);
+            }
+        },
+
         getFocusableElements: () => {
             if (this.refs.drawer) {
                 return this.refs.drawer.querySelectorAll(
@@ -81,38 +154,19 @@ export default class DrawerComponentTest extends Component {
                 );
             }
         },
+        saveElementTabState: el => {
+            return saveElementTabState(el);
+        },
+        restoreElementTabState: el => {
+            return restoreElementTabState(el);
+        },
+        makeElementUntabbable: el => {
+            return el.setAttribute('tabindex', -1);
+        },
         isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
-
-        // Todo: below methods
-
-
-        /*        saveElementTabState: function saveElementTabState(el) {
-         return __WEBPACK_IMPORTED_MODULE_2__util__["e" /!* saveElementTabState *!/](el);
-         },
-         restoreElementTabState: function restoreElementTabState(el) {
-         return __WEBPACK_IMPORTED_MODULE_2__util__["f" /!* restoreElementTabState *!/](el);
-         },
-         makeElementUntabbable: function makeElementUntabbable(el) {
-         return el.setAttribute('tabindex', -1);
-         },
-
-         isDrawer: function isDrawer(el) {
-         return el === _this2.drawer;
-         }
-
-
-
-         },
-         saveElementTabState: function saveElementTabState() /!* el: Element *!/ {
-         },
-         restoreElementTabState: function restoreElementTabState() /!* el: Element *!/ {
-         },
-         makeElementUntabbable: function makeElementUntabbable() /!* el: Element *!/ {
-         },
-         isDrawer: function isDrawer() {
-         return (/!* el: Element *!/ /!* boolean *!/false
-         );
-         }*/
+        isDrawer: el => {
+            return el === this.refs.drawer;
+        }
     });
 
     componentDidMount() {
@@ -126,7 +180,7 @@ export default class DrawerComponentTest extends Component {
     componentDidUpdate() {
         if (this.props.isOpen) {
             let drawer = new MDCTemporaryDrawer(this.refs.root);
-            console.log(drawer)
+            console.log(drawer);
             drawer.open = true;
         }
     }
