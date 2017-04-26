@@ -65,10 +65,6 @@ class ListItem extends PureComponent {
         className: PropTypes.string,
     };
 
-    static defaultProps = {
-//empty
-    };
-
     state = {
         classNamesRipple: [],
         rippleCss: {},
@@ -109,20 +105,7 @@ class ListItem extends PureComponent {
             }
         })),
         computeBoundingRect: () => {
-            //console.log(this.refs.root.getBoundingClientRect());
-            /*
-             const {left, top} = this.refs.root.getBoundingClientRect();
-             console.log(left, top);
-             const DIM = 40;*/
             return this.refs.root.getBoundingClientRect();
-            /*            return {
-             top,
-             left,
-             right: left + DIM,
-             bottom: top + DIM,
-             width: DIM,
-             height: DIM,
-             };*/
         },
         getWindowPageOffset: () => {
             return {
@@ -175,7 +158,6 @@ class ListItem extends PureComponent {
     }
 
     componentDidUpdate() {
-
         if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {

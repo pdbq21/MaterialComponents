@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 20.03.17.
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const propTypes = {

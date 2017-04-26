@@ -8,49 +8,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple as ripples}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripples;
-
-/*
- const propTypes = {
- accent: PropTypes.bool,
- children: PropTypes.node,
- className: PropTypes.string,
- compact: PropTypes.bool,
- dense: PropTypes.bool,
- primary: PropTypes.bool,
- raised: PropTypes.bool,
- };
- const Button = ({
- accent,
- children,
- className,
- compact,
- dense,
- primary,
- raised,
- elementType,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-button', {
- 'mdc-button--accent': accent,
- 'mdc-button--compact': compact,
- 'mdc-button--dense': dense,
- 'mdc-button--primary': primary,
- 'mdc-button--raised': raised,
- }, className);
- const ElementType =  elementType || 'button';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
-
- Button.propTypes = propTypes;
- export default Button;*/
+import {ripple}  from 'material-components-web/dist/material-components-web';
+const {MDCRipple, MDCRippleFoundation} = ripple;
 
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
@@ -77,7 +36,7 @@ function supportsCssVariables(windowObj) {
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-class Button extends PureComponent {
+export default class Button extends PureComponent {
     static propTypes = {
         accent: PropTypes.bool,
         children: PropTypes.node,
@@ -95,7 +54,7 @@ class Button extends PureComponent {
     state = {
         classNamesRipple: [],
         rippleCss: {},
-    }
+    };
 
 
     foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
@@ -132,20 +91,7 @@ class Button extends PureComponent {
             }
         })),
         computeBoundingRect: () => {
-            //console.log(this.refs.root.getBoundingClientRect());
-/*
-            const {left, top} = this.refs.root.getBoundingClientRect();
-            console.log(left, top);
-            const DIM = 40;*/
             return this.refs.root.getBoundingClientRect();
-/*            return {
-                top,
-                left,
-                right: left + DIM,
-                bottom: top + DIM,
-                width: DIM,
-                height: DIM,
-            };*/
         },
         getWindowPageOffset: () => {
             return {
@@ -219,5 +165,43 @@ class Button extends PureComponent {
         }
     }
 }
+/*
+ const propTypes = {
+ accent: PropTypes.bool,
+ children: PropTypes.node,
+ className: PropTypes.string,
+ compact: PropTypes.bool,
+ dense: PropTypes.bool,
+ primary: PropTypes.bool,
+ raised: PropTypes.bool,
+ };
+ const Button = ({
+ accent,
+ children,
+ className,
+ compact,
+ dense,
+ primary,
+ raised,
+ elementType,
+ ...otherProp
+ }) => {
+ const classes = classnames(
+ 'mdc-button', {
+ 'mdc-button--accent': accent,
+ 'mdc-button--compact': compact,
+ 'mdc-button--dense': dense,
+ 'mdc-button--primary': primary,
+ 'mdc-button--raised': raised,
+ }, className);
+ const ElementType =  elementType || 'button';
+ return (
+ <ElementType className={classes}
+ {...otherProp}
+ >
+ {children}
+ </ElementType>);
+ };
 
-export default Button;
+ Button.propTypes = propTypes;
+ export default Button;*/

@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 20.03.17.
  */
-import React, {PropTypes, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {textfield as mdcTextfield}  from 'material-components-web/dist/material-components-web';
 const {MDCTextfieldFoundation} = mdcTextfield;

@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 29.03.17.
  */
-import React, {PropTypes, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default class Input extends PureComponent {
