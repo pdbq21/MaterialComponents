@@ -5,21 +5,54 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import '@material/dialog/dist/mdc.dialog.min.css';
 import {dialog}  from 'material-components-web/dist/material-components-web';
-const {util, MDCDialog, MDCDialogFoundation} = dialog;
+const {util, MDCDialogFoundation} = dialog;
 const {createFocusTrapInstance} = util;
+const {
+    cssClasses: {
+        OPEN: OPEN_CLASS_NAME,
+    },
+} = MDCDialogFoundation;
 
 export default class DialogTest extends Component {
+
+    static defaultProps = {
+        open: false,
+    };
+
     state = {
-        classNames: []
+        classNames: [],
+        open: false,
     };
 
     foundation = new MDCDialogFoundation({
-        addClass: className => this.setState(({classNames}) => ({
-            classNames: classNames.concat([className])
-        })),
-        removeClass: className => this.setState(({classNames}) => ({
-            classNames: classNames.filter(cn => cn !== className)
-        })),
+        addClass: className => {
+            this.setState(({classNames}) => ({
+                classNames: classNames.concat([className])
+            }));
+            if (className === OPEN_CLASS_NAME) {
+                this.setState({
+                    open: true,
+                });
+                if (this.props.onOpen) {
+                    this.props.onOpen(this.refs.root);
+                }
+            }
+        },
+        removeClass: className => {
+            this.setState(({classNames}) => ({
+                classNames: classNames.filter(cn => cn !== className)
+            }));
+            // MDCDialog does not provide opening/closing event.
+            // But we can assume open/close by adding/removing OPEN_CLASS_NAME
+            if (className === OPEN_CLASS_NAME) {
+                this.element.setState({
+                    open: false,
+                });
+                if (this.props.onClose) {
+                    this.props.onClose(this.refs.root);
+                }
+            }
+        },
         setStyle: (prop, val) => {
             if (this.refs.root) {
                 this.refs.root.style.setProperty(prop, val);
@@ -83,13 +116,19 @@ export default class DialogTest extends Component {
         this.foundation.destroy();
     }
 
-    componentDidUpdate() {
-        if (this.props.isOpen) {
-            // todo: this working if function attr is selector
-            //let dialog = new MDCDialog(document.querySelector('#mdc-dialog-default'));
-            //dialog.show();
-            this.foundation.open();
+    componentWillReceiveProps() {
+        console.log(this.foundation);
+        if ((!!this.props.open) !== (!!this.state.open)) {
+            if (this.props.open) {
+                this.foundation.open();
+            } else {
+                this.foundation.close();
+            }
         }
+    }
+
+    componentDidUpdate() {
+
     }
 
     render() {
@@ -98,7 +137,6 @@ export default class DialogTest extends Component {
                 ref={(root) => {
                     this.root = root
                 }}
-                id="mdc-dialog-default"
                 style={{'visibility': 'hidden'}}
                 className={classnames('mdc-dialog', this.state.classNames)}
                 role="alertdialog"
