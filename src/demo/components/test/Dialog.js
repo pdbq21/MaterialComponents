@@ -34,7 +34,7 @@ export default class DialogTest extends Component {
                     open: true,
                 });
                 if (this.props.onOpen) {
-                    this.props.onOpen(this.refs.root);
+                    this.props.onOpen(this);
                 }
             }
         },
@@ -45,11 +45,11 @@ export default class DialogTest extends Component {
             // MDCDialog does not provide opening/closing event.
             // But we can assume open/close by adding/removing OPEN_CLASS_NAME
             if (className === OPEN_CLASS_NAME) {
-                this.element.setState({
+                this.setState({
                     open: false,
                 });
                 if (this.props.onClose) {
-                    this.props.onClose(this.refs.root);
+                    this.props.onClose(this);
                 }
             }
         },
@@ -95,7 +95,16 @@ export default class DialogTest extends Component {
             }
         },
         eventTargetHasClass: (target, className) => (target.classList.contains(className)),
-
+        notifyAccept: () => {
+            if (this.props.onAccept !== null) {
+                this.props.onAccept(this);
+            }
+        },
+        notifyCancel: () => {
+            if (this.props.onCancel !== null) {
+                this.props.onCancel(this);
+            }
+        },
         //todo below
 
         /* notifyAccept: function notifyAccept() {
@@ -107,19 +116,17 @@ export default class DialogTest extends Component {
     });
 
     componentDidMount() {
-        console.log(this.foundation);
         this.foundation.init();
-
     }
 
     componentWillUnmount() {
         this.foundation.destroy();
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(props) {
         console.log(this.foundation);
-        if ((!!this.props.open) !== (!!this.state.open)) {
-            if (this.props.open) {
+        if (props.open !== this.state.open) {
+            if (props.open) {
                 this.foundation.open();
             } else {
                 this.foundation.close();
@@ -134,18 +141,14 @@ export default class DialogTest extends Component {
     render() {
         return (
             <aside
-                ref={(root) => {
-                    this.root = root
-                }}
+                ref='root'
                 style={{'visibility': 'hidden'}}
                 className={classnames('mdc-dialog', this.state.classNames)}
                 role="alertdialog"
                 aria-labelledby="my-mdc-dialog-label"
                 aria-describedby="my-mdc-dialog-description">
                 <div
-                    ref={(dialogSurface) => {
-                        this.dialogSurface = dialogSurface
-                    }}
+                    ref='dialogSurface'
                     className="mdc-dialog__surface">
                     <header className="mdc-dialog__header">
                         <h2 id="my-mdc-dialog-label" className="mdc-dialog__header__title">
@@ -162,9 +165,7 @@ export default class DialogTest extends Component {
                             Decline
                         </button>
                         <button
-                            ref={(acceptSelector) => {
-                                this.acceptSelector = acceptSelector
-                            }}
+                            ref='acceptSelector'
                             type="button"
                             className="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">
                             Accept

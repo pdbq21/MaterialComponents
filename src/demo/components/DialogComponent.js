@@ -16,6 +16,8 @@ export default class DialogComponent extends React.Component {
         this.handle = this.handle.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleAccept = this.handleAccept.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     setOpen(open) {
@@ -33,6 +35,13 @@ export default class DialogComponent extends React.Component {
     handleClose() {
         this.setOpen(false);
     }
+    handleAccept(){
+        console.log("Accept");
+    }
+
+    handleCancel(){
+        console.log("Decline");
+    }
 
     render() {
         const {open} = this.state;
@@ -45,6 +54,8 @@ export default class DialogComponent extends React.Component {
                     <div>
                         <DialogTest
                             open={open}
+                            onAccept={this.handleAccept}
+                            onCancel={this.handleCancel}
                             onOpen={this.handleOpen}
                             onClose={this.handleClose}
                         />

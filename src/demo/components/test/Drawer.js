@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
-const {util, MDCTemporaryDrawer, MDCTemporaryDrawerFoundation} = drawer;
+const {util, MDCTemporaryDrawerFoundation} = drawer;
 const {
     applyPassive,
     getTransformPropertyName,
@@ -21,7 +21,9 @@ const {
 } = MDCTemporaryDrawerFoundation;
 
 export default class DrawerComponentTest extends Component {
-
+    static defaultProps = {
+        open: false,
+    };
     state = {
         classNameDrawer: [],
         open: false
@@ -132,6 +134,7 @@ export default class DrawerComponentTest extends Component {
         this.foundation.destroy();
     }
     componentWillReceiveProps(props) {
+        console.log(this.foundation);
         if (props.open !== this.state.open) {
             if (props.open) {
                 this.foundation.open();
@@ -153,7 +156,7 @@ export default class DrawerComponentTest extends Component {
         console.log(util);
         return (
             <aside
-                ref="root"
+                ref='root'
                 className={classnames('mdc-temporary-drawer', this.state.classNameDrawer)}
             >
                 <nav ref='drawer' className="mdc-temporary-drawer__drawer">
