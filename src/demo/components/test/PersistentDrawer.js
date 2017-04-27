@@ -118,7 +118,17 @@ export default class DrawerComponentTest extends Component {
         isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
         isDrawer: el => {
             return el === this.refs.drawer;
-        }
+        },
+       /* notifyOpen: () => {
+            if (this.props.onOpen !== null) {
+                this.props.onAccept(this);
+            }
+        },
+        notifyClose: () => {
+            if (this.props.onCancel !== null) {
+                this.props.onCancel(this);
+            }
+        },*/
     });
 
     componentDidMount() {
@@ -140,7 +150,7 @@ export default class DrawerComponentTest extends Component {
     }
 
     render() {
-        const a = new MDCPersistentDrawerFoundation;
+        const a = new MDCPersistentDrawerFoundation();
         console.dir(a);
         return (
             <aside

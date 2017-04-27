@@ -7,8 +7,13 @@ import IconToggleComponentTest from './test/IconToggle'
 
 
 export default class IconToggleComponent extends React.Component {
-
-
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(){
+        console.log("Decline");
+    }
     render() {
 
         return (
@@ -18,7 +23,10 @@ export default class IconToggleComponent extends React.Component {
                     <h3>Icon Toggle</h3>
                     <legend>Using material-icons</legend>
                     <div>
-                        <IconToggleComponentTest ripple />
+                        <IconToggleComponentTest
+                            ripple
+                            onChange={this.handleChange}
+                        />
                     </div>
                 </fieldset>
             </div>

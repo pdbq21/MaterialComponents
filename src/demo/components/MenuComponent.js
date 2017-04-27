@@ -11,30 +11,41 @@ export default class MenuComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
-            isActive: 'Top Left'
-        }
+            open: false,
+        };
 
-        this.handel = this.handel.bind(this);
-        this.handelRadio = this.handelRadio.bind(this);
+        this.handle = this.handle.bind(this);
+        this.handleSelected = this.handleSelected.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
-
-    handel() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
+    setOpen(open) {
+        this.setState({open});
     }
 
-    handelRadio = (e) => this.setState({isActive: e.target.parentNode.textContent});
+    handle() {
+        console.log(0);
+        this.setOpen(true);
+    }
+
+    handleSelected(...e) {
+        console.log(e);
+        //this.setOpen(true);
+    }
+
+    handleCancel() {
+        console.log(1);
+        this.setOpen(false);
+    }
+
 
     render() {
-        const {isOpen, isActive} = this.state;
+        const {open} = this.state;
 
         return (
             <div>
                 <div>
-                    <p>
+                    {/* <p>
                         Position:
                         <span>
                         Top left
@@ -64,15 +75,17 @@ export default class MenuComponent extends React.Component {
                         checked={isActive === 'Bottom right'}
                         />
                     </span>
-                    </p>
+                    </p>*/}
                 </div>
 
                 <fieldset>
                     <legend>Sample Menu</legend>
-                    <button onClick={this.handel}>Open</button>
+                    <button onClick={this.handle}>Open</button>
                     <div>
                         <MenuComponentTest
-                            isOpen={isOpen}
+                            open={open}
+                            onSelected={this.handleSelected}
+                            onCancel={this.handleCancel}
                             className="mdc-simple-menu--open-from-top-left"
                         />
                     </div>

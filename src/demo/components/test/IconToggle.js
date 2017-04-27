@@ -38,19 +38,6 @@ function supportsCssVariables(windowObj) {
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-
-function emit(root, evtType, evtData) {
-    let evt;
-    if (typeof CustomEvent === 'function') {
-        evt = new CustomEvent(evtType, { detail: evtData });
-    } else {
-        evt = document.createEvent('CustomEvent');
-        evt.initCustomEvent(evtType, false, false, evtData);
-    }
-
-    root.dispatchEvent(evt);
-}
-
 export default class IconToggleComponentTest extends Component {
 
     state = {
@@ -108,9 +95,8 @@ export default class IconToggleComponentTest extends Component {
         },
 
         notifyChange: evtData => {
-            if (this.refs.root) {
-                console.log(this.refs.root);
-                return emit(this.refs.root, 'MDCIconToggle:change', evtData);
+            if (this.props.onChange !== null) {
+                this.props.onChange(this, evtData);
             }
         },
 
@@ -147,8 +133,6 @@ export default class IconToggleComponentTest extends Component {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-
-
         updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
             rippleCss: {
                 ...rippleCss,
@@ -202,6 +186,7 @@ export default class IconToggleComponentTest extends Component {
     }
 
     render() {
+        console.log(iconToggle);
         const ownProps = Object.assign({}, this.props);
         delete ownProps.ripple;
         const {

@@ -5,35 +5,25 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import '@material/menu/dist/mdc.menu.min.css';
 import {menu}  from 'material-components-web/dist/material-components-web';
-const {MDCSimpleMenu, MDCSimpleMenuFoundation} = menu;
+const {MDCSimpleMenuFoundation} = menu;
 
-let storedTransformPropertyName_ = void 0;
-function getTransformPropertyName() {
-    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
-    const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
+let storedTransformPropertyName_;
+// Returns the name of the correct transform property to use on the current browser.
+export function getTransformPropertyName(globalObj, forceRefresh = false) {
     if (storedTransformPropertyName_ === undefined || forceRefresh) {
         const el = globalObj.document.createElement('div');
-        storedTransformPropertyName_ = 'transform' in el.style ? 'transform' : '-webkit-transform';
+        storedTransformPropertyName_ = ('transform' in el.style ? 'transform' : 'webkitTransform');
     }
-
     return storedTransformPropertyName_;
 }
-function emit(root, evtType, evtData) {
-    let evt = void 0;
-    if (typeof CustomEvent === 'function') {
-        evt = new CustomEvent(evtType, { detail: evtData });
-    } else {
-        evt = document.createEvent('CustomEvent');
-        evt.initCustomEvent(evtType, false, false, evtData);
-    }
 
-    root.dispatchEvent(evt);
-}
 export default class MenuComponentTest extends Component {
-
+    static defaultProps = {
+        open: false,
+    };
     state = {
-        classNames: []
+        classNames: [],
+        open: false,
     };
 
     foundation = new MDCSimpleMenuFoundation({
@@ -48,7 +38,7 @@ export default class MenuComponentTest extends Component {
                     return this.refs.root.classList.contains(className);
                 }
             },
-            hasAnchor: function hasAnchor() {
+            hasAnchor: () => {
                 if (this.refs.root) {
                     return this.refs.root.parentElement && this.refs.root.parentElement.classList.contains('mdc-menu-anchor');
                 }
@@ -168,28 +158,19 @@ export default class MenuComponentTest extends Component {
                 }
             },
             notifySelected: evtData => {
-                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
-                return emit(this.refs.root, 'MDCSimpleMenu:selected', {
-                    index: evtData.index,
-                    item: items[evtData.index]
-                });
+                if (this.props.onSelected !== null) {
+                    const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                    this.props.onSelected(this, {
+                        index: evtData.index,
+                        item: items[evtData.index]
+                    });
+                }
             },
             notifyCancel: () => {
-                return emit(this.refs.root, 'MDCSimpleMenu:cancel');
+                if (this.props.onCancel !== null) {
+                    this.props.onCancel(this);
+                }
             },
-            /**** todo below *****/
-
-/*
-            notifySelected: function notifySelected(evtData) {
-                return _this2.emit('MDCSimpleMenu:selected', {
-                    index: evtData.index,
-                    item: _this2.items[evtData.index]
-                });
-            },
-            notifyCancel: function notifyCancel() {
-                return _this2.emit('MDCSimpleMenu:cancel');
-            },
-*/
         }
     );
 
@@ -201,17 +182,15 @@ export default class MenuComponentTest extends Component {
         this.foundation.destroy();
     }
 
-    componentDidUpdate() {
-        //todo: fix this if
-        if (this.props.isOpen) {
-            let drawer = new MDCSimpleMenu(this.refs.root);
-            console.log(drawer);
-            drawer.open = true;
+    componentWillReceiveProps(props) {
+        if (props.open) {
+            this.foundation.open();
+        } else {
+            this.foundation.close();
         }
     }
 
     render() {
-        console.log(this.foundation);
         return (
             <div
                 ref='root'
