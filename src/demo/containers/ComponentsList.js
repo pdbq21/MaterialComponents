@@ -121,7 +121,7 @@ case 'Drawer (Persistent)':
                     <li className={`navigation-item ${(activeMenuItem === 'Card') ? 'active' : ''}`}>
                         Card
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Dialog') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Dialog') ? 'active' : ''} todo-lite`}>
                         Dialog
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Elevation') ? 'active' : ''}`}>

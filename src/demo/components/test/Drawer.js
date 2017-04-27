@@ -32,8 +32,8 @@ export default class DrawerComponentTest extends Component {
     foundation = new MDCTemporaryDrawerFoundation({
         addClass: className => {
             this.setState(({classNameDrawer}) => ({
-            classNameDrawer: classNameDrawer.concat([className])
-        }));
+                classNameDrawer: classNameDrawer.concat([className])
+            }));
             if (className === OPEN_CLASS_NAME) {
                 this.setState({
                     open: true,
@@ -42,11 +42,11 @@ export default class DrawerComponentTest extends Component {
                     this.props.onOpenDrawer(this);
                 }
             }
-            },
+        },
         removeClass: className => {
             this.setState(({classNameDrawer}) => ({
-            classNameDrawer: classNameDrawer.filter(cn => cn !== className)
-        }));
+                classNameDrawer: classNameDrawer.filter(cn => cn !== className)
+            }));
             // MDCTemporaryDrawerFoundation does not provide opening/closing event.
             // But we can assume open/close by adding/removing OPEN_CLASS_NAME
             if (className === OPEN_CLASS_NAME) {
@@ -57,7 +57,7 @@ export default class DrawerComponentTest extends Component {
                     this.props.onCloseDrawer(this);
                 }
             }
-            },
+        },
         hasClass: className => (this.refs.root.classList.contains(className)),
 
         hasNecessaryDom: () => Boolean(this.refs.drawer),
@@ -97,7 +97,7 @@ export default class DrawerComponentTest extends Component {
             }
         },
         updateCssVariable: value => {
-            if (supportsCssCustomProperties()){
+            if (supportsCssCustomProperties()) {
                 this.refs.root.style.setProperty('--mdc-temporary-drawer-opacity', value);
             }
         },
@@ -133,8 +133,8 @@ export default class DrawerComponentTest extends Component {
     componentWillUnmount() {
         this.foundation.destroy();
     }
+
     componentWillReceiveProps(props) {
-        console.log(this.foundation);
         if (props.open !== this.state.open) {
             if (props.open) {
                 this.foundation.open();
@@ -142,14 +142,6 @@ export default class DrawerComponentTest extends Component {
                 this.foundation.close();
             }
         }
-    }
-    componentDidUpdate() {
-        /*if (this.props.isOpen) {
-            let drawer = new MDCTemporaryDrawer(this.refs.root);
-            console.dir(drawer, MDCTemporaryDrawerFoundation);
-            drawer.open = true;
-            //this.foundation.open();
-        }*/
     }
 
     render() {

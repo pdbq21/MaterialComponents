@@ -105,14 +105,6 @@ export default class DialogTest extends Component {
                 this.props.onCancel(this);
             }
         },
-        //todo below
-
-        /* notifyAccept: function notifyAccept() {
-         return _this2.emit('MDCDialog:accept');
-         },
-         notifyCancel: function notifyCancel() {
-         return _this2.emit('MDCDialog:cancel');
-         },*/
     });
 
     componentDidMount() {

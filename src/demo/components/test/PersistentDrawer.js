@@ -6,98 +6,61 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import '@material/drawer/dist/mdc.drawer.min.css';
 import {drawer}  from 'material-components-web/dist/material-components-web';
-const {MDCPersistentDrawer, MDCPersistentDrawerFoundation} = drawer;
-
-// Remap touch events to pointer events, if the browser doesn't support touch events.
-function remapEvent(eventName) {
-    const globalObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
-
-    if (!('ontouchstart' in globalObj.document)) {
-        switch (eventName) {
-            case 'touchstart':
-                return 'pointerdown';
-            case 'touchmove':
-                return 'pointermove';
-            case 'touchend':
-                return 'pointerup';
-            default:
-                return eventName;
-        }
+const {util, MDCPersistentDrawerFoundation} = drawer;
+const {
+    // Determine whether the current browser supports passive event listeners, and if so, use them.
+    applyPassive,
+    // Choose the correct transform property to use on the current browser.
+    getTransformPropertyName,
+    restoreElementTabState,
+    // Remap touch events to pointer events, if the browser doesn't support touch events.
+    remapEvent,
+    // Save the tab state for an element.
+    saveElementTabState
+} = util;
+const {
+    cssClasses: {
+        OPEN: OPEN_CLASS_NAME,
     }
-
-    return eventName;
-}
-const TAB_DATA = 'data-mdc-tabindex';
-const TAB_DATA_HANDLED = 'data-mdc-tabindex-handled';
-let supportsPassive_;
-let storedTransformPropertyName_;
-// Determine whether the current browser supports passive event listeners, and if so, use them.
-function applyPassive() {
-    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
-    const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-    if (supportsPassive_ === undefined || forceRefresh) {
-        let isSupported = false;
-        try {
-            globalObj.document.addEventListener('test', null, {
-                get passive() {
-                    isSupported = true;
-                }
-            });
-        } catch (e) {
-        }
-
-        supportsPassive_ = isSupported;
-    }
-
-    return supportsPassive_ ? {passive: true} : false;
-}
-// Choose the correct transform property to use on the current browser.
-function getTransformPropertyName() {
-    const globalObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window;
-    const forceRefresh = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-    if (storedTransformPropertyName_ === undefined || forceRefresh) {
-        const el = globalObj.document.createElement('div');
-        storedTransformPropertyName_ = 'transform' in el.style ? 'transform' : '-webkit-transform';
-    }
-
-    return storedTransformPropertyName_;
-}
-
-// Save the tab state for an element.
-function saveElementTabState(el) {
-    if (el.hasAttribute('tabindex')) {
-        el.setAttribute(TAB_DATA, el.getAttribute('tabindex'));
-    }
-    el.setAttribute(TAB_DATA_HANDLED, true);
-}
-// Restore the tab state for an element, if it was saved.
-function restoreElementTabState(el) {
-    // Only modify elements we've already handled, in case anything was dynamically added since we saved state.
-    if (el.hasAttribute(TAB_DATA_HANDLED)) {
-        if (el.hasAttribute(TAB_DATA)) {
-            el.setAttribute('tabindex', el.getAttribute(TAB_DATA));
-            el.removeAttribute(TAB_DATA);
-        } else {
-            el.removeAttribute('tabindex');
-        }
-        el.removeAttribute(TAB_DATA_HANDLED);
-    }
-}
+} = MDCPersistentDrawerFoundation;
 export default class DrawerComponentTest extends Component {
-
+    static defaultProps = {
+        open: false,
+    };
     state = {
-        classNameDrawer: []
+        classNameDrawer: [],
+        open: false
     };
 
     foundation = new MDCPersistentDrawerFoundation({
-        addClass: className => this.setState(({classNameDrawer}) => ({
-            classNameDrawer: classNameDrawer.concat([className])
-        })),
-        removeClass: className => this.setState(({classNameDrawer}) => ({
-            classNameDrawer: classNameDrawer.filter(cn => cn !== className)
-        })),
+        addClass: className => {
+            this.setState(({classNameDrawer}) => ({
+                classNameDrawer: classNameDrawer.concat([className])
+            }));
+            if (className === OPEN_CLASS_NAME) {
+                this.setState({
+                    open: true,
+                });
+                if (this.props.onOpenDrawer) {
+                    this.props.onOpenDrawer(this);
+                }
+            }
+        },
+        removeClass: className => {
+            this.setState(({classNameDrawer}) => ({
+                classNameDrawer: classNameDrawer.filter(cn => cn !== className)
+            }));
+            // MDCTemporaryDrawerFoundation does not provide opening/closing event.
+            // But we can assume open/close by adding/removing OPEN_CLASS_NAME
+            if (className === OPEN_CLASS_NAME) {
+                this.setState({
+                    open: false,
+                });
+                if (this.props.onCloseDrawer) {
+                    this.props.onCloseDrawer(this);
+                }
+            }
+        },
         hasClass: className => (this.refs.root.classList.contains(className)),
         hasNecessaryDom: () => Boolean(this.refs.drawer),
         registerInteractionHandler: (evtType, handler) => {
@@ -166,15 +129,19 @@ export default class DrawerComponentTest extends Component {
         this.foundation.destroy();
     }
 
-    componentDidUpdate() {
-        if (this.props.isOpen) {
-            let drawer = new MDCPersistentDrawer(this.refs.root);
-            drawer.open = true;
+    componentWillReceiveProps(props) {
+        if (props.open !== this.state.open) {
+            if (props.open) {
+                this.foundation.open();
+            } else {
+                this.foundation.close();
+            }
         }
     }
 
     render() {
-        console.log(drawer);
+        const a = new MDCPersistentDrawerFoundation;
+        console.dir(a);
         return (
             <aside
                 ref='root'
