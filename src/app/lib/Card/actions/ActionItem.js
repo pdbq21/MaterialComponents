@@ -17,12 +17,10 @@ const ActionItem = ({
     ...otherProp
 }) => {
     const ElementType =  elementType || Button;
-    const defaultButton = !(elementType);
     const classes = classnames(
         'mdc-card__action', className);
     return (
         <ElementType
-            compact={defaultButton}
             className={classes}
             {...otherProp}
         >

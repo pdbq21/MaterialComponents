@@ -17,7 +17,6 @@ import {
 } from '../../app/lib'
 
 export default function Cards() {
-
     return (
         <div>
             <fieldset>
@@ -47,8 +46,8 @@ export default function Cards() {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
                     </CardSupportingText>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -63,8 +62,8 @@ export default function Cards() {
                             'height': '10em'
                         }}/>
                     <CardActions vertical>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -79,8 +78,8 @@ export default function Cards() {
                         <CardPrimarySubtitle>Subtitle</CardPrimarySubtitle>
                     </CardPrimary>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -96,8 +95,8 @@ export default function Cards() {
                         nisi ut aliquip ex ea commodo consequat.
                     </CardSupportingText>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -110,7 +109,7 @@ export default function Cards() {
                         <CardPrimaryTitle large>Title goes here</CardPrimaryTitle>
                     </CardMedia>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -123,8 +122,8 @@ export default function Cards() {
                         <CardMediaItem src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
 
@@ -137,8 +136,8 @@ export default function Cards() {
                         <CardMediaItem size='1.5' src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
                 <Card className='mdc-card--demo'>
@@ -150,16 +149,16 @@ export default function Cards() {
                         <CardMediaItem size='2' src="http://material-components-web.appspot.com/images/1-1.jpg" />
                     </CardHorizontalBlock>
                     <CardActions>
-                        <CardActionItem>Action 1</CardActionItem>
-                        <CardActionItem>Action 2</CardActionItem>
+                        <CardActionItem compact>Action 1</CardActionItem>
+                        <CardActionItem compact>Action 2</CardActionItem>
                     </CardActions>
                 </Card>
                 <Card className='mdc-card--demo'>
                     <CardHorizontalBlock>
                         <CardMediaItem size='3' src="http://material-components-web.appspot.com/images/1-1.jpg" />
                         <CardActions vertical>
-                            <CardActionItem>A 1</CardActionItem>
-                            <CardActionItem>A 2</CardActionItem>
+                            <CardActionItem compact>A 1</CardActionItem>
+                            <CardActionItem compact>A 2</CardActionItem>
                         </CardActions>
                     </CardHorizontalBlock>
                 </Card>
