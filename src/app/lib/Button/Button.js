@@ -118,7 +118,6 @@ export default class Button extends PureComponent {
             children,
             ...otherProp
         } = ownProps;
-
         const ElementType = elementType || 'button';
         return (
             <ElementType
@@ -141,7 +140,6 @@ export default class Button extends PureComponent {
             </ElementType>
         );
     }
-
     // Within the two component lifecycle methods below, we invoke the foundation's lifecycle hooks
     // so that proper work can be performed.
     componentDidMount() {
@@ -149,15 +147,12 @@ export default class Button extends PureComponent {
             this.foundationRipple.init();
         }
     }
-
     componentWillUnmount() {
         if (this.props.ripple) {
             this.foundationRipple.destroy();
         }
     }
-
     componentDidUpdate() {
-
         if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {

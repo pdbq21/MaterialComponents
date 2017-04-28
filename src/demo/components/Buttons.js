@@ -29,7 +29,6 @@ export default function Buttons() {
                     <Button ripple accent raised>accent raised</Button>
                     <Button ripple elementType="div">div</Button>
                     <Button ripple elementType="div" raised>div raised</Button>
-
                 </fieldset>
                 <fieldset>
                     <legend>Buttons with Only CSS</legend>
