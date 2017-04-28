@@ -174,7 +174,7 @@ case 'Drawer (Persistent)':
                     <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} todo`}>
                        Select
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''}`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''} todo`}>
                         Ripple
                     </li>
                 </ul>
