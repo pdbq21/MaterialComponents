@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCRippleFoundation} = ripple;
-
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -57,7 +56,6 @@ export default class Button extends PureComponent {
     };
 
     foundationRipple = new MDCRippleFoundation({
-        // for FAB this. === true \ for other component === false
         isUnbounded: () => false,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -73,7 +71,6 @@ export default class Button extends PureComponent {
                 }))
             }
         },
-        // root / nativeCb
         registerInteractionHandler: (evtType, handler) => {
             if (this.refs.root) {
                 this.refs.root.addEventListener(evtType, handler);
@@ -100,42 +97,11 @@ export default class Button extends PureComponent {
                 }))
             }
         },
-        computeBoundingRect: () => {
-            return this.refs.root.getBoundingClientRect();
-        },
-        getWindowPageOffset: () => {
-            return {
-                x: window.pageXOffset,
-                y: window.pageYOffset
-            }
-        },
-//todo below
-
-        /*
-         removeClass: function removeClass(className) {
-         return instance.root_.classList.remove(className);
-         },
-         registerInteractionHandler: function registerInteractionHandler(evtType, handler) {
-         return instance.root_.addEventListener(evtType, handler);
-         },
-         deregisterInteractionHandler: function deregisterInteractionHandler(evtType, handler) {
-         return instance.root_.removeEventListener(evtType, handler);
-         },
-         registerResizeHandler: function registerResizeHandler(handler) {
-         return window.addEventListener('resize', handler);
-         },
-         deregisterResizeHandler: function deregisterResizeHandler(handler) {
-         return window.removeEventListener('resize', handler);
-         },
-         updateCssVariable: function updateCssVariable(varName, value) {
-         return instance.root_.style.setProperty(varName, value);
-         },
-         computeBoundingRect: function computeBoundingRect() {
-         return instance.root_.getBoundingClientRect();
-         },
-         getWindowPageOffset: function getWindowPageOffset() {
-         return {x: window.pageXOffset, y: window.pageYOffset};
-         }*/
+        computeBoundingRect: () => (this.refs.root.getBoundingClientRect()),
+        getWindowPageOffset: () => ({
+            x: window.pageXOffset,
+            y: window.pageYOffset
+        }),
     });
 
     render() {
@@ -201,43 +167,3 @@ export default class Button extends PureComponent {
         }
     }
 }
-/*
- const propTypes = {
- accent: PropTypes.bool,
- children: PropTypes.node,
- className: PropTypes.string,
- compact: PropTypes.bool,
- dense: PropTypes.bool,
- primary: PropTypes.bool,
- raised: PropTypes.bool,
- };
- const Button = ({
- accent,
- children,
- className,
- compact,
- dense,
- primary,
- raised,
- elementType,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-button', {
- 'mdc-button--accent': accent,
- 'mdc-button--compact': compact,
- 'mdc-button--dense': dense,
- 'mdc-button--primary': primary,
- 'mdc-button--raised': raised,
- }, className);
- const ElementType =  elementType || 'button';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
-
- Button.propTypes = propTypes;
- export default Button;*/

@@ -292,7 +292,6 @@ class Checkbox extends PureComponent {
             className,
             ...otherProp
         } = ownProps;
-        console.log(checkbox, ripple)
         return (
             <div ref="root" className={
                 classnames(
@@ -336,12 +335,16 @@ class Checkbox extends PureComponent {
     // Within the two component lifecycle methods below, we invoke the foundation's lifecycle hooks
     // so that proper work can be performed.
     componentDidMount() {
-        this.foundation.init();
+        if (this.props.ripple) {
+            this.foundationRipple.init();
+        }
         this.foundationRipple.init();
     }
 
     componentWillUnmount() {
-        this.foundationRipple.destroy();
+        if (this.props.ripple) {
+            this.foundationRipple.destroy();
+        }
         this.foundation.destroy();
     }
 
