@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+const {MDCRippleFoundation} = ripple;
 
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
@@ -56,8 +56,7 @@ export default class Button extends PureComponent {
         rippleCss: {},
     };
 
-
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+    foundationRipple = new MDCRippleFoundation({
         // for FAB this. === true \ for other component === false
         isUnbounded: () => false,
         browserSupportsCssVars: () => {
@@ -67,15 +66,23 @@ export default class Button extends PureComponent {
         addClass: className => this.setState(({classNamesRipple}) => ({
             classNamesRipple: classNamesRipple.concat([className])
         })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
+        removeClass: className => {
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
+        },
         // root / nativeCb
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -83,13 +90,16 @@ export default class Button extends PureComponent {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
             }
-        })),
+        },
         computeBoundingRect: () => {
             return this.refs.root.getBoundingClientRect();
         },
@@ -99,8 +109,34 @@ export default class Button extends PureComponent {
                 y: window.pageYOffset
             }
         },
+//todo below
 
-    }));
+        /*
+         removeClass: function removeClass(className) {
+         return instance.root_.classList.remove(className);
+         },
+         registerInteractionHandler: function registerInteractionHandler(evtType, handler) {
+         return instance.root_.addEventListener(evtType, handler);
+         },
+         deregisterInteractionHandler: function deregisterInteractionHandler(evtType, handler) {
+         return instance.root_.removeEventListener(evtType, handler);
+         },
+         registerResizeHandler: function registerResizeHandler(handler) {
+         return window.addEventListener('resize', handler);
+         },
+         deregisterResizeHandler: function deregisterResizeHandler(handler) {
+         return window.removeEventListener('resize', handler);
+         },
+         updateCssVariable: function updateCssVariable(varName, value) {
+         return instance.root_.style.setProperty(varName, value);
+         },
+         computeBoundingRect: function computeBoundingRect() {
+         return instance.root_.getBoundingClientRect();
+         },
+         getWindowPageOffset: function getWindowPageOffset() {
+         return {x: window.pageXOffset, y: window.pageYOffset};
+         }*/
+    });
 
     render() {
         const ownProps = Object.assign({}, this.props);

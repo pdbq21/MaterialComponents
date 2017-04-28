@@ -43,7 +43,6 @@ class ComponentsList extends Component {
 
     handelNavigation({target}) {
         //console.log(target.textContent);
-
         if (target.classList.contains('navigation-item')) {
             const {activeMenuItem} = this.props.mapStateReducer;
             if (target.textContent !== activeMenuItem) {
@@ -95,7 +94,7 @@ class ComponentsList extends Component {
                 return (<IconToggleComponent />);
             case 'Grid List':
                 return (<GridListComponent />);
-case 'Drawer (Persistent)':
+            case 'Drawer (Persistent)':
                 return (<PersistentDrawerComponent />);
 
             default:
@@ -145,7 +144,7 @@ case 'Drawer (Persistent)':
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Grid List') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Grid List') ? 'active' : ''} todo-lite`}>
                         Grid List
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Icon Toggle') ? 'active' : ''} todo`}>
@@ -172,7 +171,7 @@ case 'Drawer (Persistent)':
                         Snackbar
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} todo`}>
-                       Select
+                        Select
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''} todo`}>
                         Ripple

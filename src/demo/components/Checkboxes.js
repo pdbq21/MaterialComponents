@@ -14,12 +14,10 @@ export default class Checkboxes extends React.Component {
             checked: false,
             disabled: false,
             indeterminate: false
-        }
-
+        };
         this.handelIndeterminate = this.handelIndeterminate.bind(this);
         this.handelDisabled = this.handelDisabled.bind(this);
     }
-
 
     handelIndeterminate() {
         this.setState({

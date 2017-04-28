@@ -1,41 +1,6 @@
 /**
  * Created by ruslan on 13.03.17.
  */
-/*
- import React from 'react';
-
- const propTypes = {};
-
- const Checkbox = ({
- ...otherProp
- }) => {
-
- return (
- <div className={`mdc-checkbox`}
- {...otherProp}
- >
- <input
- type="checkbox"
- className="mdc-checkbox__native-control"
- />
- <div className="mdc-checkbox__background">
- <svg version="1.1"
- className="mdc-checkbox__checkmark"
- xmlns="http://www.w3.org/2000/svg"
- viewBox="0 0 24 24">
- <path className="mdc-checkbox__checkmark__path"
- fill="none"
- stroke="white"
- d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
- </svg>
- <div className="mdc-checkbox__mixedmark"></div>
- </div>
- </div>);
- };
-
- Checkbox.propTypes = propTypes;
- export default Checkbox;*/
-
 
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
@@ -65,7 +30,6 @@ const eventTypeMap = {
         webkitPrefix: 'webkitTransitionEnd',
     },
 };
-
 const cssPropertyMap = {
     animation: {
         noPrefix: 'animation',
@@ -108,7 +72,6 @@ function getCorrectEventName(windowObj, eventType) {
     if (!hasProperShape(windowObj) || !eventFoundInMaps(eventType)) {
         return eventType;
     }
-
     let map = eventType in eventTypeMap ? eventTypeMap : cssPropertyMap;
     let el = windowObj.document.createElement('div');
     let eventName = '';
@@ -118,7 +81,6 @@ function getCorrectEventName(windowObj, eventType) {
     } else {
         eventName = map[eventType].noPrefix in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
     }
-
     return eventName;
 }
 
@@ -136,7 +98,6 @@ function supportsCssVariables(windowObj) {
     if (!supportsFunctionPresent) {
         return false;
     }
-
     const explicitlySupportsCssVars = windowObj.CSS.supports("--css-vars", "yes");
     // See: https://bugs.webkit.org/show_bug.cgi?id=154669
     // See: README section on Safari
@@ -146,7 +107,6 @@ function supportsCssVariables(windowObj) {
     );
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
-
 
 class Checkbox extends PureComponent {
     static propTypes = {
@@ -231,12 +191,16 @@ class Checkbox extends PureComponent {
             return supportsCssVariables(window);
         },
         isSurfaceActive: () => this.refs.root[MATCHES](':active'),
-        addClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.concat([className])
-        })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
+        addClass: className => {
+            this.setState(({classNamesRipple}) => ({
+                classNamesRipple: classNamesRipple.concat([className])
+            }))
+        },
+        removeClass: className => {
+            this.setState(({classNamesRipple}) => ({
+                classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+            }))
+        },
         // root / nativeCb
         registerInteractionHandler: (evtType, handler) => {
             this.refs.nativeCb.addEventListener(evtType, handler);
@@ -244,23 +208,21 @@ class Checkbox extends PureComponent {
         deregisterInteractionHandler: (evtType, handler) => {
             this.refs.nativeCb.removeEventListener(evtType, handler);
         },
-        registerResizeHandler: handler => {
-            window.addEventListener('resize', handler);
+        /*registerResizeHandler: handler => {
+         window.addEventListener('resize', handler);
+         },
+         deregisterResizeHandler: handler => {
+         window.removeEventListener('resize', handler);
+         },*/
+        updateCssVariable: (varName, value) => {
+            this.setState(({rippleCss}) => ({
+                rippleCss: {
+                    ...rippleCss,
+                    [varName]: value
+                }
+            }))
         },
-        deregisterResizeHandler: handler => {
-            window.removeEventListener('resize', handler);
-        },
-
-
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
-            }
-        })),
         computeBoundingRect: () => {
-            //console.log(this.refs.root.getBoundingClientRect());
-
             const {left, top} = this.refs.root.getBoundingClientRect();
             const DIM = 40;
             //return this.refs.root.getBoundingClientRect();
@@ -273,13 +235,47 @@ class Checkbox extends PureComponent {
                 height: DIM,
             };
         },
-        getWindowPageOffset: () => {
-            return {
-                x: window.pageXOffset,
-                y: window.pageYOffset
-            }
-        },
-
+        /*getWindowPageOffset: () => {
+         return {
+         x: window.pageXOffset,
+         y: window.pageYOffset
+         }
+         },*/
+//todo below
+        /*
+         isUnbounded: function isUnbounded() {
+         return instance.unbounded;
+         },
+         isSurfaceActive: function isSurfaceActive() {
+         return instance.root_[MATCHES](':active');
+         },
+         addClass: function addClass(className) {
+         return instance.root_.classList.add(className);
+         },
+         removeClass: function removeClass(className) {
+         return instance.root_.classList.remove(className);
+         },
+         registerInteractionHandler: function registerInteractionHandler(evtType, handler) {
+         return instance.root_.addEventListener(evtType, handler);
+         },
+         deregisterInteractionHandler: function deregisterInteractionHandler(evtType, handler) {
+         return instance.root_.removeEventListener(evtType, handler);
+         },
+         registerResizeHandler: function registerResizeHandler(handler) {
+         return window.addEventListener('resize', handler);
+         },
+         deregisterResizeHandler: function deregisterResizeHandler(handler) {
+         return window.removeEventListener('resize', handler);
+         },
+         updateCssVariable: function updateCssVariable(varName, value) {
+         return instance.root_.style.setProperty(varName, value);
+         },
+         computeBoundingRect: function computeBoundingRect() {
+         return instance.root_.getBoundingClientRect();
+         },
+         getWindowPageOffset: function getWindowPageOffset() {
+         return {x: window.pageXOffset, y: window.pageYOffset};
+         }*/
     }));
 
     render() {
@@ -296,6 +292,7 @@ class Checkbox extends PureComponent {
             className,
             ...otherProp
         } = ownProps;
+        console.log(checkbox, ripple)
         return (
             <div ref="root" className={
                 classnames(
@@ -340,16 +337,11 @@ class Checkbox extends PureComponent {
     // so that proper work can be performed.
     componentDidMount() {
         this.foundation.init();
-
-        if (this.props.ripple) {
-            this.foundationRipple.init();
-        }
+        this.foundationRipple.init();
     }
 
     componentWillUnmount() {
-        if (this.props.ripple) {
-            this.foundationRipple.destroy();
-        }
+        this.foundationRipple.destroy();
         this.foundation.destroy();
     }
 
@@ -385,3 +377,38 @@ class Checkbox extends PureComponent {
 }
 
 export default Checkbox;
+
+/*
+ import React from 'react';
+
+ const propTypes = {};
+
+ const Checkbox = ({
+ ...otherProp
+ }) => {
+
+ return (
+ <div className={`mdc-checkbox`}
+ {...otherProp}
+ >
+ <input
+ type="checkbox"
+ className="mdc-checkbox__native-control"
+ />
+ <div className="mdc-checkbox__background">
+ <svg version="1.1"
+ className="mdc-checkbox__checkmark"
+ xmlns="http://www.w3.org/2000/svg"
+ viewBox="0 0 24 24">
+ <path className="mdc-checkbox__checkmark__path"
+ fill="none"
+ stroke="white"
+ d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+ </svg>
+ <div className="mdc-checkbox__mixedmark"></div>
+ </div>
+ </div>);
+ };
+
+ Checkbox.propTypes = propTypes;
+ export default Checkbox;*/
