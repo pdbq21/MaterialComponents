@@ -1,11 +1,11 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-export { default as Button } from './Button';
-export { default as Elevation } from './Elevation';
-export { default as Ripple } from './Ripple';
+export {default as Button} from './Button';
+export {default as Elevation} from './Elevation';
+export {default as Ripple} from './Ripple';
 export {
-    Card, CardHorizontalBlock, CardMedia, CardMediaItem, CardSupportingText , CardPrimary,
+    Card, CardHorizontalBlock, CardMedia, CardMediaItem, CardSupportingText, CardPrimary,
     CardPrimaryTitle, CardPrimarySubtitle, CardActions, CardActionItem
 } from './Card';
 export {
@@ -32,7 +32,7 @@ export {
     ListItemTextSecondary,
     ListItemDetail
 } from './List';
-export { FAB, FABIcon } from './FAB';
+export {FAB, FABIcon} from './FAB';
 export {
     Toolbar,
     ToolbarSection,
@@ -49,7 +49,7 @@ export {
     TextfieldLabel,
     TextfieldHelptext
 } from './Textfield';
-export { FormField } from './FormField';
+export {FormField} from './FormField';
 export {
     Radio,
     RadioInput,
@@ -74,7 +74,15 @@ export {
     PermanentToolbarSpacer,
     DrawerListItemDetail
 } from './Drawer'
-
+export {
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    DialogFooterButton,
+    DialogSurface,
+    DialogTitle
+} from './Dialog'
 /* Test Ripple Adapter */
 
-export { Adapter } from './Ripple'
+export {Adapter} from './Ripple'

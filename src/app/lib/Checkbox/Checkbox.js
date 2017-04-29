@@ -10,7 +10,7 @@ const {MDCCheckboxFoundation} = checkbox;
 
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+const {MDCRippleFoundation} = ripple;
 
 const eventTypeMap = {
     animationstart: {
@@ -184,7 +184,7 @@ class Checkbox extends PureComponent {
         isAttachedToDOM: () => Boolean(this.refs.root.parentNode),
     });
 
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+    foundationRipple = new MDCRippleFoundation({
         // for FAB this. === true \ for other component === false
         isUnbounded: () => true,
         browserSupportsCssVars: () => {
@@ -276,7 +276,7 @@ class Checkbox extends PureComponent {
          getWindowPageOffset: function getWindowPageOffset() {
          return {x: window.pageXOffset, y: window.pageYOffset};
          }*/
-    }));
+    });
 
     render() {
         // Within render, we generate the html needed to render a proper MDC-Web checkbox.

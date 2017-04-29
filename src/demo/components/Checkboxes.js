@@ -50,7 +50,7 @@ export default class Checkboxes extends React.Component {
                                   })}
                                   ripple
                         />
-                        <CheckboxLabel id="my-checkbox-label" for="my-checkbox">
+                        <CheckboxLabel id="my-checkbox-label" htmlFor="my-checkbox">
                             The checkbox is currently
                         </CheckboxLabel>
                     </div>

@@ -1,5 +1,5 @@
 /**
- * Created by ruslan on 29.03.17.
+ * Created by ruslan on 29.04.17.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,30 +8,26 @@ import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    id: PropTypes.string,
 };
-const Label = ({
+const Footer = ({
                   children,
                   className,
+                  id,
+                  elementType,
                   ...otherProp
               }) => {
-    const classes = classnames(
-        'mdc-checkbox-label', className);
+    const ElementType = elementType || 'footer';
+    const classes = classnames('mdc-dialog__footer', className);
     return (
-        <label
+        <ElementType
             className={classes}
+            id={id}
             {...otherProp}
         >
             {children}
-        </label>);
+        </ElementType>);
 };
 
-Label.propTypes = propTypes;
-export default Label;
-
-/*function Label(props) {
- const {id, children} = props;
-
- return (
- <label className="mdc-checkbox-label" id={id} htmlFor={controlId}>{children}</label>
- );
- }*/
+Footer.propTypes = propTypes;
+export default Footer;

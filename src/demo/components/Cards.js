@@ -2,7 +2,6 @@
  * Created by ruslan on 13.03.17.
  */
 import React from 'react';
-import '@material/card/dist/mdc.card.css';
 import {
     Card,
     CardHorizontalBlock,

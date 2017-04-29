@@ -95,13 +95,16 @@ export default class Radio extends PureComponent {
             return supportsCssVariables(window);
         },
         isSurfaceActive: () => this.refs.root[MATCHES](':active'),
-        addClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.concat([className])
-        })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
-        // root / nativeCb
+        addClass: className => {
+            this.setState(({classNamesRipple}) => ({
+                classNamesRipple: classNamesRipple.concat([className])
+            }))
+        },
+        removeClass: className => {
+            this.setState(({classNamesRipple}) => ({
+                classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+            }))
+        },
         registerInteractionHandler: (evtType, handler) => {
             this.child.refs.rootInput.addEventListener(evtType, handler);
         },
@@ -114,7 +117,6 @@ export default class Radio extends PureComponent {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-
         updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
             rippleCss: {
                 ...rippleCss,
@@ -122,12 +124,9 @@ export default class Radio extends PureComponent {
             }
         })),
         computeBoundingRect: () => {
-            //console.log(this.refs.root.getBoundingClientRect());
-
             const {left, top} = this.refs.root.getBoundingClientRect();
             console.log(left, top);
             const DIM = 40;
-            //return this.refs.root.getBoundingClientRect();
             return {
                 top,
                 left,

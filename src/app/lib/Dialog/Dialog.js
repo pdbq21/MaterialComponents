@@ -1,9 +1,8 @@
 /**
- * Created by ruslan on 11.04.17.
+ * Created by ruslan on 29.04.17.
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import classnames from 'classnames';
-import '@material/dialog/dist/mdc.dialog.min.css';
 import {dialog}  from 'material-components-web/dist/material-components-web';
 const {util, MDCDialogFoundation} = dialog;
 const {createFocusTrapInstance} = util;
@@ -13,12 +12,10 @@ const {
     },
 } = MDCDialogFoundation;
 
-export default class DialogTest extends Component {
-
+export default class Dialog extends PureComponent {
     static defaultProps = {
         open: false,
     };
-
     state = {
         classNames: [],
         open: false,
@@ -107,14 +104,52 @@ export default class DialogTest extends Component {
         },
     });
 
+    render() {
+        const ownProps = Object.assign({}, this.props);
+        const {
+            className,
+            elementType,
+            ...otherProp
+        } = ownProps;
+
+        const childElement = child => {
+            console.log(child);
+            if (child.type.name === 'Input') {
+                return React.cloneElement(child, {
+                    onRef: (ref) => (this.child = ref)
+                })
+            } else {
+                return child
+            }
+        };
+
+
+        let renderChildren = React.Children.map(this.props.children, childElement);
+        const ElementType = elementType || 'aside';
+        return (
+            <ElementType
+                ref="root"
+                style={{'visibility': 'hidden'}}
+                role="alertdialog"
+                aria-labelledby="my-mdc-dialog-label"
+                aria-describedby="my-mdc-dialog-description"
+                className={classnames('mdc-dialog', this.state.classNames, className)}
+                {...otherProp}
+            >
+                {renderChildren}
+                <div className="mdc-dialog__backdrop" />
+            </ElementType>
+        );
+    }
+
+    // Within the two component lifecycle methods below, we invoke the foundation's lifecycle hooks
+    // so that proper work can be performed.
     componentDidMount() {
         this.foundation.init();
     }
-
     componentWillUnmount() {
         this.foundation.destroy();
     }
-
     componentWillReceiveProps(props) {
         if (props.open !== this.state.open) {
             if (props.open) {
@@ -123,49 +158,5 @@ export default class DialogTest extends Component {
                 this.foundation.close();
             }
         }
-    }
-
-    componentDidUpdate() {
-
-    }
-
-    render() {
-        return (
-            <aside
-                ref='root'
-                style={{'visibility': 'hidden'}}
-                className={classnames('mdc-dialog', this.state.classNames)}
-                role="alertdialog"
-                aria-labelledby="my-mdc-dialog-label"
-                aria-describedby="my-mdc-dialog-description">
-                <div
-                    ref='dialogSurface'
-                    className="mdc-dialog__surface">
-                    <header className="mdc-dialog__header">
-                        <h2 id="my-mdc-dialog-label" className="mdc-dialog__header__title">
-                            Use Google's location service?
-                        </h2>
-                    </header>
-                    <section id="my-mdc-dialog-description" className="mdc-dialog__body">
-                        Let Google help apps determine location. This means sending anonymous location data to Google,
-                        even when no apps are running.
-                    </section>
-                    <footer className="mdc-dialog__footer">
-                        <button type="button"
-                                className="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">
-                            Decline
-                        </button>
-                        <button
-                            ref='acceptSelector'
-                            type="button"
-                            className="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">
-                            Accept
-                        </button>
-                    </footer>
-                </div>
-                <div className="mdc-dialog__backdrop"/>
-            </aside>
-
-        );
     }
 }
