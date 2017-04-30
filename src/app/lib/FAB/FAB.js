@@ -5,46 +5,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple as ripples}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripples;
-
-/*
-const propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    icon: PropTypes.bool,
-    mini: PropTypes.bool,
-    plain: PropTypes.bool,
-};
-const FAB = ({
-    children,
-    className,
-    elementType,
-    icon,
-    mini,
-    plain,
-    ...otherProp
-}) => {
-    const classes = classnames(
-        'mdc-fab', {
-            'material-icons': icon,
-            'mdc-fab--mini': mini,
-            'mdc-fab--plain': plain,
-        }, className);
-    const ElementType = elementType || 'button';
-    return (
-        <ElementType className={classes}
-                     {...otherProp}
-        >
-                {children}
-        </ElementType>);
-};
-
-FAB.propTypes = propTypes;
-export default FAB;
-*/
-
-
+import {ripple}  from 'material-components-web/dist/material-components-web';
+const {MDCRippleFoundation} = ripple;
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -59,7 +21,6 @@ function supportsCssVariables(windowObj) {
     if (!supportsFunctionPresent) {
         return false;
     }
-
     const explicitlySupportsCssVars = windowObj.CSS.supports("--css-vars", "yes");
     // See: https://bugs.webkit.org/show_bug.cgi?id=154669
     // See: README section on Safari
@@ -70,7 +31,7 @@ function supportsCssVariables(windowObj) {
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-class FAB extends PureComponent {
+export default class FAB extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
@@ -79,18 +40,12 @@ class FAB extends PureComponent {
         plain: PropTypes.bool,
     };
 
-    static defaultProps = {
-//empty
-    };
-
     state = {
         classNamesRipple: [],
         rippleCss: {},
-    }
+    };
 
-
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
-        // for Checkbox this. === true \ for other component === false
+    foundationRipple = new MDCRippleFoundation({
         isUnbounded: () => false,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -99,15 +54,22 @@ class FAB extends PureComponent {
         addClass: className => this.setState(({classNamesRipple}) => ({
             classNamesRipple: classNamesRipple.concat([className])
         })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
-        // root / nativeCb
+        removeClass: className => {
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
+        },
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -116,27 +78,18 @@ class FAB extends PureComponent {
             window.removeEventListener('resize', handler);
         },
 
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
             }
-        })),
+        },
         computeBoundingRect: () => {
-            //console.log(this.refs.root.getBoundingClientRect());
-            /*
-             const {left, top} = this.refs.root.getBoundingClientRect();
-             console.log(left, top);
-             const DIM = 40;*/
             return this.refs.root.getBoundingClientRect();
-            /*            return {
-             top,
-             left,
-             right: left + DIM,
-             bottom: top + DIM,
-             width: DIM,
-             height: DIM,
-             };*/
         },
         getWindowPageOffset: () => {
             return {
@@ -145,9 +98,11 @@ class FAB extends PureComponent {
             }
         },
 
-    }));
+    });
 
     render() {
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.ripple;
         const {
             children,
             className,
@@ -156,7 +111,7 @@ class FAB extends PureComponent {
             mini,
             plain,
             ...otherProp
-        } = this.props;
+        } = ownProps;
         const ElementType = elementType || 'button';
         return (
             <ElementType
@@ -193,7 +148,6 @@ class FAB extends PureComponent {
     }
 
     componentDidUpdate() {
-
         if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {
@@ -204,4 +158,38 @@ class FAB extends PureComponent {
     }
 }
 
-export default FAB;
+/*
+ const propTypes = {
+ children: PropTypes.node,
+ className: PropTypes.string,
+ icon: PropTypes.bool,
+ mini: PropTypes.bool,
+ plain: PropTypes.bool,
+ };
+ const FAB = ({
+ children,
+ className,
+ elementType,
+ icon,
+ mini,
+ plain,
+ ...otherProp
+ }) => {
+ const classes = classnames(
+ 'mdc-fab', {
+ 'material-icons': icon,
+ 'mdc-fab--mini': mini,
+ 'mdc-fab--plain': plain,
+ }, className);
+ const ElementType = elementType || 'button';
+ return (
+ <ElementType className={classes}
+ {...otherProp}
+ >
+ {children}
+ </ElementType>);
+ };
+
+ FAB.propTypes = propTypes;
+ export default FAB;
+ */

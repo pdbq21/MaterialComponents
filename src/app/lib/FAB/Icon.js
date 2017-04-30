@@ -15,8 +15,7 @@ const Icon = ({
     elementType,
     ...otherProp
 }) => {
-    const classes = classnames(
-        'mdc-fab__icon', className);
+    const classes = classnames('mdc-fab__icon', className);
     const ElementType =  elementType || 'span';
     return (
         <ElementType className={classes}

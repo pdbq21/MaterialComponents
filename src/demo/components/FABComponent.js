@@ -14,6 +14,17 @@ export default function FABComponent() {
         <div >
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
             <fieldset>
+                <legend>FAB Ripple</legend>
+                <h3>FAB Default</h3>
+                <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB mini</h3>
+                <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB plain</h3>
+                <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
+                <h3>FAB plain + mini</h3>
+                <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            </fieldset>
+            <fieldset>
                 <legend>FAB only CSS</legend>
                 <h3>FAB Default</h3>
                 <FAB icon><FABIcon>favorite</FABIcon></FAB>
@@ -34,18 +45,6 @@ export default function FABComponent() {
                 <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
                 <h3>FAB plain + mini</h3>
                 <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
-            </fieldset>
-            <fieldset>
-                <legend>FAB Ripple</legend>
-                <h3>Coming...</h3>
-                <h3>FAB Default</h3>
-                <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
-                <h3>FAB mini</h3>
-                <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
-                <h3>FAB plain</h3>
-                <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
-                <h3>FAB plain + mini</h3>
-                <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
             </fieldset>
         </div>
     );

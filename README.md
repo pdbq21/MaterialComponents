@@ -3,6 +3,7 @@
 - [+] Card
 - [+] Dialog
 - [+] Elevation
+- [+] FAB
 
 ##ToDo
 - Create Radio in lib
