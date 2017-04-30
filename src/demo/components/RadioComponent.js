@@ -7,8 +7,7 @@ import React from 'react';
 //import {default as TestRadio} from './test/Radio'
 import {
     Radio,
-    RadioInput,
-    RadioLabel
+    RadioInput
 } from '../../app/lib'
 export default class RadioComponent extends React.PureComponent {
 
@@ -37,7 +36,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 1</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 1</label>
                         <Radio
                             ripple
                             disabled={disabled}
@@ -51,7 +50,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 2</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 2</label>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -67,7 +66,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 1</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 1</label>
                         <Radio disabled={disabled}>
                             <RadioInput
                                 id="my-radio-demo"
@@ -78,7 +77,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 2</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 2</label>
                     </div>
                     <div>
                     </div>
@@ -96,7 +95,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 1</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 1</label>
                         <Radio disabled>
                             <RadioInput
                                 id="my-radio-demo"
@@ -107,7 +106,7 @@ export default class RadioComponent extends React.PureComponent {
                                 })}
                             />
                         </Radio>
-                        <RadioLabel id="my-radio-label" for="my-radio-demo">Radio 2</RadioLabel>
+                        <label id="my-radio-label" htmlFor="my-radio-demo">Radio 2</label>
                     </div>
                 </fieldset>
             </div>

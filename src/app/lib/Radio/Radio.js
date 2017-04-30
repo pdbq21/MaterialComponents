@@ -1,27 +1,6 @@
 /**
  * Created by ruslan on 14.03.17.
  */
-/*
- import React from 'react';
-
- const propTypes = {};
-
- const Radio = ({
- ...otherProp
- }) => {
-
- return (
- <div
- {...otherProp}
- >
-
- </div>);
- };
-
- Radio.propTypes = propTypes;
- export default Radio;*/
-
-
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -30,7 +9,7 @@ const {MDCRadioFoundation} = radio;
 
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+const {MDCRippleFoundation} = ripple;
 
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
@@ -88,7 +67,7 @@ export default class Radio extends PureComponent {
         }
     });
 
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+    foundationRipple = new MDCRippleFoundation({
         // for Checkbox and Radio this. === true \ for other component === false
         isUnbounded: () => true,
         browserSupportsCssVars: () => {
@@ -101,15 +80,21 @@ export default class Radio extends PureComponent {
             }))
         },
         removeClass: className => {
-            this.setState(({classNamesRipple}) => ({
-                classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-            }))
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
         },
         registerInteractionHandler: (evtType, handler) => {
-            this.child.refs.rootInput.addEventListener(evtType, handler);
+            if (this.child.refs.rootInput) {
+                this.child.refs.rootInput.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.child.refs.rootInput.removeEventListener(evtType, handler);
+            if (this.child.refs.rootInput) {
+                this.child.refs.rootInput.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -117,12 +102,16 @@ export default class Radio extends PureComponent {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
             }
-        })),
+        },
         computeBoundingRect: () => {
             const {left, top} = this.refs.root.getBoundingClientRect();
 
@@ -143,7 +132,7 @@ export default class Radio extends PureComponent {
             }
         },
 
-    }));
+    });
 
     render() {
         const ownProps = Object.assign({}, this.props);
@@ -209,7 +198,7 @@ export default class Radio extends PureComponent {
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {

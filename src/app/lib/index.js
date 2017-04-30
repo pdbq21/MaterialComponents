@@ -52,8 +52,7 @@ export {
 export {FormField} from './FormField';
 export {
     Radio,
-    RadioInput,
-    RadioLabel
+    RadioInput
 } from './Radio';
 export {
     Checkbox,
