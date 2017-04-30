@@ -125,7 +125,7 @@ export default class Radio extends PureComponent {
         })),
         computeBoundingRect: () => {
             const {left, top} = this.refs.root.getBoundingClientRect();
-            console.log(left, top);
+
             const DIM = 40;
             return {
                 top,
@@ -163,7 +163,6 @@ export default class Radio extends PureComponent {
                 return child
             }
         };
-
 
         let renderChildren = React.Children.map(this.props.children, childElement);
         return (

@@ -68,26 +68,26 @@ export default class Dialog extends PureComponent {
             }
         },
         registerSurfaceInteractionHandler: (evt, handler) => {
-            if (this.refs.dialogSurface) {
-                this.refs.dialogSurface.addEventListener(evt, handler);
+            if (this.child.refs.dialogSurface) {
+                this.child.refs.dialogSurface.addEventListener(evt, handler);
             }
         },
         deregisterSurfaceInteractionHandler: (evt, handler) => {
-            if (this.refs.dialogSurface) {
-                this.refs.dialogSurface.removeEventListener(evt, handler);
+            if (this.child.refs.dialogSurface) {
+                this.child.refs.dialogSurface.removeEventListener(evt, handler);
             }
         },
         registerDocumentKeydownHandler: handler => (document.addEventListener('keydown', handler)),
         deregisterDocumentKeydownHandler: handler => (document.removeEventListener('keydown', handler)),
         trapFocusOnSurface: () => {
-            if (this.refs.dialogSurface || this.refs.acceptSelector) {
-                const focusTrap_ = createFocusTrapInstance(this.refs.dialogSurface, this.refs.acceptSelector);
+            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector) {
+                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector);
                 focusTrap_.activate();
             }
         },
         untrapFocusOnSurface: () => {
-            if (this.refs.dialogSurface || this.refs.acceptSelector) {
-                const focusTrap_ = createFocusTrapInstance(this.refs.dialogSurface, this.refs.acceptSelector);
+            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector) {
+                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector);
                 focusTrap_.deactivate();
             }
         },
@@ -106,15 +106,18 @@ export default class Dialog extends PureComponent {
 
     render() {
         const ownProps = Object.assign({}, this.props);
+        delete ownProps.onAccept;
+        delete ownProps.onCancel;
+        delete ownProps.onClose;
+        delete ownProps.onOpen;
+        delete ownProps.open;
         const {
             className,
             elementType,
             ...otherProp
         } = ownProps;
-
         const childElement = child => {
-            console.log(child);
-            if (child.type.name === 'Input') {
+            if (child.type.name === 'Surface') {
                 return React.cloneElement(child, {
                     onRef: (ref) => (this.child = ref)
                 })
@@ -123,21 +126,17 @@ export default class Dialog extends PureComponent {
             }
         };
 
-
         let renderChildren = React.Children.map(this.props.children, childElement);
         const ElementType = elementType || 'aside';
         return (
             <ElementType
                 ref="root"
                 style={{'visibility': 'hidden'}}
-                role="alertdialog"
-                aria-labelledby="my-mdc-dialog-label"
-                aria-describedby="my-mdc-dialog-description"
                 className={classnames('mdc-dialog', this.state.classNames, className)}
                 {...otherProp}
             >
                 {renderChildren}
-                <div className="mdc-dialog__backdrop" />
+                <div className="mdc-dialog__backdrop"/>
             </ElementType>
         );
     }
@@ -147,9 +146,11 @@ export default class Dialog extends PureComponent {
     componentDidMount() {
         this.foundation.init();
     }
+
     componentWillUnmount() {
         this.foundation.destroy();
     }
+
     componentWillReceiveProps(props) {
         if (props.open !== this.state.open) {
             if (props.open) {
@@ -160,3 +161,7 @@ export default class Dialog extends PureComponent {
         }
     }
 }
+/*
+* Note:
+* this.Surface.Footer.FooterButton => this.child.child.child
+* */

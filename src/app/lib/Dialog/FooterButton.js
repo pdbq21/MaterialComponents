@@ -2,10 +2,14 @@
  * Created by ruslan on 29.04.17.
  */
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {Button} from '../../lib'
 
 export default class FooterButton extends PureComponent {
+    static propTypes = {
+        className: PropTypes.string,
+    };
 
     componentDidMount() {
         this.props.onRef(this)

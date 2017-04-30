@@ -27,6 +27,16 @@ export default class Surface extends PureComponent {
             className,
             ...otherProp
         } = ownProps;
+        const childElement = child => {
+            if (child.type.name === 'Footer') {
+                return React.cloneElement(child, {
+                    onRef: (ref) => (this.child = ref)
+                })
+            } else {
+                return child
+            }
+        };
+        let renderChildren = React.Children.map(children, childElement);
         const classes = classnames('mdc-dialog__surface', className);
         const ElementType = elementType || 'div';
         return (
@@ -35,7 +45,7 @@ export default class Surface extends PureComponent {
                 className={classes}
                 {...otherProp}
             >
-                {children}
+                {renderChildren}
             </ElementType>);
     }
 }
