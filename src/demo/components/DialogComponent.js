@@ -2,8 +2,7 @@
  * Created by ruslan on 11.04.17.
  */
 import React from 'react';
-
-import DialogTest from './test/Dialog'
+//import DialogTest from './test/Dialog'
 import {
     Dialog,
     DialogHeader,
@@ -13,56 +12,72 @@ import {
     DialogSurface,
     DialogTitle
 } from '../../app/lib'
-
+import {
+    List,
+    ListItem,
+} from '../../app/lib'
 export default class DialogComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
+            openScroll: false,
         };
 
         this.handle = this.handle.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
+        this.handleOpenScroll = this.handleOpenScroll.bind(this);
+        this.handleCloseScroll = this.handleCloseScroll.bind(this);
         this.handleAccept = this.handleAccept.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
     }
+
     setOpen(open) {
         this.setState({open});
     }
+
     handle() {
         this.setOpen(true);
     }
+
     handleOpen() {
         this.setOpen(true);
     }
+
     handleClose() {
         this.setOpen(false);
     }
-    handleAccept(){
+
+    setOpenScroll(openScroll) {
+        this.setState({openScroll});
+    }
+
+    handleScroll() {
+        this.setOpenScroll(true);
+    }
+
+    handleOpenScroll() {
+        this.setOpenScroll(true);
+    }
+
+    handleCloseScroll() {
+        this.setOpenScroll(false);
+    }
+
+    handleAccept() {
         console.log("Accept");
     }
-    handleCancel(){
+
+    handleCancel() {
         console.log("Decline");
     }
-    render() {
-        const {open} = this.state;
 
+    render() {
+        const {open, openScroll} = this.state;
         return (
             <div>
-                <fieldset>
-                    <legend>Dialog</legend>
-                    <button onClick={this.handle}>Open</button>
-                    <div>
-                        {/*<DialogTest
-                            open={open}
-                            onAccept={this.handleAccept}
-                            onCancel={this.handleCancel}
-                            onOpen={this.handleOpen}
-                            onClose={this.handleClose}
-                        />*/}
-                    </div>
-                </fieldset>
                 <fieldset>
                     <legend>Dialog</legend>
                     <button onClick={this.handle}>Open</button>
@@ -81,7 +96,42 @@ export default class DialogComponent extends React.Component {
                                     </DialogTitle>
                                 </DialogHeader>
                                 <DialogBody>
-                                    Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+                                    Let Google help apps determine location. This means sending anonymous location data
+                                    to Google, even when no apps are running.
+                                </DialogBody>
+                                <DialogFooter>
+                                    <DialogFooterButton cancel>Decline</DialogFooterButton>
+                                    <DialogFooterButton accept>Accept</DialogFooterButton>
+                                </DialogFooter>
+                            </DialogSurface>
+                        </Dialog>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Dialog with List</legend>
+                    <button onClick={this.handleScroll}>Open</button>
+                    <div>
+                        <Dialog
+                            open={openScroll}
+                            onAccept={this.handleAccept}
+                            onCancel={this.handleCancel}
+                            onOpen={this.handleOpenScroll}
+                            onClose={this.handleCloseScroll}
+                        >
+                            <DialogSurface>
+                                <DialogHeader>
+                                    <DialogTitle>
+                                        Choose?
+                                    </DialogTitle>
+                                </DialogHeader>
+                                <DialogBody scrollable>
+                                    <List>
+                                        <ListItem>Item 1</ListItem>
+                                        <ListItem>Item 2</ListItem>
+                                        <ListItem>Item 3</ListItem>
+                                        <ListItem>Item 4</ListItem>
+                                        <ListItem>Item 5</ListItem>
+                                    </List>
                                 </DialogBody>
                                 <DialogFooter>
                                     <DialogFooterButton cancel>Decline</DialogFooterButton>
@@ -94,5 +144,4 @@ export default class DialogComponent extends React.Component {
             </div>
         );
     }
-
 }
