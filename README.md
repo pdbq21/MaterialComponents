@@ -8,6 +8,7 @@
 - [+] List
 - [+] Radio
 - [+] Switch
+- [+] LayoutGrid
 
 ##ToDo
 - Create Radio in lib

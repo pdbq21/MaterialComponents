@@ -99,7 +99,6 @@ export default class SnackbarComponent extends React.Component {
                     <div>
                         <TestSnackbar
                             isOpen={isOpen}
-
                             message={this.state.valueMessage}
                             timeout={this.state.valueTimeout}
                             actionHandler={this.handelAction}

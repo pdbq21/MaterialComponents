@@ -3,8 +3,59 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import classnames from 'classnames';
+
+export default class LayoutGrid extends PureComponent {
+    static propTypes = {
+        children: PropTypes.node,
+        className: PropTypes.string,
+    };
+
+    setPropertyLayoutGrid(margin, gutter){
+        if (this.refs.root && margin){
+            this.refs.root.style.setProperty('--mdc-layout-grid-margin', margin);
+        }
+        if (this.refs.root && gutter){
+            this.refs.root.style.setProperty('--mdc-layout-grid-gutter', gutter);
+        }
+    }
+
+    componentDidMount() {
+        const {gutter, margin} = this.props;
+        this.setPropertyLayoutGrid(margin, gutter);
+    }
+    componentWillReceiveProps(props) {
+        const {gutter, margin} = props;
+        this.setPropertyLayoutGrid(margin, gutter);
+    }
+
+    render() {
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.gutter;
+        delete ownProps.margin;
+        const {
+            children,
+            className,
+            elementType,
+            ...otherProp
+        } = ownProps;
+        const ElementType = elementType || 'div';
+        return (
+            <ElementType
+                ref="root"
+                className={
+                    classnames(
+                        'mdc-layout-grid',
+                        className
+                    )}
+                {...otherProp}
+            >
+                {children}
+            </ElementType>
+        );
+    }
+}
+
 /*
  const propTypes = {
  children: PropTypes.node,
@@ -37,45 +88,3 @@ import classnames from 'classnames';
 
  LayoutGrid.propTypes = propTypes;
  export default LayoutGrid;*/
-
-
-class LayoutGrid extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-    };
-
-    componentDidMount() {
-        const {gutter, margin} = this.props;
-        ReactDOM.findDOMNode(this.refs.root).style.setProperty('--mdc-layout-grid-gutter', gutter || '16px');
-        ReactDOM.findDOMNode(this.refs.root).style.setProperty('--mdc-layout-grid-margin', margin || '16px');
-    }
-
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        delete ownProps.gutter;
-        delete ownProps.margin;
-        const {
-            children,
-            className,
-            elementType,
-            ...otherProp
-        } = ownProps;
-        const ElementType = elementType || 'div';
-        return (
-            <ElementType
-                ref="root"
-                className={
-                    classnames(
-                        'mdc-layout-grid',
-                        className
-                    )}
-                {...otherProp}
-            >
-                {children}
-            </ElementType>
-        );
-    }
-}
-
-export default LayoutGrid;
