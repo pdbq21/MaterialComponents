@@ -23,7 +23,7 @@ const Body = ({
         {
             'mdc-typography--body2': size === '2',
             'mdc-typography--body1': !size || size === '1',
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         }, className);
     return (
         <ElementType

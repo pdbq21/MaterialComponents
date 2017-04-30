@@ -23,7 +23,7 @@ const Subheading = ({
         {
             'mdc-typography--subheading2': size === '2',
             'mdc-typography--subheading1': !size || size === '1',
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         }, className);
     return (
         <ElementType

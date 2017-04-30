@@ -19,7 +19,7 @@ const Typography = ({
 }) => {
     const classes = classnames(
         'mdc-typography', {
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         }, className);
     const ElementType =  elementType || 'section';
     return (

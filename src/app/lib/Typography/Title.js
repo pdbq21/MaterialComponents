@@ -21,7 +21,7 @@ const Title = ({
     const ElementType =  elementType || 'h2';
     const classes = classnames(
         'mdc-typography--title', {
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         }, className);
     return (
         <ElementType

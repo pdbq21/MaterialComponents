@@ -4,6 +4,7 @@
 - [+] Dialog
 - [+] Elevation
 - [+] FAB
+- [+] Typography
 
 ##ToDo
 - Create Radio in lib

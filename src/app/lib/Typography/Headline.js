@@ -20,7 +20,7 @@ const Headline = ({
     const ElementType =  elementType || 'h1';
     const classes = classnames(
         'mdc-typography--headline', {
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         }, className);
     return (
         <ElementType

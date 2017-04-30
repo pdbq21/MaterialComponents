@@ -20,7 +20,7 @@ const Caption = ({
     const ElementType =  elementType || 'span';
     const classes = classnames(
         'mdc-typography--caption', {
-            'adjust-margin': adjustMargin
+            'mdc-typography--adjust-margin': adjustMargin
         }, className);
     return (
         <ElementType

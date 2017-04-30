@@ -25,7 +25,7 @@ const Display = ({
             'mdc-typography--display3': size === '3',
             'mdc-typography--display2': size === '2',
             'mdc-typography--display1': !size || size === '1',
-            'adjust-margin': adjustMargin,
+            'mdc-typography--adjust-margin': adjustMargin,
         },className);
     return (
         <ElementType
