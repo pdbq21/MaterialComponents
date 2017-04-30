@@ -3,3 +3,51 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.App fieldset>*{
+    margin: 1em;
+}
+.navigation{
+    padding: 0;
+}
+.navigation-item{
+    margin: 0.5em 0;
+    padding: 0.25em 1em;
+    background-color: aquamarine;
+    cursor: pointer;
+}
+.navigation-item:hover{
+    background-color: #63c5a4;
+    color: #f8f8f8;
+}
+
+.navigation-item.active{
+    color: crimson;
+ }
+.elevation>div{
+    width: 10em;
+    height: 6em;
+    margin: 2em;
+    display: inline-block;
+}
+.mdc-card--demo{
+    width: 350px;
+    min-height: 9em;
+}
+.layout-grid--demo .mdc-layout-grid{
+    background-color: wheat;
+}
+.layout-grid--demo .mdc-layout-grid__cell{
+    background-color: whitesmoke;
+}
+.toolbar--demo{
+    width: 20em;
+}
+.todo{
+    background-color: brown;
+    color: white;
+}
+.todo-lite{
+    background-color: coral;
+}
+
+
