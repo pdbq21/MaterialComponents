@@ -8,16 +8,14 @@ import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    forId: PropTypes.string,
 };
 const Label = ({
-    children,
-    className,
-    elementType,
-    ...otherProp
-}) => {
-    const classes = classnames(
-        'mdc-switch-label', className);
+                   children,
+                   className,
+                   elementType,
+                   ...otherProp
+               }) => {
+    const classes = classnames('mdc-switch-label', className);
     const ElementType = elementType || 'label';
     return (
         <ElementType className={classes}

@@ -16,7 +16,6 @@ const Switch = ({
     className,
     elementType,
     disabled,
-    forId,
     ...otherProp
 }) => {
     const classes = classnames(
@@ -28,10 +27,9 @@ const Switch = ({
         <ElementType className={classes}
                      {...otherProp}
         >
-            <input type="checkbox" id={forId} className="mdc-switch__native-control" disabled={disabled} />
+            {children}
             <div className="mdc-switch__background">
                 <div className="mdc-switch__knob">
-                    {children}
                 </div>
             </div>
         </ElementType>);

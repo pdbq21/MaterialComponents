@@ -7,6 +7,7 @@
 - [+] Typography
 - [+] List
 - [+] Radio
+- [+] Switch
 
 ##ToDo
 - Create Radio in lib

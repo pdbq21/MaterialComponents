@@ -6,6 +6,7 @@ import React from 'react';
 import '@material/switch/dist/mdc.switch.min.css';
 import {
     Switch,
+    SwitchInput,
     SwitchLabel
 } from '../../app/lib'
 export default function SwitchComponent() {
@@ -15,7 +16,9 @@ export default function SwitchComponent() {
             <fieldset>
                 <legend>Only CSS Switch</legend>
                 <section>
-                    <Switch forId="basic-switch"/>
+                    <Switch>
+                        <SwitchInput id="basic-switch"/>
+                    </Switch>
                     <SwitchLabel htmlFor="basic-switch">off/on</SwitchLabel>
                 </section>
 
@@ -23,7 +26,9 @@ export default function SwitchComponent() {
             <fieldset>
                 <legend>Disabled Switch</legend>
                 <section>
-                    <Switch forId="another-basic-switch" disabled/>
+                    <Switch disabled>
+                        <SwitchInput id="another-basic-switch" disabled />
+                    </Switch>
                     <SwitchLabel htmlFor="another-basic-switch">off/on</SwitchLabel>
                 </section>
 

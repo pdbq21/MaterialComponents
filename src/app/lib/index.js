@@ -41,6 +41,7 @@ export {
 } from './Toolbar';
 export {
     Switch,
+    SwitchInput,
     SwitchLabel
 } from './Switch';
 export {
