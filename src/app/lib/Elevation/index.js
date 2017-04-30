@@ -3,4 +3,4 @@
  */
 
 import '@material/elevation/dist/mdc.elevation.css';
-export { default } from './Elevation';
+export { default as Elevation } from './Elevation';

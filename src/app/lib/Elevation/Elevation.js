@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     zSpace: PropTypes.oneOfType([
@@ -12,19 +13,25 @@ const propTypes = {
     className: PropTypes.string,
 };
 const Elevation = ({
-    children,
-    zSpace,
-    className,
-    elementType,
-    ...otherProp// todo: Describe the possible properties
-}) => {
-
+                       children,
+                       zSpace,
+                       className,
+                       transition,
+                       elementType,
+                       ...otherProp
+                   }) => {
     const ElementType = elementType || 'div';
     const zSpaceNumber = zSpace || '0';////0-24 z-space
-    const classNameProp = className || '';
     return (
-        <ElementType className={`mdc-elevation--z${zSpaceNumber} ${classNameProp}`}
-                     {...otherProp}
+        <ElementType
+            className={
+                classnames(
+                    `mdc-elevation--z${zSpaceNumber}`, {
+                        'mdc-elevation-transition': transition,
+                    },
+                    className
+                )}
+            {...otherProp}
         >
             {children}
         </ElementType>);

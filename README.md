@@ -1,6 +1,8 @@
 ##Components
 - [+] Button
 - [+] Card
+- [+] Dialog
+- [+] Elevation
 
 ##ToDo
 - Create Radio in lib
