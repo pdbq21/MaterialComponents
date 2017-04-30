@@ -10,14 +10,13 @@ const propTypes = {
     className: PropTypes.string,
 };
 const Subheader = ({
-    children,
-    className,
-    elementType,
-    ...otherProp
-}) => {
-    const classes = classnames(
-        'mdc-list-group__subheader',  className);
-    const ElementType =  elementType || 'h3';
+                       children,
+                       className,
+                       elementType,
+                       ...otherProp
+                   }) => {
+    const classes = classnames('mdc-list-group__subheader', className);
+    const ElementType = elementType || 'h3';
     return (
         <ElementType className={classes}
                      {...otherProp}

@@ -8,32 +8,6 @@ import classnames from 'classnames';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import { ripple }  from 'material-components-web/dist/material-components-web';
 const {MDCRipple, MDCRippleFoundation} = ripple;
-/*
-const propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-};
-const ListItem = ({
-    children,
-    className,
-    elementType,
-    ...otherProp
-}) => {
-    const classes = classnames(
-        'mdc-list-item',  className);
-    const ElementType =  elementType || 'li';
-    return (
-        <ElementType className={classes}
-                     {...otherProp}
-        >
-            {children}
-        </ElementType>);
-};
-
-ListItem.propTypes = propTypes;
-export default ListItem;
-*/
-
 function getMatchesProperty(HTMLElementPrototype) {
     return [
         'webkitMatchesSelector', 'msMatchesSelector', 'matches',
@@ -59,7 +33,7 @@ function supportsCssVariables(windowObj) {
 }
 
 
-class ListItem extends PureComponent {
+export default class ListItem extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
@@ -68,11 +42,10 @@ class ListItem extends PureComponent {
     state = {
         classNamesRipple: [],
         rippleCss: {},
-    }
+    };
 
 
     foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
-        // for FAB this. === true \ for other component === false
         isUnbounded: () => false,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -81,15 +54,22 @@ class ListItem extends PureComponent {
         addClass: className => this.setState(({classNamesRipple}) => ({
             classNamesRipple: classNamesRipple.concat([className])
         })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
-        // root / nativeCb
+        removeClass: className => {
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
+        },
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -98,12 +78,16 @@ class ListItem extends PureComponent {
             window.removeEventListener('resize', handler);
         },
 
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
             }
-        })),
+        },
         computeBoundingRect: () => {
             return this.refs.root.getBoundingClientRect();
         },
@@ -168,4 +152,28 @@ class ListItem extends PureComponent {
     }
 }
 
-export default ListItem;
+/*
+ const propTypes = {
+ children: PropTypes.node,
+ className: PropTypes.string,
+ };
+ const ListItem = ({
+ children,
+ className,
+ elementType,
+ ...otherProp
+ }) => {
+ const classes = classnames(
+ 'mdc-list-item',  className);
+ const ElementType =  elementType || 'li';
+ return (
+ <ElementType className={classes}
+ {...otherProp}
+ >
+ {children}
+ </ElementType>);
+ };
+
+ ListItem.propTypes = propTypes;
+ export default ListItem;
+ */
