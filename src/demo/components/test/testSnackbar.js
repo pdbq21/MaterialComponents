@@ -155,35 +155,35 @@ export default class TestSnackbar extends Component {
     }
 
     componentDidMount() {
+        console.dir(this.foundation);
         this.foundation.init();
     }
 
     componentWillUnmount() {
         this.foundation.destroy();
     }
-
+    componentWillReceiveProps(props) {
+        const {
+            message,
+            actionText,
+            timeout,
+            multiline,
+            actionOnBottom,
+            actionHandler
+        } = props;
+        if (props.open !== this.state.open) {
+            if (props.open) {
+                this.foundation.open();
+            } else {
+                this.foundation.close();
+            }
+        }
+    }
     componentDidUpdate() {
         if (this.props.isOpen) {
             let drawer = new MDCSnackbar(this.refs.root);
-            const {
-                message,
-                actionText,
-                timeout,
-                multiline,
-                actionOnBottom,
-                actionHandler
-            } = this.props;
-            let data = {
-                message: message,
-                actionOnBottom: actionOnBottom,
-                multiline: multiline,
-                timeout: timeout
-            };
-            if (actionText) {
-                data.actionText = actionText;
-                data.actionHandler = actionHandler;
-            }
-            drawer.show(data);
+
+
         }
     }
 

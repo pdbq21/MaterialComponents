@@ -110,7 +110,9 @@ export {
     GridListTileSupportText,
     GridListTileIcon
 } from './GridList'
-
+export {
+    Snackbar
+} from './Snackbar'
 
 /* Test Ripple Adapter */
 

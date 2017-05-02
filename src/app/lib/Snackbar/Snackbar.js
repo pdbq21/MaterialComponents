@@ -154,6 +154,7 @@ export default class Snackbar extends PureComponent {
     }
 
     componentDidMount() {
+        console.dir(this.foundation);
         this.foundation.init();
     }
 
