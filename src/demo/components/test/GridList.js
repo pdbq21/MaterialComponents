@@ -55,15 +55,27 @@ export default class GridListTest extends Component {
                 <ul className="mdc-grid-list__tiles">
                     <li className="mdc-grid-tile">
                         <div className="mdc-grid-tile__primary">
-                            <img className="mdc-grid-tile__primary-content" alt="" src="my-image.jpg"/>
+                            <img
+                                className="mdc-grid-tile__primary-content"
+                                alt=""
+                                src="https://material-components-web.appspot.com/images/1-1.jpg"
+                            />
                         </div>
-                        <span className="mdc-grid-tile__secondary">
-        <span className="mdc-grid-tile__title">Title</span>
+                        <span
+                            className="mdc-grid-tile__secondary"
+                        >
+        <span
+            className="mdc-grid-tile__title"
+        >Title</span>
       </span>
                     </li>
                     <li className="mdc-grid-tile">
                         <div className="mdc-grid-tile__primary">
-                            <img className="mdc-grid-tile__primary-content" alt="" src="my-image.jpg"/>
+                            <img
+                                className="mdc-grid-tile__primary-content"
+                                alt=""
+                                src="https://material-components-web.appspot.com/images/1-1.jpg"
+                            />
                         </div>
                         <span className="mdc-grid-tile__secondary">
         <span className="mdc-grid-tile__title">Title</span>

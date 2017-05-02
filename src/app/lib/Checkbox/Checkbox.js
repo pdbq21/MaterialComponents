@@ -201,9 +201,11 @@ class Checkbox extends PureComponent {
             }))
         },
         removeClass: className => {
-            this.setState(({classNamesRipple}) => ({
-                classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-            }))
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
         },
         // root / nativeCb
         registerInteractionHandler: (evtType, handler) => {
@@ -219,12 +221,14 @@ class Checkbox extends PureComponent {
             window.removeEventListener('resize', handler);
         },
         updateCssVariable: (varName, value) => {
-            this.setState(({rippleCss}) => ({
-                rippleCss: {
-                    ...rippleCss,
-                    [varName]: value
-                }
-            }))
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
+            }
         },
         computeBoundingRect: () => {
             const {left, top} = this.refs.root.getBoundingClientRect();

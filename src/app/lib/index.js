@@ -91,6 +91,19 @@ export {
     DialogSurface,
     DialogTitle
 } from './Dialog'
+export {
+    GridList,
+    GridListTiles,
+    GridListTile,
+    GridListTilePrimary,
+    GridListTileContent,
+    GridListTileSecondary,
+    GridListTileTitle,
+    GridListTileSupportText,
+    GridListTileIcon
+} from 'GridLIst'
+
+
 /* Test Ripple Adapter */
 
 export {Adapter} from './Ripple'
