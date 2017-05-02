@@ -2,31 +2,35 @@
  * Created by ruslan on 12.04.17.
  */
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-class Drawer extends PureComponent {
-    static propTypes = {
-        id: PropTypes.string,
-    };
+export default class Drawer extends PureComponent {
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(null)
+    }
 
     render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.onRef;
+        const {
+            className,
+            children,
+            elementType,
+            ...otherProps
+        } = ownProps;
         const ElementType = elementType || 'nav';
+        const classes = classnames('mdc-temporary-drawer__drawer', className);
         return (
             <ElementType
-                ref="root"
-                className={
-                    classnames(
-                        'mdc-temporary-drawer__drawer',
-                        className
-                    )}
+                ref="drawer"
+                className={classes}
                 {...otherProps}
             >
                 {children}
-            </ElementType>
-        );
+            </ElementType>);
     }
 }
-
-export default Drawer;

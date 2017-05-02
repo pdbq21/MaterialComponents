@@ -21,7 +21,7 @@ import MenuComponent from '../components/MenuComponent'
 import FABComponent from '../components/FABComponent'
 import ToolbarComponent from '../components/ToolbarComponent'
 import SwitchComponent from '../components/SwitchComponent'
-import DrawerComponent from '../components/DrawerComponent'
+import DrawerComponent from '../components/DrawerTemporaryComponent'
 import TextfieldComponent from '../components/TextfieldComponent'
 import SnackbarComponent from '../components/SnackbarComponent'
 import SelectComponent from '../components/SelectComponent'
@@ -166,7 +166,7 @@ case 'Drawer Permanent Above':
                         Switch
                     </li>
                     <li
-                        className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''} todo-lite`}>
+                        className={`navigation-item ${(activeMenuItem === 'Drawer (Temporary)') ? 'active' : ''} `}>
                         Drawer (Temporary)
                     </li>
                     <li
@@ -188,7 +188,7 @@ case 'Drawer Permanent Above':
                     <li className={`navigation-item ${(activeMenuItem === 'Drawer Permanent Below') ? 'active' : ''}`}>
                         Drawer Permanent Below
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Drawer Permanent Above') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Drawer Permanent Above') ? 'active' : ''} `}>
                         Drawer Permanent Above
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Form Field') ? 'active' : ''}`}>

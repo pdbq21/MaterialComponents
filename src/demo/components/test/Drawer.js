@@ -38,8 +38,8 @@ export default class DrawerComponentTest extends Component {
                 this.setState({
                     open: true,
                 });
-                if (this.props.onOpenDrawer) {
-                    this.props.onOpenDrawer(this);
+                if (this.props.onOpen) {
+                    this.props.onOpen(this);
                 }
             }
         },
@@ -53,8 +53,8 @@ export default class DrawerComponentTest extends Component {
                 this.setState({
                     open: false,
                 });
-                if (this.props.onCloseDrawer) {
-                    this.props.onCloseDrawer(this);
+                if (this.props.onClose) {
+                    this.props.onClose(this);
                 }
             }
         },

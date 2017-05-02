@@ -2,28 +2,21 @@
  * Created by ruslan on 20.03.17.
  */
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-
-import Drawer from '../Drawer';
+import classnames from 'classnames';
 
 class Permanent extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-    };
 
     render() {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'nav';
         return (
-            <Drawer
-                permanent
+            <ElementType
                 elementType={ElementType}
-                className={className}
+                className={classnames('mdc-permanent-drawer', className)}
                 {...otherProps}
             >
                 {children}
-            </Drawer>
+            </ElementType>
         );
     }
 }

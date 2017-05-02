@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {ToolbarSpacer as Item} from '../DrawerToolbarSpacer';
+import DrawerToolbarSpacer from '../DrawerToolbarSpacer';
 
 class ToolbarSpacer extends PureComponent {
     static propTypes = {
@@ -16,14 +16,14 @@ class ToolbarSpacer extends PureComponent {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType =  elementType || 'div';
         return (
-            <Item
+            <DrawerToolbarSpacer
                 temporary
                 elementType={ElementType}
                 className={className}
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </DrawerToolbarSpacer>
         );
     }
 }

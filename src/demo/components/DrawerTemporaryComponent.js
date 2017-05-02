@@ -3,18 +3,28 @@
  */
 import React from 'react';
 
-import '@material/drawer/dist/mdc.drawer.css';
-import DrawerComponentTest from './test/Drawer'
-
+//import DrawerComponentTest from './test/Drawer'
+import {
+    DrawerTemporary,
+    TemporaryContent,
+    DrawerListItemDetail,
+    TemporaryDrawer,
+    TemporaryHeader,
+    TemporaryHeaderContent,
+    TemporaryListItem,
+    TemporaryToolbarSpacer
+} from '../../app/lib'
 export default class DrawerComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             open: false,
+            isActive: false
         };
 
         this.handle = this.handle.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
@@ -27,6 +37,10 @@ export default class DrawerComponent extends React.Component {
         this.setOpen(true);
     }
 
+    handleToggle() {
+        this.setState({isActive: !this.state.isActive});
+    }
+
     handleOpen() {
         this.setOpen(true);
     }
@@ -36,19 +50,47 @@ export default class DrawerComponent extends React.Component {
     }
 
     render() {
-        const {open} = this.state;
+        const {open, isActive} = this.state;
 
         return (
             <div>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
                 <fieldset>
                     <legend>Drawer</legend>
                     <button onClick={this.handle}>Open</button>
+                    <button onClick={this.handleToggle}>ToolbarSpacer/Header</button>
                     <div>
-                        <DrawerComponentTest
+                        <DrawerTemporary
                             open={open}
                             onOpen={this.handleOpen}
                             onClose={this.handleClose}
-                        />
+                        >
+                            <TemporaryDrawer>
+                                {(isActive) ?
+                                    <TemporaryToolbarSpacer/> :
+                                    <TemporaryHeader>
+                                        <TemporaryHeaderContent>
+                                            Header here
+                                        </TemporaryHeaderContent>
+                                    </TemporaryHeader>
+                                }
+
+                                <TemporaryContent>
+                                    <TemporaryListItem selected>
+                                        <DrawerListItemDetail start>
+                                            inbox
+                                        </DrawerListItemDetail>
+                                        Inbox
+                                    </TemporaryListItem>
+                                    <TemporaryListItem >
+                                        <DrawerListItemDetail start>
+                                            star
+                                        </DrawerListItemDetail>
+                                        Star
+                                    </TemporaryListItem>
+                                </TemporaryContent>
+                            </TemporaryDrawer>
+                        </DrawerTemporary>
                     </div>
                 </fieldset>
             </div>
