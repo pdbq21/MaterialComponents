@@ -179,9 +179,13 @@ class Checkbox extends PureComponent {
             return this.refs.nativeCb;
         },
         //this.refs.nativeCb.offsetWidth / this.refs.root.offsetWidth
-        forceLayout: () => this.refs.root.offsetWidth,
+        forceLayout: () => {
+            if (this.refs.nativeCb) {
+                return this.refs.nativeCb.offsetWidth;
+            }
+        },
         //this.refs.nativeCb / this.refs.root.parentNode
-        isAttachedToDOM: () => Boolean(this.refs.root.parentNode),
+        isAttachedToDOM: () => Boolean(this.refs.nativeCb),
     });
 
     foundationRipple = new MDCRippleFoundation({
@@ -208,12 +212,12 @@ class Checkbox extends PureComponent {
         deregisterInteractionHandler: (evtType, handler) => {
             this.refs.nativeCb.removeEventListener(evtType, handler);
         },
-        /*registerResizeHandler: handler => {
-         window.addEventListener('resize', handler);
-         },
-         deregisterResizeHandler: handler => {
-         window.removeEventListener('resize', handler);
-         },*/
+        registerResizeHandler: handler => {
+            window.addEventListener('resize', handler);
+        },
+        deregisterResizeHandler: handler => {
+            window.removeEventListener('resize', handler);
+        },
         updateCssVariable: (varName, value) => {
             this.setState(({rippleCss}) => ({
                 rippleCss: {
@@ -235,47 +239,12 @@ class Checkbox extends PureComponent {
                 height: DIM,
             };
         },
-        /*getWindowPageOffset: () => {
-         return {
-         x: window.pageXOffset,
-         y: window.pageYOffset
-         }
-         },*/
-//todo below
-        /*
-         isUnbounded: function isUnbounded() {
-         return instance.unbounded;
-         },
-         isSurfaceActive: function isSurfaceActive() {
-         return instance.root_[MATCHES](':active');
-         },
-         addClass: function addClass(className) {
-         return instance.root_.classList.add(className);
-         },
-         removeClass: function removeClass(className) {
-         return instance.root_.classList.remove(className);
-         },
-         registerInteractionHandler: function registerInteractionHandler(evtType, handler) {
-         return instance.root_.addEventListener(evtType, handler);
-         },
-         deregisterInteractionHandler: function deregisterInteractionHandler(evtType, handler) {
-         return instance.root_.removeEventListener(evtType, handler);
-         },
-         registerResizeHandler: function registerResizeHandler(handler) {
-         return window.addEventListener('resize', handler);
-         },
-         deregisterResizeHandler: function deregisterResizeHandler(handler) {
-         return window.removeEventListener('resize', handler);
-         },
-         updateCssVariable: function updateCssVariable(varName, value) {
-         return instance.root_.style.setProperty(varName, value);
-         },
-         computeBoundingRect: function computeBoundingRect() {
-         return instance.root_.getBoundingClientRect();
-         },
-         getWindowPageOffset: function getWindowPageOffset() {
-         return {x: window.pageXOffset, y: window.pageYOffset};
-         }*/
+        getWindowPageOffset: () => {
+            return {
+                x: window.pageXOffset,
+                y: window.pageYOffset
+            }
+        },
     });
 
     render() {
@@ -338,7 +307,7 @@ class Checkbox extends PureComponent {
         if (this.props.ripple) {
             this.foundationRipple.init();
         }
-        this.foundationRipple.init();
+        this.foundation.init();
     }
 
     componentWillUnmount() {

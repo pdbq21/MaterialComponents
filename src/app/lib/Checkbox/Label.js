@@ -14,8 +14,7 @@ const Label = ({
                   className,
                   ...otherProp
               }) => {
-    const classes = classnames(
-        'mdc-checkbox-label', className);
+    const classes = classnames('mdc-checkbox-label', className);
     return (
         <label
             className={classes}

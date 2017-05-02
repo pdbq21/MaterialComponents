@@ -89,7 +89,9 @@ export default class FAB extends PureComponent {
             }
         },
         computeBoundingRect: () => {
-            return this.refs.root.getBoundingClientRect();
+            if (this.refs.root) {
+                return this.refs.root.getBoundingClientRect();
+            }
         },
         getWindowPageOffset: () => {
             return {

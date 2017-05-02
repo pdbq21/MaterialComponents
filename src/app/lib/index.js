@@ -5,8 +5,16 @@ export {Button} from './Button';
 export {Elevation} from './Elevation';
 export {default as Ripple} from './Ripple';
 export {
-    Card, CardHorizontalBlock, CardMedia, CardMediaItem, CardSupportingText, CardPrimary,
-    CardPrimaryTitle, CardPrimarySubtitle, CardActions, CardActionItem
+    Card,
+    CardHorizontalBlock,
+    CardMedia,
+    CardMediaItem,
+    CardSupportingText,
+    CardPrimary,
+    CardPrimaryTitle,
+    CardPrimarySubtitle,
+    CardActions,
+    CardActionItem
 } from './Card';
 export {
     Typography,

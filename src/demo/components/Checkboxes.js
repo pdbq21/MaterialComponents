@@ -67,5 +67,4 @@ export default class Checkboxes extends React.Component {
             </div>
         );
     }
-
 }
