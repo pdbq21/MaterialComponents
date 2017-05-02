@@ -12,11 +12,12 @@ class DrawerToolbarSpacer extends PureComponent {
         className: PropTypes.string,
         temporary: PropTypes.bool,
         permanent: PropTypes.bool,
+        persistent: PropTypes.bool,
     };
 
     render() {
         const {
-            elementType, children, temporary, permanent, className,
+            elementType, children, temporary, permanent, persistent, className,
             ...otherProps
         } = this.props;
         const ElementType = elementType || 'div';
@@ -25,7 +26,9 @@ class DrawerToolbarSpacer extends PureComponent {
                 classnames(
                     {
                         'mdc-temporary-drawer__toolbar-spacer': temporary,
-                        'mdc-permanent-drawer__toolbar-spacer': permanent
+                        'mdc-permanent-drawer__toolbar-spacer': permanent,
+                        'mdc-persistent-drawer__toolbar-spacer': persistent,
+
                     },
                     className
                 )}

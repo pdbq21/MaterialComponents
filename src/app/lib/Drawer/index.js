@@ -13,6 +13,14 @@ export { Header as TemporaryHeader } from './temporary';
 export { HeaderContent as TemporaryHeaderContent } from './temporary';
 export { ListItem as TemporaryListItem } from './temporary';
 
+export { Persistent as DrawerPersistent } from './persistent';
+export { Content as PersistentContent } from './persistent';
+export { ToolbarSpacer as PersistentToolbarSpacer } from './persistent';
+export { Drawer as PersistentDrawer } from './persistent';
+export { Header as PersistentHeader } from './persistent';
+export { HeaderContent as PersistentHeaderContent } from './persistent';
+export { ListItem as PersistentListItem } from './persistent';
+
 export { Permanent as DrawerPermanent } from './permanent';
 export { Content as PermanentContent } from './permanent';
 export { List as PermanentList } from './permanent';

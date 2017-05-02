@@ -81,7 +81,14 @@ export {
     PermanentList,
     PermanentListItem,
     PermanentToolbarSpacer,
-    DrawerListItemDetail
+    DrawerListItemDetail,
+    DrawerPersistent,
+    PersistentContent,
+    PersistentToolbarSpacer,
+    PersistentDrawer,
+    PersistentHeader,
+    PersistentHeaderContent,
+    PersistentListItem
 } from './Drawer'
 export {
     Dialog,

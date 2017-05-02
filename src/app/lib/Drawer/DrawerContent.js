@@ -12,12 +12,13 @@ class DrawerContent extends PureComponent {
         className: PropTypes.string,
         temporary: PropTypes.bool,
         permanent: PropTypes.bool,
+        persistent: PropTypes.bool,
         list: PropTypes.bool,
     };
 
     render() {
         const {
-            elementType, children, className, temporary, permanent, list,
+            elementType, children, className, temporary, permanent, list, persistent,
             ...otherProps
         } = this.props;
         const ElementType = elementType || 'div';
@@ -27,6 +28,7 @@ class DrawerContent extends PureComponent {
                     {
                         'mdc-temporary-drawer__content': temporary,
                         'mdc-permanent-drawer__content': permanent,
+                        'mdc-persistent-drawer__content': persistent,
                         'mdc-list': list,
                     },
                     className

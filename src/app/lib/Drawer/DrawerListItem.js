@@ -12,7 +12,9 @@ class DrawerListItem extends PureComponent {
     };
 
     render() {
-        const {elementType, selected, temporary, permanent, children, className, ...otherProps} = this.props;
+        const {
+            elementType, selected, temporary, permanent, persistent, children, className, ...otherProps
+        } = this.props;
         const ElementType = elementType || 'a';
         return (
             <ListItem
@@ -22,6 +24,7 @@ class DrawerListItem extends PureComponent {
                         {
                             'mdc-temporary-drawer--selected': temporary && selected,
                             'mdc-permanent-drawer--selected': permanent && selected,
+                            'mdc-persistent-drawer--selected': persistent && selected,
                         },
                         className
                     )

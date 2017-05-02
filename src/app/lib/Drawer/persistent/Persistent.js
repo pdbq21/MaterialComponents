@@ -1,25 +1,28 @@
 /**
- * Created by ruslan on 12.04.17.
+ * Created by ruslan on 02.05.17.
  */
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 import {drawer}  from 'material-components-web/dist/material-components-web';
-const {util, MDCTemporaryDrawerFoundation} = drawer;
+const {util, MDCPersistentDrawerFoundation} = drawer;
 const {
+    // Determine whether the current browser supports passive event listeners, and if so, use them.
     applyPassive,
+    // Choose the correct transform property to use on the current browser.
     getTransformPropertyName,
     restoreElementTabState,
+    // Remap touch events to pointer events, if the browser doesn't support touch events.
     remapEvent,
-    saveElementTabState,
-    supportsCssCustomProperties
+    // Save the tab state for an element.
+    saveElementTabState
 } = util;
 const {
     cssClasses: {
         OPEN: OPEN_CLASS_NAME,
     }
-} = MDCTemporaryDrawerFoundation;
+} = MDCPersistentDrawerFoundation;
 
-export default class Temporary extends PureComponent {
+export default class Persistent extends PureComponent {
     static defaultProps = {
         open: false,
     };
@@ -28,7 +31,7 @@ export default class Temporary extends PureComponent {
         open: false
     };
 
-    foundation = new MDCTemporaryDrawerFoundation({
+    foundation = new MDCPersistentDrawerFoundation({
         addClass: className => {
             this.setState(({classNameDrawer}) => ({
                 classNameDrawer: classNameDrawer.concat([className])
@@ -58,13 +61,7 @@ export default class Temporary extends PureComponent {
             }
         },
         hasClass: className => (this.refs.root.classList.contains(className)),
-
-        hasNecessaryDom: () => {
-            if (this.child){
-                return Boolean(this.child.refs.drawer);
-            }
-        },
-
+        hasNecessaryDom: () => Boolean(this.child.refs.drawer),
         registerInteractionHandler: (evtType, handler) => {
             this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
         },
@@ -78,10 +75,10 @@ export default class Temporary extends PureComponent {
             this.child.refs.drawer.removeEventListener(remapEvent(evtType), handler);
         },
         registerTransitionEndHandler: handler => {
-            this.child.refs.drawer.addEventListener('transitionend', handler);
+            this.refs.root.addEventListener('transitionend', handler);
         },
         deregisterTransitionEndHandler: handler => {
-            this.child.refs.drawer.removeEventListener('transitionend', handler);
+            this.refs.root.removeEventListener('transitionend', handler);
         },
         registerDocumentKeydownHandler: handler => {
             document.addEventListener('keydown', handler);
@@ -99,12 +96,6 @@ export default class Temporary extends PureComponent {
                 return this.child.refs.drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
             }
         },
-        updateCssVariable: value => {
-            if (supportsCssCustomProperties()) {
-                this.refs.root.style.setProperty('--mdc-temporary-drawer-opacity', value);
-            }
-        },
-
         getFocusableElements: () => {
             if (this.child.refs.drawer) {
                 return this.child.refs.drawer.querySelectorAll(
@@ -123,6 +114,10 @@ export default class Temporary extends PureComponent {
         makeElementUntabbable: el => {
             return el.setAttribute('tabindex', -1);
         },
+        isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
+        isDrawer: el => {
+            return el === this.child.refs.drawer;
+        },
         notifyOpen: () => {
             if (this.props.onOpen !== null) {
                 this.props.onOpen(this);
@@ -133,10 +128,6 @@ export default class Temporary extends PureComponent {
                 this.props.onClose(this);
             }
         },
-        isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
-        isDrawer: el => {
-            return el === this.child.refs.drawer;
-        }
     });
 
     componentDidMount() {
@@ -183,7 +174,7 @@ export default class Temporary extends PureComponent {
         return (
             <ElementType
                 ref='root'
-                className={classnames('mdc-temporary-drawer', this.state.classNameDrawer, className)}
+                className={classnames('mdc-persistent-drawer', this.state.classNameDrawer, className)}
                 {...otherProp}
             >
                 {renderChildren}

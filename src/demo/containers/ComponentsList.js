@@ -29,7 +29,7 @@ import RippleComponent from '../components/RippleComponent'
 import DialogComponent from '../components/DialogComponent'
 import IconToggleComponent from '../components/IconToggleComponent'
 import GridListComponent from '../components/GridListComponent'
-import PersistentDrawerComponent from '../components/PersistentDrawerComponent'
+import PersistentDrawerComponent from '../components/DrawerPersistentComponent'
 import FormFieldComponent from '../components/FormFieldComponent'
 import DrawerPermanentBelow from '../components/DrawerPermanentBelow'
 import DrawerPermanentAbove from '../components/DrawerPermanentAbove'
@@ -170,7 +170,7 @@ case 'Drawer Permanent Above':
                         Drawer (Temporary)
                     </li>
                     <li
-                        className={`navigation-item ${(activeMenuItem === 'Drawer (Persistent)') ? 'active' : ''} todo`}>
+                        className={`navigation-item ${(activeMenuItem === 'Drawer (Persistent)') ? 'active' : ''}`}>
                         Drawer (Persistent)
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Textfield') ? 'active' : ''}`}>
