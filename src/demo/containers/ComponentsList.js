@@ -147,7 +147,7 @@ case 'Form Field':
                     <li className={`navigation-item ${(activeMenuItem === 'FAB') ? 'active' : ''}`}>
                         FAB
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Grid List') ? 'active' : ''} todo-lite`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Grid List') ? 'active' : ''} `}>
                         Grid List
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Icon Toggle') ? 'active' : ''} todo`}>

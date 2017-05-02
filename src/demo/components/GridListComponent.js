@@ -19,7 +19,6 @@ export default function GridListComponent() {
     return (
         <div className="demo-grid-list">
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-            <GridListTest/>
             <fieldset>
                 <legend>Grid List</legend>
                 <div>
