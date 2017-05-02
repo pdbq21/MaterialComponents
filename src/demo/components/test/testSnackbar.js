@@ -163,7 +163,7 @@ export default class TestSnackbar extends Component {
         this.foundation.destroy();
     }
     componentWillReceiveProps(props) {
-        const {
+        /*const {
             message,
             actionText,
             timeout,
@@ -177,13 +177,31 @@ export default class TestSnackbar extends Component {
             } else {
                 this.foundation.close();
             }
-        }
+        }*/
     }
     componentDidUpdate() {
         if (this.props.isOpen) {
-            let drawer = new MDCSnackbar(this.refs.root);
-
-
+            //let drawer = new MDCSnackbar(this.refs.root);
+            //console.log(drawer, this.foundation);
+            const {
+                message,
+                actionText,
+                timeout,
+                multiline,
+                actionOnBottom,
+                actionHandler
+            } = this.props;
+            let data = {
+                message: message,
+                actionOnBottom: actionOnBottom,
+                multiline: multiline,
+                timeout: timeout
+            };
+            if (actionText) {
+                data.actionText = actionText;
+                data.actionHandler = actionHandler;
+            }
+            this.foundation.show(data);
         }
     }
 
