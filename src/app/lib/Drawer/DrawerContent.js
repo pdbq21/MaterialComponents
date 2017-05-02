@@ -5,7 +5,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-class Content extends PureComponent {
+class DrawerContent extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
         children: PropTypes.node,
@@ -39,4 +39,4 @@ class Content extends PureComponent {
     }
 }
 
-export default Content;
+export default DrawerContent;

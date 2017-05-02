@@ -5,7 +5,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-class ToolbarSpacer extends PureComponent {
+class DrawerToolbarSpacer extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
         children: PropTypes.node,
@@ -37,4 +37,4 @@ class ToolbarSpacer extends PureComponent {
     }
 }
 
-export default ToolbarSpacer;
+export default DrawerToolbarSpacer;

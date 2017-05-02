@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {ToolbarSpacer as Item} from '../ToolbarSpacer';
+import {ToolbarSpacer as Item} from '../DrawerToolbarSpacer';
 
 class ToolbarSpacer extends PureComponent {
     static propTypes = {

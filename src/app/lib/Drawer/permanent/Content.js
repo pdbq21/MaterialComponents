@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {Content as Item} from '../Content';
+import DrawerContent from '../DrawerContent';
 
 class Content extends PureComponent {
     static propTypes = {
@@ -16,14 +16,14 @@ class Content extends PureComponent {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'div';
         return (
-            <Item
+            <DrawerContent
                 permanent
                 elementType={ElementType}
                 className={className }
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </DrawerContent>
         );
     }
 }

@@ -21,7 +21,7 @@ export default class DrawerPermanentBelow extends React.Component {
                     <div>
                         <DrawerPermanent>
                             <PermanentList>
-                                <PermanentListItem>
+                                <PermanentListItem selected>
                                     <DrawerListItemDetail icon start>
                                         inbox
                                     </DrawerListItemDetail>

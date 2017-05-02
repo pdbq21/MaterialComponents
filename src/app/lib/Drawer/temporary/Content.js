@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {Content as Item} from '../Content';
+import {Content as Item} from '../DrawerContent';
 
 class Content extends PureComponent {
     static propTypes = {
