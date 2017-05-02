@@ -13,6 +13,7 @@
 - [+] Grid List
 - [+] Drawer Permanent
 - [+] Drawer Temporary
+- [+] Drawer Persistent
 
 ##ToDo
 - Create Radio in lib
