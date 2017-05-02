@@ -4,9 +4,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {ListItem as Item} from '../index'
+import {ListItem} from '../index'
 
-class ListItem extends PureComponent {
+class DrawerListItem extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
     };
@@ -15,7 +15,7 @@ class ListItem extends PureComponent {
         const {elementType, selected, temporary, permanent, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'a';
         return (
-            <Item
+            <ListItem
                 elementType={ElementType}
                 className={
                     classnames(
@@ -29,9 +29,9 @@ class ListItem extends PureComponent {
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </ListItem>
         );
     }
 }
 
-export default ListItem;
+export default DrawerListItem;

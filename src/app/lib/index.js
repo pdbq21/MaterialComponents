@@ -79,6 +79,7 @@ export {
     DrawerPermanent,
     PermanentContent,
     PermanentList,
+    PermanentListItem,
     PermanentToolbarSpacer,
     DrawerListItemDetail
 } from './Drawer'

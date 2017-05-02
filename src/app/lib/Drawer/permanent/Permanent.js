@@ -3,6 +3,33 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
+import Drawer from '../Drawer';
+
+class Permanent extends PureComponent {
+    static propTypes = {
+        children: PropTypes.node,
+        className: PropTypes.string,
+    };
+
+    render() {
+        const {elementType, children, className, ...otherProps} = this.props;
+        const ElementType = elementType || 'nav';
+        return (
+            <Drawer
+                permanent
+                elementType={ElementType}
+                className={className}
+                {...otherProps}
+            >
+                {children}
+            </Drawer>
+        );
+    }
+}
+
+export default Permanent;
+
 /*
  const propTypes = {
  children: PropTypes.node,
@@ -27,29 +54,3 @@ import PropTypes from 'prop-types';
 
  Permanent.propTypes = propTypes;
  export default Permanent;*/
-import Drawer from '../Drawer';
-
-class Permanent extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-    };
-
-
-    render() {
-        const {elementType, children, className, ...otherProps} = this.props;
-        const ElementType = elementType || 'nav';
-        return (
-            <Drawer
-                permanent
-                elementType={ElementType}
-                className={className}
-                {...otherProps}
-            >
-                {children}
-            </Drawer>
-        );
-    }
-}
-
-export default Permanent;

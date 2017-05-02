@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {ListItem as Item} from '../ListItem';
+import DrawerListItem from '../DrawerListItem';
 
 class ListItem extends PureComponent {
     static propTypes = {
@@ -16,14 +16,14 @@ class ListItem extends PureComponent {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'a';
         return (
-            <Item
+            <DrawerListItem
                 permanent
                 elementType={ElementType}
                 className={className}
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </DrawerListItem>
         );
     }
 }

@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {ListItem as Item} from '../ListItem';
+import {ListItem as Item} from '../DrawerListItem';
 
 class ListItem extends PureComponent {
     static propTypes = {

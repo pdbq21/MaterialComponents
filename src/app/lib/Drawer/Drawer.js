@@ -5,7 +5,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-class Drawer extends PureComponent {
+export default class Drawer extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
         children: PropTypes.node,
@@ -38,5 +38,3 @@ class Drawer extends PureComponent {
         );
     }
 }
-
-export default Drawer;
