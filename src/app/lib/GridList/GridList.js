@@ -27,7 +27,7 @@ export default class Radio extends PureComponent {
         },
         setStyleForTilesElement: (property, value) => {
             if (this.refs.root) {
-                this.refs.root.querySelector('.mdc-grid-tile').style[property] = value;
+                this.refs.root.querySelector('.mdc-grid-list__tiles').style[property] = value;
             }
         },
         registerResizeHandler: handler => {

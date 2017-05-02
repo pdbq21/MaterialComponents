@@ -101,7 +101,7 @@ export {
     GridListTileTitle,
     GridListTileSupportText,
     GridListTileIcon
-} from 'GridLIst'
+} from './GridList'
 
 
 /* Test Ripple Adapter */

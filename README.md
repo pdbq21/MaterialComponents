@@ -10,6 +10,7 @@
 - [+] Switch
 - [+] LayoutGrid
 - [+] FormField
+- [+] Grid List
 
 ##ToDo
 - Create Radio in lib
