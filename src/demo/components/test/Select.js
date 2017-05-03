@@ -25,12 +25,12 @@ export default class TestSelect extends Component {
         })),
         setAttr: (attr, value) => {
             if (this.refs.root) {
-                this.refs.root.setAttribute(attr, value);
+                return this.refs.root.setAttribute(attr, value);
             }
         },
         rmAttr: attr => {
             if (this.refs.root) {
-                this.refs.root.removeAttribute(attr);
+                return this.refs.root.removeAttribute(attr);
             }
         },
         computeBoundingRect: () => {
@@ -41,39 +41,38 @@ export default class TestSelect extends Component {
 
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                this.refs.root.addEventListener(type, handler)
+                return this.refs.root.addEventListener(type, handler)
             }
         },
         deregisterInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                this.refs.root.removeEventListener(type, handler)
+                return this.refs.root.removeEventListener(type, handler)
             }
         },
         focus: () => {
             if (this.refs.root) {
-                this.refs.root.focus()
+                return this.refs.root.focus()
             }
         },
 
         makeTabbable: () => {
             if (this.refs.root) {
-                this.refs.root.tabIndex = 0;
+                return this.refs.root.tabIndex = 0;
             }
         },
         makeUntabbable: () => {
             if (this.refs.root) {
-                this.refs.root.tabIndex = -1;
+                return this.refs.root.tabIndex = -1;
             }
         },
         getComputedStyleValue: prop => {
             if (this.refs.root) {
                 return window.getComputedStyle(this.refs.root).getPropertyValue(prop);
             }
-
         },
         setStyle: (propertyName, value) => {
             if (this.refs.root) {
-                this.refs.root.style.setProperty(propertyName, value);
+                return this.refs.root.style.setProperty(propertyName, value);
             }
         },
         create2dRenderingContext: () => {
@@ -91,23 +90,23 @@ export default class TestSelect extends Component {
             }
         },
         setMenuElStyle: (propertyName, value) => {
-            if (this.refs.menu) {
-                this.refs.menu.style.setProperty(propertyName, value);
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.style.setProperty(propertyName, value);
             }
         },
         setMenuElAttr: (attr, value) => {
-            if (this.refs.menu) {
-                this.refs.menu.style.setAttribute(attr, value);
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.style.setAttribute(attr, value);
             }
         },
         rmMenuElAttr: attr => {
-            if (this.refs.menu) {
-                this.refs.menu.style.removeAttribute(attr);
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.style.removeAttribute(attr);
             }
         },
         getMenuElOffsetHeight: () => {
-            if (this.refs.menu) {
-                return this.refs.menu.offsetHeight;
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.offsetHeight;
             }
         },
 
@@ -122,7 +121,11 @@ export default class TestSelect extends Component {
                 return this.options.length;
             }
         },
-        getTextForOptionAtIndex: index => this.options[index].textContent,
+        getTextForOptionAtIndex: index => {
+            if (this.options){
+                return this.options[index].textContent
+            }
+        },
         getValueForOptionAtIndex: index => (
             this.options[index].id || this.options[index].textContent
         ),
@@ -137,15 +140,30 @@ export default class TestSelect extends Component {
         ),
         /* todo below */
 
-/*
+
+
+
         openMenu: function openMenu(focusIndex) {
-            return _this2.menu_.show({focusIndex: focusIndex});
+            return _this2.menu_.show({ focusIndex: focusIndex });
         },
         isMenuOpen: function isMenuOpen() {
             return _this2.menu_.open;
         },
 
 
+
+        getValueForOptionAtIndex: function getValueForOptionAtIndex(index) {
+            return _this2.options[index].id || _this2.options[index].textContent;
+        },
+        setAttrForOptionAtIndex: function setAttrForOptionAtIndex(index, attr, value) {
+            return _this2.options[index].setAttribute(attr, value);
+        },
+        rmAttrForOptionAtIndex: function rmAttrForOptionAtIndex(index, attr) {
+            return _this2.options[index].removeAttribute(attr);
+        },
+        getOffsetTopForOptionAtIndex: function getOffsetTopForOptionAtIndex(index) {
+            return _this2.options[index].offsetTop;
+        },
         registerMenuInteractionHandler: function registerMenuInteractionHandler(type, handler) {
             return _this2.menu_.listen(type, handler);
         },
@@ -154,7 +172,10 @@ export default class TestSelect extends Component {
         },
         notifyChange: function notifyChange() {
             return _this2.emit('MDCSelect:change', _this2);
-        },*/
+        },
+        getWindowInnerHeight: function getWindowInnerHeight() {
+            return window.innerHeight;
+        }
 
     });
 

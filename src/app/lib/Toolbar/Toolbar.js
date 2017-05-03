@@ -13,7 +13,7 @@ const {
         FLEXIBLE_ROW_SELECTOR: FLEXIBLE_ROW_SELECTOR_CLASS_NAME
     }
 } = MDCToolbarFoundation;
-export default class Menu extends PureComponent {
+export default class Toolbar extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
     };
