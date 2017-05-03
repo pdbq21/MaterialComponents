@@ -80,14 +80,14 @@ export default class Dialog extends PureComponent {
         registerDocumentKeydownHandler: handler => (document.addEventListener('keydown', handler)),
         deregisterDocumentKeydownHandler: handler => (document.removeEventListener('keydown', handler)),
         trapFocusOnSurface: () => {
-            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector) {
-                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector);
+            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector.refs.root) {
+                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector.refs.root);
                 focusTrap_.activate();
             }
         },
         untrapFocusOnSurface: () => {
-            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector) {
-                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector);
+            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector.refs.root) {
+                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector.refs.root);
                 focusTrap_.deactivate();
             }
         },
