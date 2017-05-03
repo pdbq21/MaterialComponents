@@ -13,24 +13,27 @@ const propTypes = {
     avatar: PropTypes.bool,
 };
 const List = ({
-    children,
-    className,
-    dense,
-    twoLine,
-    avatar,
-    elementType,
-    ...otherProp
-}) => {
+                  children,
+                  className,
+                  dense,
+                  twoLine,
+                  avatar,
+                  itemsRef,
+                  elementType,
+                  ...otherProp
+              }) => {
     const classes = classnames(
         'mdc-list', {
-           'mdc-list--dense': dense,
-           'mdc-list--two-line': twoLine,
-           'mdc-list--avatar-list': avatar,
+            'mdc-list--dense': dense,
+            'mdc-list--two-line': twoLine,
+            'mdc-list--avatar-list': avatar,
         }, className);
-    const ElementType =  elementType || 'ul';
+    const ElementType = elementType || 'ul';
     return (
-        <ElementType className={classes}
-                     {...otherProp}
+        <ElementType
+            ref={itemsRef || ""}
+            className={classes}
+            {...otherProp}
         >
             {children}
         </ElementType>);

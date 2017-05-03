@@ -4,34 +4,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-/*
-const propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-};
-const Anchor = ({
-    children,
-    className,
-    elementType,
-    ...otherProp
-}) => {
-    const classes = classnames(
-        'mdc-menu-anchor', className);
-    const ElementType =  elementType || 'div';
-    return (
-        <ElementType className={classes}
-                     tabindex='-1'
-                     {...otherProp}
-        >
-            {children}
-        </ElementType>);
-};
 
-Anchor.propTypes = propTypes;
-export default Anchor;*/
-
-
-class Anchor extends PureComponent {
+export default class Anchor extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
         className: PropTypes.string,
@@ -43,13 +17,10 @@ class Anchor extends PureComponent {
             ...otherProps
         } = this.props;
         const ElementType = elementType || 'div';
+        const classes = classnames('mdc-menu-anchor', className);
         return (
             <ElementType
-                className={
-                    classnames(
-                        'mdc-menu-anchor',
-                        className
-                    )}
+                className={classes}
                 {...otherProps}
             >
                 {children}
@@ -57,5 +28,3 @@ class Anchor extends PureComponent {
         );
     }
 }
-
-export default Anchor;

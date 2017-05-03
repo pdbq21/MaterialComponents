@@ -3,26 +3,26 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ListItem as Item} from '../index'
+import {ListItem} from '../index'
 
-class ListItem extends PureComponent {
+export default class MenuListItem extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
     };
 
     render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+        const {elementType, children, className, role, tabIndex, ...otherProps} = this.props;
         const ElementType = elementType || 'li';
         return (
-            <Item
+            <ListItem
                 elementType={ElementType}
                 className={className}
+                role={role || "menuitem"}
+                tabIndex={tabIndex || "0"}
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </ListItem>
         );
     }
 }
-
-export default ListItem;

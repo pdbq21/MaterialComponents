@@ -116,7 +116,12 @@ export {
     SnackbarActionWrapper,
     SnackbarActionButton
 } from './Snackbar'
-
+export {
+    SimpleMenu,
+    SimpleMenuItems,
+    SimpleMenuListItem,
+    SimpleMenuAnchor
+} from './Menu'
 /* Test Ripple Adapter */
 
 export {Adapter} from './Ripple'
