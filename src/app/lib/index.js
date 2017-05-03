@@ -43,9 +43,10 @@ export {
 export {FAB, FABIcon} from './FAB';
 export {
     Toolbar,
+    ToolbarRow,
     ToolbarSection,
     ToolbarTitle,
-    ToolbarMain
+    ToolbarMain,
 } from './Toolbar';
 export {
     Switch,
@@ -122,6 +123,9 @@ export {
     SimpleMenuListItem,
     SimpleMenuAnchor
 } from './Menu'
+export {
+    Icons
+} from './base'
 /* Test Ripple Adapter */
 
 export {Adapter} from './Ripple'
