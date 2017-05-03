@@ -11,7 +11,6 @@ class Permanent extends PureComponent {
         const ElementType = elementType || 'nav';
         return (
             <ElementType
-                elementType={ElementType}
                 className={classnames('mdc-permanent-drawer', className)}
                 {...otherProps}
             >

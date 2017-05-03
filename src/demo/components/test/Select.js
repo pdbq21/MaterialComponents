@@ -6,15 +6,178 @@ import '@material/select/dist/mdc.select.min.css';
 import {select}  from 'material-components-web/dist/material-components-web';
 const {MDCSelectFoundation} = select;
 import classnames from 'classnames';
+import '@material/menu/dist/mdc.menu.min.css';
+import {menu}  from 'material-components-web/dist/material-components-web';
+const {MDCSimpleMenuFoundation} = menu;
+import '@material/list/dist/mdc.list.min.css';
 
+let storedTransformPropertyName_;
+// Returns the name of the correct transform property to use on the current browser.
+function getTransformPropertyName(globalObj, forceRefresh = false) {
+    if (storedTransformPropertyName_ === undefined || forceRefresh) {
+        const el = globalObj.document.createElement('div');
+        storedTransformPropertyName_ = ('transform' in el.style ? 'transform' : 'webkitTransform');
+    }
+
+    return storedTransformPropertyName_;
+}
 
 export default class TestSelect extends Component {
 
     state = {
         classNames: [],
-        attrRoot: {}
-    }
-
+        classNamesMenuEl: [],
+    };
+    //this.refs.menuEl
+    foundationMenu = new MDCSimpleMenuFoundation({
+        addClass: className => this.setState(({classNamesMenuEl}) => ({
+            classNamesMenuEl: classNamesMenuEl.concat([className])
+        })),
+        removeClass: className => this.setState(({classNamesMenuEl}) => ({
+            classNamesMenuEl: classNamesMenuEl.filter(cn => cn !== className)
+        })),
+        hasClass: className => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.classList.contains(className);
+            }
+        },
+        hasNecessaryDom: () => {
+            return Boolean(this.refs.items);
+        },
+        getInnerDimensions: () => {
+            return {
+                width: this.refs.items.offsetWidth,
+                height: this.refs.items.offsetHeight
+            };
+        },
+        hasAnchor: () => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.parentElement && this.refs.menuEl.parentElement.classList.contains('mdc-menu-anchor');
+            }
+        },
+        getAnchorDimensions: () => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.parentElement.getBoundingClientRect();
+            }
+        },
+        getWindowDimensions: () => {
+            return {width: window.innerWidth, height: window.innerHeight};
+        },
+        setScale: (x, y) => {
+            if (this.refs.menuEl) {
+                this.refs.menuEl.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
+            }
+        },
+        setInnerScale: (x, y) => {
+            if (this.refs.items) {
+                this.refs.items.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
+            }
+        },
+        getNumberOfItems: () => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items.length;
+            }
+        },
+        registerInteractionHandler: (type, handler) => {
+            if (this.refs.menuEl) {
+                this.refs.menuEl.addEventListener(type, handler);
+            }
+        },
+        deregisterInteractionHandler: (type, handler) => {
+            if (this.refs.menuEl) {
+                this.refs.menuEl.removeEventListener(type, handler);
+            }
+        },
+        registerDocumentClickHandler: handler => {
+            return document.addEventListener('click', handler);
+        },
+        deregisterDocumentClickHandler: handler => {
+            return document.removeEventListener('click', handler);
+        },
+        getYParamsForItemAtIndex: index => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return {
+                    top: items[index].offsetTop,
+                    height: items[index].offsetHeight
+                };
+            }
+        },
+        setTransitionDelayForItemAtIndex: (index, value) => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].style.setProperty('transition-delay', value);
+            }
+        },
+        getIndexForEventTarget: target => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items.indexOf(target);
+            }
+        },
+        notifySelected: evtData => {
+            if (this.props.onSelected !== null) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                this.props.onSelected(this, {
+                    index: evtData.index,
+                    item: items[evtData.index]
+                });
+            }
+        },
+        notifyCancel: () => {
+            if (this.props.onCancel !== null) {
+                this.props.onCancel(this);
+            }
+        },
+        saveFocus: () => {
+            this.previousFocus_ = document.activeElement;
+        },
+        restoreFocus: () => {
+            if (this.previousFocus_) {
+                this.previousFocus_.focus();
+            }
+        },
+        isFocused: () => {
+            if (this.refs.menuEl) {
+                return document.activeElement === this.refs.menuEl;
+            }
+        },
+        focus: () => {
+            if (this.refs.menuEl) {
+                this.refs.menuEl.focus();
+            }
+        },
+        getFocusedItemIndex: () => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items.indexOf(document.activeElement);
+            }
+        },
+        focusItemAtIndex: index => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].focus();
+            }
+        },
+        isRtl: () => {
+            if (this.refs.menuEl) {
+                return getComputedStyle(this.refs.menuEl).getPropertyValue('direction') === 'rtl';
+            }
+        },
+        setTransformOrigin: origin => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.style[getTransformPropertyName(window) + '-origin'] = origin;
+            }
+        },
+        setPosition: position => {
+            this.refs.menuEl.style.left = 'left' in position ? position.left : null;
+            this.refs.menuEl.style.right = 'right' in position ? position.right : null;
+            this.refs.menuEl.style.top = 'top' in position ? position.top : null;
+            this.refs.menuEl.style.bottom = 'bottom' in position ? position.bottom : null;
+        },
+        getAccurateTime: () => window.performance.now(),
+    });
 
     foundation = new MDCSelectFoundation({
         addClass: className => this.setState(({classNames}) => ({
@@ -78,17 +241,6 @@ export default class TestSelect extends Component {
         create2dRenderingContext: () => {
             return document.createElement('canvas').getContext('2d');
         },
-
-        registerMenuInteractionHandler: (type, handler) => {
-            if (this.refs.root) {
-                this.refs.root.addEventListener(type, handler)
-            }
-        },
-        deregisterMenuInteractionHandler: (type, handler) => {
-            if (this.refs.root) {
-                this.refs.root.removeEventListener(type, handler)
-            }
-        },
         setMenuElStyle: (propertyName, value) => {
             if (this.refs.menuEl) {
                 return this.refs.menuEl.style.setProperty(propertyName, value);
@@ -96,12 +248,12 @@ export default class TestSelect extends Component {
         },
         setMenuElAttr: (attr, value) => {
             if (this.refs.menuEl) {
-                return this.refs.menuEl.style.setAttribute(attr, value);
+                return this.refs.menuEl.setAttribute(attr, value);
             }
         },
         rmMenuElAttr: attr => {
             if (this.refs.menuEl) {
-                return this.refs.menuEl.style.removeAttribute(attr);
+                return this.refs.menuEl.removeAttribute(attr);
             }
         },
         getMenuElOffsetHeight: () => {
@@ -115,73 +267,70 @@ export default class TestSelect extends Component {
                 return this.refs.selectedText.textContent = selectedTextContent;
             }
         },
-        getWindowInnerHeight: () => window.innerHeight,
+        getWindowInnerHeight: () => (window.innerHeight),
+
+        notifyChange: () => {
+            if (this.props.onChange !== null) {
+                return this.props.onChange(this);
+            }
+        },
+        openMenu: focusIndex => {
+            return this.foundationMenu.open({focusIndex: focusIndex});
+        },
+        isMenuOpen: () => {
+            return this.foundationMenu.open();
+        },
+
         getNumberOfOptions: () => {
-            if (this.options){
-                return this.options.length;
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items.length;
             }
         },
         getTextForOptionAtIndex: index => {
-            if (this.options){
-                return this.options[index].textContent
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].textContent;
             }
         },
-        getValueForOptionAtIndex: index => (
-            this.options[index].id || this.options[index].textContent
-        ),
-        setAttrForOptionAtIndex: (index, attr, value) => (
-            this.options[index].setAttribute(attr, value)
-        ),
-        rmAttrForOptionAtIndex: (index, attr) => (
-            this.options[index].removeAttribute(attr)
-        ),
-        getOffsetTopForOptionAtIndex: index => (
-            this.options[index].offsetTop
-        ),
-        /* todo below */
-
-
-
-
-        openMenu: function openMenu(focusIndex) {
-            return _this2.menu_.show({ focusIndex: focusIndex });
+        getValueForOptionAtIndex: index => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].id || items[index].textContent;
+            }
         },
-        isMenuOpen: function isMenuOpen() {
-            return _this2.menu_.open;
+        setAttrForOptionAtIndex: (index, attr, value) => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].setAttribute(attr, value);
+            }
         },
-
-
-
-        getValueForOptionAtIndex: function getValueForOptionAtIndex(index) {
-            return _this2.options[index].id || _this2.options[index].textContent;
+        rmAttrForOptionAtIndex: (index, attr) => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].removeAttribute(attr);
+            }
         },
-        setAttrForOptionAtIndex: function setAttrForOptionAtIndex(index, attr, value) {
-            return _this2.options[index].setAttribute(attr, value);
+        getOffsetTopForOptionAtIndex: index => {
+            if (this.refs.items) {
+                const items = [].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                return items[index].offsetTop;
+            }
         },
-        rmAttrForOptionAtIndex: function rmAttrForOptionAtIndex(index, attr) {
-            return _this2.options[index].removeAttribute(attr);
+        registerMenuInteractionHandler: (type, handler) => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.addEventListener(type, handler);
+            }
         },
-        getOffsetTopForOptionAtIndex: function getOffsetTopForOptionAtIndex(index) {
-            return _this2.options[index].offsetTop;
+        deregisterMenuInteractionHandler: (type, handler) => {
+            if (this.refs.menuEl) {
+                return this.refs.menuEl.removeEventListener(type, handler);
+            }
         },
-        registerMenuInteractionHandler: function registerMenuInteractionHandler(type, handler) {
-            return _this2.menu_.listen(type, handler);
-        },
-        deregisterMenuInteractionHandler: function deregisterMenuInteractionHandler(type, handler) {
-            return _this2.menu_.unlisten(type, handler);
-        },
-        notifyChange: function notifyChange() {
-            return _this2.emit('MDCSelect:change', _this2);
-        },
-        getWindowInnerHeight: function getWindowInnerHeight() {
-            return window.innerHeight;
-        }
-
     });
 
 
     render() {
-        console.log(MDCSelectFoundation);
         return (
             <div>
                 <div
@@ -194,9 +343,12 @@ export default class TestSelect extends Component {
                         ref='selectedText'
                         className="mdc-select__selected-text">Pick a food group</span>
                     <div
-                        ref='menu'
-                        className="mdc-simple-menu mdc-select__menu">
-                        <ul className="mdc-list mdc-simple-menu__items">
+                        ref='menuEl'
+                        className={classnames('mdc-simple-menu mdc-select__menu', this.state.classNamesMenuEl)}
+                        >
+                        <ul
+                            ref='items'
+                            className="mdc-list mdc-simple-menu__items">
                             <li className="mdc-list-item" role="option" id="grains" tabIndex="0">
                                 Bread, Cereal, Rice, and Pasta
                             </li>
@@ -223,10 +375,14 @@ export default class TestSelect extends Component {
     }
 
     componentDidMount() {
+        console.log(this.foundationMenu);
+        this.foundationMenu.init();
         this.foundation.init();
     }
 
     componentWillUnmount() {
+
+        this.foundationMenu.destroy();
         this.foundation.destroy();
     }
 

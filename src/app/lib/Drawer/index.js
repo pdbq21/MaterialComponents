@@ -27,4 +27,4 @@ export { List as PermanentList } from './permanent';
 export { ListItem as PermanentListItem } from './permanent';
 export { ToolbarSpacer as PermanentToolbarSpacer } from './permanent';
 
-export { default as DrawerListItemDetail } from './ListItemDetail';
+export { default as DrawerListItemDetail } from './DrawerListItemDetail';

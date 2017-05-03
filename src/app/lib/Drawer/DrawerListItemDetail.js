@@ -3,10 +3,10 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ListItemDetail as Item} from '../index'
+import {ListItemDetail} from '../index'
 
 
-class ListItemDetail extends PureComponent {
+class DrawerListItemDetail extends PureComponent {
     static propTypes = {
         id: PropTypes.string,
     };
@@ -15,7 +15,7 @@ class ListItemDetail extends PureComponent {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'i';
         return (
-            <Item
+            <ListItemDetail
                 icon
                 start
                 elementType={ElementType}
@@ -23,9 +23,9 @@ class ListItemDetail extends PureComponent {
                 {...otherProps}
             >
                 {children}
-            </Item>
+            </ListItemDetail>
         );
     }
 }
 
-export default ListItemDetail;
+export default DrawerListItemDetail;

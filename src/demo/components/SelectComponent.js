@@ -6,6 +6,24 @@ import React from 'react';
 import TestSelect from './test/Select'
 
 export default class SelectComponent extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        };
+
+        this.handleSelected = this.handleSelected.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleSelected(...e) {
+        console.log(e);
+    }
+
+    handleCancel() {
+    }
+    handleChange() {
+    }
 
     render() {
         return (
@@ -13,7 +31,11 @@ export default class SelectComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Fully-Featured Component</legend>
                     <div>
-                        <TestSelect />
+                        <TestSelect
+                            onSelected={this.handleSelected}
+                            onCancel={this.handleCancel}
+                            onChange={this.handleChange}
+                        />
                     </div>
                 </fieldset>
                 <fieldset>
