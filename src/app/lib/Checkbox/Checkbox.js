@@ -164,6 +164,7 @@ class Checkbox extends PureComponent {
             // being our foundations are designed to be adaptable enough to fit the needs of the host
             // platform.
             if (this.refs.nativeCb) {
+                console.log(this.refs);
                 this.refs.nativeCb.addEventListener('change', handler);
             }
         },

@@ -6,7 +6,11 @@ import classnames from 'classnames';
 import '@material/snackbar/dist/mdc.snackbar.min.css';
 import {snackbar}  from 'material-components-web/dist/material-components-web';
 const {MDCSnackbar, MDCSnackbarFoundation} = snackbar;
-
+const {
+    cssClasses: {
+        ACTIVE: ACTIVE_CLASS_NAME,
+    },
+} = MDCSnackbarFoundation;
 const eventTypeMap = {
     animationstart: {
         noPrefix: 'animationstart',
@@ -83,18 +87,41 @@ export default class TestSnackbar extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            classNames: []
+            classNames: [],
+            open: false
         };
 
 
         this.foundation = new MDCSnackbarFoundation({
 
-            addClass: className => this.setState(({classNames}) => ({
-                classNames: classNames.concat([className])
-            })),
-            removeClass: className => this.setState(({classNames}) => ({
-                classNames: classNames.filter(cn => cn !== className)
-            })),
+            addClass: className => {
+                this.setState(({classNames}) => ({
+                    classNames: classNames.concat([className])
+                }));
+                if (className === ACTIVE_CLASS_NAME) {
+                    this.setState({
+                        open: true,
+                    });
+                    if (this.props.onOpen) {
+                        this.props.onOpen(this);
+                    }
+                }
+            },
+            removeClass: className => {
+                this.setState(({classNames}) => ({
+                    classNames: classNames.filter(cn => cn !== className)
+                }));
+                // MDCDialog does not provide opening/closing event.
+                // But we can assume open/close by adding/removing OPEN_CLASS_NAME
+                if (className === ACTIVE_CLASS_NAME) {
+                    this.setState({
+                        open: false,
+                    });
+                    if (this.props.onClose) {
+                        this.props.onClose(this);
+                    }
+                }
+            },
             setAriaHidden: () => {
                 if (this.refs.root) {
                     this.refs.root.setAttribute('aria-hidden', 'true');
@@ -163,25 +190,31 @@ export default class TestSnackbar extends Component {
         this.foundation.destroy();
     }
     componentWillReceiveProps(props) {
-        /*const {
-            message,
-            actionText,
-            timeout,
-            multiline,
-            actionOnBottom,
-            actionHandler
-        } = props;
         if (props.open !== this.state.open) {
-            if (props.open) {
-                this.foundation.open();
-            } else {
-                this.foundation.close();
+            const {
+                message,
+                actionText,
+                timeout,
+                multiline,
+                actionOnBottom,
+                actionHandler
+            } = props;
+            let data = {
+                message: message,
+                actionOnBottom: actionOnBottom,
+                multiline: multiline,
+                timeout: timeout
+            };
+            if (actionText) {
+                data.actionText = actionText;
+                data.actionHandler = actionHandler;
             }
-        }*/
+            this.foundation.show(data);
+        }
     }
     componentDidUpdate() {
-        if (this.props.isOpen) {
-            //let drawer = new MDCSnackbar(this.refs.root);
+/*        if (this.props.isOpen) {
+            let drawer = new MDCSnackbar(this.refs.root);
             //console.log(drawer, this.foundation);
             const {
                 message,
@@ -201,8 +234,10 @@ export default class TestSnackbar extends Component {
                 data.actionText = actionText;
                 data.actionHandler = actionHandler;
             }
+            console.log(drawer, this.foundation);
             this.foundation.show(data);
-        }
+            drawer.show(data);
+        }*/
     }
 
     render() {

@@ -111,7 +111,10 @@ export {
     GridListTileIcon
 } from './GridList'
 export {
-    Snackbar
+    Snackbar,
+    SnackbarText,
+    SnackbarActionWrapper,
+    SnackbarActionButton
 } from './Snackbar'
 
 /* Test Ripple Adapter */

@@ -22,8 +22,7 @@ export default class Input extends PureComponent {
 
         const {className, ...otherProp} = this.props;
         delete otherProp.onRef;
-        const classes = classnames(
-            'mdc-radio__native-control', className);
+        const classes = classnames('mdc-radio__native-control', className);
         return (
             <input
                 ref="rootInput"

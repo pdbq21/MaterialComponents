@@ -14,6 +14,7 @@
 - [+] Drawer Permanent
 - [+] Drawer Temporary
 - [+] Drawer Persistent
+- [+] Snackbar
 
 ##ToDo
 - Create Radio in lib

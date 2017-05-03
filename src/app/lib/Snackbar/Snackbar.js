@@ -5,8 +5,12 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {snackbar}  from 'material-components-web/dist/material-components-web';
-const {MDCSnackbar, MDCSnackbarFoundation} = snackbar;
-
+const {MDCSnackbarFoundation} = snackbar;
+const {
+    cssClasses: {
+        ACTIVE: ACTIVE_CLASS_NAME,
+    },
+} = MDCSnackbarFoundation;
 const eventTypeMap = {
     animationstart: {
         noPrefix: 'animationstart',
@@ -85,15 +89,35 @@ export default class Snackbar extends PureComponent {
         super(props, context);
         this.state = {
             classNames: [],
+            open: false,
         };
         this.foundation = new MDCSnackbarFoundation({
+            addClass: className => {
+                this.setState(({classNames}) => ({
+                    classNames: classNames.concat([className])
+                }));
 
-            addClass: className => this.setState(({classNames}) => ({
-                classNames: classNames.concat([className])
-            })),
-            removeClass: className => this.setState(({classNames}) => ({
-                classNames: classNames.filter(cn => cn !== className)
-            })),
+                if (className === ACTIVE_CLASS_NAME) {
+                    this.setState({
+                        open: true,
+                    });
+                }
+            },
+            removeClass: className => {
+                this.setState(({classNames}) => ({
+                    classNames: classNames.filter(cn => cn !== className)
+                }));
+                // MDCDialog does not provide opening/closing event.
+                // But we can assume open/close by adding/removing OPEN_CLASS_NAME
+                if (className === ACTIVE_CLASS_NAME) {
+                    this.setState({
+                        open: false,
+                    });
+                    if (this.props.onClose) {
+                        this.props.onClose(this);
+                    }
+                }
+            },
             setAriaHidden: () => {
                 if (this.refs.root) {
                     this.refs.root.setAttribute('aria-hidden', 'true');
@@ -104,57 +128,50 @@ export default class Snackbar extends PureComponent {
                     this.refs.root.removeAttribute('aria-hidden');
                 }
             },
-
             setMessageText: text => {
-                if (this.refs.text) {
-                    this.refs.text.textContent = text;
+                if (this.child.Text.refs.text) {
+                    return this.child.Text.refs.text.textContent = text;
                 }
             },
             setActionText: text => {
-                if (this.refs.button) {
-                    this.refs.button.textContent = text;
+                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
+                    return this.child.ActionWrapper.child.refs.actionButton.refs.root.textContent = text;
                 }
             },
-
             setActionAriaHidden: () => {
-                if (this.refs.button) {
-                    this.refs.button.setAttribute('aria-hidden', 'true');
+                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
+                    this.child.ActionWrapper.child.refs.actionButton.refs.root.setAttribute('aria-hidden', 'true');
                 }
             },
             unsetActionAriaHidden: () => {
-                if (this.refs.button) {
-                    this.refs.button.removeAttribute('aria-hidden');
+                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
+                    this.child.ActionWrapper.child.refs.actionButton.refs.root.removeAttribute('aria-hidden');
                 }
             },
-
-
             registerActionClickHandler: handler => {
-                if (this.refs.button) {
-                    this.refs.button.addEventListener('click', handler);
+                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
+                    this.child.ActionWrapper.child.refs.actionButton.refs.root.addEventListener('click', handler);
                 }
             },
             deregisterActionClickHandler: handler => {
-                if (this.refs.button) {
-                    this.refs.button.removeEventListener('click', handler);
+                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
+                    this.child.ActionWrapper.child.refs.actionButton.refs.root.removeEventListener('click', handler);
                 }
             },
-
-            registerTransitionEndHandler: function registerTransitionEndHandler(handler) {
+            registerTransitionEndHandler: handler => {
                 if (this.refs.root) {
                     this.refs.root.addEventListener(getCorrectEventName(window, 'transitionend'), handler);
                 }
             },
-            deregisterTransitionEndHandler: function deregisterTransitionEndHandler(handler) {
+            deregisterTransitionEndHandler: handler => {
                 if (this.refs.root) {
                     this.refs.root.removeEventListener(getCorrectEventName(window, 'transitionend'), handler);
                 }
             }
-
         });
     }
 
     componentDidMount() {
-        console.dir(this.foundation);
         this.foundation.init();
     }
 
@@ -162,9 +179,8 @@ export default class Snackbar extends PureComponent {
         this.foundation.destroy();
     }
 
-    componentDidUpdate() {
-        if (this.props.isOpen) {
-            let drawer = new MDCSnackbar(this.refs.root);
+    componentWillReceiveProps(props) {
+        if (props.open !== this.state.open) {
             const {
                 message,
                 actionText,
@@ -172,7 +188,7 @@ export default class Snackbar extends PureComponent {
                 multiline,
                 actionOnBottom,
                 actionHandler
-            } = this.props;
+            } = props;
             let data = {
                 message: message,
                 actionOnBottom: actionOnBottom,
@@ -183,7 +199,7 @@ export default class Snackbar extends PureComponent {
                 data.actionText = actionText;
                 data.actionHandler = actionHandler;
             }
-            drawer.show(data);
+            this.foundation.show(data);
         }
     }
 
@@ -195,23 +211,39 @@ export default class Snackbar extends PureComponent {
         delete ownProps.multiline;
         delete ownProps.actionOnBottom;
         delete ownProps.actionHandler;
+        delete ownProps.open;
+        delete ownProps.onClose;
         const {
             elementType,
             className,
+            children,
             ...otherProp
         } = ownProps;
         const ElementType = elementType || 'div';
+
+        const childElement = child => {
+            if (child.type.name === 'Text' || 'ActionWrapper') {
+                return React.cloneElement(child, {
+                    onRef: (ref) => {
+                        this.child = Object.assign({}, this.child);
+                        return this.child[child.type.name] = ref;
+                    }
+                })
+            } else {
+                return child
+            }
+        };
+
+        let renderChildren = React.Children.map(children, childElement);
         return (
-            <ElementType ref='root'
-                 className={classnames('mdc-snackbar', this.state.classNames, className)}
-                 aria-live="assertive"
-                 aria-atomic="true"
-                         {...otherProp}
+            <ElementType
+                ref='root'
+                className={classnames('mdc-snackbar', this.state.classNames, className)}
+                aria-live="assertive"
+                aria-atomic="true"
+                {...otherProp}
             >
-                <div ref='text' className="mdc-snackbar__text"/>
-                <div className="mdc-snackbar__action-wrapper">
-                    <button type="button" ref='button' className="mdc-button mdc-snackbar__action-button"/>
-                </div>
+                {renderChildren}
             </ElementType>
 
         );

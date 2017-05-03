@@ -2,21 +2,29 @@
  * Created by ruslan on 27.03.17.
  */
 import React from 'react';
-import TestSnackbar from './test/testSnackbar'
+//import TestSnackbar from './test/testSnackbar'
+
+import {
+    Snackbar,
+    SnackbarText,
+    SnackbarActionWrapper,
+    SnackbarActionButton
+} from '../../app/lib'
 export default class SnackbarComponent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
+            open: false,
             checkedMultiline: false,
             checkedAction: false,
-            valueMessage: '',
-            valueAction: '',
+            valueMessage: 'default message',
+            valueAction: 'action',
             valueTimeout: '2750',//default
         };
 
         this.handel = this.handel.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.handelAction = this.handelAction.bind(this);
         this.handleChangeMessage = this.handleChangeMessage.bind(this);
         this.handleChangeAction = this.handleChangeAction.bind(this);
@@ -28,7 +36,7 @@ export default class SnackbarComponent extends React.Component {
 
     handel() {
         this.setState({
-            isOpen: !this.state.isOpen
+            open: !this.state.open
         })
     }
 
@@ -65,9 +73,14 @@ export default class SnackbarComponent extends React.Component {
     handelAction() {
         console.log('action')
     }
+    handleClose() {
+        this.setState({
+            open: false
+        })
+    }
 
     render() {
-        const {isOpen} = this.state;
+        const {open} = this.state;
         return (
             <div >
                 <fieldset>
@@ -97,15 +110,35 @@ export default class SnackbarComponent extends React.Component {
 
                     <button onClick={this.handel}>Open</button>
                     <div>
-                        <TestSnackbar
-                            isOpen={isOpen}
+                        {/*<TestSnackbar
+                            open={open}
                             message={this.state.valueMessage}
                             timeout={this.state.valueTimeout}
                             actionHandler={this.handelAction}
                             actionText={this.state.valueAction}
                             multiline={this.state.checkedMultiline}
                             actionOnBottom={this.state.checkedAction}
-                        />
+
+                            onOpen={this.handleOpen}
+                            onClose={this.handleClose}
+                        />*/}
+                    </div>
+                    <div>
+                        <Snackbar
+                            open={open}
+                            message={this.state.valueMessage}
+                            timeout={this.state.valueTimeout}
+                            actionHandler={this.handelAction}
+                            actionText={this.state.valueAction}
+                            multiline={this.state.checkedMultiline}
+                            actionOnBottom={this.state.checkedAction}
+                            onClose={this.handleClose}
+                        >
+                            <SnackbarText/>
+                            <SnackbarActionWrapper>
+                                <SnackbarActionButton/>
+                            </SnackbarActionWrapper>
+                        </Snackbar>
                     </div>
                 </fieldset>
             </div>
