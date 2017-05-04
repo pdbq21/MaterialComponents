@@ -16,7 +16,7 @@ export default class SelectComponent extends React.PureComponent {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    handleSelected(...e) {
+    handleSelected(e) {
         console.log(e);
     }
 

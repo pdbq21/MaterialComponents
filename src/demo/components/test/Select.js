@@ -8,7 +8,7 @@ const {MDCSelectFoundation} = select;
 import classnames from 'classnames';
 import '@material/menu/dist/mdc.menu.min.css';
 import {menu}  from 'material-components-web/dist/material-components-web';
-const {MDCSimpleMenuFoundation} = menu;
+const {MDCSimpleMenu, MDCSimpleMenuFoundation} = menu;
 import '@material/list/dist/mdc.list.min.css';
 
 let storedTransformPropertyName_;
@@ -29,7 +29,10 @@ export default class TestSelect extends Component {
         classNamesMenuEl: [],
     };
     //this.refs.menuEl
-    foundationMenu = new MDCSimpleMenuFoundation({
+
+    menuFactory = (el) => new MDCSimpleMenu(el);
+    menu_ = this.menuFactory(this.refs.root.querySelector('.mdc-select__menu'));
+    /*foundationMenu = new MDCSimpleMenuFoundation({
         addClass: className => this.setState(({classNamesMenuEl}) => ({
             classNamesMenuEl: classNamesMenuEl.concat([className])
         })),
@@ -177,7 +180,7 @@ export default class TestSelect extends Component {
             this.refs.menuEl.style.bottom = 'bottom' in position ? position.bottom : null;
         },
         getAccurateTime: () => window.performance.now(),
-    });
+    });*/
 
     foundation = new MDCSelectFoundation({
         addClass: className => this.setState(({classNames}) => ({
@@ -274,7 +277,7 @@ export default class TestSelect extends Component {
                 return this.props.onChange(this);
             }
         },
-        openMenu: focusIndex => {
+/*        openMenu: focusIndex => {
             return this.foundationMenu.open({focusIndex: focusIndex});
         },
         isMenuOpen: () => {
@@ -326,7 +329,42 @@ export default class TestSelect extends Component {
             if (this.refs.menuEl) {
                 return this.refs.menuEl.removeEventListener(type, handler);
             }
+        },*/
+
+
+
+        openMenu: (focusIndex) => {
+            return this.menu_.show({ focusIndex: focusIndex });
         },
+        isMenuOpen: () => {
+            return this.menu_.open;
+        },
+//items
+        getNumberOfOptions: () => {
+            return this.menu_.items.length;
+        },
+        getTextForOptionAtIndex:  (index) => {
+            return this.menu_.items[index].textContent;
+        },
+        getValueForOptionAtIndex: (index) => {
+            return this.menu_.items[index].id || this.menu_.items[index].textContent;
+        },
+        setAttrForOptionAtIndex:  (index, attr, value) => {
+            return this.menu_.items[index].setAttribute(attr, value);
+        },
+        rmAttrForOptionAtIndex:  (index, attr) => {
+            return this.menu_.items[index].removeAttribute(attr);
+        },
+        getOffsetTopForOptionAtIndex:  (index) => {
+            return this.menu_.items[index].offsetTop;
+        },
+        registerMenuInteractionHandler: (type, handler) => {
+            return this.menu_.listen(type, handler);
+        },
+        deregisterMenuInteractionHandler: (type, handler) => {
+            return this.menu_.unlisten(type, handler);
+        },
+
     });
 
 
@@ -376,13 +414,13 @@ export default class TestSelect extends Component {
 
     componentDidMount() {
         console.log(this.foundationMenu);
-        this.foundationMenu.init();
+       // this.foundationMenu.init();
         this.foundation.init();
     }
 
     componentWillUnmount() {
 
-        this.foundationMenu.destroy();
+       // this.foundationMenu.destroy();
         this.foundation.destroy();
     }
 
