@@ -124,6 +124,9 @@ export {
     SimpleMenuAnchor
 } from './Menu'
 export {
+    IconToggle
+} from './IconToggle'
+export {
     Icons
 } from './base'
 /* Test Ripple Adapter */

@@ -1,18 +1,15 @@
 /**
- * Created by ruslan on 13.04.17.
+ * Created by ruslan on 04.05.17.
  */
-/**
- * Created by ruslan on 12.04.17.
- */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import '@material/icon-toggle/dist/mdc.icon-toggle.min.css';
 import {iconToggle}  from 'material-components-web/dist/material-components-web';
 const {MDCIconToggleFoundation} = iconToggle;
 import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+import {ripple} from 'material-components-web/dist/material-components-web';
+const {MDCRippleFoundation} = ripple;
 const {
     strings: {
         ARIA_LABEL,
@@ -46,10 +43,13 @@ function supportsCssVariables(windowObj) {
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-export default class IconToggleComponentTest extends Component {
+
+export default class Menu extends PureComponent {
+    static propTypes = {
+        children: PropTypes.node,
+    };
 
     state = {
-        classes: [],
         classNamesRipple: [],
         rippleCss: {},
     };
@@ -59,12 +59,6 @@ export default class IconToggleComponentTest extends Component {
         return sel ? this.refs.root.querySelector(sel) : this.refs.root;
     };
     foundation = new MDCIconToggleFoundation({
-        /*addClass: className => this.setState(({classes}) => ({
-         classes: classes.concat([className])
-         })),
-         removeClass: className => this.setState(({classes}) => ({
-         classes: classes.filter(cn => cn !== className)
-         })),*/
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
                 this.refs.root.addEventListener(type, handler);
@@ -75,11 +69,6 @@ export default class IconToggleComponentTest extends Component {
                 this.refs.root.removeEventListener(type, handler);
             }
         },
-        /*setText: text => {
-         if (this.refs.root) {
-         this.refs.root.textContent = text;
-         }
-         },*/
         getTabIndex: () => {
             if (this.refs.root) {
                 return this.refs.root.tabIndex;
@@ -105,13 +94,11 @@ export default class IconToggleComponentTest extends Component {
                 this.refs.root.removeAttribute(name);
             }
         },
-
         notifyChange: evtData => {
             if (this.props.onChange !== null) {
                 this.props.onChange(evtData);
             }
         },
-
         addClass: className => {
             const iconEl_ = this.iconEl_();
             return iconEl_.classList.add(className);
@@ -120,7 +107,6 @@ export default class IconToggleComponentTest extends Component {
             const iconEl_ = this.iconEl_();
             return iconEl_.classList.remove(className);
         },
-
         setText: text => {
             const iconEl_ = this.iconEl_();
             return iconEl_.textContent = text;
@@ -128,8 +114,7 @@ export default class IconToggleComponentTest extends Component {
     });
 
 
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
-        // for FAB this. === true \ for other component === false
+    foundationRipple = new MDCRippleFoundation({
         isUnbounded: () => true,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -138,15 +123,22 @@ export default class IconToggleComponentTest extends Component {
         addClass: className => this.setState(({classNamesRipple}) => ({
             classNamesRipple: classNamesRipple.concat([className])
         })),
-        removeClass: className => this.setState(({classNamesRipple}) => ({
-            classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-        })),
-        // root / nativeCb
+        removeClass: className => {
+            if (this.refs.root) {
+                this.setState(({classNamesRipple}) => ({
+                    classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+                }))
+            }
+        },
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(evtType, handler);
+            if (this.refs.root) {
+                this.refs.root.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -154,12 +146,16 @@ export default class IconToggleComponentTest extends Component {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-        updateCssVariable: (varName, value) => this.setState(({rippleCss}) => ({
-            rippleCss: {
-                ...rippleCss,
-                [varName]: value
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                this.setState(({rippleCss}) => ({
+                    rippleCss: {
+                        ...rippleCss,
+                        [varName]: value
+                    }
+                }))
             }
-        })),
+        },
         computeBoundingRect: () => {
             const {left, top} = this.refs.root.getBoundingClientRect();
             const DIM = 48;
@@ -179,14 +175,13 @@ export default class IconToggleComponentTest extends Component {
             }
         },
 
-    }));
+    });
 
     componentDidMount() {
         this.foundation.init();
         if (this.props.ripple) {
             this.foundationRipple.init();
         }
-
     }
 
     componentWillUnmount() {
@@ -260,59 +255,44 @@ export default class IconToggleComponentTest extends Component {
     }
 
     render() {
-        console.log(this.foundation);
         const ownProps = Object.assign({}, this.props);
         delete ownProps.ripple;
         delete ownProps.toggle;
+        delete ownProps.onChange;
         const {
+            elementType,
             className,
+            children,
+            role,
+            tabIndex,
+            icon,
+            primary,
+            accent,
+            disabled,
             ...otherProp
         } = ownProps;
-/*        return (
-            <i
-                ref='root'
-                className={
-                    classnames(
-                        'mdc-icon-toggle material-icons',
-                        this.state.classes,
-                        this.state.classNamesRipple,
-                        className
-                    )}
-                role="button" aria-pressed="false"
-                aria-label="Add to favorites" tabIndex="0"
-                data-toggle-on='{"label": "Remove from favorites", "content": "favorite"}'
-                data-toggle-off='{"label": "Add to favorites", "content": "favorite_border"}'
-                {...otherProp}
-            >
-                favorite_border
-            </i>
-        );*/
+        const ElementType = elementType || 'i';
+        const classes = classnames(
+            'mdc-icon-toggle',
+            {
+                'material-icons': icon,
+                'mdc-icon-toggle--primary': primary,
+                'mdc-icon-toggle--accent': accent,
+                'mdc-icon-toggle--disabled': disabled,
+            },
+            this.state.classNamesRipple,
+            className
+        );
         return (
-            <span
+            <ElementType
                 ref='root'
-                className={
-                    classnames(
-                        'mdc-icon-toggle',
-                        this.state.classes,
-                        this.state.classNamesRipple,
-                        className
-                    )}
-                role="button"
-                aria-pressed="false"
-                aria-label="Star this item"
-                tabIndex="0"
-                data-icon-inner-selector=".fa"
-                data-toggle-on='{"cssClass": "fa-star", "label": "Unstar this item"}'
-                data-toggle-off='{"cssClass": "fa-star-o", "label": "Star this item"}'
+                className={classes}
+                role={role || "button"}
+                tabIndex={tabIndex || "0"}
                 {...otherProp}
             >
-  <i
-      className="fa fa-star-o"
-      aria-hidden="true"
-  />
-</span>
-
-
+                {children}
+            </ElementType>
         );
     }
 }
