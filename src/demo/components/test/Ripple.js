@@ -2,18 +2,13 @@
  * Created by ruslan on 30.03.17.
  */
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple as test}  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = test;
+const {MDCRippleFoundation} = test;
 import classnames from 'classnames';
 import '@material/fab/dist/mdc.fab.min.css';
-
-export default function (props) {
-    return (
-        <RippleSelect />
-    )
-}
 
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -23,7 +18,7 @@ function getMatchesProperty(HTMLElementPrototype) {
 
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
 
-export function supportsCssVariables(windowObj) {
+function supportsCssVariables(windowObj) {
     const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === "function";
     if (!supportsFunctionPresent) {
         return false;
@@ -39,7 +34,7 @@ export function supportsCssVariables(windowObj) {
     return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-class RippleSelect extends Component {
+export default class RippleSelect extends Component {
     static propTypes = {
         id: PropTypes.string,
     }
@@ -52,9 +47,9 @@ class RippleSelect extends Component {
     }
 
 
-    foundation = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+    foundation = new MDCRippleFoundation({
         // for FAB this. === true \ for other component === false
-        isUnbounded: () => true,
+/*        isUnbounded: () => true,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
         },
@@ -91,7 +86,7 @@ class RippleSelect extends Component {
              const {left, top} = this.refs.root.getBoundingClientRect();
              console.log(left, top);
              const DIM = 40;
-            /*return this.refs.root.getBoundingClientRect();*/
+            /!*return this.refs.root.getBoundingClientRect();*!/
             return {
                 top,
                 left,
@@ -106,32 +101,66 @@ class RippleSelect extends Component {
                 x: window.pageXOffset,
                 y: window.pageYOffset
             }
+        },*/
+
+/*
+
+        browserSupportsCssVars: () => {
+            return supportsCssVariables(window);
         },
 
-    }));
+        isUnbounded: function isUnbounded() {
+            return instance.unbounded;
+        },
+        isSurfaceActive: function isSurfaceActive() {
+            return instance.root_[MATCHES](':active');
+        },
+        addClass: function addClass(className) {
+            return instance.root_.classList.add(className);
+        },
+        removeClass: function removeClass(className) {
+            return instance.root_.classList.remove(className);
+        },
+        registerInteractionHandler: function registerInteractionHandler(evtType, handler) {
+            return instance.root_.addEventListener(evtType, handler);
+        },
+        deregisterInteractionHandler: function deregisterInteractionHandler(evtType, handler) {
+            return instance.root_.removeEventListener(evtType, handler);
+        },
+        registerResizeHandler: function registerResizeHandler(handler) {
+            return window.addEventListener('resize', handler);
+        },
+        deregisterResizeHandler: function deregisterResizeHandler(handler) {
+            return window.removeEventListener('resize', handler);
+        },
+        updateCssVariable: function updateCssVariable(varName, value) {
+            return instance.root_.style.setProperty(varName, value);
+        },
+        computeBoundingRect: function computeBoundingRect() {
+            return instance.root_.getBoundingClientRect();
+        },
+        getWindowPageOffset: function getWindowPageOffset() {
+            return { x: window.pageXOffset, y: window.pageYOffset };
+        }
+*/
+    });
 
 
     render() {
-        // console.log(test, MDCRippleFoundation);
         return (
             <div
                 ref="root"
                 className={
-                    classnames('material-icons','mdc-ripple-surface', this.state.classNames)
-                }
-                aria-label="Favorite"
-                data-mdc-ripple-is-unbounded
-                tabIndex="0"
-
-            >
-
-                favorite
-
+                    classnames('mdc-ripple-surface', this.state.classNames)
+                }>
+                {this.props.children}
             </div>
         );
     }
 
     componentDidMount() {
+            console.log(this.props.children);
+
         this.foundation.init();
     }
 
@@ -139,7 +168,8 @@ class RippleSelect extends Component {
         this.foundation.destroy();
     }
 
-    componentDidUpdate(props) {
+    componentDidUpdate() {
+
         if (this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {

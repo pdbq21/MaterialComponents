@@ -3,8 +3,8 @@
  */
 import React from 'react';
 
-import {default as TestRipple} from './test/Ripple'
-
+import RippleSelect from './test/Ripple'
+import {Elevation} from '../../app/lib'
 export default class RippleComponent extends React.PureComponent {
 
     render() {
@@ -14,7 +14,9 @@ export default class RippleComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Ripple Component</legend>
                     <div>
-                        <TestRipple />
+                        <RippleSelect>
+                            <Elevation zSpace="2" style={{'wight': '20em', 'height': '20em'}} />
+                        </RippleSelect>
                     </div>
                 </fieldset>
                 <fieldset>
