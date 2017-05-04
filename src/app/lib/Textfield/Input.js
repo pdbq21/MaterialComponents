@@ -2,7 +2,6 @@
  * Created by ruslan on 20.03.17.
  */
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /*
@@ -31,10 +30,6 @@ import classnames from 'classnames';
  export default Input;*/
 
 export default class Input extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-    };
-
     componentDidMount() {
         this.props.onRef(this)
     }
@@ -44,23 +39,24 @@ export default class Input extends PureComponent {
     }
 
     render() {
+        const ownProps = Object.assign({}, this.props);
+        delete ownProps.onRef;
+        const {
+            className,
+            children,
+            elementType,
+            ...otherProps
+        } = ownProps;
 
-        const {children, elementType, className, ...otherProp} = this.props;
-        delete otherProp.onRef;
-        const classes = classnames(
-            'mdc-textfield__input', className);
+
+        const classes = classnames('mdc-textfield__input', className);
         const ElementType = elementType || 'input';
         return (
+
             <ElementType
                 ref="rootInput"
                 className={classes}
-                {...otherProp}
-                /*onChange={(event) => {
-                 this.setState({
-                 value: this.refs.rootInput.value
-                 });
-                 //this.props.onChange(event);
-                 }}*/
+                {...otherProps}
             >
                 {children}
             </ElementType>);

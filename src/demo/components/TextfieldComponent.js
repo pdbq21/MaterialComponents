@@ -72,6 +72,30 @@ export default class TextfieldComponent extends React.Component {
 
                 <fieldset>
                     <legend>Textfield JS</legend>
+
+                    <div>
+                        <h2>Full Functionality JS Component (Floating Label, Validation, Autocomplete)</h2>
+                        <Textfield upgraded>
+                            <TextfieldInput
+                            id="demo-full-textfield"
+                            name="email"
+                            aria-controls="my-textfield-helptext"
+                            required
+                            />
+                            <TextfieldLabel
+                            htmlFor="demo-full-textfield"
+                            >
+                                Email Address
+                            </TextfieldLabel>
+                        </Textfield>
+                        <TextfieldHelptext
+                            aria-hidden="true"
+                            persistent
+                            validation
+                        >
+                            Help Text (possibly validation message)
+                        </TextfieldHelptext>
+                    </div>
                     <div>
                         <h3>Label float above</h3>
                         <Textfield>
@@ -117,22 +141,6 @@ export default class TextfieldComponent extends React.Component {
                             Must be at least 8 characters long
                         </TextfieldHelptext>
                     </div>
-                    {/*
-                     <div>
-                     <div className="mdc-textfield">
-                     <input type="text" id="my-textfield-1" className="mdc-textfield__input" />
-                     <label className="mdc-textfield__label" htmlFor="my-textfield-1">Hint text</label>
-                     </div>
-                     </div>
-
-                     <div>
-                     <div className="mdc-textfield mdc-textfield--focused">
-                     <input type="text" id="my-textfield-2" className="mdc-textfield__input" />
-                     <label className="mdc-textfield__label mdc-textfield__label--float-above" htmlFor="my-textfield-2">Hint text</label>
-                     </div>
-                     </div>
-                     */}
-
                 </fieldset>
             </div>
         );
