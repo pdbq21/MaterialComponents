@@ -13,6 +13,14 @@ const {MDCIconToggleFoundation} = iconToggle;
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCRipple, MDCRippleFoundation} = ripple;
+const {
+    strings: {
+        ARIA_LABEL,
+        ARIA_PRESSED,
+        DATA_TOGGLE_OFF,
+        DATA_TOGGLE_ON
+    }
+} = MDCIconToggleFoundation;
 //Ripple
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -46,13 +54,17 @@ export default class IconToggleComponentTest extends Component {
         rippleCss: {},
     };
 
+    iconEl_ = () => {
+        const sel = this.refs.root.dataset.iconInnerSelector;
+        return sel ? this.refs.root.querySelector(sel) : this.refs.root;
+    };
     foundation = new MDCIconToggleFoundation({
-        addClass: className => this.setState(({classes}) => ({
-            classes: classes.concat([className])
-        })),
-        removeClass: className => this.setState(({classes}) => ({
-            classes: classes.filter(cn => cn !== className)
-        })),
+        /*addClass: className => this.setState(({classes}) => ({
+         classes: classes.concat([className])
+         })),
+         removeClass: className => this.setState(({classes}) => ({
+         classes: classes.filter(cn => cn !== className)
+         })),*/
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
                 this.refs.root.addEventListener(type, handler);
@@ -63,11 +75,11 @@ export default class IconToggleComponentTest extends Component {
                 this.refs.root.removeEventListener(type, handler);
             }
         },
-        setText: text => {
-            if (this.refs.root) {
-                this.refs.root.textContent = text;
-            }
-        },
+        /*setText: text => {
+         if (this.refs.root) {
+         this.refs.root.textContent = text;
+         }
+         },*/
         getTabIndex: () => {
             if (this.refs.root) {
                 return this.refs.root.tabIndex;
@@ -96,14 +108,23 @@ export default class IconToggleComponentTest extends Component {
 
         notifyChange: evtData => {
             if (this.props.onChange !== null) {
-                this.props.onChange(this, evtData);
+                this.props.onChange(evtData);
             }
         },
 
- /*Todo: fix error emit() not a function
-        notifyChange: function notifyChange(evtData) {
-            return _this3.emit('MDCIconToggle:change', evtData);
-        }*/
+        addClass: className => {
+            const iconEl_ = this.iconEl_();
+            return iconEl_.classList.add(className);
+        },
+        removeClass: className => {
+            const iconEl_ = this.iconEl_();
+            return iconEl_.classList.remove(className);
+        },
+
+        setText: text => {
+            const iconEl_ = this.iconEl_();
+            return iconEl_.textContent = text;
+        },
     });
 
 
@@ -162,7 +183,7 @@ export default class IconToggleComponentTest extends Component {
 
     componentDidMount() {
         this.foundation.init();
-       if (this.props.ripple) {
+        if (this.props.ripple) {
             this.foundationRipple.init();
         }
 
@@ -173,6 +194,59 @@ export default class IconToggleComponentTest extends Component {
             this.foundationRipple.destroy();
         }
         this.foundation.destroy();
+    }
+
+    parseJsonDataAttr_ = (dataAttr) => {
+        const val = this.refs.root.getAttribute(dataAttr);
+        if (!val) {
+            return {};
+        }
+        return JSON.parse(val);
+    };
+
+    toggle_ = (isOn) => {
+        const _ref = isOn ?
+                this.foundation.toggleOnData_ :
+                this.foundation.toggleOffData_,
+            content = _ref.content,
+            label = _ref.label,
+            cssClass = _ref.cssClass;
+
+        const _ref2 = isOn ?
+                this.foundation.toggleOffData_ :
+                this.foundation.toggleOnData_,
+            classToRemove = _ref2.cssClass;
+
+        if (isOn) {
+            this.foundation.adapter_.setAttr(ARIA_PRESSED, 'true');
+        } else {
+            this.foundation.adapter_.setAttr(ARIA_PRESSED, 'false');
+        }
+
+        if (classToRemove) {
+            this.foundation.adapter_.removeClass(classToRemove);
+        }
+        if (cssClass) {
+            this.foundation.adapter_.addClass(cssClass);
+        }
+        if (content) {
+            this.foundation.adapter_.setText(content);
+        }
+        if (label) {
+            this.foundation.adapter_.setAttr(ARIA_LABEL, label);
+        }
+    };
+
+    refreshToggleData = (toggle) => {
+        this.foundation.toggleOnData_ = this.parseJsonDataAttr_(DATA_TOGGLE_ON);
+        this.foundation.toggleOffData_ = this.parseJsonDataAttr_(DATA_TOGGLE_OFF);
+        this.toggle_(toggle);
+    };
+
+    componentWillReceiveProps(props) {
+        if (typeof props.toggle !== 'undefined') {
+            this.refreshToggleData(props.toggle);
+        }
     }
 
     componentDidUpdate() {
@@ -186,31 +260,58 @@ export default class IconToggleComponentTest extends Component {
     }
 
     render() {
-        console.log(iconToggle);
         const ownProps = Object.assign({}, this.props);
         delete ownProps.ripple;
+        delete ownProps.toggle;
         const {
             className,
             ...otherProp
         } = ownProps;
+/*        return (
+            <i
+                ref='root'
+                className={
+                    classnames(
+                        'mdc-icon-toggle material-icons',
+                        this.state.classes,
+                        this.state.classNamesRipple,
+                        className
+                    )}
+                role="button" aria-pressed="false"
+                aria-label="Add to favorites" tabIndex="0"
+                data-toggle-on='{"label": "Remove from favorites", "content": "favorite"}'
+                data-toggle-off='{"label": "Add to favorites", "content": "favorite_border"}'
+                {...otherProp}
+            >
+                favorite_border
+            </i>
+        );*/
         return (
-                <i
-                    ref='root'
-                    className={
-                        classnames(
-                            'mdc-icon-toggle material-icons',
-                            this.state.classes,
-                            this.state.classNamesRipple,
-                            className
-                        )}
-                     role="button" aria-pressed="false"
-                   aria-label="Add to favorites" tabIndex="0"
-                   data-toggle-on='{"label": "Remove from favorites", "content": "favorite"}'
-                   data-toggle-off='{"label": "Add to favorites", "content": "favorite_border"}'
-                    {...otherProp}
-                >
-                    favorite_border
-                </i>
+            <span
+                ref='root'
+                className={
+                    classnames(
+                        'mdc-icon-toggle',
+                        this.state.classes,
+                        this.state.classNamesRipple,
+                        className
+                    )}
+                role="button"
+                aria-pressed="false"
+                aria-label="Star this item"
+                tabIndex="0"
+                data-icon-inner-selector=".fa"
+                data-toggle-on='{"cssClass": "fa-star", "label": "Unstar this item"}'
+                data-toggle-off='{"cssClass": "fa-star-o", "label": "Star this item"}'
+                {...otherProp}
+            >
+  <i
+      className="fa fa-star-o"
+      aria-hidden="true"
+  />
+</span>
+
+
         );
     }
 }
