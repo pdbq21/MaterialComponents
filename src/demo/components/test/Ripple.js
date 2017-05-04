@@ -2,7 +2,6 @@
  * Created by ruslan on 30.03.17.
  */
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple as test}  from 'material-components-web/dist/material-components-web';
@@ -49,7 +48,7 @@ export default class RippleSelect extends Component {
 
     foundation = new MDCRippleFoundation({
         // for FAB this. === true \ for other component === false
-/*        isUnbounded: () => true,
+     isUnbounded: () => true,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
         },
@@ -101,7 +100,7 @@ export default class RippleSelect extends Component {
                 x: window.pageXOffset,
                 y: window.pageYOffset
             }
-        },*/
+        },
 
 /*
 
