@@ -17,6 +17,7 @@
 - [+] Snackbar
 - [+] Simple Menu
 - [+] Toolbar
+- [+] IconToggle
 
 ##ToDo
 - Create Radio in lib

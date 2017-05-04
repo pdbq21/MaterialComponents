@@ -31,7 +31,7 @@ const List = ({
     const ElementType = elementType || 'ul';
     return (
         <ElementType
-            ref={itemsRef || ""}
+            ref={itemsRef || null}
             className={classes}
             {...otherProp}
         >
