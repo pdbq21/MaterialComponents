@@ -10,7 +10,7 @@ import '../styles/style.sass'
 
 //import component
 import Buttons from '../components/Buttons'
-import Checkbox from '../components/Checkboxes'
+import Checkbox from '../components/CheckboxComponent'
 import Elevations from '../components/Elevations'
 import Cards from '../components/Cards'
 import RadioComponent from '../components/RadioComponent'

@@ -66,7 +66,12 @@ export {
 } from './Radio';
 export {
     Checkbox,
-    CheckboxLabel
+    CheckboxLabel,
+    CheckboxBackground,
+    CheckboxCheckmark,
+    CheckboxInput,
+    CheckboxMixedmark,
+    CheckboxPath
 } from './Checkbox';
 
 export {

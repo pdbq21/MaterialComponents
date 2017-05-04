@@ -18,6 +18,7 @@
 - [+] Simple Menu
 - [+] Toolbar
 - [+] IconToggle
+- [+] Checkbox
 
 ##ToDo
 - Create Radio in lib
