@@ -42,9 +42,9 @@ export default class TestSelect extends Component {
 
         root.dispatchEvent(evt);
     };
-    menu_ = () => (new MDCSimpleMenu(this.refs.root.querySelector('.mdc-select__menu')));
     items_ = () => ([].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]')));
     menuEl_ = () => (this.refs.root.querySelector('.mdc-select__menu'));
+    selectedText_ = () => (this.refs.root.querySelector('.mdc-select__selected-text'));
     foundationMenu = new MDCSimpleMenuFoundation({
         addClass: className => this.setState(({classNamesMenuEl}) => ({
             classNamesMenuEl: classNamesMenuEl.concat([className])
@@ -287,10 +287,8 @@ export default class TestSelect extends Component {
         },
 
         setSelectedTextContent: selectedTextContent => {
-            console.log(this.refs.selectedText);
-            if (this.refs.selectedText) {
-                return this.refs.selectedText.textContent = selectedTextContent;
-            }
+                return this.selectedText_().textContent = selectedTextContent;
+
         },
         getWindowInnerHeight: () => (window.innerHeight),
 
@@ -406,7 +404,6 @@ export default class TestSelect extends Component {
 
     render() {
         return (
-            <div>
                 <div
                     ref='root'
                     className={classnames('mdc-select', this.state.classNames)}
@@ -446,7 +443,6 @@ export default class TestSelect extends Component {
                         </ul>
                     </div>
                 </div>
-            </div>
         );
     }
 

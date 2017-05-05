@@ -179,7 +179,7 @@ case 'Drawer Permanent Above':
                     <li className={`navigation-item ${(activeMenuItem === 'Snackbar') ? 'active' : ''} `}>
                         Snackbar
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} todo-lite`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Select') ? 'active' : ''} `}>
                         Select
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Ripple') ? 'active' : ''} todo`}>

@@ -3,26 +3,33 @@
  */
 import React from 'react';
 
-import TestSelect from './test/Select'
+//import TestSelect from './test/Select'
 
+import {
+    Select,
+    SelectMenu,
+    SelectText,
+    SelectItems,
+    SelectItem
+} from '../../app/lib'
 export default class SelectComponent extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = {
-            open: false,
-        };
-
         this.handleSelected = this.handleSelected.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+
     handleSelected(e) {
         console.log(e);
     }
 
-    handleCancel() {
+    handleCancel(e) {
+        console.log(e);
     }
+
     handleChange(e) {
+
         console.log(e);
     }
 
@@ -32,11 +39,37 @@ export default class SelectComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Fully-Featured Component</legend>
                     <div>
-                        <TestSelect
+                        <Select
                             onSelected={this.handleSelected}
                             onCancel={this.handleCancel}
                             onChange={this.handleChange}
-                        />
+                        >
+                            <SelectText>Pick a food group</SelectText>
+                            <SelectMenu>
+                                <SelectItems>
+                                    <SelectItem>
+                                        Pick a food group
+                                    </SelectItem><SelectItem>
+                                    Bread, Cereal, Rice, and Pasta
+                                </SelectItem>
+                                    <SelectItem>
+                                        Vegetables
+                                    </SelectItem>
+                                    <SelectItem>
+                                        Fruit
+                                    </SelectItem>
+                                    <SelectItem>
+                                        Milk, Yogurt, and Cheese
+                                    </SelectItem>
+                                    <SelectItem>
+                                        Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
+                                    </SelectItem>
+                                    <SelectItem>
+                                        Fats, Oils, and Sweets
+                                    </SelectItem>
+                                </SelectItems>
+                            </SelectMenu>
+                        </Select>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -60,7 +93,7 @@ export default class SelectComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Select Multiple - CSS Only</legend>
                     <div>
-                        <select multiple size="6" className="mdc-multi-select mdl-list" >
+                        <select multiple size="6" className="mdc-multi-select mdl-list">
                             <optgroup className="mdc-list-group" label="Starches">
                                 <option className="mdc-list-item">
                                     Potato
@@ -69,7 +102,7 @@ export default class SelectComponent extends React.PureComponent {
                                     Cereal
                                 </option>
                             </optgroup>
-                            <option className="mdc-list-divider" role="presentation" disabled />
+                            <option className="mdc-list-divider" role="presentation" disabled/>
                             <option>
                                 misc...
                             </option>

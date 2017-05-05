@@ -20,6 +20,7 @@
 - [+] IconToggle
 - [+] Checkbox
 - [+] Textfield
+- [+] Select
 
 ##ToDo
 - Create Radio in lib

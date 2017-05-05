@@ -132,6 +132,13 @@ export {
     IconToggle
 } from './IconToggle'
 export {
+    Select,
+    SelectMenu,
+    SelectText,
+    SelectItems,
+    SelectItem
+} from './Select'
+export {
     Icons
 } from './base'
 /* Test Ripple Adapter */
