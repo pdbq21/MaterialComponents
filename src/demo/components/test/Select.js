@@ -29,9 +29,20 @@ export default class TestSelect extends Component {
         classNamesMenuEl: [],
     };
     //this.refs.menuEl
+    // Fires a cross-browser-compatible custom event from the component root of the given type,
+    // with the given data.
+    emit = (root, evtType, evtData) => {
+        let evt;
+        if (typeof CustomEvent === 'function') {
+            evt = new CustomEvent(evtType, {detail: evtData});
+        } else {
+            evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(evtType, false, false, evtData);
+        }
 
-    menuFactory = (el) => new MDCSimpleMenu(el);
-    menu_ = () => (this.menuFactory(this.refs.root.querySelector('.mdc-select__menu')));
+        root.dispatchEvent(evt);
+    };
+    menu_ = () => (new MDCSimpleMenu(this.refs.root.querySelector('.mdc-select__menu')));
     items_ = () => ([].slice.call(this.refs.items.querySelectorAll('.mdc-list-item[role]')));
     menuEl_ = () => (this.refs.root.querySelector('.mdc-select__menu'));
     foundationMenu = new MDCSimpleMenuFoundation({
@@ -122,18 +133,26 @@ export default class TestSelect extends Component {
             }
         },
         notifySelected: evtData => {
-            if (this.props.onSelected !== null) {
+           if (this.props.onSelected !== null) {
                 const items = this.items_();
                 this.props.onSelected({
                     index: evtData.index,
                     item: items[evtData.index]
                 });
             }
+            const menuEl = this.menuEl_();
+            const items = this.items_();
+         return this.emit(menuEl, 'MDCSimpleMenu:selected', {
+         index: evtData.index,
+         item: items[evtData.index]
+         });
         },
         notifyCancel: () => {
+            const menuEl = this.menuEl_();
             if (this.props.onCancel !== null) {
                 this.props.onCancel(this);
             }
+            return this.emit(menuEl, 'MDCSimpleMenu:cancel');
         },
         saveFocus: () => {
             this.previousFocus_ = document.activeElement;
@@ -268,6 +287,7 @@ export default class TestSelect extends Component {
         },
 
         setSelectedTextContent: selectedTextContent => {
+            console.log(this.refs.selectedText);
             if (this.refs.selectedText) {
                 return this.refs.selectedText.textContent = selectedTextContent;
             }
@@ -365,11 +385,14 @@ export default class TestSelect extends Component {
             return this.items_()[index].offsetTop;
         },
         registerMenuInteractionHandler: (type, handler) => {
-            console.log(7);
-
-            // todo:  this.menu_().listen(type, handler) to work
-            //this.menu_().listen(type, handler)
             const menuEl = this.menuEl_();
+           /* if (type === "MDCSimpleMenu:selected"){
+                this.foundationMenu.adapter_.notifySelected()
+            }*/
+            //notifySelected this.foundationMenu.adapter_
+            //notifyCancel
+            //this.menu_().listen(type, handler)
+
                 return menuEl.addEventListener(type, handler);
             //return this.menu_().listen(type, handler);
         },
@@ -401,6 +424,8 @@ export default class TestSelect extends Component {
                             ref='items'
                             className="mdc-list mdc-simple-menu__items">
                             <li className="mdc-list-item" role="option" id="grains" tabIndex="0">
+                                Pick a food group
+                            </li><li className="mdc-list-item" role="option" id="grains" tabIndex="0">
                                 Bread, Cereal, Rice, and Pasta
                             </li>
                             <li className="mdc-list-item" role="option" id="vegetables" tabIndex="0">

@@ -85,7 +85,7 @@ export default class RippleSelect extends Component {
              const {left, top} = this.refs.root.getBoundingClientRect();
              console.log(left, top);
              const DIM = 40;
-            /!*return this.refs.root.getBoundingClientRect();*!/
+            /*return this.refs.root.getBoundingClientRect();*/
             return {
                 top,
                 left,

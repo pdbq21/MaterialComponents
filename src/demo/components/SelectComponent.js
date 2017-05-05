@@ -22,7 +22,8 @@ export default class SelectComponent extends React.PureComponent {
 
     handleCancel() {
     }
-    handleChange() {
+    handleChange(e) {
+        console.log(e);
     }
 
     render() {
