@@ -1,12 +1,10 @@
-$font-stack:    Helvetica, sans-serif
+$font-stack: Helvetica, sans-serif
 $primary-color: #333
-
 body
   font: 100% $font-stack
   color: $primary-color
 
-
-.App fieldset>*
+.App fieldset > *
   margin: 1em
 
 .navigation
@@ -23,12 +21,11 @@ body
   &.active
     color: crimson
 
-.elevation>div
+.elevation > div
   width: 10em
   height: 6em
   margin: 2em
   display: inline-block
-
 
 .mdc-card--demo
   width: 350px
@@ -46,6 +43,7 @@ body
 .todo
   background-color: brown
   color: white
+
 .todo-lite
   background-color: coral
 
@@ -55,3 +53,13 @@ body
   position: relative
   .mdc-menu-anchor
     position: absolute
+
+
+
+.mdc-ripple-upgraded--background-active-fill:before
+  -webkit-transition-duration: .12s
+  opacity: 1
+
+.mdc-ripple-upgraded--foreground-activation:after
+  -webkit-animation: .3s mdc-ripple-fg-radius-in forwards, 83ms mdc-ripple-fg-opacity-in forwards
+  animation: .3s mdc-ripple-fg-radius-in forwards, 83ms mdc-ripple-fg-opacity-in forwards

@@ -88,7 +88,6 @@ export default class Radio extends PureComponent {
         },
         registerInteractionHandler: (evtType, handler) => {
             if (this.child.refs.rootInput) {
-                console.log(this.child.refs.rootInput)
                 this.child.refs.rootInput.addEventListener(evtType, handler);
             }
         },

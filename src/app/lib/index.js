@@ -3,7 +3,7 @@
  */
 export {Button} from './Button';
 export {Elevation} from './Elevation';
-export {default as Ripple} from './Ripple';
+export {Ripple} from './Ripple';
 export {
     Card,
     CardHorizontalBlock,
@@ -141,6 +141,3 @@ export {
 export {
     Icons
 } from './base'
-/* Test Ripple Adapter */
-
-export {Adapter} from './Ripple'

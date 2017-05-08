@@ -61,7 +61,7 @@ export default class Button extends PureComponent {
             return supportsCssVariables(window);
         },
         isSurfaceActive: () => this.refs.root[MATCHES](':active'),
-        addClass: className => this.setState(({classNamesRipple}) => ({
+        /*addClass: className => this.setState(({classNamesRipple}) => ({
             classNamesRipple: classNamesRipple.concat([className])
         })),
         removeClass: className => {
@@ -69,6 +69,16 @@ export default class Button extends PureComponent {
                 this.setState(({classNamesRipple}) => ({
                     classNamesRipple: classNamesRipple.filter(cn => cn !== className)
                 }))
+            }
+        },*/
+        addClass: (className) => {
+            if (this.refs.root) {
+                return this.refs.root.classList.add(className);
+            }
+        },
+        removeClass: (className) => {
+            if (this.refs.root) {
+                return this.refs.root.classList.remove(className);
             }
         },
         registerInteractionHandler: (evtType, handler) => {
@@ -87,7 +97,7 @@ export default class Button extends PureComponent {
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
         },
-        updateCssVariable: (varName, value) => {
+        /*updateCssVariable: (varName, value) => {
             if (this.refs.root) {
                 this.setState(({rippleCss}) => ({
                     rippleCss: {
@@ -95,6 +105,11 @@ export default class Button extends PureComponent {
                         [varName]: value
                     }
                 }))
+            }
+        },*/
+        updateCssVariable: (varName, value) => {
+            if (this.refs.root) {
+                return this.refs.root.style.setProperty(varName, value);
             }
         },
         computeBoundingRect: () => (this.refs.root.getBoundingClientRect()),
@@ -153,12 +168,12 @@ export default class Button extends PureComponent {
         }
     }
     componentDidUpdate() {
-        if (this.props.ripple && this.refs.root) {
+        /*if (this.props.ripple && this.refs.root) {
             for (let key in this.state.rippleCss) {
                 if (this.state.rippleCss.hasOwnProperty(key)) {
                     this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
                 }
             }
-        }
+        }*/
     }
 }

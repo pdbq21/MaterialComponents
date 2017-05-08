@@ -180,7 +180,6 @@ export default class Menu extends PureComponent {
     });
 
     componentDidMount() {
-        console.log(this.foundation);
         this.foundation.init();
     }
 
