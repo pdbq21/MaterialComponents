@@ -6,7 +6,6 @@ import React from 'react';
 //import RippleSelect from './test/Ripple'
 
 import {Ripple} from '../../app/lib'
-import '@material/ripple/dist/mdc.ripple.css';
 export default class RippleComponent extends React.PureComponent {
 
     render() {
@@ -18,29 +17,14 @@ export default class RippleComponent extends React.PureComponent {
                     <legend>Ripple Component</legend>
                     <div>
                         <Ripple>
-                            <div className="mdc-ripple-surface material-icons"
-                                 aria-label="Favorite"
+                            <div className="mdc-ripple-surface mdc-elevation--z2"
                                  tabIndex="0"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
                             >
-                                favorite
-                            </div>
-                        </Ripple>
-                    </div>
-                    <div>
-                        <Ripple>
-                            <div
-                                className="mdc-ripple-surface mdc-elevation--z2"
-                                tabIndex="0"
-                            >
-                                button
-                            </div>
-                        </Ripple>
-                        <Ripple>
-                            <div
-                                className="mdc-button test-ripple mdc-elevation--z2"
-                                tabIndex="0"
-                            >
-                                button
+                                Interact with me!
                             </div>
                         </Ripple>
                     </div>
@@ -49,12 +33,7 @@ export default class RippleComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Only CSS</legend>
                     <div>
-                        <Ripple>
 
-                        <div className="mdc-ripple-surface mdc-elevation--z2" tabIndex="0">
-                            Interact with me!
-                        </div>
-                        </Ripple>
                     </div>
                 </fieldset>
             </div>

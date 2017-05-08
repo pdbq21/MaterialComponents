@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@material/animation@^0.1.3", "@material/animation@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@material/animation/-/animation-0.1.4.tgz#37897e2d2aa057ca0b2400426b2141d869bdb4fb"
-
 "@material/animation@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@material/animation/-/animation-0.2.0.tgz#347fd2e5ff7d43f05afa96b26737f9787cc07b1a"
@@ -46,18 +42,6 @@
     "@material/rtl" "^0.1.3"
     "@material/theme" "^0.1.4"
 
-"@material/dialog@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@material/dialog/-/dialog-0.1.1.tgz#ded9148160407bc46ffdafe15117aed46826405b"
-  dependencies:
-    "@material/animation" "^0.1.3"
-    "@material/base" "^0.1.1"
-    "@material/elevation" "^0.1.2"
-    "@material/ripple" "^0.5.0"
-    "@material/rtl" "^0.1.1"
-    "@material/theme" "^0.1.3"
-    "@material/typography" "^0.1.1"
-
 "@material/dialog@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@material/dialog/-/dialog-0.2.2.tgz#4451c6b8a112964baa6168296fb16de9e0b1d06d"
@@ -81,12 +65,6 @@
     "@material/rtl" "^0.1.3"
     "@material/theme" "^0.1.4"
     "@material/typography" "^0.2.1"
-
-"@material/elevation@^0.1.2":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@material/elevation/-/elevation-0.1.3.tgz#2eaa8d947e088da8220d3820edea95c3187fd48f"
-  dependencies:
-    "@material/animation" "^0.1.4"
 
 "@material/elevation@^0.1.5":
   version "0.1.5"
@@ -162,31 +140,12 @@
     "@material/ripple" "^0.6.0"
     "@material/theme" "^0.1.4"
 
-"@material/ripple@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.4.0.tgz#a4cc0e64663af38429b3729d1ec737a44c22c298"
-  dependencies:
-    "@material/animation" "^0.1.4"
-    "@material/base" "^0.1.2"
-    "@material/theme" "^0.1.2"
-
-"@material/ripple@^0.5.0":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.5.1.tgz#b361f10d30fd4e6e1db9c5234a0dac32dfe35ce6"
-  dependencies:
-    "@material/base" "^0.1.2"
-    "@material/theme" "^0.1.4"
-
 "@material/ripple@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.6.0.tgz#b9bb854186a7ebe8fb210f98726dd969e44b2e3b"
   dependencies:
     "@material/base" "^0.1.2"
     "@material/theme" "^0.1.4"
-
-"@material/rtl@^0.1.1":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.1.2.tgz#f8ac5a5e1b15d4f09af2db5a8efeb0d02cc01204"
 
 "@material/rtl@^0.1.2", "@material/rtl@^0.1.3":
   version "0.1.3"
@@ -233,7 +192,7 @@
     "@material/theme" "^0.1.4"
     "@material/typography" "^0.2.1"
 
-"@material/theme@^0.1.2", "@material/theme@^0.1.3", "@material/theme@^0.1.4":
+"@material/theme@^0.1.3", "@material/theme@^0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@material/theme/-/theme-0.1.4.tgz#d094bc99eff7535eac4650bacadfc10faaba3792"
 
