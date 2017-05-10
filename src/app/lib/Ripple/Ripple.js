@@ -4,8 +4,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {ripple as test}  from 'material-components-web/dist/material-components-web';
-const {MDCRippleFoundation} = test;
+import {ripple}  from 'material-components-web/dist/material-components-web';
+const {MDCRippleFoundation} = ripple;
 
 function getMatchesProperty(HTMLElementPrototype) {
     return [
@@ -113,18 +113,22 @@ export default class Ripple extends PureComponent {
             React.cloneElement(children, {
                 ref: 'root',
                 className: classes,
-                ['data-mdc-ripple-is-unbounded']: isUnbounded
+                'data-mdc-ripple-is-unbounded': isUnbounded
             })
         );
     }
 
     componentDidMount() {
         this.foundation = this.foundation_();
-        this.foundation.init();
+        if (!this.props['data-no-js']){
+            this.foundation.init();
+        }
     }
 
     componentWillUnmount() {
-        this.foundation.destroy();
+        if (!this.props['data-no-js']){
+            this.foundation.destroy();
+        }
     }
 }
 /*

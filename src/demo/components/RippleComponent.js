@@ -30,7 +30,8 @@ export default class RippleComponent extends React.PureComponent {
                             </div>
                         </Ripple>
                     </div>
-<h2>Unbounded</h2>
+                    <h2>Unbounded</h2>
+
                     <div>
                         <Ripple
                             unbounded
@@ -46,13 +47,31 @@ export default class RippleComponent extends React.PureComponent {
                     <h2>Theme Styles</h2>
                     <div>
                         <Ripple
-                            unbounded
+                            primary
                         >
-                            <div className="demo-surface material-icons"
+                            <div className="mdc-elevation--z2"
                                  tabIndex="0"
-                                 aria-label="Favorite"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
                             >
-                                favorite
+                                Primary
+                            </div>
+                        </Ripple>
+                    </div>
+                    <div>
+                        <Ripple
+                            accent
+                        >
+                            <div className="mdc-elevation--z2"
+                                 tabIndex="0"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
+                            >
+                                Accent
                             </div>
                         </Ripple>
                     </div>
@@ -60,7 +79,69 @@ export default class RippleComponent extends React.PureComponent {
                 <fieldset>
                     <legend>Only CSS</legend>
                     <div>
+                        <h2>Bounded</h2>
+                        <Ripple
+                            data-no-js
+                        >
 
+                            <div className="mdc-elevation--z2"
+                                 tabIndex="0"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
+                            >
+                                Interact with me!
+                            </div>
+                        </Ripple>
+                    </div>
+                    <h2>Unbounded</h2>
+
+                    <div>
+                        <Ripple
+                            data-no-js
+                            unbounded
+                        >
+                            <div className="material-icons demo-surface"
+                                 aria-label="Favorite"
+                                 tabIndex="0"
+                            >
+                                favorite
+                            </div>
+                        </Ripple>
+                    </div>
+                    <h2>Theme Styles</h2>
+                    <div>
+                        <Ripple
+                            data-no-js
+                            primary
+                        >
+                            <div className="mdc-elevation--z2"
+                                 tabIndex="0"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
+                            >
+                                Primary
+                            </div>
+                        </Ripple>
+                    </div>
+                    <div>
+                        <Ripple
+                            data-no-js
+                            accent
+                        >
+                            <div className="mdc-elevation--z2"
+                                 tabIndex="0"
+                                 style={{
+                                     'height': '10em',
+                                     'width': '10em'
+                                 }}
+                            >
+                                Accent
+                            </div>
+                        </Ripple>
                     </div>
                 </fieldset>
             </div>

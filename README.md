@@ -21,6 +21,7 @@
 - [+] Checkbox
 - [+] Textfield
 - [+] Select
+- [+] Ripple
 
 ##ToDo
 - Ripple:
