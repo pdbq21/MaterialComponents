@@ -10,13 +10,6 @@ export default class Input extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
     componentWillReceiveProps(props) {
         if (props.indeterminate !== this.props.indeterminate) {
             this.refs.nativeCb.indeterminate = props.indeterminate;
@@ -24,7 +17,6 @@ export default class Input extends PureComponent {
     }
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         delete ownProps.indeterminate;
         const {
             className,
@@ -35,7 +27,7 @@ export default class Input extends PureComponent {
         const classes = classnames('mdc-checkbox__native-control', className);
         return (
             <input
-                ref="nativeCb"
+                ref='nativeCb'
                 type="checkbox"
                 className={classes}
                 checked={checked}

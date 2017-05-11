@@ -128,6 +128,7 @@ class Checkbox extends PureComponent {
         rippleCss: {},
     };
 
+    nativeCb_ = () => (this.refs.root.querySelector('.mdc-checkbox__native-control'));
 
     // Here we initialize a foundation class, passing it an adapter which tells it how to
     // work with the React component in an idiomatic way.
@@ -155,33 +156,33 @@ class Checkbox extends PureComponent {
             // the handler passed here, as well as performs the other business logic. The point
             // being our foundations are designed to be adaptable enough to fit the needs of the host
             // platform.
-            if (this.child.refs.nativeCb) {
-                return this.child.refs.nativeCb.addEventListener('change', handler);
+            const nativeCb = this.nativeCb_();
+            if (nativeCb) {
+                return nativeCb.addEventListener('change', handler);
             }
         },
         deregisterChangeHandler: handler => {
-            if (this.child.refs.nativeCb) {
-                return this.child.refs.nativeCb.removeEventListener('change', handler);
+            const nativeCb = this.nativeCb_();
+            if (nativeCb) {
+                return nativeCb.removeEventListener('change', handler);
             }
         },
         getNativeControl: () => {
-            if (!this.child.refs.nativeCb) {
+            const nativeCb = this.nativeCb_();
+            if (!nativeCb) {
                 throw new Error('Invalid state for operation');
             }
-            return this.child.refs.nativeCb;
+            return nativeCb;
         },
-        //this.refs.nativeCb.offsetWidth / this.refs.root.offsetWidth
         forceLayout: () => {
             if (this.refs.root) {
                 return this.refs.root.offsetWidth;
             }
         },
-        //this.refs.nativeCb / this.refs.root.parentNode
         isAttachedToDOM: () => (Boolean(this.refs.root.parentNode)),
     });
 
     foundationRipple = new MDCRippleFoundation({
-        // for FAB this. === true \ for other component === false
         isUnbounded: () => true,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -199,12 +200,17 @@ class Checkbox extends PureComponent {
                 }))
             }
         },
-        // root / nativeCb
         registerInteractionHandler: (evtType, handler) => {
-            return this.child.refs.nativeCb.addEventListener(evtType, handler);
+            const nativeCb = this.nativeCb_();
+            if (nativeCb) {
+                return nativeCb.addEventListener(evtType, handler);
+            }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            return this.child.refs.nativeCb.removeEventListener(evtType, handler);
+            const nativeCb = this.nativeCb_();
+            if (nativeCb) {
+                return nativeCb.removeEventListener(evtType, handler);
+            }
         },
         registerResizeHandler: handler => {
             window.addEventListener('resize', handler);
@@ -225,7 +231,6 @@ class Checkbox extends PureComponent {
         computeBoundingRect: () => {
             const {left, top} = this.refs.root.getBoundingClientRect();
             const DIM = 40;
-            //return this.refs.root.getBoundingClientRect();
             return {
                 top,
                 left,
@@ -255,7 +260,7 @@ class Checkbox extends PureComponent {
             ...otherProp
         } = ownProps;
 
-        const childElement = child => {
+/*        const childElement = child => {
             if (child.type.name === 'Input') {
                 return React.cloneElement(child, {
                     onRef: (ref) => (this.child = ref)
@@ -265,7 +270,7 @@ class Checkbox extends PureComponent {
             }
         };
 
-        let renderChildren = React.Children.map(children, childElement);
+        let renderChildren = React.Children.map(children, childElement);*/
         const ElementType = elementType || 'div';
         const classes = classnames('mdc-checkbox', {
                 'mdc-checkbox--disabled': disabled
@@ -276,7 +281,7 @@ class Checkbox extends PureComponent {
                 className={classes}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>
         );
     }
@@ -305,7 +310,6 @@ class Checkbox extends PureComponent {
         /*if (props.disabled !== this.props.disabled) {
          this.setState({disabledInternal: props.disabled});
          }*/
-
     }
 
     // Since we cannot set an indeterminate attribute on a native checkbox, we use componentDidUpdate to update
@@ -323,38 +327,3 @@ class Checkbox extends PureComponent {
 }
 
 export default Checkbox;
-
-/*
- import React from 'react';
-
- const propTypes = {};
-
- const Checkbox = ({
- ...otherProp
- }) => {
-
- return (
- <div className={`mdc-checkbox`}
- {...otherProp}
- >
- <input
- type="checkbox"
- className="mdc-checkbox__native-control"
- />
- <div className="mdc-checkbox__background">
- <svg version="1.1"
- className="mdc-checkbox__checkmark"
- xmlns="http://www.w3.org/2000/svg"
- viewBox="0 0 24 24">
- <path className="mdc-checkbox__checkmark__path"
- fill="none"
- stroke="white"
- d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
- </svg>
- <div className="mdc-checkbox__mixedmark"></div>
- </div>
- </div>);
- };
-
- Checkbox.propTypes = propTypes;
- export default Checkbox;*/
