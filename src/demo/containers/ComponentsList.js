@@ -33,6 +33,7 @@ import PersistentDrawerComponent from '../components/DrawerPersistentComponent'
 import FormFieldComponent from '../components/FormFieldComponent'
 import DrawerPermanentBelow from '../components/DrawerPermanentBelow'
 import DrawerPermanentAbove from '../components/DrawerPermanentAbove'
+import ThemeComponent from '../components/ThemeComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -99,12 +100,14 @@ class ComponentsList extends Component {
                 return (<GridListComponent />);
             case 'Drawer (Persistent)':
                 return (<PersistentDrawerComponent />);
-case 'Form Field':
+            case 'Form Field':
                 return (<FormFieldComponent />);
-case 'Drawer Permanent Below':
+            case 'Drawer Permanent Below':
                 return (<DrawerPermanentBelow />);
-case 'Drawer Permanent Above':
+            case 'Drawer Permanent Above':
                 return (<DrawerPermanentAbove />);
+            case 'Theme':
+                return (<ThemeComponent />);
 
             default:
                 return null;
@@ -193,6 +196,9 @@ case 'Drawer Permanent Above':
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Form Field') ? 'active' : ''}`}>
                         Form Field
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Theme') ? 'active' : ''}`}>
+                       Theme
                     </li>
                 </ul>
 

@@ -22,6 +22,7 @@
 - [+] Textfield
 - [+] Select
 - [+] Ripple
+- [+] Theme
 
 ##ToDo
 - Ripple:

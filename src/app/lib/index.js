@@ -139,5 +139,5 @@ export {
     SelectItem
 } from './Select'
 export {
-    Icons
-} from './base'
+    Theme
+} from './Theme'
