@@ -51,7 +51,8 @@ export default class Radio extends PureComponent {
         classNamesRipple: [],
         rippleCss: {},
     }
-
+//
+    rootInput_ = () => (this.refs.root.querySelector('.mdc-radio__native-control'));
     foundation = new MDCRadioFoundation({
         addClass: className => this.setState(({classNames}) => ({
             classNames: classNames.concat([className])
@@ -60,10 +61,11 @@ export default class Radio extends PureComponent {
             classNames: classNames.filter(cn => cn !== className)
         })),
         getNativeControl: () => {
-            if (!this.child.refs.rootInput) {
+            const rootInput = this.rootInput_();
+            if (!rootInput) {
                 throw new Error('Invalid state for operation');
             }
-            return this.child.refs.rootInput;
+            return rootInput;
         }
     });
 
@@ -87,13 +89,15 @@ export default class Radio extends PureComponent {
             }
         },
         registerInteractionHandler: (evtType, handler) => {
-            if (this.child.refs.rootInput) {
-                this.child.refs.rootInput.addEventListener(evtType, handler);
+            const rootInput = this.rootInput_();
+            if (rootInput) {
+                return rootInput.addEventListener(evtType, handler);
             }
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            if (this.child.refs.rootInput) {
-                this.child.refs.rootInput.removeEventListener(evtType, handler);
+            const rootInput = this.rootInput_();
+            if (rootInput) {
+                return rootInput.removeEventListener(evtType, handler);
             }
         },
         registerResizeHandler: handler => {
@@ -140,20 +144,10 @@ export default class Radio extends PureComponent {
         const {
             className,
             disabled,
+            children,
             ...otherProp
         } = ownProps;
 
-        const childElement = child => {
-            if (child.type.name === 'Input') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(this.props.children, childElement);
         return (
             <div
                 ref="root"
@@ -162,7 +156,7 @@ export default class Radio extends PureComponent {
                 }, this.state.classes, this.state.classNamesRipple, className)}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
                 <div className="mdc-radio__background">
                     <div className="mdc-radio__outer-circle"/>
                     <div className="mdc-radio__inner-circle"/>

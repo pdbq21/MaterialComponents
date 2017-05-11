@@ -7,7 +7,6 @@ import classnames from 'classnames';
 export default class Row extends PureComponent {
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             elementType,
             className,

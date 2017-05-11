@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import '@material/ripple/dist/mdc.ripple.min.css';
 import { ripple }  from 'material-components-web/dist/material-components-web';
-const {MDCRipple, MDCRippleFoundation} = ripple;
+const {MDCRippleFoundation} = ripple;
 function getMatchesProperty(HTMLElementPrototype) {
     return [
         'webkitMatchesSelector', 'msMatchesSelector', 'matches',
@@ -45,7 +45,7 @@ export default class ListItem extends PureComponent {
     };
 
 
-    foundationRipple = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
+    foundationRipple = new MDCRippleFoundation({
         isUnbounded: () => false,
         browserSupportsCssVars: () => {
             return supportsCssVariables(window);
@@ -98,7 +98,7 @@ export default class ListItem extends PureComponent {
             }
         },
 
-    }));
+    });
 
     render() {
         const ownProps = Object.assign({}, this.props);

@@ -28,11 +28,16 @@ export default class Textfield extends PureComponent {
 
 
         this.helptextElement = () => {
-            const input = this.child.Input.refs.rootInput;
-            return input.hasAttribute('aria-controls') ?
-                document.getElementById(input.getAttribute('aria-controls')) :
-                null;
+            const rootInput = this.rootInput_();
+            if (rootInput){
+                return rootInput.hasAttribute('aria-controls') ?
+                    document.getElementById(rootInput.getAttribute('aria-controls')) :
+                    null;
+            }
         };
+
+        this.rootInput_ = () => (this.refs.root.querySelector('.mdc-textfield__input'));
+        this.rootLabel_ = () => (this.refs.root.querySelector('.mdc-textfield__label'));
 
         this.foundation = new MDCTextfieldFoundation({
 
@@ -44,59 +49,70 @@ export default class Textfield extends PureComponent {
             })),
 
             addClassToLabel: className => {
-                if (this.child.Label.refs.label) {
-                    return this.child.Label.refs.label.classList.add(className);
+                const rootLabel = this.rootLabel_();
+                if (rootLabel) {
+                    return rootLabel.classList.add(className);
                 }
             },
             removeClassFromLabel: className => {
-                if (this.child.Label.refs.label) {
-                    return this.child.Label.refs.label.classList.remove(className);
+                const rootLabel = this.rootLabel_();
+                if (rootLabel) {
+                    return rootLabel.classList.remove(className);
                 }
             },
 
             registerInputFocusHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.addEventListener('focus', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.addEventListener('focus', handler);
                 }
             },
             registerInputBlurHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.addEventListener('blur', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.addEventListener('blur', handler);
                 }
             },
             registerInputInputHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.addEventListener('input', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.addEventListener('input', handler);
                 }
             },
             registerInputKeydownHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.addEventListener('keydown', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.addEventListener('keydown', handler);
                 }
             },
             deregisterInputFocusHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.removeEventListener('focus', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.removeEventListener('focus', handler);
                 }
             },
             deregisterInputBlurHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.removeEventListener('blur', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.removeEventListener('blur', handler);
                 }
             },
             deregisterInputInputHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.removeEventListener('input', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.removeEventListener('input', handler);
                 }
             },
             deregisterInputKeydownHandler: handler => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput.removeEventListener('keydown', handler);
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput.removeEventListener('keydown', handler);
                 }
             },
             getNativeInput: () => {
-                if (this.child.Input.refs.rootInput) {
-                    return this.child.Input.refs.rootInput;
+                const rootInput = this.rootInput_();
+                if (rootInput) {
+                    return rootInput;
                 }
             },
             addClassToHelptext: className => {
@@ -159,21 +175,6 @@ export default class Textfield extends PureComponent {
             ...otherProps
         } = ownProps;
 
-        const childElement = child => {
-            if (child.type.name === 'Input' || 'Label') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => {
-                        this.child = Object.assign({}, this.child);
-                        return this.child[child.type.name] = ref;
-                    }
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(children, childElement);
-
         const classes = classnames(
             'mdc-textfield', {
                 'mdc-textfield--disabled': disabled,
@@ -189,8 +190,7 @@ export default class Textfield extends PureComponent {
                 className={classes}
                 {...otherProps}
             >
-                {renderChildren}
+                {children}
             </ElementType>);
     }
-
 }

@@ -10,42 +10,23 @@ export default class Surface extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
-
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             children,
             elementType,
             className,
             ...otherProp
         } = ownProps;
-        const childElement = child => {
-            if (child.type.name === 'Footer') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-        let renderChildren = React.Children.map(children, childElement);
+
         const classes = classnames('mdc-dialog__surface', className);
         const ElementType = elementType || 'div';
         return (
             <ElementType
-                ref="dialogSurface"
                 className={classes}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>);
     }
 }

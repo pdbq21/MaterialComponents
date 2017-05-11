@@ -91,6 +91,11 @@ export default class Snackbar extends PureComponent {
             classNames: [],
             open: false,
         };
+
+        //
+        this.actionButton_ = () => (this.refs.root.querySelector('.mdc-snackbar__action-button'));
+        this.rootText_ = () => (this.refs.root.querySelector('.mdc-snackbar__text'));
+
         this.foundation = new MDCSnackbarFoundation({
             addClass: className => {
                 this.setState(({classNames}) => ({
@@ -120,42 +125,48 @@ export default class Snackbar extends PureComponent {
             },
             setAriaHidden: () => {
                 if (this.refs.root) {
-                    this.refs.root.setAttribute('aria-hidden', 'true');
+                    return this.refs.root.setAttribute('aria-hidden', 'true');
                 }
             },
             unsetAriaHidden: () => {
                 if (this.refs.root) {
-                    this.refs.root.removeAttribute('aria-hidden');
+                    return this.refs.root.removeAttribute('aria-hidden');
                 }
             },
             setMessageText: text => {
-                if (this.child.Text.refs.text) {
-                    return this.child.Text.refs.text.textContent = text;
+                const rootText = this.rootText_();
+                if (rootText) {
+                    return rootText.textContent = text;
                 }
             },
             setActionText: text => {
-                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
-                    return this.child.ActionWrapper.child.refs.actionButton.refs.root.textContent = text;
+                const actionButton = this.actionButton_();
+                if (actionButton) {
+                    return actionButton.textContent = text;
                 }
             },
             setActionAriaHidden: () => {
-                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
-                    this.child.ActionWrapper.child.refs.actionButton.refs.root.setAttribute('aria-hidden', 'true');
+                const actionButton = this.actionButton_();
+                if (actionButton) {
+                    return actionButton.setAttribute('aria-hidden', 'true');
                 }
             },
             unsetActionAriaHidden: () => {
-                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
-                    this.child.ActionWrapper.child.refs.actionButton.refs.root.removeAttribute('aria-hidden');
+                const actionButton = this.actionButton_();
+                if (actionButton) {
+                    return actionButton.removeAttribute('aria-hidden');
                 }
             },
             registerActionClickHandler: handler => {
-                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
-                    this.child.ActionWrapper.child.refs.actionButton.refs.root.addEventListener('click', handler);
+                const actionButton = this.actionButton_();
+                if (actionButton) {
+                    actionButton.addEventListener('click', handler);
                 }
             },
             deregisterActionClickHandler: handler => {
-                if (this.child.ActionWrapper.child.refs.actionButton.refs.root) {
-                    this.child.ActionWrapper.child.refs.actionButton.refs.root.removeEventListener('click', handler);
+                const actionButton = this.actionButton_();
+                if (actionButton) {
+                    actionButton.removeEventListener('click', handler);
                 }
             },
             registerTransitionEndHandler: handler => {
@@ -220,21 +231,6 @@ export default class Snackbar extends PureComponent {
             ...otherProp
         } = ownProps;
         const ElementType = elementType || 'div';
-
-        const childElement = child => {
-            if (child.type.name === 'Text' || 'ActionWrapper') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => {
-                        this.child = Object.assign({}, this.child);
-                        return this.child[child.type.name] = ref;
-                    }
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(children, childElement);
         return (
             <ElementType
                 ref='root'
@@ -243,7 +239,7 @@ export default class Snackbar extends PureComponent {
                 aria-atomic="true"
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>
 
         );

@@ -10,17 +10,9 @@ export default class Footer extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
 
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             children,
             className,
@@ -28,16 +20,7 @@ export default class Footer extends PureComponent {
             elementType,
             ...otherProp
         } = ownProps;
-        const childElement = child => {
-            if (child.type.name === 'FooterButton') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-        let renderChildren = React.Children.map(children, childElement);
+
         const classes = classnames('mdc-dialog__footer', className);
         const ElementType = elementType || 'footer';
         return (
@@ -46,7 +29,7 @@ export default class Footer extends PureComponent {
                 id={id}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>);
     }
 }

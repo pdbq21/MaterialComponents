@@ -29,6 +29,8 @@ export default class Menu extends PureComponent {
         };
     }
 
+    items_ = () => (this.refs.root.querySelector('.mdc-simple-menu__items.mdc-list'));
+
     foundation = new MDCSimpleMenuFoundation({
         addClass: className => this.setState(({classNames}) => ({
             classNames: classNames.concat([className])
@@ -42,13 +44,17 @@ export default class Menu extends PureComponent {
             }
         },
         hasNecessaryDom: () => {
-            return Boolean(this.child.refs.items);
+            const items = this.items_();
+            return Boolean(items);
         },
         getInnerDimensions: () => {
-            return {
-                width: this.child.refs.items.offsetWidth,
-                height: this.child.refs.items.offsetHeight
-            };
+            const items = this.items_();
+            if (items){
+                return {
+                    width: items.offsetWidth,
+                    height: items.offsetHeight
+                };
+            }
         },
         hasAnchor: () => {
             if (this.refs.root) {
@@ -65,28 +71,30 @@ export default class Menu extends PureComponent {
         },
         setScale: (x, y) => {
             if (this.refs.root) {
-                this.refs.root.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
+                return this.refs.root.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
             }
         },
         setInnerScale: (x, y) => {
-            if (this.child.refs.items) {
-                this.child.refs.items.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
+            const items = this.items_();
+            if (items) {
+                return items.style[getTransformPropertyName(window)] = 'scale(' + x + ', ' + y + ')';
             }
         },
         getNumberOfItems: () => {
-            if (this.child.refs.items) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
-                return items.length;
+            const items = this.items_();
+            if (items) {
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
+                return itemsList.length;
             }
         },
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                this.refs.root.addEventListener(type, handler);
+                return this.refs.root.addEventListener(type, handler);
             }
         },
         deregisterInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                this.refs.root.removeEventListener(type, handler);
+                return this.refs.root.removeEventListener(type, handler);
             }
         },
         registerDocumentClickHandler: handler => {
@@ -96,32 +104,36 @@ export default class Menu extends PureComponent {
             return document.removeEventListener('click', handler);
         },
         getYParamsForItemAtIndex: index => {
-            if (this.child.refs.items) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
+            const items = this.items_();
+            if (items) {
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
                 return {
-                    top: items[index].offsetTop,
-                    height: items[index].offsetHeight
+                    top: itemsList[index].offsetTop,
+                    height: itemsList[index].offsetHeight
                 };
             }
         },
         setTransitionDelayForItemAtIndex: (index, value) => {
-            if (this.child.refs.items) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
-                return items[index].style.setProperty('transition-delay', value);
+            const items = this.items_();
+            if (items) {
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
+                return itemsList[index].style.setProperty('transition-delay', value);
             }
         },
         getIndexForEventTarget: target => {
-            if (this.child.refs.items) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
-                return items.indexOf(target);
+            const items = this.items_();
+            if (items) {
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
+                return itemsList.indexOf(target);
             }
         },
         notifySelected: evtData => {
+            const items = this.items_();
             if (this.props.onSelected !== null) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
                 this.props.onSelected(this, {
                     index: evtData.index,
-                    item: items[evtData.index]
+                    item: itemsList[evtData.index]
                 });
             }
         },
@@ -149,9 +161,10 @@ export default class Menu extends PureComponent {
             }
         },
         getFocusedItemIndex: () => {
-            if (this.child.refs.items) {
-                const items = [].slice.call(this.child.refs.items.querySelectorAll('.mdc-list-item[role]'));
-                return items.indexOf(document.activeElement);
+            const items = this.items_();
+            if (items) {
+                const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
+                return itemsList.indexOf(document.activeElement);
             }
         },
         focusItemAtIndex: index => {
@@ -210,17 +223,6 @@ export default class Menu extends PureComponent {
         const ElementType = elementType || 'div';
         const classes = classnames('mdc-simple-menu', this.state.classNames, className);
 
-        const childElement = child => {
-            if (child.type.name === 'Items') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(children, childElement);
         return (
             <ElementType
                 ref='root'
@@ -228,7 +230,7 @@ export default class Menu extends PureComponent {
                 tabIndex={tabIndex || "-1"}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>
         );
     }

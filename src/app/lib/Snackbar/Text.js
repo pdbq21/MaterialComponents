@@ -10,22 +10,13 @@ export default class Text extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
-
     render() {
         const {children, className, ...otherProp} = this.props;
-        delete otherProp.onRef;
         const classes = classnames('mdc-snackbar__text', className);
         return (
             <div
-                ref='text'
                 className={classes}
+                {...otherProp}
             >
                 {children}
             </div>

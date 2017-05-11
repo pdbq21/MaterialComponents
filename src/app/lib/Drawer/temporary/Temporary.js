@@ -28,6 +28,8 @@ export default class Temporary extends PureComponent {
         open: false
     };
 
+    drawer_ = () => (this.refs.root.querySelector('.mdc-temporary-drawer__drawer'));
+
     foundation = new MDCTemporaryDrawerFoundation({
         addClass: className => {
             this.setState(({classNameDrawer}) => ({
@@ -60,28 +62,39 @@ export default class Temporary extends PureComponent {
         hasClass: className => (this.refs.root.classList.contains(className)),
 
         hasNecessaryDom: () => {
-            if (this.child){
-                return Boolean(this.child.refs.drawer);
-            }
+            const drawer = this.drawer_();
+                return Boolean(drawer);
         },
 
         registerInteractionHandler: (evtType, handler) => {
-            this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
+            return this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
         },
         deregisterInteractionHandler: (evtType, handler) => {
-            this.refs.root.removeEventListener(remapEvent(evtType), handler, applyPassive());
+            return this.refs.root.removeEventListener(remapEvent(evtType), handler, applyPassive());
         },
         registerDrawerInteractionHandler: (evtType, handler) => {
-            this.child.refs.drawer.addEventListener(remapEvent(evtType), handler);
+            const drawer = this.drawer_();
+            if (drawer){
+             return  drawer.addEventListener(remapEvent(evtType), handler);
+            }
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
-            this.child.refs.drawer.removeEventListener(remapEvent(evtType), handler);
+            const drawer = this.drawer_();
+            if (drawer){
+                return  drawer.removeEventListener(remapEvent(evtType), handler);
+            }
         },
         registerTransitionEndHandler: handler => {
-            this.child.refs.drawer.addEventListener('transitionend', handler);
+            const drawer = this.drawer_();
+            if (drawer){
+                return  drawer.addEventListener('transitionend', handler);
+            }
         },
         deregisterTransitionEndHandler: handler => {
-            this.child.refs.drawer.removeEventListener('transitionend', handler);
+            const drawer = this.drawer_();
+            if (drawer){
+                return  drawer.removeEventListener('transitionend', handler);
+            }
         },
         registerDocumentKeydownHandler: handler => {
             document.addEventListener('keydown', handler);
@@ -90,13 +103,15 @@ export default class Temporary extends PureComponent {
             document.removeEventListener('keydown', handler);
         },
         getDrawerWidth: () => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.offsetWidth;
+            const drawer = this.drawer_();
+            if (drawer){
+                return  drawer.offsetWidth;
             }
         },
         setTranslateX: value => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
+            const drawer = this.drawer_();
+            if (drawer) {
+                return  drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
             }
         },
         updateCssVariable: value => {
@@ -106,8 +121,9 @@ export default class Temporary extends PureComponent {
         },
 
         getFocusableElements: () => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.querySelectorAll(
+            const drawer = this.drawer_();
+            if (drawer) {
+                return drawer.querySelectorAll(
                     'a[href], area[href], input:not([disabled]), select:not([disabled]), ' +
                     'textarea:not([disabled]), button:not([disabled]), iframe, object, embed, ' +
                     '[tabindex], [contenteditable]'
@@ -135,7 +151,8 @@ export default class Temporary extends PureComponent {
         },
         isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
         isDrawer: el => {
-            return el === this.child.refs.drawer;
+            const drawer = this.drawer_();
+            return el === drawer;
         }
     });
 
@@ -168,17 +185,6 @@ export default class Temporary extends PureComponent {
             ...otherProp
         } = ownProps;
 
-        const childElement = child => {
-            if (child.type.name === 'Drawer') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(children, childElement);
         const ElementType = elementType || 'aside';
         return (
             <ElementType
@@ -186,7 +192,7 @@ export default class Temporary extends PureComponent {
                 className={classnames('mdc-temporary-drawer', this.state.classNameDrawer, className)}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>
         );
     }

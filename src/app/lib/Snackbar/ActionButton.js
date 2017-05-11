@@ -11,17 +11,8 @@ export default class ActionButton extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
-
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             children,
             elementType,
@@ -32,7 +23,6 @@ export default class ActionButton extends PureComponent {
         const ElementType = elementType || Button;
         return (
             <ElementType
-                ref='actionButton'
                 className={classes}
                 {...otherProp}
             >

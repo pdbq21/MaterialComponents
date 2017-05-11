@@ -30,6 +30,7 @@ export default class Persistent extends PureComponent {
         classNameDrawer: [],
         open: false
     };
+    drawer_ = () => (this.refs.root.querySelector('.mdc-persistent-drawer__drawer'));
 
     foundation = new MDCPersistentDrawerFoundation({
         addClass: className => {
@@ -61,7 +62,10 @@ export default class Persistent extends PureComponent {
             }
         },
         hasClass: className => (this.refs.root.classList.contains(className)),
-        hasNecessaryDom: () => Boolean(this.child.refs.drawer),
+        hasNecessaryDom: () => {
+            const drawer = this.drawer_();
+            return Boolean(drawer)
+        },
         registerInteractionHandler: (evtType, handler) => {
             this.refs.root.addEventListener(remapEvent(evtType), handler, applyPassive());
         },
@@ -69,10 +73,16 @@ export default class Persistent extends PureComponent {
             this.refs.root.removeEventListener(remapEvent(evtType), handler, applyPassive());
         },
         registerDrawerInteractionHandler: (evtType, handler) => {
-            this.child.refs.drawer.addEventListener(remapEvent(evtType), handler);
+            const drawer = this.drawer_();
+            if (drawer){
+                return drawer.addEventListener(remapEvent(evtType), handler);
+            }
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
-            this.child.refs.drawer.removeEventListener(remapEvent(evtType), handler);
+            const drawer = this.drawer_();
+            if (drawer){
+                return drawer.removeEventListener(remapEvent(evtType), handler);
+            }
         },
         registerTransitionEndHandler: handler => {
             this.refs.root.addEventListener('transitionend', handler);
@@ -87,18 +97,21 @@ export default class Persistent extends PureComponent {
             document.removeEventListener('keydown', handler);
         },
         getDrawerWidth: () => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.offsetWidth;
+            const drawer = this.drawer_();
+            if (drawer) {
+                return drawer.offsetWidth;
             }
         },
         setTranslateX: value => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
+            const drawer = this.drawer_();
+            if (drawer) {
+                return drawer.style.setProperty(getTransformPropertyName(), value === null ? null : 'translateX(' + value + 'px)');
             }
         },
         getFocusableElements: () => {
-            if (this.child.refs.drawer) {
-                return this.child.refs.drawer.querySelectorAll(
+            const drawer = this.drawer_();
+            if (drawer) {
+                return drawer.querySelectorAll(
                     'a[href], area[href], input:not([disabled]), select:not([disabled]), ' +
                     'textarea:not([disabled]), button:not([disabled]), iframe, object, embed, ' +
                     '[tabindex], [contenteditable]'
@@ -116,7 +129,8 @@ export default class Persistent extends PureComponent {
         },
         isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
         isDrawer: el => {
-            return el === this.child.refs.drawer;
+            const drawer = this.drawer_();
+                return el === drawer;
         },
         notifyOpen: () => {
             if (this.props.onOpen !== null) {
@@ -159,17 +173,6 @@ export default class Persistent extends PureComponent {
             ...otherProp
         } = ownProps;
 
-        const childElement = child => {
-            if (child.type.name === 'Drawer') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
-
-        let renderChildren = React.Children.map(children, childElement);
         const ElementType = elementType || 'aside';
         return (
             <ElementType
@@ -177,7 +180,7 @@ export default class Persistent extends PureComponent {
                 className={classnames('mdc-persistent-drawer', this.state.classNameDrawer, className)}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
             </ElementType>
         );
     }

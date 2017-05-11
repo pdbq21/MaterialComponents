@@ -5,17 +5,9 @@ import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 
 export default class Label extends PureComponent {
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
 
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             children,
             elementType,
@@ -33,7 +25,6 @@ export default class Label extends PureComponent {
         const ElementType = elementType || 'label';
         return (
             <ElementType
-                ref="label"
                 className={classes}
                          {...otherProps}
             >

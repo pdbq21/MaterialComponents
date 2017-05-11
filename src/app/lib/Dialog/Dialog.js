@@ -20,6 +20,10 @@ export default class Dialog extends PureComponent {
         classNames: [],
         open: false,
     };
+    dialogSurface_ = () => (this.refs.root.querySelector('.mdc-dialog__surface'));
+    acceptSelector_ = () => (this.refs.root.querySelector(
+        '.mdc-dialog__footer__button.mdc-dialog__footer__button--accept'
+    ));
 
     foundation = new MDCDialogFoundation({
         addClass: className => {
@@ -68,26 +72,32 @@ export default class Dialog extends PureComponent {
             }
         },
         registerSurfaceInteractionHandler: (evt, handler) => {
-            if (this.child.refs.dialogSurface) {
-                this.child.refs.dialogSurface.addEventListener(evt, handler);
+            const dialogSurface = this.dialogSurface_();
+            if (dialogSurface) {
+                return dialogSurface.addEventListener(evt, handler);
             }
         },
         deregisterSurfaceInteractionHandler: (evt, handler) => {
-            if (this.child.refs.dialogSurface) {
-                this.child.refs.dialogSurface.removeEventListener(evt, handler);
+            const dialogSurface = this.dialogSurface_();
+            if (dialogSurface) {
+                return dialogSurface.removeEventListener(evt, handler);
             }
         },
         registerDocumentKeydownHandler: handler => (document.addEventListener('keydown', handler)),
         deregisterDocumentKeydownHandler: handler => (document.removeEventListener('keydown', handler)),
         trapFocusOnSurface: () => {
-            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector.refs.root) {
-                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector.refs.root);
+            const dialogSurface = this.dialogSurface_();
+            const acceptSelector = this.acceptSelector_();
+            if (dialogSurface || acceptSelector) {
+                const focusTrap_ = createFocusTrapInstance(dialogSurface, acceptSelector);
                 focusTrap_.activate();
             }
         },
         untrapFocusOnSurface: () => {
-            if (this.child.refs.dialogSurface || this.child.child.child.refs.acceptSelector.refs.root) {
-                const focusTrap_ = createFocusTrapInstance(this.child.refs.dialogSurface, this.child.child.child.refs.acceptSelector.refs.root);
+            const dialogSurface = this.dialogSurface_();
+            const acceptSelector = this.acceptSelector_();
+            if (dialogSurface || acceptSelector) {
+                const focusTrap_ = createFocusTrapInstance(dialogSurface, acceptSelector);
                 focusTrap_.deactivate();
             }
         },
@@ -114,19 +124,10 @@ export default class Dialog extends PureComponent {
         const {
             className,
             elementType,
+            children,
             ...otherProp
         } = ownProps;
-        const childElement = child => {
-            if (child.type.name === 'Surface') {
-                return React.cloneElement(child, {
-                    onRef: (ref) => (this.child = ref)
-                })
-            } else {
-                return child
-            }
-        };
 
-        let renderChildren = React.Children.map(this.props.children, childElement);
         const ElementType = elementType || 'aside';
         return (
             <ElementType
@@ -135,7 +136,7 @@ export default class Dialog extends PureComponent {
                 className={classnames('mdc-dialog', this.state.classNames, className)}
                 {...otherProp}
             >
-                {renderChildren}
+                {children}
                 <div className="mdc-dialog__backdrop"/>
             </ElementType>
         );
@@ -161,7 +162,3 @@ export default class Dialog extends PureComponent {
         }
     }
 }
-/*
-* Note:
-* this.Surface.Footer.FooterButton => this.child.child.child
-* */

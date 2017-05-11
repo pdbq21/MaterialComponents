@@ -5,17 +5,9 @@ import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 
 export default class Drawer extends PureComponent {
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
 
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             className,
             children,
@@ -26,7 +18,6 @@ export default class Drawer extends PureComponent {
         const classes = classnames('mdc-persistent-drawer__drawer', className);
         return (
             <ElementType
-                ref="drawer"
                 className={classes}
                 {...otherProps}
             >

@@ -11,17 +11,8 @@ export default class FooterButton extends PureComponent {
         className: PropTypes.string,
     };
 
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(null)
-    }
-
     render() {
         const ownProps = Object.assign({}, this.props);
-        delete ownProps.onRef;
         const {
             children,
             elementType,
@@ -37,7 +28,6 @@ export default class FooterButton extends PureComponent {
         const ElementType = elementType || Button;
         return (
             <ElementType
-                ref={(accept)? "acceptSelector" : null}
                 className={classes}
                 {...otherProp}
             >
