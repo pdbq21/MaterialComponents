@@ -34,6 +34,7 @@ import FormFieldComponent from '../components/FormFieldComponent'
 import DrawerPermanentBelow from '../components/DrawerPermanentBelow'
 import DrawerPermanentAbove from '../components/DrawerPermanentAbove'
 import ThemeComponent from '../components/ThemeComponent'
+import HintListComponent from '../components/HintListComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -108,6 +109,8 @@ class ComponentsList extends Component {
                 return (<DrawerPermanentAbove />);
             case 'Theme':
                 return (<ThemeComponent />);
+            case 'Hint List':
+                return (<HintListComponent />);
 
             default:
                 return null;
@@ -199,6 +202,9 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Theme') ? 'active' : ''}`}>
                        Theme
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo`}>
+                        Hint List
                     </li>
                 </ul>
 

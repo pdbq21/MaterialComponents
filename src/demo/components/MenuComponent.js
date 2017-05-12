@@ -37,6 +37,7 @@ export default class MenuComponent extends React.Component {
     handle() {
         this.setOpen(true);
     }
+
     setOpen1(open1) {
         this.setState({open1});
     }
@@ -44,11 +45,12 @@ export default class MenuComponent extends React.Component {
     handle1() {
         this.setOpen1(true);
     }
+
     handelRadio(name) {
-        const styles = (name === 'Top Left')? {'top': 0, 'left': 0} :
-            (name === 'Top right')? {'top': 0, 'right': 0} :
-            (name === 'Bottom left')? {'bottom': 0, 'left': 0} :
-            (name === 'Bottom right')? {'bottom': 0, 'right': 0} : null;
+        const styles = (name === 'Top Left') ? {'top': 0, 'left': 0} :
+            (name === 'Top right') ? {'top': 0, 'right': 0} :
+                (name === 'Bottom left') ? {'bottom': 0, 'left': 0} :
+                    (name === 'Bottom right') ? {'bottom': 0, 'right': 0} : null;
         this.setState({isActive: name, styles: styles});
     }
 
@@ -56,6 +58,7 @@ export default class MenuComponent extends React.Component {
         console.log(e);
         this.setOpen(false);
     }
+
     handleSelected1(...e) {
         console.log(e);
         this.setOpen1(false);
@@ -64,13 +67,14 @@ export default class MenuComponent extends React.Component {
     handleCancel() {
         this.setOpen(false);
     }
+
     handleCancel1() {
         this.setOpen1(false);
     }
 
 
     render() {
-        const {open1,open, isActive, styles} = this.state;
+        const {open1, open, isActive, styles} = this.state;
 
         return (
             <div>
@@ -128,16 +132,16 @@ export default class MenuComponent extends React.Component {
                     </span>
                             <span>
                        Bottom right
-                        <input  onChange={() => this.handelRadio('Bottom right')}
-                                type="radio"
-                                checked={isActive === 'Bottom right'}
+                        <input onChange={() => this.handelRadio('Bottom right')}
+                               type="radio"
+                               checked={isActive === 'Bottom right'}
                         />
                     </span>
                         </p>
                     </div>
                     <div
                         className="demo-simple-menu"
-                        >
+                    >
                         <SimpleMenuAnchor style={styles}>
                             <button onClick={this.handle}>Open</button>
                             <SimpleMenu
@@ -161,7 +165,6 @@ export default class MenuComponent extends React.Component {
                                 </SimpleMenuItems>
                             </SimpleMenu>
                         </SimpleMenuAnchor>
-
                     </div>
                 </fieldset>
             </div>
