@@ -78,9 +78,15 @@ export default class Hint extends PureComponent {
 
         return (
             <ElementType
-                ref='root'
                 className={classes}
                 {...otherProp}
+                //input props
+                valueInput=""
+                handleInput=""
+                //Items props
+                handelItem=""
+                data=""
+
             >
                 {children}
             </ElementType>
