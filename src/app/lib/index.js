@@ -141,3 +141,7 @@ export {
 export {
     Theme
 } from './Theme'
+
+export {
+    Hint
+} from './Hint'

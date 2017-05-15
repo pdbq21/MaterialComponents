@@ -11,17 +11,18 @@ const propTypes = {
     fixed: PropTypes.bool,
 };
 const Main = ({
-    children,
-    className,
-    elementType,
-    fixed,
-    ...otherProp
-}) => {
+                  children,
+                  className,
+                  elementType,
+                  fixed,
+                  ...otherProp
+              }) => {
     const classes = classnames({'mdc-toolbar-fixed-adjust': fixed}, className);
     const ElementType = elementType || 'main';
     return (
-        <ElementType className={classes}
-                     {...otherProp}
+        <ElementType
+            className={classes}
+            {...otherProp}
         >
             {children}
         </ElementType>);
