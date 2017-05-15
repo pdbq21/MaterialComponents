@@ -7,6 +7,7 @@ import {TextfieldInput} from '../index'
 export default class Input extends PureComponent {
 
     render() {
+        console.log(this.props);
         const {children, handleInput, onChange, value, valueInput, ...otherProps} = this.props;
         return (
             <TextfieldInput

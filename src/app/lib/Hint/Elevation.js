@@ -7,15 +7,40 @@ import {Elevation} from '../index'
 export default class HintElevation extends PureComponent {
 
     render() {
-        const {children, zSpace, ...otherProps} = this.props;
+        const ownProps = Object.assign({}, this.props);
+        const {
+            isOpen,
+            handelItem,
+            data,
+            widthInput,
+            zSpace,
+            children,
+            ...otherProps
+        } = ownProps;
         const zSpaceNumber = zSpace || '2';
-        return (
-            <Elevation
+
+        const childElement = child => {
+            if (child.type.name === 'Items') {
+                return React.cloneElement(child, {
+                    handelItem: handelItem,
+                    data: data
+                })
+            } else {
+                return child
+            }
+        };
+
+        let renderChildren = React.Children.map(children, childElement);
+
+        return ((isOpen)? <Elevation
+                style={{
+                    'width': widthInput,
+                }}
                 zSpace={zSpaceNumber}
                 {...otherProps}
             >
-                {children}
-            </Elevation>
+                {renderChildren}
+            </Elevation> : null
         );
     }
 }

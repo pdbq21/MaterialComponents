@@ -143,5 +143,10 @@ export {
 } from './Theme'
 
 export {
-    Hint
+    Hint,
+    HintElevation,
+    HintTextfield,
+    HintInput,
+    HintLabel,
+    HintList
 } from './Hint'

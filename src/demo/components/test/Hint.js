@@ -69,10 +69,7 @@ export default class HintComponentTest extends Component {
     }
     render() {
         const ownProps = Object.assign({}, this.props);
-        const {
-            className,
-            ...otherProp
-        } = ownProps;
+
 
         const {widthInput, data, value, open} = this.state;
         return (

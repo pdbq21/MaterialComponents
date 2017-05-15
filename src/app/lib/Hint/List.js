@@ -8,6 +8,7 @@ export default class Items extends PureComponent {
 
     render() {
         const {data, handelItem, ...otherProps} = this.props;
+        console.log(this.props);
         return (
             <List
                 {...otherProps}

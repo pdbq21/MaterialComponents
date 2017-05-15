@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+//import classnames from 'classnames';
 
 export default class Hint extends PureComponent {
     static propTypes = {
@@ -15,9 +15,8 @@ export default class Hint extends PureComponent {
         this.state = {
             widthInput: 0,
             data: [],
-            classes: [],
             value: '',
-            open: false
+            isOpen: false
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -28,11 +27,14 @@ export default class Hint extends PureComponent {
 
     handleInput({currentTarget}) {
         const {url, list} = this.props;
-        if (typeof url !== 'undefined'){
+        if (typeof url !== 'undefined') {
             // this.fetchData(url, currentTarget.value);
             this.fetchData(url);
-        } else if (typeof list !== 'undefined'){
-            this.setState({data: list});
+        } else if (typeof list !== 'undefined') {
+            this.setState({
+                data: list,
+                isOpen: true
+            });
         } else {
             console.error('Not data');
         }
@@ -52,43 +54,61 @@ export default class Hint extends PureComponent {
             .then((res) => {
                 this.setState({
                     data: Object.keys(res),
-                    open: true,
+                    isOpen: true,
                 });
             });
     }
-    handelItem({currentTarget}){
+
+    handelItem({currentTarget}) {
         this.setState({
-            open: false,
+            isOpen: false,
             value: currentTarget.textContent,
         });
     }
 
 
     render() {
+        const {
+            isOpen,
+            data,
+            value,
+            widthInput
+        } = this.state;
         const ownProps = Object.assign({}, this.props);
         delete ownProps.url;
+        delete ownProps.list;
         const {
             elementType,
-            className,
             children,
-            ...otherProp
+            ...otherProps
         } = ownProps;
         const ElementType = elementType || 'div';
-        const classes = classnames(className);
+
+        const childElement = child => {
+            if (child.type.name === 'HintTextfield') {
+                return React.cloneElement(child, {
+                    valueInput: value,
+                    handleInput: this.handleInput,
+                })
+            } else if (child.type.name === 'HintElevation') {
+                return React.cloneElement(child, {
+                    isOpen: isOpen,
+                    handelItem: this.handelItem,
+                    data: data,
+                    widthInput: widthInput
+                })
+            } else {
+                return child
+            }
+        };
+
+        let renderChildren = React.Children.map(children, childElement);
 
         return (
             <ElementType
-                className={classes}
-                {...otherProp}
-                //input props
-                valueInput=""
-                handleInput=""
-                //Items props
-                handelItem=""
-                data=""
-
+                {...otherProps}
             >
-                {children}
+                {renderChildren}
             </ElementType>
         );
     }
