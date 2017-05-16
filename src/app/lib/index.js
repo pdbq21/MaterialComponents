@@ -148,5 +148,6 @@ export {
     HintTextfield,
     HintInput,
     HintLabel,
-    HintList
+    HintList,
+    HintTags
 } from './Hint'

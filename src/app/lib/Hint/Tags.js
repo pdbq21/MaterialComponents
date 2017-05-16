@@ -7,18 +7,21 @@ import {List, ListItem, ListItemDetail} from '../index'
 export default class Tags extends PureComponent {
 
     render() {
-        const {data, handleTagRemove, ...otherProps} = this.props;
+        const {activeItems, handleTagRemove, ...otherProps} = this.props;
+        console.log(activeItems);
         return (
             <List
                 {...otherProps}
             >
                 {
-                    data.map((item, index) => (
+                    activeItems.map((item, index) => (
                         <ListItem
                             key={`key-${Date.now()}-${index}`}
                         >
-                            {item}
+                            {item.name}
                             <ListItemDetail
+                                end
+                                style={{'backgroundColor': 'grey'}}
                             onClick={handleTagRemove}
                             />
                         </ListItem>

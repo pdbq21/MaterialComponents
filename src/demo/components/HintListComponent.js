@@ -11,9 +11,7 @@ import {
     HintInput,
     HintLabel,
     HintList,
-    List,
-    ListItem,
-    ListItemDetail
+    HintTags
 } from '../../app/lib'
 
 export default class HintListComponent extends React.Component {
@@ -29,20 +27,14 @@ export default class HintListComponent extends React.Component {
         }}
         multiselect
     >
-        <List
+        <HintTags
             dense
             style={{
                 'display': 'flex',
                 'flexDirection': 'row',
                 'padding': 0,
             }}
-        >
-            <ListItem>tag 1<ListItemDetail end style={{'backgroundColor': 'grey'}}/></ListItem>
-            <ListItem>tag 2<ListItemDetail end style={{'backgroundColor': 'grey'}}/></ListItem>
-            <ListItem>tag 3<ListItemDetail end style={{'backgroundColor': 'grey'}}/></ListItem>
-            <ListItem>tag 4<ListItemDetail end style={{'backgroundColor': 'grey'}}/></ListItem>
-            <ListItem>tag 5<ListItemDetail end style={{'backgroundColor': 'grey'}}/></ListItem>
-        </List>
+        />
         <HintTextfield
             style={{
                 'width': '80%',

@@ -68,23 +68,21 @@ export default class Hint extends PureComponent {
 
     handelItem({currentTarget}, index) {
         if (this.props.multiselect){
-            let activeItems = this.state.activeItems,
-                value = this.state.value;
+            let activeItems = this.state.activeItems;
             if (currentTarget.attributes['aria-selected'].value === 'false'){
                 currentTarget.attributes['aria-selected'].value = 'true';
-                value = (activeItems.length)? `${value}, ${this.state.data[index]}` : this.state.data[index];
-                activeItems.push(index);
+                activeItems.push({
+                    name: this.state.data[index],
+                    index: index
+                });
+
             } else {
                 currentTarget.attributes['aria-selected'].value = 'false';
-                activeItems = activeItems.filter(activeIndex => activeIndex !== index);
-                value = value.replace(`, ${this.state.data[index]}` , '');
-                value = value.replace(`${this.state.data[index]}, `, '');
-                value = value.replace(this.state.data[index], '');
+                activeItems = activeItems.filter(activeIndex => activeIndex.index !== index);
             }
 
             this.setState({
                 activeItems:  activeItems,
-                value: value,
             });
         } else {
             this.setState({
@@ -99,10 +97,12 @@ export default class Hint extends PureComponent {
     }
 
     render() {
+        console.log(this.state);
         const {
             isOpen,
             data,
             value,
+            activeItems,
             widthInput
         } = this.state;
         const ownProps = Object.assign({}, this.props);
@@ -134,6 +134,7 @@ export default class Hint extends PureComponent {
             } else if (child.type.name === 'Tags') {
                 return React.cloneElement(child, {
                     handleTagRemove: this.handleTagRemove,
+                    activeItems: activeItems
                 })
             } else {
                 return child

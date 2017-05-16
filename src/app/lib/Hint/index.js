@@ -7,3 +7,4 @@ export { default as HintTextfield} from './Textfield';
 export { default as HintInput} from './Input';
 export { default as HintLabel} from './Label';
 export { default as HintList} from './List';
+export { default as HintTags} from './Tags';
