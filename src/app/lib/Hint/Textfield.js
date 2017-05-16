@@ -11,16 +11,17 @@ export default class HintTextfield extends PureComponent {
         const {
             valueInput,
             handleInput,
+            handleClickInput,
             children,
             ...otherProps
         } = ownProps;
 
         const childElement = child => {
-            console.log(child.type.name);
             if (child.type.name === 'Input') {
                 return React.cloneElement(child, {
                     valueInput: valueInput,
                     handleInput: handleInput,
+                    handleClickInput: handleClickInput,
                 })
             } else {
                 return child

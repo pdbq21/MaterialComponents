@@ -1,13 +1,13 @@
 /**
- * Created by ruslan on 15.05.17.
+ * Created by ruslan on 16.05.17.
  */
 import React, {PureComponent} from 'react';
-import {List, ListItem} from '../index'
+import {List, ListItem, ListItemDetail} from '../index'
 
-export default class Items extends PureComponent {
+export default class Tags extends PureComponent {
 
     render() {
-        const {data, handelItem, ...otherProps} = this.props;
+        const {data, handleTagRemove, ...otherProps} = this.props;
         return (
             <List
                 {...otherProps}
@@ -15,11 +15,12 @@ export default class Items extends PureComponent {
                 {
                     data.map((item, index) => (
                         <ListItem
-                            aria-selected="false"
-                            onClick={(e) => handelItem(e, index)}
                             key={`key-${Date.now()}-${index}`}
                         >
                             {item}
+                            <ListItemDetail
+                            onClick={handleTagRemove}
+                            />
                         </ListItem>
                     ))
                 }

@@ -49,5 +49,10 @@ body {
 .todo-lite{
     background-color: coral;
 }
+.my-mdc-hint li.mdc-list-item[aria-selected='true']{
+    color: black;
+    background-color: #d3d3d3;
+    border-bottom: 1px solid white;
+}
 
 
