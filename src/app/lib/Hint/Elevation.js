@@ -13,6 +13,7 @@ export default class HintElevation extends PureComponent {
             handelItem,
             data,
             widthInput,
+            activeItems,
             zSpace,
             children,
             ...otherProps
@@ -23,7 +24,8 @@ export default class HintElevation extends PureComponent {
             if (child.type.name === 'Items') {
                 return React.cloneElement(child, {
                     handelItem: handelItem,
-                    data: data
+                    data: data,
+                    activeItems: activeItems,
                 })
             } else {
                 return child

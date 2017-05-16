@@ -8,7 +8,6 @@ export default class Tags extends PureComponent {
 
     render() {
         const {activeItems, handleTagRemove, ...otherProps} = this.props;
-        console.log(activeItems);
         return (
             <List
                 {...otherProps}
@@ -22,7 +21,7 @@ export default class Tags extends PureComponent {
                             <ListItemDetail
                                 end
                                 style={{'backgroundColor': 'grey'}}
-                            onClick={handleTagRemove}
+                            onClick={() => handleTagRemove(item.index)}
                             />
                         </ListItem>
                     ))

@@ -70,17 +70,16 @@ export default class Hint extends PureComponent {
         if (this.props.multiselect){
             let activeItems = this.state.activeItems;
             if (currentTarget.attributes['aria-selected'].value === 'false'){
-                currentTarget.attributes['aria-selected'].value = 'true';
-                activeItems.push({
+                //currentTarget.attributes['aria-selected'].value = 'true';
+                activeItems = activeItems.concat([{
                     name: this.state.data[index],
                     index: index
-                });
+                }]);
 
-            } else {
-                currentTarget.attributes['aria-selected'].value = 'false';
+            } else if (currentTarget.attributes['aria-selected'].value === 'true') {
+                //currentTarget.attributes['aria-selected'].value = 'false';
                 activeItems = activeItems.filter(activeIndex => activeIndex.index !== index);
             }
-
             this.setState({
                 activeItems:  activeItems,
             });
@@ -92,18 +91,20 @@ export default class Hint extends PureComponent {
         }
     }
 
-    handleTagRemove(){
-        console.log('remove');
+    handleTagRemove(index){
+        let activeItems = this.state.activeItems.filter(activeIndex => activeIndex.index !== index);
+        this.setState({
+            activeItems:  activeItems,
+        });
     }
 
     render() {
-        console.log(this.state);
         const {
             isOpen,
             data,
             value,
             activeItems,
-            widthInput
+            widthInput,
         } = this.state;
         const ownProps = Object.assign({}, this.props);
         delete ownProps.url;
@@ -129,7 +130,8 @@ export default class Hint extends PureComponent {
                     isOpen: isOpen,
                     handelItem: this.handelItem,
                     data: data,
-                    widthInput: widthInput
+                    widthInput: widthInput,
+                    activeItems: activeItems
                 })
             } else if (child.type.name === 'Tags') {
                 return React.cloneElement(child, {

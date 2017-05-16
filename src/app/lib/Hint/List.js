@@ -6,8 +6,18 @@ import {List, ListItem} from '../index'
 
 export default class Items extends PureComponent {
 
+    filterActiveItem(item, active) {
+        let isActive = false;
+        active.forEach((active) => {
+            if (active.name === item) {
+                isActive = true;
+            }
+        });
+        return isActive;
+    }
+
     render() {
-        const {data, handelItem, ...otherProps} = this.props;
+        const {data, handelItem, activeItems, ...otherProps} = this.props;
         return (
             <List
                 {...otherProps}
@@ -15,7 +25,7 @@ export default class Items extends PureComponent {
                 {
                     data.map((item, index) => (
                         <ListItem
-                            aria-selected="false"
+                            aria-selected={this.filterActiveItem(item, activeItems)}
                             onClick={(e) => handelItem(e, index)}
                             key={`key-${Date.now()}-${index}`}
                         >
