@@ -36,12 +36,11 @@ export default class Hint extends PureComponent {
     handleInput({currentTarget}) {
         const {url, list} = this.props;
         if (typeof url !== 'undefined') {
-            // this.fetchData(url, currentTarget.value);
             this.fetchData(url, currentTarget.value);
         } else if (typeof list !== 'undefined') {
             this.setState({
                 data: list,
-                isOpen: Boolean(list.length)
+                isOpen: Boolean(list.length && currentTarget.value.length)
             });
         } else {
             console.error('Not data');
@@ -54,30 +53,35 @@ export default class Hint extends PureComponent {
     }
 
     fetchData(url, value) {
-        fetch(url + encodeURIComponent(value))
-            .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                this.setState({
-                    data: res.results,
-                    isOpen: Boolean(res.results.length),
+        if (value.trim().length){
+            fetch(url + encodeURIComponent(value))
+                .then((res) => {
+                    return res.json();
+                })
+                .then((res) => {
+                    this.setState({
+                        data: res.results,
+                        isOpen: Boolean(res.results.length && value.length),
+                    });
                 });
+        } else{
+            this.setState({
+                data: [],
+                isOpen: false
             });
+        }
     }
 
     handelItem({currentTarget}, index) {
         if (this.props.multiselect){
             let activeItems = this.state.activeItems;
             if (currentTarget.attributes['aria-selected'].value === 'false'){
-                //currentTarget.attributes['aria-selected'].value = 'true';
                 activeItems = activeItems.concat([{
                     name: this.state.data[index],
                     index: index
                 }]);
 
             } else if (currentTarget.attributes['aria-selected'].value === 'true') {
-                //currentTarget.attributes['aria-selected'].value = 'false';
                 activeItems = activeItems.filter(activeIndex => activeIndex.index !== index);
             }
             this.setState({

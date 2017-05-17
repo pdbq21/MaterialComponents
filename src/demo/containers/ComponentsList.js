@@ -203,7 +203,7 @@ class ComponentsList extends Component {
                     <li className={`navigation-item ${(activeMenuItem === 'Theme') ? 'active' : ''}`}>
                        Theme
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo-lite`}>
                         Hint List
                     </li>
                 </ul>

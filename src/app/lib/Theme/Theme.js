@@ -93,7 +93,7 @@ export default class Theme extends PureComponent {
             {children}
         </ElementType> :
             React.cloneElement(children, {
-                className: classes + ' ' + children.props.className,
+                className: `${classes} ${(children.props.className)? children.props.className : ''}`,
             });
     }
 }
