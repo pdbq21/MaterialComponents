@@ -11,7 +11,7 @@ import {
     TypographySubheading,
     TypographyBody,
     TypographyCaption
-} from '../../app/lib'
+} from '../../app/index'
 
 export default function TypographyComponent() {
 

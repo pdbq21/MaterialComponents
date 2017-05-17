@@ -9,7 +9,7 @@ import {
     TextfieldLabel,
     List,
     ListItem,
-} from '../../../app/lib'
+} from '../../../app/index'
 
 const testValidatorUrl = (data, text) => data.indexOf(text);
 

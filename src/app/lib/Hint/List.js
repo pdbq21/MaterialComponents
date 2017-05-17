@@ -2,7 +2,7 @@
  * Created by ruslan on 15.05.17.
  */
 import React, {PureComponent} from 'react';
-import {List, ListItem} from '../index'
+import {List, ListItem} from '../../index'
 
 export default class Items extends PureComponent {
 

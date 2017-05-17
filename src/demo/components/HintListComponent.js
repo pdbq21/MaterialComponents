@@ -12,7 +12,7 @@ import {
     HintLabel,
     HintList,
     HintTags,
-} from '../../app/lib'
+} from '../../app/index'
 
 export default class HintListComponent extends React.Component {
 

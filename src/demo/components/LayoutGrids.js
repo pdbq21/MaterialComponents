@@ -6,7 +6,7 @@ import React from 'react';
 import {
     LayoutGrid,
     LayoutGridCell
-} from '../../app/lib'
+} from '../../app/index'
 
 export default class LayoutGrids extends React.Component {
     constructor(props) {

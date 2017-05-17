@@ -8,7 +8,7 @@ import {
     Switch,
     SwitchInput,
     SwitchLabel
-} from '../../app/lib'
+} from '../../app/index'
 export default function SwitchComponent() {
 
     return (

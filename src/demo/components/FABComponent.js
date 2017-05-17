@@ -6,7 +6,7 @@ import React from 'react';
 import {
     FAB,
     FABIcon
-} from '../../app/lib'
+} from '../../app/index'
 
 export default function FABComponent() {
 

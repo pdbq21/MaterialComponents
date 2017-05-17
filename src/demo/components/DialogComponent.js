@@ -11,11 +11,11 @@ import {
     DialogFooterButton,
     DialogSurface,
     DialogTitle
-} from '../../app/lib'
+} from '../../app/index'
 import {
     List,
     ListItem,
-} from '../../app/lib'
+} from '../../app/index'
 export default class DialogComponent extends React.Component {
     constructor(props) {
         super(props);

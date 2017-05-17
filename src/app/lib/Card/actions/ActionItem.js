@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {Button} from '../../../lib'
+import {Button} from '../../../index'
 
 const propTypes = {
     children: PropTypes.node,

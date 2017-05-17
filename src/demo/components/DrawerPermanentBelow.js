@@ -8,7 +8,7 @@ import {
     PermanentList,
     PermanentListItem,
     DrawerListItemDetail
-} from '../../app/lib'
+} from '../../app/index'
 export default class DrawerPermanentBelow extends React.Component {
 
     render() {

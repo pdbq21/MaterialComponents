@@ -9,7 +9,7 @@ import {
     ToolbarSection,
     ToolbarTitle,
     ToolbarMain,
-} from '../../app/lib'
+} from '../../app/index'
 export default class ToolbarComponent extends React.Component {
 
     constructor(props) {

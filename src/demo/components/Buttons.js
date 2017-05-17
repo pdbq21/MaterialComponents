@@ -2,8 +2,8 @@
  * Created by ruslan on 13.03.17.
  */
 import React from 'react';
-import {Button} from '../../app/lib'
-import {Elevation} from '../../app/lib'
+import {Button} from '../../app/index'
+import {Elevation} from '../../app/index'
 
 export default function Buttons() {
 

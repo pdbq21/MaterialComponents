@@ -10,7 +10,7 @@ import {
     DrawerListItemDetail,
     PermanentContent,
     PermanentToolbarSpacer
-} from '../../app/lib'
+} from '../../app/index'
 export default class DrawerPermanentAbove extends React.Component {
 
     render() {

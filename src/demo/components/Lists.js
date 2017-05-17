@@ -13,7 +13,7 @@ import {
     ListItemTextPrimary,
     ListItemTextSecondary,
     ListItemDetail
-} from '../../app/lib'
+} from '../../app/index'
 
 export default function Lists() {
 

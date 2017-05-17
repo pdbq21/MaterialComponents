@@ -4,7 +4,7 @@
 import React from 'react'
 import {
     FormField
-} from '../../app/lib'
+} from '../../app/index'
 export default class FormFieldComponent extends React.Component {
     render() {
         return (

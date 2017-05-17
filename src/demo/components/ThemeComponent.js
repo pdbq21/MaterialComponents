@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-import {Theme} from '../../app/lib';
+import {Theme} from '../../app/index';
 
 export default class ThemeComponent extends React.PureComponent {
 

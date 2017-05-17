@@ -10,7 +10,7 @@ import {
     CheckboxInput,
     CheckboxMixedmark,
     CheckboxPath
-} from '../../app/lib'
+} from '../../app/index'
 export default class Checkboxes extends React.Component {
 
     constructor(props) {

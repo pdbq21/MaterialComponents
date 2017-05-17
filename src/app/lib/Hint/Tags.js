@@ -2,7 +2,7 @@
  * Created by ruslan on 16.05.17.
  */
 import React, {PureComponent} from 'react';
-import {List, ListItem, ListItemDetail, Elevation, Theme} from '../index'
+import {List, ListItem, ListItemDetail, Elevation, Theme} from '../../index'
 //primaryBg
 export default class Tags extends PureComponent {
 

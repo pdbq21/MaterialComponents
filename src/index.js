@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-//import App from './App';
+
 import './index.css';
 
-import ComponentsList from './demo/containers/ComponentsList'
+import ComponentsList from './demo/containers/ComponentsList';
+//import App from './demo/containers/ComponentsView';
 import configureStore from './demo/store/configureStore';
 
 const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <ComponentsList />
+        <ComponentsList/>
     </Provider>,
     document.getElementById('root')
 );

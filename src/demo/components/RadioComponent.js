@@ -8,7 +8,7 @@ import React from 'react';
 import {
     Radio,
     RadioInput
-} from '../../app/lib'
+} from '../../app/index'
 export default class RadioComponent extends React.PureComponent {
 
     state = {

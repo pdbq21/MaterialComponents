@@ -9,7 +9,7 @@ import {
     SimpleMenuItems,
     SimpleMenuListItem,
     SimpleMenuAnchor
-} from '../../app/lib'
+} from '../../app/index'
 export default class MenuComponent extends React.Component {
 
     constructor(props) {

@@ -2,7 +2,7 @@
  * Created by ruslan on 15.05.17.
  */
 import React, {PureComponent} from 'react';
-import {TextfieldInput} from '../index'
+import {TextfieldInput} from '../../index'
 
 export default class Input extends PureComponent {
 

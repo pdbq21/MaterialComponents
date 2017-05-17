@@ -3,13 +3,13 @@
  */
 import React from 'react';
 
-import {FormField} from '../../app/lib'
+import {FormField} from '../../app/index'
 import {
     Textfield,
     TextfieldInput,
     TextfieldLabel,
     TextfieldHelptext
-} from '../../app/lib'
+} from '../../app/index'
 
 //import {default as TestFoundation} from './testFoundation'
 

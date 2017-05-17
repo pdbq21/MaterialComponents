@@ -3,7 +3,7 @@
  */
 import React from 'react';
 //import IconToggleComponentTest from './test/IconToggle'
-import {IconToggle} from '../../app/lib'
+import {IconToggle} from '../../app/index'
 
 export default class IconToggleComponent extends React.Component {
     constructor(props) {

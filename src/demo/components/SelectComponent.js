@@ -11,7 +11,7 @@ import {
     SelectText,
     SelectItems,
     SelectItem
-} from '../../app/lib'
+} from '../../app/index'
 export default class SelectComponent extends React.PureComponent {
     constructor(props) {
         super(props);

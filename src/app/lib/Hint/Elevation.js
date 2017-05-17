@@ -2,7 +2,7 @@
  * Created by ruslan on 15.05.17.
  */
 import React, {PureComponent} from 'react';
-import {Elevation} from '../index'
+import {Elevation} from '../../index'
 
 export default class HintElevation extends PureComponent {
 

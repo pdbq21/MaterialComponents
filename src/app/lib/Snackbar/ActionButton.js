@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {Button} from '../../lib'
+import {Button} from '../../index'
 
 export default class ActionButton extends PureComponent {
     static propTypes = {

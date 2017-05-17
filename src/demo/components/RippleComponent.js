@@ -5,7 +5,7 @@ import React from 'react';
 
 //import RippleSelect from './test/Ripple'
 
-import {Ripple} from '../../app/lib'
+import {Ripple} from '../../app/index'
 export default class RippleComponent extends React.PureComponent {
 
     render() {

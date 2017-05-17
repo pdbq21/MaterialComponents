@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ListItemDetail} from '../index'
+import {ListItemDetail} from '../../index'
 
 
 class DrawerListItemDetail extends PureComponent {

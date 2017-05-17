@@ -13,7 +13,7 @@ import {
     GridListTileTitle,
     GridListTileSupportText,
     GridListTileIcon
-} from '../../app/lib'
+} from '../../app/index'
 export default function GridListComponent() {
 
     return (

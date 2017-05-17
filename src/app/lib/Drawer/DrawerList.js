@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {List} from '../index'
+import {List} from '../../index'
 
 class DrawerList extends PureComponent {
     static propTypes = {

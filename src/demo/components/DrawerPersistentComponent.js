@@ -13,7 +13,7 @@ import {
     PersistentHeader,
     PersistentHeaderContent,
     PersistentListItem
-} from '../../app/lib'
+} from '../../app/index'
 
 export default class PersistentDrawerComponent extends React.Component {
 

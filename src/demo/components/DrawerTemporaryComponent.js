@@ -13,7 +13,7 @@ import {
     TemporaryHeaderContent,
     TemporaryListItem,
     TemporaryToolbarSpacer
-} from '../../app/lib'
+} from '../../app/index'
 export default class DrawerComponent extends React.Component {
 
     constructor(props) {

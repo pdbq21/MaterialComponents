@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ListItem} from '../index'
+import {ListItem} from '../../index'
 
 export default class MenuListItem extends PureComponent {
     static propTypes = {

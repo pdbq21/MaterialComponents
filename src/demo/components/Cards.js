@@ -13,7 +13,7 @@ import {
     CardPrimarySubtitle,
     CardActions,
     CardActionItem
-} from '../../app/lib'
+} from '../../app/index'
 
 export default function Cards() {
     return (

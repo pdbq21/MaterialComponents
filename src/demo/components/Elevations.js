@@ -2,7 +2,7 @@
  * Created by ruslan on 08.03.17.
  */
 import React from 'react';
-import {Elevation} from '../../app/lib'
+import {Elevation} from '../../app/index'
 
 export default class Elevations extends React.Component {
     constructor(props) {

@@ -9,7 +9,7 @@ import {
     SnackbarText,
     SnackbarActionWrapper,
     SnackbarActionButton
-} from '../../app/lib'
+} from '../../app/index'
 export default class SnackbarComponent extends React.Component {
 
     constructor(props) {
