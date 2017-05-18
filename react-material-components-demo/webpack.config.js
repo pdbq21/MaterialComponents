@@ -7,10 +7,10 @@ const path = require('path');
 module.exports = {
     context: __dirname + "/src",
     entry: {
-        app: "./App.js",
+        App: "./App.js",
     },
     output: {
-        path: __dirname + "/dist",
+        path: __dirname + "/assets",
         filename: "[name].bundle.js",
         publicPath: "/assets"
     },
@@ -25,7 +25,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
