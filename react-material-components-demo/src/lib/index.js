@@ -141,7 +141,9 @@ export {
 export {
     Theme
 } from './Theme/index'
-
+export {
+    Icons
+} from './base'
 export {
     Hint,
     HintElevation,

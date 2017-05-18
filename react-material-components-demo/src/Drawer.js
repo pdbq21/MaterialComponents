@@ -2,7 +2,6 @@
  * Created by ruslan on 18.05.17.
  */
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
 import {
     Button,
     Card,
@@ -118,55 +117,43 @@ import {
     TypographySubheading,
     TypographyTitle,
 } from './lib'
-import Header from './Header'
-import Main from './main'
-import Drawer from './Drawer'
 
-class App extends Component {
-constructor(props){
-    super(props);
-    this.state = {
-        isOpenMenu: false
-    };
-
-    this.handleShowMenu = this.handleShowMenu.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-}
-handleShowMenu(){
-    this.setState({
-        isOpenMenu: true
-    })
-}
-    setOpen(isOpenMenu) {
-        this.setState({isOpenMenu});
-    }
-
-    handleOpen() {
-        this.setOpen(true);
-    }
-
-    handleClose() {
-        this.setOpen(false);
-    }
+export default class Drawer extends Component {
     render() {
-    const {isOpenMenu} = this.state;
+        const {
+            isOpenMenu,
+            handleOpen,
+            handleClose
+        } = this.props;
         return (
-            <div>
-                <Header
-                    handleShowMenu={this.handleShowMenu}
-                />
-                <Drawer
-                    isOpenMenu={isOpenMenu}
-                    handleOpen={this.handleOpen}
-                    handleClose={this.handleClose}
-                />
-                <Main/>
-            </div>
+            <DrawerTemporary
+                open={isOpenMenu}
+                onOpen={handleOpen}
+                onClose={handleClose}
+            >
+                <TemporaryDrawer>
+                    <TemporaryHeader>
+                        <Theme
+                            primaryBg
+                            primaryPrimary
+                        >
+                        <TemporaryHeaderContent>Components</TemporaryHeaderContent>
+                        </Theme>
+                    </TemporaryHeader>
+                    <TemporaryContent>
+                        <TemporaryListItem>
+                            <DrawerListItemDetail
+                                start
+                                icon
+                            >
+                                plus-circle
+                            </DrawerListItemDetail>
+                            Button
+                        </TemporaryListItem>
+                        <TemporaryListItem/>
+                    </TemporaryContent>
+                </TemporaryDrawer>
+            </DrawerTemporary>
         )
     }
 }
-
-ReactDOM.render(
-    <App/>, document.getElementById('root')
-);
