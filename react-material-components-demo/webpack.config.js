@@ -18,13 +18,15 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     devServer: {
-        contentBase: __dirname + "/src"
+        contentBase: __dirname + "/src",
+        compress: true,
+        port: 3000
     },
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel',
+                test: /\.js$/,
+                loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
                     cacheDirectory: true,
