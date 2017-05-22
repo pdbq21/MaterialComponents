@@ -35,6 +35,7 @@ import DrawerPermanentBelow from '../components/DrawerPermanentBelow'
 import DrawerPermanentAbove from '../components/DrawerPermanentAbove'
 import ThemeComponent from '../components/ThemeComponent'
 import HintListComponent from '../components/HintListComponent'
+import TabsComponent from '../components/TabsComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -111,6 +112,8 @@ class ComponentsList extends Component {
                 return (<ThemeComponent />);
             case 'Hint List':
                 return (<HintListComponent />);
+case 'Tabs':
+                return (<TabsComponent />);
 
             default:
                 return null;
@@ -205,6 +208,9 @@ class ComponentsList extends Component {
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo-lite`}>
                         Hint List
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'Tabs') ? 'active' : ''} todo`}>
+                        Tabs
                     </li>
                 </ul>
 
