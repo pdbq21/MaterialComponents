@@ -53,7 +53,7 @@ import {
     HintTags,
     HintTextfield,
     IconToggle,
-    Icons,
+    Icon,
     LayoutGrid,
     LayoutGridCell,
     List,
@@ -131,9 +131,9 @@ export default class Header extends Component {
                         <ToolbarSection
                             start
                         >
-                            <Icons
+                            <Icon
                             onClick={handleShowMenu}
-                            >menu</Icons>
+                            >menu</Icon>
 
                         </ToolbarSection>
                         <ToolbarSection

@@ -142,7 +142,7 @@ export {
     Theme
 } from './Theme/index'
 export {
-    Icons
+    Icon
 } from './base'
 export {
     Hint,

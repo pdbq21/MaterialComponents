@@ -5,126 +5,138 @@ import React, {Component} from 'react'
 import {
     Button,
     Card,
-    CardActionItem,
-    CardActions,
-    CardHorizontalBlock,
-    CardMedia,
-    CardMediaItem,
-    CardPrimary,
-    CardPrimarySubtitle,
-    CardPrimaryTitle,
-    CardSupportingText,
     Checkbox,
-    CheckboxBackground,
-    CheckboxCheckmark,
-    CheckboxInput,
-    CheckboxLabel,
-    CheckboxMixedmark,
-    CheckboxPath,
     Dialog,
-    DialogBody,
-    DialogFooter,
-    DialogFooterButton,
-    DialogHeader,
-    DialogSurface,
-    DialogTitle,
     DrawerListItemDetail,
     DrawerPermanent,
     DrawerPersistent,
     DrawerTemporary,
     Elevation,
     FAB,
-    FABIcon,
     FormField,
     GridList,
-    GridListTile,
-    GridListTileContent,
-    GridListTileIcon,
-    GridListTilePrimary,
-    GridListTileSecondary,
-    GridListTileSupportText,
-    GridListTileTitle,
-    GridListTiles,
     Hint,
-    HintElevation,
-    HintInput,
-    HintLabel,
-    HintList,
-    HintTags,
-    HintTextfield,
     IconToggle,
     LayoutGrid,
-    LayoutGridCell,
     List,
-    ListDivider,
-    ListGroup,
-    ListGroupSubheader,
-    ListItem,
-    ListItemDetail,
-    ListItemText,
-    ListItemTextPrimary,
-    ListItemTextSecondary,
-    PermanentContent,
-    PermanentList,
-    PermanentListItem,
-    PermanentToolbarSpacer,
-    PersistentContent,
     PersistentDrawer,
-    PersistentHeader,
-    PersistentHeaderContent,
-    PersistentListItem,
-    PersistentToolbarSpacer,
     Radio,
-    RadioInput,
     Ripple,
     Select,
-    SelectItem,
-    SelectItems,
-    SelectMenu,
-    SelectText,
     SimpleMenu,
-    SimpleMenuAnchor,
-    SimpleMenuItems,
-    SimpleMenuListItem,
     Snackbar,
-    SnackbarActionButton,
-    SnackbarActionWrapper,
-    SnackbarText,
     Switch,
-    SwitchInput,
-    SwitchLabel,
     TemporaryContent,
     TemporaryDrawer,
     TemporaryHeader,
     TemporaryHeaderContent,
     TemporaryListItem,
-    TemporaryToolbarSpacer,
     Textfield,
-    TextfieldHelptext,
-    TextfieldInput,
-    TextfieldLabel,
     Theme,
     Toolbar,
-    ToolbarMain,
-    ToolbarRow,
-    ToolbarSection,
-    ToolbarTitle,
     Typography,
-    TypographyBody,
-    TypographyCaption,
-    TypographyDisplay,
-    TypographyHeadline,
-    TypographySubheading,
-    TypographyTitle,
 } from './lib'
 
 export default class Drawer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            catalogList: [
+                {
+                    name: 'Home',
+                    icon: 'home'
+                },{
+                    name: 'Button',
+                    icon: 'add_circle'
+                },{
+                    name: 'Card',
+                    icon: 'dashboard'
+                },{
+                    name: 'Checkbox',
+                    icon: 'check_box'
+                },{
+                    name: 'Dialog',
+                    icon: 'chat_bubble'
+                },{
+                    name: 'Drawer Temporary',
+                    icon: 'chrome_reader_mode'
+                },{
+                    name: 'Drawer Persistent',
+                    icon: 'chrome_reader_mode'
+                },{
+                    name: 'Drawer Permanent Above Toolbar',
+                    icon: 'chrome_reader_mode'
+                },{
+                    name: 'Drawer Permanent Below Toolbar',
+                    icon: 'chrome_reader_mode'
+                },{
+                    name: 'Elevation',
+                    icon: 'filter_none'
+                },{
+                    name: 'FAB',
+                    icon: 'add_circle'
+                },{
+                    name: 'Grid List',
+                    icon: 'grid_on'
+                },{
+                    name: 'Icon',
+                    icon: 'filter_hdr'
+                },{
+                    name: 'Icon Toggle',
+                    icon: 'favorite'
+                },{
+                    name: 'Layout Grid',
+                    icon: 'line_style'
+                },{
+                    name: 'List',
+                    icon: 'list'
+                },{
+                    name: 'Radio',
+                    icon: 'radio_button_checked'
+                },{
+                    name: 'Ripple',
+                    icon: 'leak_add'
+                },{
+                    name: 'Select',
+                    icon: 'select_all'
+                },{
+                    name: 'SimpleMenu',
+                    icon: 'menu'
+                },{
+                    name: 'Snackbar',
+                    icon: 'video_label'
+                },{
+                    name: 'Switch',
+                    icon: 'toll'
+                },{
+                    name: 'Tabs',
+                    icon: 'tab'
+                },{
+                    name: 'Textfield',
+                    icon: 'text_format'
+                },{
+                    name: 'Theme',
+                    icon: 'palette'
+                },{
+                    name: 'Toolbar',
+                    icon: 'web_asset'
+                },{
+                    name: 'Typography',
+                    icon: 'format_size'
+                },
+
+            ]
+        };
+    }
+
     render() {
         const {
             isOpenMenu,
             handleOpen,
             handleClose
         } = this.props;
+        const {catalogList} = this.state;
         return (
             <DrawerTemporary
                 open={isOpenMenu}
@@ -137,20 +149,26 @@ export default class Drawer extends Component {
                             primaryBg
                             primaryPrimary
                         >
-                        <TemporaryHeaderContent>Components</TemporaryHeaderContent>
+                            <TemporaryHeaderContent>Components</TemporaryHeaderContent>
                         </Theme>
                     </TemporaryHeader>
                     <TemporaryContent>
-                        <TemporaryListItem>
-                            <DrawerListItemDetail
-                                start
-                                icon
-                            >
-                                plus-circle
-                            </DrawerListItemDetail>
-                            Button
-                        </TemporaryListItem>
-                        <TemporaryListItem/>
+                        {catalogList.map(({name, icon}, index) => {
+                            return (
+                                <TemporaryListItem
+                                    key={`key-${index}-${Date.now()}`}
+                                >
+                                    <DrawerListItemDetail
+                                        start
+                                        icon
+                                    >
+                                        {icon}
+                                    </DrawerListItemDetail>
+                                    {name}
+                                </TemporaryListItem>
+                            )
+                        })
+                        }
                     </TemporaryContent>
                 </TemporaryDrawer>
             </DrawerTemporary>
