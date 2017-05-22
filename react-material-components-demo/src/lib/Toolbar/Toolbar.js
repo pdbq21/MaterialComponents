@@ -67,8 +67,8 @@ export default class Toolbar extends PureComponent {
             }
         },
         notifyChange: evtData => {
-            if (this.props.onChange !== null) {
-                this.props.onChange(this, evtData);
+            if (this.props.onChange !== undefined) {
+                this.props.onChange(evtData);
             }
         },
         setStyle: (property, value) => {

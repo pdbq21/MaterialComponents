@@ -120,6 +120,7 @@ import {
 } from './lib'
 
 export default class Header extends Component {
+
     render() {
         const { handleShowMenu } = this.props;
         return (

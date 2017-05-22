@@ -123,21 +123,23 @@ import Main from './main'
 import Drawer from './Drawer'
 
 class App extends Component {
-constructor(props){
-    super(props);
-    this.state = {
-        isOpenMenu: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpenMenu: false
+        };
 
-    this.handleShowMenu = this.handleShowMenu.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-}
-handleShowMenu(){
-    this.setState({
-        isOpenMenu: true
-    })
-}
+        this.handleShowMenu = this.handleShowMenu.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    handleShowMenu() {
+        this.setState({
+            isOpenMenu: true
+        })
+    }
+
     setOpen(isOpenMenu) {
         this.setState({isOpenMenu});
     }
@@ -149,10 +151,11 @@ handleShowMenu(){
     handleClose() {
         this.setOpen(false);
     }
+
     render() {
-    const {isOpenMenu} = this.state;
+        const {isOpenMenu} = this.state;
         return (
-            <div>
+            <div    onClick={() => console.log(25)}        >
                 <Header
                     handleShowMenu={this.handleShowMenu}
                 />

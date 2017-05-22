@@ -74,13 +74,14 @@ export default class Temporary extends PureComponent {
         },
         registerDrawerInteractionHandler: (evtType, handler) => {
             const drawer = this.drawer_();
-            if (drawer){
+            // todo: evtType !== 'click' make selectively
+            if (drawer && evtType !== 'click'){
              return  drawer.addEventListener(remapEvent(evtType), handler);
             }
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
             const drawer = this.drawer_();
-            if (drawer){
+            if (drawer && evtType !== 'click'){
                 return  drawer.removeEventListener(remapEvent(evtType), handler);
             }
         },

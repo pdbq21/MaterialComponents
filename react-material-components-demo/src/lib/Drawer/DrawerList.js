@@ -4,7 +4,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {List} from '../index'
 
 class DrawerList extends PureComponent {
     static propTypes = {
@@ -14,15 +13,14 @@ class DrawerList extends PureComponent {
     render() {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'nav';
-        const classes = classnames(className);
+        const classes = classnames('mdc-list', className);
         return (
-            <List
-                elementType={ElementType}
+            <ElementType
                 className={classes}
                 {...otherProps}
             >
                 {children}
-            </List>
+            </ElementType>
         );
     }
 }

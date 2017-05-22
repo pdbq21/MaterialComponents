@@ -3,7 +3,7 @@
  */
 import '@material/drawer/dist/mdc.drawer.min.css';
 // use for classes mdc-list, mdc-list-item
-//import '@material/list/dist/mdc.list.min.css';
+import '@material/list/dist/mdc.list.min.css';
 
 export { Temporary as DrawerTemporary } from './temporary';
 export { Content as TemporaryContent } from './temporary';

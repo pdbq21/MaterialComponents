@@ -4,7 +4,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {ListItem} from '../index'
 
 class DrawerListItem extends PureComponent {
     static propTypes = {
@@ -17,10 +16,10 @@ class DrawerListItem extends PureComponent {
         } = this.props;
         const ElementType = elementType || 'a';
         return (
-            <ListItem
-                elementType={ElementType}
+            <ElementType
                 className={
                     classnames(
+                        'mdc-list-item',
                         {
                             'mdc-temporary-drawer--selected': temporary && selected,
                             'mdc-permanent-drawer--selected': permanent && selected,
@@ -32,7 +31,7 @@ class DrawerListItem extends PureComponent {
                 {...otherProps}
             >
                 {children}
-            </ListItem>
+            </ElementType>
         );
     }
 }

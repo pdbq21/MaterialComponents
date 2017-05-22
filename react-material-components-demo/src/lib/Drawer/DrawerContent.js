@@ -18,22 +18,29 @@ class DrawerContent extends PureComponent {
 
     render() {
         const {
-            elementType, children, className, temporary, permanent, list, persistent,
+            elementType,
+            children,
+            className,
+            temporary,
+            permanent,
+            list,
+            persistent,
             ...otherProps
         } = this.props;
         const ElementType = elementType || 'div';
         return (
-            <ElementType className={
-                classnames(
-                    {
-                        'mdc-temporary-drawer__content': temporary,
-                        'mdc-permanent-drawer__content': permanent,
-                        'mdc-persistent-drawer__content': persistent,
-                        'mdc-list': list,
-                    },
-                    className
-                )}
-                         {...otherProps}
+            <ElementType
+                className={
+                    classnames(
+                        {
+                            'mdc-temporary-drawer__content': temporary,
+                            'mdc-permanent-drawer__content': permanent,
+                            'mdc-persistent-drawer__content': persistent,
+                            'mdc-list': list,
+                        },
+                        className
+                    )}
+                {...otherProps}
             >
                 {children}
             </ElementType>

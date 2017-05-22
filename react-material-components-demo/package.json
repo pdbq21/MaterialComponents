@@ -24,5 +24,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   }
 }

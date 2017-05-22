@@ -3,38 +3,14 @@
  */
 import React, {Component} from 'react'
 import {
-    Button,
-    Card,
-    Checkbox,
-    Dialog,
     DrawerListItemDetail,
-    DrawerPermanent,
-    DrawerPersistent,
     DrawerTemporary,
-    Elevation,
-    FAB,
-    FormField,
-    GridList,
-    Hint,
-    IconToggle,
-    LayoutGrid,
-    List,
-    PersistentDrawer,
-    Radio,
-    Ripple,
-    Select,
-    SimpleMenu,
-    Snackbar,
-    Switch,
     TemporaryContent,
     TemporaryDrawer,
     TemporaryHeader,
     TemporaryHeaderContent,
     TemporaryListItem,
-    Textfield,
     Theme,
-    Toolbar,
-    Typography,
 } from './lib'
 
 export default class Drawer extends Component {
@@ -101,7 +77,7 @@ export default class Drawer extends Component {
                     name: 'Select',
                     icon: 'select_all'
                 },{
-                    name: 'SimpleMenu',
+                    name: 'Simple Menu',
                     icon: 'menu'
                 },{
                     name: 'Snackbar',
@@ -128,8 +104,11 @@ export default class Drawer extends Component {
 
             ]
         };
+        this.handleMenuItem = this.handleMenuItem.bind(this)
     }
-
+    handleMenuItem(e, name){
+        console.log(e, name)
+    }
     render() {
         const {
             isOpenMenu,
@@ -144,7 +123,9 @@ export default class Drawer extends Component {
                 onClose={handleClose}
             >
                 <TemporaryDrawer>
-                    <TemporaryHeader>
+                    <TemporaryHeader
+
+                    >
                         <Theme
                             primaryBg
                             primaryPrimary
@@ -152,11 +133,14 @@ export default class Drawer extends Component {
                             <TemporaryHeaderContent>Components</TemporaryHeaderContent>
                         </Theme>
                     </TemporaryHeader>
-                    <TemporaryContent>
+                    <TemporaryContent
+                    >
                         {catalogList.map(({name, icon}, index) => {
                             return (
                                 <TemporaryListItem
                                     key={`key-${index}-${Date.now()}`}
+                                    onClick={() => console.log(2005)}
+                                    href="#"
                                 >
                                     <DrawerListItemDetail
                                         start

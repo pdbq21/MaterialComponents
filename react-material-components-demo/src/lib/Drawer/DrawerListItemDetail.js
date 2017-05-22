@@ -3,8 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ListItemDetail} from '../index'
-
+import classnames from 'classnames';
 
 class DrawerListItemDetail extends PureComponent {
     static propTypes = {
@@ -12,18 +11,20 @@ class DrawerListItemDetail extends PureComponent {
     };
 
     render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+        const {elementType, children, className, icon, start, end, ...otherProps} = this.props;
         const ElementType = elementType || 'i';
+        const classes = classnames({
+            'material-icons': icon,
+            'mdc-list-item__start-detail': start,
+            'mdc-list-item__end-detail': end
+        }, className);
         return (
-            <ListItemDetail
-                icon
-                start
-                elementType={ElementType}
-                className={className}
+            <ElementType
+                className={classes}
                 {...otherProps}
             >
                 {children}
-            </ListItemDetail>
+            </ElementType>
         );
     }
 }
