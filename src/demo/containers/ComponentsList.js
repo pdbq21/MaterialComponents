@@ -129,6 +129,9 @@ case 'Tabs':
                     className="navigation"
                     onClick={this.handelNavigation}
                 >
+                    <li className={`navigation-item ${(activeMenuItem === 'Tabs') ? 'active' : ''} todo`}>
+                        Tabs
+                    </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Button') ? 'active' : ''}`}>
                         Button
                     </li>
@@ -209,9 +212,7 @@ case 'Tabs':
                     <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo-lite`}>
                         Hint List
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'Tabs') ? 'active' : ''} todo`}>
-                        Tabs
-                    </li>
+
                 </ul>
 
                 <div>

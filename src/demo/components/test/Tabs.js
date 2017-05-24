@@ -6,8 +6,8 @@ import classnames from 'classnames';
 import '@material/tabs/dist/mdc.tabs.min.css';
 import {tabs} from 'material-components-web/dist/material-components-web';
 
-const {MDCTabBarFoundation, MDCTabFoundation} = tabs;
-
+const {MDCTabBarFoundation, MDCTabFoundation, MDCTab} = tabs;
+//const {* as test} = MDCTabBarFoundation;
 const cssPropertyMap = {
     'animation': {
         noPrefix: 'animation',
@@ -83,7 +83,9 @@ export default class TabsTest extends Component {
     state = {
         classNames: [],
         classNamesBars: [],
-        foundationTab: []
+        foundationTab: [],
+        activeTabIndex_: 0,
+        isIndicatorShown_: false
     };
 
     emit = (root, evtType, evtData) => {
@@ -94,67 +96,71 @@ export default class TabsTest extends Component {
             evt = document.createEvent('CustomEvent');
             evt.initCustomEvent(evtType, false, false, evtData);
         }
-
         root.dispatchEvent(evt);
     };
 
     layoutIndicator_() {
-        const isIndicatorFirstRender = !this.isIndicatorShown_;
+        const isIndicatorFirstRender = !this.state.isIndicatorShown_;
 
         // Ensure that indicator appears in the right position immediately for correct first render.
         if (isIndicatorFirstRender) {
-            this.adapter_.setStyleForIndicator('transition', 'none');
+            this.foundationBars.adapter_.setStyleForIndicator('transition', 'none');
         }
-
-        const translateAmtForActiveTabLeft = this.adapter_.getComputedLeftForTabAtIndex(this.activeTabIndex_);
+        const translateAmtForActiveTabLeft = this.foundationBars.adapter_.getComputedLeftForTabAtIndex(this.state.activeTabIndex_);
         const scaleAmtForActiveTabWidth =
-            this.adapter_.getComputedWidthForTabAtIndex(this.activeTabIndex_) / this.adapter_.getOffsetWidth();
+            this.foundationBars.adapter_.getComputedWidthForTabAtIndex(this.state.activeTabIndex_) / this.foundationBars.adapter_.getOffsetWidth();
 
         const transformValue = `translateX(${translateAmtForActiveTabLeft}px) scale(${scaleAmtForActiveTabWidth}, 1)`;
-        this.adapter_.setStyleForIndicator(getCorrectPropertyName(window, 'transform'), transformValue);
+        this.foundationBars.adapter_.setStyleForIndicator(getCorrectPropertyName(window, 'transform'), transformValue);
 
         if (isIndicatorFirstRender) {
             // Force layout so that transform styles to take effect.
-            this.adapter_.getOffsetWidthForIndicator();
-            this.adapter_.setStyleForIndicator('transition', '');
-            this.adapter_.setStyleForIndicator('visibility', 'visible');
-            this.isIndicatorShown_ = true;
+            this.foundationBars.adapter_.getOffsetWidthForIndicator();
+            this.foundationBars.adapter_.setStyleForIndicator('transition', '');
+            this.foundationBars.adapter_.setStyleForIndicator('visibility', 'visible');
+            // this.isIndicatorShown_ = true;
+            this.setState({
+                isIndicatorShown_: true
+            })
         }
     }
 
     switchToTabAtIndex(index, shouldNotify) {
-        if (index === this.activeTabIndex_) {
+        if (index === this.state.activeTabIndex_) {
             return;
         }
-
-        if (index < 0 || index >= this.adapter_.getNumberOfTabs()) {
+        if (index < 0 || index >= this.foundationBars.adapter_.getNumberOfTabs()) {
             throw new Error(`Out of bounds index specified for tab: ${index}`);
         }
 
-        const prevActiveTabIndex = this.activeTabIndex_;
-        this.activeTabIndex_ = index;
+        const prevActiveTabIndex = this.state.activeTabIndex_;
+        this.setState({
+            activeTabIndex_: index
+        });
+        //this.activeTabIndex_ = index;
         requestAnimationFrame(() => {
             if (prevActiveTabIndex >= 0) {
-                this.adapter_.setTabActiveAtIndex(prevActiveTabIndex, false);
+                this.foundationBars.adapter_.setTabActiveAtIndex(prevActiveTabIndex, false);
             }
-            this.adapter_.setTabActiveAtIndex(this.activeTabIndex_, true);
+            this.foundationBars.adapter_.setTabActiveAtIndex(this.state.activeTabIndex_, true);
             this.layoutIndicator_();
             if (shouldNotify) {
-                this.adapter_.notifyChange({activeTabIndex: this.activeTabIndex_});
+                this.foundationBars.adapter_.notifyChange({activeTabIndex: this.state.activeTabIndex_});
             }
         });
     }
 
-    setActiveTabIndex_(activeTabIndex, notifyChange) {
-        this.foundation_.switchToTabAtIndex(activeTabIndex, notifyChange);
-    }
 
     setActiveTab_(activeTab, notifyChange) {
-        const indexOfTab = this.tabs.indexOf(activeTab);
+        const tabs = this.tabs_();
+        //todo:   const indexOfTab = tabs.indexOf(activeTab); not work
+        const indexOfTab = tabs.map(function (tab) {
+            return tab.root_;
+        }).indexOf(activeTab.root_);
         if (indexOfTab < 0) {
             throw new Error('Invalid tab component given as activeTab: Tab not found within this component\'s tab list');
         }
-        this.setActiveTabIndex_(indexOfTab, notifyChange);
+        this.switchToTabAtIndex(indexOfTab, notifyChange);
     }
 
     tabSelectedHandler_ = ({detail}) => {
@@ -162,64 +168,64 @@ export default class TabsTest extends Component {
         this.setActiveTab_(tab, true);
     };
 
-   /* foundation = new MDCTabFoundation({
-        addClass: className => {
-            const menuEl = this.menuEl_();
-            if (menuEl) {
-                return menuEl.classList.add(className);
-            }
-        },
-        removeClass: className => {
-            const menuEl = this.menuEl_();
-            if (menuEl) {
-                return menuEl.classList.remove(className);
-            }
-        },
-        registerInteractionHandler: (type, handler) => {
-            if (this.refs.root) {
-                return this.refs.root.addEventListener(type, handler)
-            }
-        },
-        deregisterInteractionHandler: (type, handler) => {
-            if (this.refs.root) {
-                return this.refs.root.removeEventListener(type, handler)
-            }
-        },
-        getOffsetWidth: () => {
-            if (this.refs.root) {
-                return this.refs.root.offsetWidth;
-            }
-        },
+    /* foundation = new MDCTabFoundation({
+     addClass: className => {
+     const menuEl = this.menuEl_();
+     if (menuEl) {
+     return menuEl.classList.add(className);
+     }
+     },
+     removeClass: className => {
+     const menuEl = this.menuEl_();
+     if (menuEl) {
+     return menuEl.classList.remove(className);
+     }
+     },
+     registerInteractionHandler: (type, handler) => {
+     if (this.refs.root) {
+     return this.refs.root.addEventListener(type, handler)
+     }
+     },
+     deregisterInteractionHandler: (type, handler) => {
+     if (this.refs.root) {
+     return this.refs.root.removeEventListener(type, handler)
+     }
+     },
+     getOffsetWidth: () => {
+     if (this.refs.root) {
+     return this.refs.root.offsetWidth;
+     }
+     },
 
-        getOffsetLeft: () => {
-            if (this.refs.root) {
-                return this.refs.root.offsetLeft;
-            }
-        },
-        notifySelected: () => {
-            if (this.props.onSelected !== null) {
-                this.props.onSelected({
-                    tab: this.refs.root
-                }, true);
-            }
-            if (this.refs.root) {
-                return this.emit(this.refs.root, 'MDCTab:selected', {
-                    tab: this,
-                }, true);
-            }
-        },
-    });*/
+     getOffsetLeft: () => {
+     if (this.refs.root) {
+     return this.refs.root.offsetLeft;
+     }
+     },
+     notifySelected: () => {
+     if (this.props.onSelected !== null) {
+     this.props.onSelected({
+     tab: this.refs.root
+     }, true);
+     }
+     if (this.refs.root) {
+     return this.emit(this.refs.root, 'MDCTab:selected', {
+     tab: this,
+     }, true);
+     }
+     },
+     });*/
 
     indicator_ = () => (this.refs.root.querySelector('.mdc-tab-bar__indicator'));
     tabs_ = () => (this.gatherTabs_(this.tabFactory));
 
-   /* initialize(tabFactory = (el) => new MDCTab(el)) {
+    /* initialize(tabFactory = (el) => new MDCTab(el)) {
 
-        this.tabSelectedHandler_ = ({detail}) => {
-            const {tab} = detail;
-            this.setActiveTab_(tab, true);
-        };
-    }*/
+     this.tabSelectedHandler_ = ({detail}) => {
+     const {tab} = detail;
+     this.setActiveTab_(tab, true);
+     };
+     }*/
 
     // tabs_ = this.gatherTabs_(tabFactory);
 
@@ -265,9 +271,9 @@ export default class TabsTest extends Component {
                 }
             },
         });
-        this.state.foundationTab.push(
-            foundation
-        )
+        //const foundation = new MDCTab(el);
+        console.dir(foundation);
+        return foundation;
     };
 
     gatherTabs_(tabFactory) {
@@ -296,56 +302,96 @@ export default class TabsTest extends Component {
         },
         // todo: below
 
-        /* bindOnMDCTabSelectedEvent: () => {
-         if (this.refs.root) {
-         return this.refs.root.addEventListener('MDCTab:selected', this.tabSelectedHandler_);
-         }
-         return _this3.listen('MDCTab:selected', _this3.tabSelectedHandler_);
-         },*/
-        /* unbindOnMDCTabSelectedEvent: function unbindOnMDCTabSelectedEvent() {
-         return _this3.unlisten('MDCTab:selected', _this3.tabSelectedHandler_);
-         },
+        bindOnMDCTabSelectedEvent: () => {
+            if (this.refs.root) {
+                return this.refs.root.addEventListener('MDCTab:selected', this.tabSelectedHandler_);
+            }
+            //return _this3.listen('MDCTab:selected', _this3.tabSelectedHandler_);
+        },
+        unbindOnMDCTabSelectedEvent: () => {
+            if (this.refs.root) {
+                return this.refs.root.removeEventListener('MDCTab:selected', this.tabSelectedHandler_);
+            }
+            // return _this3.unlisten('MDCTab:selected', _this3.tabSelectedHandler_);
+        },
 
-
-         setStyleForIndicator: function setStyleForIndicator(propertyName, value) {
-         return _this3.indicator_.style.setProperty(propertyName, value);
-         },
-         getOffsetWidthForIndicator: function getOffsetWidthForIndicator() {
-         return _this3.indicator_.offsetWidth;
-         },
-         notifyChange: function notifyChange(evtData) {
-         return _this3.emit('MDCTabBar:change', evtData);
-         },
-         getNumberOfTabs: function getNumberOfTabs() {
-         return _this3.tabs.length;
-         },
-         isTabActiveAtIndex: function isTabActiveAtIndex(index) {
-         return _this3.tabs[index].isActive;
-         },
-         setTabActiveAtIndex: function setTabActiveAtIndex(index, isActive) {
-         _this3.tabs[index].isActive = isActive;
-         },
-         isDefaultPreventedOnClickForTabAtIndex: function isDefaultPreventedOnClickForTabAtIndex(index) {
-         return _this3.tabs[index].preventDefaultOnClick;
-         },
-         setPreventDefaultOnClickForTabAtIndex: function setPreventDefaultOnClickForTabAtIndex(index, preventDefaultOnClick) {
-         _this3.tabs[index].preventDefaultOnClick = preventDefaultOnClick;
-         },
-         measureTabAtIndex: function measureTabAtIndex(index) {
-         return _this3.tabs[index].measureSelf();
-         },
-         getComputedWidthForTabAtIndex: function getComputedWidthForTabAtIndex(index) {
-         return _this3.tabs[index].computedWidth;
-         },
-         getComputedLeftForTabAtIndex: function getComputedLeftForTabAtIndex(index) {
-         return _this3.tabs[index].computedLeft;
-         }*/
+        setStyleForIndicator: (propertyName, value) => {
+            const indicator = this.indicator_();
+            if (indicator) {
+                return indicator.style.setProperty(propertyName, value);
+            }
+        },
+        getOffsetWidthForIndicator: () => {
+            const indicator = this.indicator_();
+            if (indicator) {
+                return indicator.offsetWidth;
+            }
+        },
+        notifyChange: evtData => {
+            if (this.refs.root) {
+                return this.emit(this.refs.root, 'MDCTabBar:change', evtData);
+            }
+        },
+        getNumberOfTabs: () => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                return tabs.length;
+            }
+        },
+        isTabActiveAtIndex: index => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                return tabs[index].isActive;
+            }
+        },
+        setTabActiveAtIndex: (index, isActive) => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                return tabs[index].isActive = isActive;
+            }
+        },
+        isDefaultPreventedOnClickForTabAtIndex: index => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                return tabs[index].preventDefaultOnClick;
+            }
+        },
+        setPreventDefaultOnClickForTabAtIndex: (index, preventDefaultOnClick) => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                return tabs[index].preventDefaultOnClick = preventDefaultOnClick;
+            }
+        },
+        measureTabAtIndex: index => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                console.log('measureTabAtIndex', tabs, index);
+                console.log(this)
+                //return tabs[index].measureSelf();
+                // todo: width and left save in each foundation Tab, need change it
+                tabs[index].computedWidth_ = tabs[index].adapter_.getOffsetWidth();
+                tabs[index].computedLeft_ = tabs[index].adapter_.getOffsetLeft();
+            }
+        },
+        getComputedWidthForTabAtIndex: index => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                //return tabs[index].getComputedWidth();
+                return tabs[index].computedWidth;
+            }
+        },
+        getComputedLeftForTabAtIndex: index => {
+            const tabs = this.tabs_();
+            if (tabs) {
+                console.log(tabs, index)
+                //return tabs[index].getComputedLeft();
+                return tabs[index].computedLeft;
+            }
+        }
     });
 
     componentDidMount() {
-
         this.foundationBars.init();
-        console.dir(this.state);
     }
 
     componentWillUnmount() {
@@ -354,39 +400,10 @@ export default class TabsTest extends Component {
 
 
     render() {
-        console.log(MDCTabFoundation, MDCTabBarFoundation);
         return (
             <div
 
                 className="">
-                {/*                <section id="dynamic-demo-toolbar">
-                 <nav
-                 ref="root"
-                 id="dynamic-tab-bar"
-                 className={classnames('mdc-tab-bar mdc-tab-bar--indicator-accent', this.state.classNamesBars)}
-                 role="tablist"
-                 >
-                 <a role="tab" aria-controls="panel-1"
-                 className="mdc-tab mdc-tab--active" href="#panel-1">Item One</a>
-                 <a role="tab" aria-controls="panel-2"
-                 className="mdc-tab" href="#panel-2">Item Two</a>
-                 <a role="tab" aria-controls="panel-3"
-                 className="mdc-tab" href="#panel-3">Item Three</a>
-                 <span className="mdc-tab-bar__indicator"/>
-                 </nav>
-                 </section>
-                 <section>
-                 <div className="panels">
-                 <p className="panel active" id="panel-1" role="tabpanel" aria-hidden="false">Item One</p>
-                 <p className="panel" id="panel-2" role="tabpanel" aria-hidden="true">Item Two</p>
-                 <p className="panel" id="panel-3" role="tabpanel" aria-hidden="true">Item Three</p>
-                 </div>
-                 <div className="dots">
-                 <a className="dot active" data-trigger="panel-1" href="#panel-1"/>
-                 <a className="dot" data-trigger="panel-2" href="#panel-2"/>
-                 <a className="dot" data-trigger="panel-3" href="#panel-3"/>
-                 </div>
-                 </section>*/}
                 <nav
                     ref='root'
                     id="my-mdc-tab-bar"
