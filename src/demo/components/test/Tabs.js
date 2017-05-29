@@ -232,7 +232,7 @@ export default class TabsTest extends Component {
     tabElements = () => ([].slice.call(this.refs.root.querySelectorAll('.mdc-tab')));
 
     tabFactory = (el) => {
-        const foundation = new MDCTabFoundation({
+        /*const foundation = new MDCTabFoundation({
             addClass: className => {
                 if (el) {
                     return el.classList.add(className);
@@ -270,9 +270,9 @@ export default class TabsTest extends Component {
                     }, true);
                 }
             },
-        });
-        //const foundation = new MDCTab(el);
-        console.dir(foundation);
+        });*/
+        const foundation = new MDCTab(el);
+        //console.dir(foundation);
         return foundation;
     };
 
@@ -365,39 +365,50 @@ export default class TabsTest extends Component {
         measureTabAtIndex: index => {
             const tabs = this.tabs_();
             if (tabs) {
-                console.log('measureTabAtIndex', tabs, index);
-                console.log(this)
+                // console.log('measureTabAtIndex', tabs, index);
+                console.log(tabs[index]);
                 //return tabs[index].measureSelf();
                 // todo: width and left save in each foundation Tab, need change it
-                tabs[index].computedWidth_ = tabs[index].adapter_.getOffsetWidth();
-                tabs[index].computedLeft_ = tabs[index].adapter_.getOffsetLeft();
+                tabs[index].foundation_.computedWidth_ = tabs[index].foundation_.adapter_.getOffsetWidth();
+                tabs[index].foundation_.computedLeft_ = tabs[index].foundation_.adapter_.getOffsetLeft();
+                // console.log(tabs[index-1]);
             }
         },
         getComputedWidthForTabAtIndex: index => {
             const tabs = this.tabs_();
             if (tabs) {
-                //return tabs[index].getComputedWidth();
-                return tabs[index].computedWidth;
+                return tabs[index].foundation_.adapter_.getOffsetWidth();
+                //return tabs[index].computedWidth;
             }
         },
         getComputedLeftForTabAtIndex: index => {
             const tabs = this.tabs_();
             if (tabs) {
-                console.log(tabs, index)
-                //return tabs[index].getComputedLeft();
-                return tabs[index].computedLeft;
+                //console.log(tabs[index], tabs[index].foundation_.adapter_.getOffsetLeft());
+                return tabs[index].foundation_.adapter_.getOffsetLeft();
+                //return tabs[index].computedLeft;
             }
         }
     });
 
     componentDidMount() {
+        //const tabs = this.tabs_();
+        //tabs.map((tab) => (tab.init()));
         this.foundationBars.init();
     }
 
     componentWillUnmount() {
+        //const tabs = this.tabs_();
+        //tabs.map((tab) => (tab.destroy()));
+
         this.foundationBars.destroy();
     }
-
+    componentDidUpdate(){
+        //const tabs = this.tabs_();
+       // console.log(tabs, this.state.activeTabIndex_);
+        //tabs[this.state.activeTabIndex_].isActive_= true;
+        //tabs.map((tab) => (tab.destroy()));
+    }
 
     render() {
         return (
