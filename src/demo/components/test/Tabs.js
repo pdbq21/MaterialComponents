@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import '@material/tabs/dist/mdc.tabs.min.css';
 import {tabs} from 'material-components-web/dist/material-components-web';
 
-const {MDCTabBarFoundation, MDCTabFoundation, MDCTab} = tabs;
+const {MDCTabBarFoundation, /*MDCTabFoundation,*/ MDCTab} = tabs;
 //const {* as test} = MDCTabBarFoundation;
 const cssPropertyMap = {
     'animation': {
