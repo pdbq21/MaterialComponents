@@ -37,6 +37,7 @@ import ThemeComponent from '../components/ThemeComponent'
 import HintListComponent from '../components/HintListComponent'
 import TabsComponent from '../components/TabsComponent'
 import LinearProgressComponent from '../components/LinearProgressComponent'
+import FormJsonComponent from '../components/FormJsonComponent'
 // import actions
 import * as Actions from '../actions/ComponentsListActions'
 
@@ -113,10 +114,12 @@ class ComponentsList extends Component {
                 return (<ThemeComponent />);
             case 'Hint List':
                 return (<HintListComponent />);
-case 'Tabs':
+            case 'Tabs':
                 return (<TabsComponent />);
-case 'LinearProgress':
+            case 'LinearProgress':
                 return (<LinearProgressComponent />);
+            case 'FormJson':
+                return (<FormJsonComponent />);
 
             default:
                 return null;
@@ -210,13 +213,16 @@ case 'LinearProgress':
                         Form Field
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Theme') ? 'active' : ''}`}>
-                       Theme
+                        Theme
                     </li>
                     <li className={`navigation-item ${(activeMenuItem === 'Hint List') ? 'active' : ''} todo-lite`}>
                         Hint List
                     </li>
-                    <li className={`navigation-item ${(activeMenuItem === 'LinearProgress') ? 'active' : ''} todo`}>
+                    <li className={`navigation-item ${(activeMenuItem === 'LinearProgress') ? 'active' : ''} todo-lite`}>
                         LinearProgress
+                    </li>
+                    <li className={`navigation-item ${(activeMenuItem === 'FormJson') ? 'active' : ''} todo`}>
+                        FormJson
                     </li>
 
                 </ul>
