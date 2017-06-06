@@ -4,21 +4,25 @@
 import React, {Component} from 'react'
 import {
     Route,
-    Switch
+    Switch as SwitchRoute
     // etc.
 } from 'react-router-dom'
-
+import {
+    ToolbarMain,
+} from './lib'
 import {Home, Button} from './pages'
 
 export default class Main extends Component {
     render() {
         return (
-            <div>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/button' component={Button}/>
-                </Switch>
-            </div>
+                <ToolbarMain
+                    fixed
+                >
+                    <SwitchRoute>
+                        <Route exact path='/' component={Home}/>
+                        <Route path='/button' component={Button}/>
+                    </SwitchRoute>
+                </ToolbarMain>
         )
     }
 }

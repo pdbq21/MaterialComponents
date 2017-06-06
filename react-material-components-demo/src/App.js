@@ -10,7 +10,7 @@ import {
     // etc.
 } from 'react-router-dom'
 
-
+import './styles.css'
 import Header from './Header'
 import Drawer from './Drawer'
 import Main from './Main'
@@ -59,8 +59,9 @@ class App extends Component {
                     handleOpen={this.handleOpen}
                     handleClose={this.handleClose}
                 />
-                <Main/>
+                <Main>
 
+                </Main>
             </div>
         </Router>
             )
