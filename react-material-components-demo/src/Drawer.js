@@ -167,9 +167,9 @@ export default class Drawer extends Component {
                     <TemporaryContent
                     >
                         {catalogList.map(({name, icon, link}, index) => {
-                            return (
+                           return (
                                 <TemporaryListItem
-                                    key={`key-${index}-${Date.now()}`}
+                                    key={`key-${index}-${icon}`}
                                     to={link}
                                     elementType={Link}
 
