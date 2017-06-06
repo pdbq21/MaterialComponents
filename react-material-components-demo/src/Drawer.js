@@ -3,6 +3,10 @@
  */
 import React, {Component} from 'react'
 import {
+    Link
+} from 'react-router-dom'
+
+import {
     DrawerListItemDetail,
     DrawerTemporary,
     TemporaryContent,
@@ -21,85 +25,112 @@ export default class Drawer extends Component {
             catalogList: [
                 {
                     name: 'Home',
-                    icon: 'home'
+                    icon: 'home',
+                    link: '/'
                 },{
                     name: 'Button',
-                    icon: 'add_circle'
+                    icon: 'add_circle',
+                    link: '/button'
                 },{
                     name: 'Card',
-                    icon: 'dashboard'
+                    icon: 'dashboard',
+                    link: '/card'
                 },{
                     name: 'Checkbox',
-                    icon: 'check_box'
+                    icon: 'check_box',
+                    link: '/checkbox'
                 },{
                     name: 'Dialog',
-                    icon: 'chat_bubble'
+                    icon: 'chat_bubble',
+                    link: '/dialog'
                 },{
                     name: 'Drawer Temporary',
-                    icon: 'chrome_reader_mode'
+                    icon: 'chrome_reader_mode',
+                    link: '/drawer_temporary'
                 },{
                     name: 'Drawer Persistent',
-                    icon: 'chrome_reader_mode'
+                    icon: 'chrome_reader_mode',
+                    link: '/drawer_persistent'
                 },{
                     name: 'Drawer Permanent Above Toolbar',
-                    icon: 'chrome_reader_mode'
+                    icon: 'chrome_reader_mode',
+                    link: '/drawer_permanent_above_toolbar'
                 },{
                     name: 'Drawer Permanent Below Toolbar',
-                    icon: 'chrome_reader_mode'
+                    icon: 'chrome_reader_mode',
+                    link: '/drawer_permanent_below_toolbar'
                 },{
                     name: 'Elevation',
-                    icon: 'filter_none'
+                    icon: 'filter_none',
+                    link: '/elevation'
                 },{
                     name: 'FAB',
-                    icon: 'add_circle'
+                    icon: 'add_circle',
+                    link: '/fab'
                 },{
                     name: 'Grid List',
-                    icon: 'grid_on'
+                    icon: 'grid_on',
+                    link: '/grid_list'
                 },{
                     name: 'Icon',
-                    icon: 'filter_hdr'
+                    icon: 'filter_hdr',
+                    link: '/icon'
                 },{
                     name: 'Icon Toggle',
-                    icon: 'favorite'
+                    icon: 'favorite',
+                    link: '/icon_toggle'
                 },{
                     name: 'Layout Grid',
-                    icon: 'line_style'
+                    icon: 'line_style',
+                    link: '/layout_grid'
                 },{
                     name: 'List',
-                    icon: 'list'
+                    icon: 'list',
+                    link: '/list'
                 },{
                     name: 'Radio',
-                    icon: 'radio_button_checked'
+                    icon: 'radio_button_checked',
+                    link: '/radio'
                 },{
                     name: 'Ripple',
-                    icon: 'leak_add'
+                    icon: 'leak_add',
+                    link: '/ripple'
                 },{
                     name: 'Select',
-                    icon: 'select_all'
+                    icon: 'select_all',
+                    link: '/select'
                 },{
                     name: 'Simple Menu',
-                    icon: 'menu'
+                    icon: 'menu',
+                    link: '/simple_menu'
                 },{
                     name: 'Snackbar',
-                    icon: 'video_label'
+                    icon: 'video_label',
+                    link: '/snackbar'
                 },{
                     name: 'Switch',
-                    icon: 'toll'
+                    icon: 'toll',
+                    link: '/switch'
                 },{
                     name: 'Tabs',
-                    icon: 'tab'
+                    icon: 'tab',
+                    link: '/tabs'
                 },{
                     name: 'Textfield',
-                    icon: 'text_format'
+                    icon: 'text_format',
+                    link: '/textfield'
                 },{
                     name: 'Theme',
-                    icon: 'palette'
+                    icon: 'palette',
+                    link: '/theme'
                 },{
                     name: 'Toolbar',
-                    icon: 'web_asset'
+                    icon: 'web_asset',
+                    link: '/toolbar'
                 },{
                     name: 'Typography',
-                    icon: 'format_size'
+                    icon: 'format_size',
+                    link: '/typography'
                 },
 
             ]
@@ -135,12 +166,13 @@ export default class Drawer extends Component {
                     </TemporaryHeader>
                     <TemporaryContent
                     >
-                        {catalogList.map(({name, icon}, index) => {
+                        {catalogList.map(({name, icon, link}, index) => {
                             return (
                                 <TemporaryListItem
                                     key={`key-${index}-${Date.now()}`}
-                                    onClick={() => console.log(2005)}
-                                    href="#"
+                                    to={link}
+                                    elementType={Link}
+
                                 >
                                     <DrawerListItemDetail
                                         start

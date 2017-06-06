@@ -1,7 +1,7 @@
 /**
- * Created by ruslan on 18.05.17.
+ * Created by ruslan on 05.06.17.
  */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
     Button,
     Card,
@@ -116,13 +116,15 @@ import {
     TypographyHeadline,
     TypographySubheading,
     TypographyTitle,
-} from './lib'
+} from '../lib'
 
-export default class Main extends Component {
+
+export default class ButtonPage extends Component {
+
     render() {
         return (
-            <div>
-
+            <div >
+                ButtonPage
             </div>
         )
     }

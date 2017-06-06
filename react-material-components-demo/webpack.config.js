@@ -10,9 +10,9 @@ module.exports = {
         App: "./App.js",
     },
     output: {
-        path: __dirname + "/assets",
+        path: __dirname + "/",
         filename: "[name].bundle.js",
-        publicPath: "/assets"
+        publicPath: "/"
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -20,8 +20,10 @@ module.exports = {
     devServer: {
         contentBase: __dirname + "/src",
         compress: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true,
     },
+
     module: {
         loaders: [
             {

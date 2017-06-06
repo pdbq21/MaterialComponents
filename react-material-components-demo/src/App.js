@@ -4,123 +4,16 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {
-    Button,
-    Card,
-    CardActionItem,
-    CardActions,
-    CardHorizontalBlock,
-    CardMedia,
-    CardMediaItem,
-    CardPrimary,
-    CardPrimarySubtitle,
-    CardPrimaryTitle,
-    CardSupportingText,
-    Checkbox,
-    CheckboxBackground,
-    CheckboxCheckmark,
-    CheckboxInput,
-    CheckboxLabel,
-    CheckboxMixedmark,
-    CheckboxPath,
-    Dialog,
-    DialogBody,
-    DialogFooter,
-    DialogFooterButton,
-    DialogHeader,
-    DialogSurface,
-    DialogTitle,
-    DrawerListItemDetail,
-    DrawerPermanent,
-    DrawerPersistent,
-    DrawerTemporary,
-    Elevation,
-    FAB,
-    FABIcon,
-    FormField,
-    GridList,
-    GridListTile,
-    GridListTileContent,
-    GridListTileIcon,
-    GridListTilePrimary,
-    GridListTileSecondary,
-    GridListTileSupportText,
-    GridListTileTitle,
-    GridListTiles,
-    Hint,
-    HintElevation,
-    HintInput,
-    HintLabel,
-    HintList,
-    HintTags,
-    HintTextfield,
-    IconToggle,
-    LayoutGrid,
-    LayoutGridCell,
-    List,
-    ListDivider,
-    ListGroup,
-    ListGroupSubheader,
-    ListItem,
-    ListItemDetail,
-    ListItemText,
-    ListItemTextPrimary,
-    ListItemTextSecondary,
-    PermanentContent,
-    PermanentList,
-    PermanentListItem,
-    PermanentToolbarSpacer,
-    PersistentContent,
-    PersistentDrawer,
-    PersistentHeader,
-    PersistentHeaderContent,
-    PersistentListItem,
-    PersistentToolbarSpacer,
-    Radio,
-    RadioInput,
-    Ripple,
-    Select,
-    SelectItem,
-    SelectItems,
-    SelectMenu,
-    SelectText,
-    SimpleMenu,
-    SimpleMenuAnchor,
-    SimpleMenuItems,
-    SimpleMenuListItem,
-    Snackbar,
-    SnackbarActionButton,
-    SnackbarActionWrapper,
-    SnackbarText,
-    Switch,
-    SwitchInput,
-    SwitchLabel,
-    TemporaryContent,
-    TemporaryDrawer,
-    TemporaryHeader,
-    TemporaryHeaderContent,
-    TemporaryListItem,
-    TemporaryToolbarSpacer,
-    Textfield,
-    TextfieldHelptext,
-    TextfieldInput,
-    TextfieldLabel,
-    Theme,
-    Toolbar,
-    ToolbarMain,
-    ToolbarRow,
-    ToolbarSection,
-    ToolbarTitle,
-    Typography,
-    TypographyBody,
-    TypographyCaption,
-    TypographyDisplay,
-    TypographyHeadline,
-    TypographySubheading,
-    TypographyTitle,
-} from './lib'
+    BrowserRouter as Router,
+    Route,
+    Link
+    // etc.
+} from 'react-router-dom'
+
+
 import Header from './Header'
-import Main from './main'
 import Drawer from './Drawer'
+import Main from './Main'
 
 class App extends Component {
     constructor(props) {
@@ -152,10 +45,12 @@ class App extends Component {
         this.setOpen(false);
     }
 
+
     render() {
         const {isOpenMenu} = this.state;
         return (
-            <div    onClick={() => console.log(25)}        >
+        <Router>
+            <div>
                 <Header
                     handleShowMenu={this.handleShowMenu}
                 />
@@ -165,11 +60,69 @@ class App extends Component {
                     handleClose={this.handleClose}
                 />
                 <Main/>
+
             </div>
-        )
+        </Router>
+            )
     }
 }
+
+const Home = () => (
+    <div>
+        <h2>Home</h2>
+    </div>
+)
+
+const About = () => (
+    <div>
+        <h2>About</h2>
+    </div>
+)
+
+const Topic = (e) => {
+    console.log(e);
+    return (<div>
+        <h3>{e.match.params.topicId}</h3>
+    </div>)
+}
+
+const Topics = ({ match }) => (
+    <div>
+        <h2>Topics</h2>
+        <ul>
+            <li>
+                <Link to={`${match.url}/rendering`}>
+                    Rendering with React
+                </Link>
+            </li>
+            <li>
+                <Link to={`${match.url}/components`}>
+                    Components
+                </Link>
+            </li>
+            <li>
+                <Link to={`${match.url}/props-v-state`}>
+                    Props v. State
+                </Link>
+            </li>
+        </ul>
+
+        <Route path={`${match.url}/:topicId`} component={Topic}/>
+        <Route exact path={match.url} render={() => (
+            <h3>Please select a topic.</h3>
+        )}/>
+    </div>
+)
 
 ReactDOM.render(
     <App/>, document.getElementById('root')
 );
+
+/*<div className='container'>
+ <h1>App</h1>
+ <ul>
+ <li><Link to='/button'>button</Link></li>
+ </ul>
+ {/!* добавили вывод потомков *!/}
+ {this.props.children}
+ </div>*/
