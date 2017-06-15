@@ -10,7 +10,7 @@ import {
 } from '../lib'
 
 
-export default class ButtonPage extends Component {
+export default class ElevationPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +32,7 @@ export default class ButtonPage extends Component {
                             required: 'no',
                             defaultValue: '0 | 0 - 24',
                             description: 'задає розбір підйому'
-                        },{
+                        }, {
                             name: 'transition',
                             type: 'bool',
                             required: 'no',
@@ -111,21 +111,18 @@ class ElevationDemo extends Component {
     }
 
 
+    setMouseIn(mouseIn) {
+        this.setState({mouseIn});
+    }
 
+    handleMouseEnter() {
+        this.setMouseIn(true);
+    }
 
+    handleMouseOut() {
+        this.setMouseIn(false);
+    }
 
-
-setMouseIn(mouseIn) {
-    this.setState({mouseIn});
-}
-
-handleMouseEnter() {
-    this.setMouseIn(true);
-}
-
-handleMouseOut() {
-    this.setMouseIn(false);
-}
     render() {
         const {mouseIn} = this.state;
         return (
@@ -184,26 +181,26 @@ handleMouseOut() {
                 >
                     <TypographyDisplay size="1">Elevation</TypographyDisplay>
                     {(function (blocks, i, len) {
-                            while (++i <= len) {
-                                blocks.push(<Elevation
-                                    key={`key-${i}`}
-                                    zSpace={i}
-                                    style={{
-                                        'height': '10em',
-                                        'width': '12em',
-                                        'display': 'flex',
-                                        'alignItems': 'center',
-                                        'justifyContent': 'center',
-                                        'margin': '2em',
-                                    }}
-                                >{`${i}dp (mdc-elevation--z${i})`}</Elevation>)
-                            }
-                            return blocks;
-                        })([], -1, 24)}
+                        while (++i <= len) {
+                            blocks.push(<Elevation
+                                key={`key-${i}`}
+                                zSpace={i}
+                                style={{
+                                    'height': '10em',
+                                    'width': '12em',
+                                    'display': 'flex',
+                                    'alignItems': 'center',
+                                    'justifyContent': 'center',
+                                    'margin': '2em',
+                                }}
+                            >{`${i}dp (mdc-elevation--z${i})`}</Elevation>)
+                        }
+                        return blocks;
+                    })([], -1, 24)}
 
                     <TypographyDisplay size="1">Elevation with transition</TypographyDisplay>
                     <Elevation
-                        zSpace={(mouseIn)? 8 : 2}
+                        zSpace={(mouseIn) ? 8 : 2}
                         transition
                         onMouseEnter={this.handleMouseEnter}
                         onMouseOut={this.handleMouseOut}

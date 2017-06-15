@@ -72,7 +72,7 @@ export default class Drawer extends Component {
                     name: 'Elevation',
                     icon: 'filter_none',
                     link: '/elevation',
-                    todo: true
+                    todo: false
                 },{
                     name: 'FAB',
                     icon: 'add_circle',
