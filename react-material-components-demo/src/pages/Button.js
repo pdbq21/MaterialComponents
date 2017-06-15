@@ -7,6 +7,7 @@ import {
     Button,
     Elevation,
     TypographyDisplay,
+    TypographyBody,
 } from '../lib'
 
 
@@ -60,16 +61,71 @@ export default class ButtonPage extends Component {
                             type: 'bool',
                             required: 'no',
                             defaultValue: 'false',
-                            description: 'додає Ripple ефект для кнопки'
+                            description: 'додає Ripple ефект'
+                        }, {
+                            name: 'disabled',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: 'кнопка не активна. працює якщо тип кнопки button'
                         },
                     ]
                 }
             ],
             used: `
-import {h, Component} from 'preact';
-import Button from 'preact-material-components/Button';
-import 'preact-material-components/Button/style.css';
+import React, {Component} from 'react'
+import {
+    Button,
+    Elevation,
+    TypographyDisplay,
+} from '../lib'
 
+class ButtonDemo extends Component {
+    render() {
+        return (
+            <section>
+                <Elevation
+                    zSpace="2"
+                >
+                    <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
+                    <Button ripple>Default</Button>
+                    <Button raised ripple>Raised</Button>
+                    <Button dense ripple>Dense</Button>
+                    <Button dense raised ripple>Dense Raised</Button>
+                    <Button compact ripple>Compact</Button>
+                    <Button compact raised ripple>Compact Raised</Button>
+                    <Button primary ripple>Primary</Button>
+                    <Button primary raised ripple>primary raised</Button>
+                    <Button accent ripple>accent</Button>
+                    <Button accent raised ripple>accent raised</Button>
+                    <Button elementType="div" raised ripple>div raised</Button>
+                    <TypographyDisplay size="1">Buttons CSS Only</TypographyDisplay>
+                    <Button>Default</Button>
+                    <Button raised>Raised</Button>
+                    <Button dense>Dense</Button>
+                    <Button dense raised>Dense Raised</Button>
+                    <Button compact>Compact</Button>
+                    <Button compact raised>Compact Raised</Button>
+                    <Button primary>Primary</Button>
+                    <Button primary>primary raised</Button>
+                    <Button accent>accent</Button>
+                    <Button accent raised>accent raised</Button>
+                    <Button elementType="div" raised>div raised</Button>
+                    <TypographyDisplay size="1">Disabled</TypographyDisplay>
+                    <Button disabled>Default</Button>
+                    <Button raised disabled>Raised</Button>
+                    <Button dense disabled>Dense</Button>
+                    <Button dense raised disabled>Dense Raised</Button>
+                    <Button compact disabled>Compact</Button>
+                    <Button compact raised disabled>Compact Raised</Button>
+                    <Button primary disabled>Primary</Button>
+                    <Button primary raised disabled>primary raised</Button>
+                    <Button accent disabled>accent</Button>
+                    <Button accent raised disabled>accent raised</Button>
+                </Elevation>
+            </section>
+        )
+    }
 }`
         };
         this.renderTable = this.renderTable.bind(this);
@@ -145,45 +201,80 @@ import 'preact-material-components/Button/style.css';
                 <Elevation
                     zSpace="2"
                     style={{
-                        'minHeight': '100px',
+                        'minHeight': '10em',
                         'display': 'flex',
                         'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '100px',
+                        'flexDirection': 'column'
                     }}
                 >
-                    Original documentation
+                    <TypographyDisplay size="1">Original documentation</TypographyDisplay>
+                    <TypographyBody>
+                        This component is based on the MDC Button, you can refer to its documentation <a
+                            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+                        >here</a>.
+                    </TypographyBody>
                 </Elevation>
                 <Elevation
                     zSpace="2"
-                    style={{
-                        'minHeight': '360px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
-                    }}
                 >
+                    <TypographyDisplay size="1">Demo code</TypographyDisplay>
                     <Highlight language={'javascript'}>
                         {this.state.used}
                     </Highlight>
                 </Elevation>
                 <Elevation
                     zSpace="2"
+                    className="demo-page-button"
+                >
+                    <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
+                    <Button ripple>Default</Button>
+                    <Button raised ripple>Raised</Button>
+                    <Button dense ripple>Dense</Button>
+                    <Button dense raised ripple>Dense Raised</Button>
+                    <Button compact ripple>Compact</Button>
+                    <Button compact raised ripple>Compact Raised</Button>
+                    <Button primary ripple>Primary</Button>
+                    <Button primary raised ripple>primary raised</Button>
+                    <Button accent ripple>accent</Button>
+                    <Button accent raised ripple>accent raised</Button>
+                    <Button elementType="div" raised ripple>div raised</Button>
+                    <TypographyDisplay size="1">Buttons CSS Only</TypographyDisplay>
+                    <Button>Default</Button>
+                    <Button raised>Raised</Button>
+                    <Button dense>Dense</Button>
+                    <Button dense raised>Dense Raised</Button>
+                    <Button compact>Compact</Button>
+                    <Button compact raised>Compact Raised</Button>
+                    <Button primary>Primary</Button>
+                    <Button primary>primary raised</Button>
+                    <Button accent>accent</Button>
+                    <Button accent raised>accent raised</Button>
+                    <Button elementType="div" raised>div raised</Button>
+                    <TypographyDisplay size="1">Disabled</TypographyDisplay>
+                    <Button disabled>Default</Button>
+                    <Button raised disabled>Raised</Button>
+                    <Button dense disabled>Dense</Button>
+                    <Button dense raised disabled>Dense Raised</Button>
+                    <Button compact disabled>Compact</Button>
+                    <Button compact raised disabled>Compact Raised</Button>
+                    <Button primary disabled>Primary</Button>
+                    <Button primary raised disabled>primary raised</Button>
+                    <Button accent disabled>accent</Button>
+                    <Button accent raised disabled>accent raised</Button>
+                </Elevation>
+                <Elevation
+                    zSpace="2"
                     style={{
-                        'minHeight': '360px',
+                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
+                        'minHeight': '50px',
                         'display': 'flex',
                         'alignItems': 'center',
                         'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
+                        'marginTop': '1em'
                     }}
                 >
-                    demo
+github
                 </Elevation>
-
             </section>
         )
     }
