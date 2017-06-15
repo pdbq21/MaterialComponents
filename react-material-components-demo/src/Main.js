@@ -10,7 +10,7 @@ import {
 import {
     ToolbarMain,
 } from './lib'
-import {Home, Button, Card, Checkbox} from './pages'
+import {Home, Button, Card, Checkbox, Dialog} from './pages'
 
 export default class Main extends Component {
     render() {
@@ -23,6 +23,7 @@ export default class Main extends Component {
                         <Route path='/button' component={Button}/>
                         <Route path='/card' component={Card}/>
                         <Route path='/checkbox' component={Checkbox}/>
+                        <Route path='/dialog' component={Dialog}/>
                     </SwitchRoute>
                 </ToolbarMain>
         )
