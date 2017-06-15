@@ -32,6 +32,7 @@ body{
 .table-props td, .table-props th {
     padding: 8px;
 }
-.demo-page-button > .mdc-button{
+.demo-page-button > .mdc-button,
+.demo-page-card > .mdc-card{
     margin: 10px;
 }
