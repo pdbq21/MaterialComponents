@@ -6,3 +6,4 @@ export Home from './Home';
 export Card from './Card';
 export Checkbox from './Checkbox';
 export Dialog from './Dialog';
+export Elevation from './Elevation';

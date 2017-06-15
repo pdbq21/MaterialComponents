@@ -26,111 +26,138 @@ export default class Drawer extends Component {
                 {
                     name: 'Home',
                     icon: 'home',
-                    link: '/'
+                    link: '/',
+                    todo: true
                 },{
                     name: 'Button',
                     icon: 'add_circle',
-                    link: '/button'
+                    link: '/button',
+                    todo: false
                 },{
                     name: 'Card',
                     icon: 'dashboard',
-                    link: '/card'
+                    link: '/card',
+                    todo: false
                 },{
                     name: 'Checkbox',
                     icon: 'check_box',
-                    link: '/checkbox'
+                    link: '/checkbox',
+                    todo: false
                 },{
                     name: 'Dialog',
                     icon: 'chat_bubble',
-                    link: '/dialog'
+                    link: '/dialog',
+                    todo: true
                 },{
                     name: 'Drawer Temporary',
                     icon: 'chrome_reader_mode',
-                    link: '/drawer_temporary'
+                    link: '/drawer_temporary',
+                    todo: true
                 },{
                     name: 'Drawer Persistent',
                     icon: 'chrome_reader_mode',
-                    link: '/drawer_persistent'
+                    link: '/drawer_persistent',
+                    todo: true
                 },{
                     name: 'Drawer Permanent Above Toolbar',
                     icon: 'chrome_reader_mode',
-                    link: '/drawer_permanent_above_toolbar'
+                    link: '/drawer_permanent_above_toolbar',
+                    todo: true
                 },{
                     name: 'Drawer Permanent Below Toolbar',
                     icon: 'chrome_reader_mode',
-                    link: '/drawer_permanent_below_toolbar'
+                    link: '/drawer_permanent_below_toolbar',
+                    todo: true
                 },{
                     name: 'Elevation',
                     icon: 'filter_none',
-                    link: '/elevation'
+                    link: '/elevation',
+                    todo: true
                 },{
                     name: 'FAB',
                     icon: 'add_circle',
-                    link: '/fab'
+                    link: '/fab',
+                    todo: true
                 },{
                     name: 'Grid List',
                     icon: 'grid_on',
-                    link: '/grid_list'
+                    link: '/grid_list',
+                    todo: true
                 },{
                     name: 'Icon',
                     icon: 'filter_hdr',
-                    link: '/icon'
+                    link: '/icon',
+                    todo: true
                 },{
                     name: 'Icon Toggle',
                     icon: 'favorite',
-                    link: '/icon_toggle'
+                    link: '/icon_toggle',
+                    todo: true
                 },{
                     name: 'Layout Grid',
                     icon: 'line_style',
-                    link: '/layout_grid'
+                    link: '/layout_grid',
+                    todo: true
                 },{
                     name: 'List',
                     icon: 'list',
-                    link: '/list'
+                    link: '/list',
+                    todo: true
                 },{
                     name: 'Radio',
                     icon: 'radio_button_checked',
-                    link: '/radio'
+                    link: '/radio',
+                    todo: true
                 },{
                     name: 'Ripple',
                     icon: 'leak_add',
-                    link: '/ripple'
+                    link: '/ripple',
+                    todo: true
                 },{
                     name: 'Select',
                     icon: 'select_all',
-                    link: '/select'
+                    link: '/select',
+                    todo: true
                 },{
                     name: 'Simple Menu',
                     icon: 'menu',
-                    link: '/simple_menu'
+                    link: '/simple_menu',
+                    todo: true
                 },{
                     name: 'Snackbar',
                     icon: 'video_label',
-                    link: '/snackbar'
+                    link: '/snackbar',
+                    todo: true
                 },{
                     name: 'Switch',
                     icon: 'toll',
-                    link: '/switch'
+                    link: '/switch',
+                    todo: true
                 },{
                     name: 'Tabs',
                     icon: 'tab',
-                    link: '/tabs'
+                    link: '/tabs',
+                    todo: true
                 },{
                     name: 'Textfield',
                     icon: 'text_format',
-                    link: '/textfield'
+                    link: '/textfield',
+                    todo: true
                 },{
                     name: 'Theme',
                     icon: 'palette',
-                    link: '/theme'
+                    link: '/theme',
+                    todo: true
                 },{
                     name: 'Toolbar',
                     icon: 'web_asset',
-                    link: '/toolbar'
+                    link: '/toolbar',
+                    todo: true
                 },{
                     name: 'Typography',
                     icon: 'format_size',
-                    link: '/typography'
+                    link: '/typography',
+                    todo: true
                 },
 
             ]
@@ -166,13 +193,13 @@ export default class Drawer extends Component {
                     </TemporaryHeader>
                     <TemporaryContent
                     >
-                        {catalogList.map(({name, icon, link}, index) => {
+                        {catalogList.map(({name, icon, link, todo}, index) => {
                            return (
                                 <TemporaryListItem
                                     key={`key-${index}-${icon}`}
                                     to={link}
                                     elementType={Link}
-
+                                    className={(todo)? 'todo-page' : ''}
                                 >
                                     <DrawerListItemDetail
                                         start
