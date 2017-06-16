@@ -13,3 +13,5 @@ export IconToggle from './IconToggle';
 export Switch from './Switch';
 export Radio from './Radio';
 export FAB from './FAB';
+export LayoutGrid from './LayoutGrid';
+export Icon from './Icon';

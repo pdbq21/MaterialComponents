@@ -20,32 +20,36 @@ import {
     Typography,
     List,
     IconToggle,
-Switch,
+    Switch,
     Radio,
-    FAB
+    FAB,
+    LayoutGrid,
+    Icon
 } from './pages'
 
 export default class Main extends Component {
     render() {
         return (
-                <ToolbarMain
-                    fixed
-                >
-                    <SwitchRoute>
-                        <Route exact path='/' component={Home}/>
-                        <Route path='/button' component={Button}/>
-                        <Route path='/card' component={Card}/>
-                        <Route path='/checkbox' component={Checkbox}/>
-                        <Route path='/dialog' component={Dialog}/>
-                        <Route path='/elevation' component={Elevation}/>
-                        <Route path='/typography' component={Typography}/>
-                        <Route path='/list' component={List}/>
-                        <Route path='/icon_toggle' component={IconToggle}/>
-                        <Route path='/switch' component={Switch}/>
-                        <Route path='/radio' component={Radio}/>
-                        <Route path='/fab' component={FAB}/>
-                    </SwitchRoute>
-                </ToolbarMain>
+            <ToolbarMain
+                fixed
+            >
+                <SwitchRoute>
+                    <Route exact path='/' component={Home}/>
+                    <Route path='/button' component={Button}/>
+                    <Route path='/card' component={Card}/>
+                    <Route path='/checkbox' component={Checkbox}/>
+                    <Route path='/dialog' component={Dialog}/>
+                    <Route path='/elevation' component={Elevation}/>
+                    <Route path='/typography' component={Typography}/>
+                    <Route path='/list' component={List}/>
+                    <Route path='/icon_toggle' component={IconToggle}/>
+                    <Route path='/switch' component={Switch}/>
+                    <Route path='/radio' component={Radio}/>
+                    <Route path='/fab' component={FAB}/>
+                    <Route path='/layout_grid' component={LayoutGrid}/>
+                    <Route path='/icon' component={Icon}/>
+                </SwitchRoute>
+            </ToolbarMain>
         )
     }
 }

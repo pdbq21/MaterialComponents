@@ -87,7 +87,7 @@ export default class Drawer extends Component {
                     name: 'Icon',
                     icon: 'filter_hdr',
                     link: '/icon',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Icon Toggle',
                     icon: 'favorite',
