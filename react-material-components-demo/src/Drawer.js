@@ -87,7 +87,7 @@ export default class Drawer extends Component {
                     name: 'Grid List',
                     icon: 'grid_on',
                     link: '/grid_list',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Icon',
                     icon: 'filter_hdr',

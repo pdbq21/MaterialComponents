@@ -43,6 +43,7 @@ export default class Radio extends PureComponent {
             children,
             className,
             gutter,
+            elementType,
             header,
             twoline,
             alignStart,
@@ -59,14 +60,15 @@ export default class Radio extends PureComponent {
             'mdc-grid-list--with-icon-align-end': alignEnd,
         [`mdc-grid-list--tile-aspect-${aspect}`]: aspect
         }, className);
+        const ElementType =  elementType || 'div';
         return (
-            <div
+            <ElementType
                 ref="root"
                 className={classes}
                 {...otherProp}
             >
                 {children}
-            </div>
+            </ElementType>
         );
     }
 

@@ -17,3 +17,4 @@ export LayoutGrid from './LayoutGrid';
 export Icon from './Icon';
 export Ripple from './Ripple';
 export FormField from './FormField';
+export GridList from './GridList';

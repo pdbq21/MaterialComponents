@@ -26,7 +26,8 @@ import {
     LayoutGrid,
     Icon,
     Ripple,
-    FormField
+    FormField,
+    GridList
 } from './pages'
 
 export default class Main extends Component {
@@ -91,9 +92,13 @@ export default class Main extends Component {
                     path: 'ripple',
                     component: Ripple
                 },
-{
+                {
                     path: 'form_field',
                     component: FormField
+                },
+                {
+                    path: 'grid_list',
+                    component: GridList
                 },
 
             ]
@@ -119,7 +124,7 @@ export default class Main extends Component {
                 fixed
             >
                 <SwitchRoute>
-                    <Route exact path='/' component={Home} />
+                    <Route exact path='/' component={Home}/>
                     {this.renderRoute()}
                 </SwitchRoute>
             </ToolbarMain>
