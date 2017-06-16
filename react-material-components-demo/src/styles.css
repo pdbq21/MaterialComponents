@@ -48,10 +48,14 @@ body{
     margin-left: 1em;
 }
 
-.demo-page-icon_toggle>.mdc-icon-toggle{
+
+.demo-page-icon_toggle>.mdc-icon-toggle,
+.demo-page-switch>.mdc-switch,
+.demo-page-fab>.mdc-fab{
     margin-left: 1em;
 }
-
-.demo-page-switch>.mdc-switch{
-    margin-left: 1em;
+.demo-page-icon_toggle>.mdc-icon-toggle:last-child,
+.demo-page-switch>.mdc-switch:last-child,
+.demo-page-fab>.mdc-fab:last-child{
+    margin-bottom: 1em;
 }

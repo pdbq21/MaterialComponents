@@ -21,7 +21,8 @@ import {
     List,
     IconToggle,
 Switch,
-    Radio
+    Radio,
+    FAB
 } from './pages'
 
 export default class Main extends Component {
@@ -42,6 +43,7 @@ export default class Main extends Component {
                         <Route path='/icon_toggle' component={IconToggle}/>
                         <Route path='/switch' component={Switch}/>
                         <Route path='/radio' component={Radio}/>
+                        <Route path='/fab' component={FAB}/>
                     </SwitchRoute>
                 </ToolbarMain>
         )

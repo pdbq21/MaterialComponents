@@ -12,3 +12,4 @@ export List from './List';
 export IconToggle from './IconToggle';
 export Switch from './Switch';
 export Radio from './Radio';
+export FAB from './FAB';

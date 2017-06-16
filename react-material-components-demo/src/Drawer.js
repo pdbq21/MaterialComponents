@@ -77,7 +77,7 @@ export default class Drawer extends Component {
                     name: 'FAB',
                     icon: 'add_circle',
                     link: '/fab',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Grid List',
                     icon: 'grid_on',
