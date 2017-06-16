@@ -59,6 +59,7 @@ body{
 .demo-page-fab>.mdc-fab:last-child{
     margin-bottom: 1em;
 }
-.demo-page-icon>.material-icons{
+.demo-page-icon>.material-icons,
+.demo-page-ripple>.mdc-ripple-surface{
     margin: 0 1em 1em 1em;
 }

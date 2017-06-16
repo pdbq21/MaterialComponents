@@ -24,30 +24,98 @@ import {
     Radio,
     FAB,
     LayoutGrid,
-    Icon
+    Icon,
+    Ripple
 } from './pages'
 
 export default class Main extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            routes: [
+                {
+                    path: 'button',
+                    component: Button
+                },
+                {
+                    path: 'card',
+                    component: Card
+                },
+                {
+                    path: 'checkbox',
+                    component: Checkbox
+                },
+                {
+                    path: 'dialog',
+                    component: Dialog
+                },
+                {
+                    path: 'elevation',
+                    component: Elevation
+                },
+                {
+                    path: 'typography',
+                    component: Typography
+                },
+                {
+                    path: 'list',
+                    component: List
+                },
+                {
+                    path: 'icon_toggle',
+                    component: IconToggle
+                },
+                {
+                    path: 'switch',
+                    component: Switch
+                },
+                {
+                    path: 'radio',
+                    component: Radio
+                },
+                {
+                    path: 'fab',
+                    component: FAB
+                },
+                {
+                    path: 'layout_grid',
+                    component: LayoutGrid
+                },
+                {
+                    path: 'icon',
+                    component: Icon
+                },
+                {
+                    path: 'ripple',
+                    component: Ripple
+                },
+
+            ]
+        };
+        this.renderRoute = this.renderRoute.bind(this);
+    }
+
+    renderRoute() {
+        const {routes} = this.state;
+        return routes.map(({path, component}, index) => (
+                <Route
+                    key={`key-route-${index}`}
+                    path={`/${path}`}
+                    component={component}
+                />
+            )
+        )
+    }
+
     render() {
         return (
             <ToolbarMain
                 fixed
             >
                 <SwitchRoute>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/button' component={Button}/>
-                    <Route path='/card' component={Card}/>
-                    <Route path='/checkbox' component={Checkbox}/>
-                    <Route path='/dialog' component={Dialog}/>
-                    <Route path='/elevation' component={Elevation}/>
-                    <Route path='/typography' component={Typography}/>
-                    <Route path='/list' component={List}/>
-                    <Route path='/icon_toggle' component={IconToggle}/>
-                    <Route path='/switch' component={Switch}/>
-                    <Route path='/radio' component={Radio}/>
-                    <Route path='/fab' component={FAB}/>
-                    <Route path='/layout_grid' component={LayoutGrid}/>
-                    <Route path='/icon' component={Icon}/>
+                    <Route exact path='/' component={Home} />
+                    {this.renderRoute()}
                 </SwitchRoute>
             </ToolbarMain>
         )

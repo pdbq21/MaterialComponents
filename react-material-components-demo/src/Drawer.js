@@ -112,7 +112,7 @@ export default class Drawer extends Component {
                     name: 'Ripple',
                     icon: 'leak_add',
                     link: '/ripple',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Select',
                     icon: 'select_all',

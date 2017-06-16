@@ -15,3 +15,4 @@ export Radio from './Radio';
 export FAB from './FAB';
 export LayoutGrid from './LayoutGrid';
 export Icon from './Icon';
+export Ripple from './Ripple';
