@@ -93,7 +93,7 @@ class IconToggleDemo extends Component {
         this.state = {
             toggle: false,
         }
-        
+    }    
     render() {
     const { toggle } = this.state;
         return (

@@ -51,3 +51,7 @@ body{
 .demo-page-icon_toggle>.mdc-icon-toggle{
     margin-left: 1em;
 }
+
+.demo-page-switch>.mdc-switch{
+    margin-left: 1em;
+}

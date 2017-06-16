@@ -132,7 +132,7 @@ export default class Drawer extends Component {
                     name: 'Switch',
                     icon: 'toll',
                     link: '/switch',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Tabs',
                     icon: 'tab',

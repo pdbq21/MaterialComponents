@@ -10,3 +10,4 @@ export Elevation from './Elevation';
 export Typography from './Typography';
 export List from './List';
 export IconToggle from './IconToggle';
+export Switch from './Switch';

@@ -8,7 +8,6 @@ import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    forId: PropTypes.string,
     disabled: PropTypes.bool,
 };
 const Switch = ({
