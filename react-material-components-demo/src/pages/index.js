@@ -11,3 +11,4 @@ export Typography from './Typography';
 export List from './List';
 export IconToggle from './IconToggle';
 export Switch from './Switch';
+export Radio from './Radio';

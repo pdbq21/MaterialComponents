@@ -4,31 +4,33 @@
 import React, {Component} from 'react'
 import Highlight from 'react-highlight.js'
 import {
-    Switch,
-    SwitchInput,
-    SwitchLabel,
+    Radio,
+    RadioInput,
     Elevation,
+    FormField,
     TypographyHeadline,
     TypographyDisplay,
     TypographyBody,
 } from '../lib'
 
 
-export default class ButtonPage extends Component {
+export default class RadioPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSwitch: false,
+            checked: true,
+            checked_1: true,
+            checked_2: true,
             components: [
                 {
-                    name: 'Switch',
+                    name: 'Radio',
                     property: [
                         {
-                            name: 'elementType',
-                            type: 'string | React Component',
+                            name: 'ripple',
+                            type: 'bool',
                             required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
+                            defaultValue: 'false',
+                            description: 'додає Ripple ефект'
                         },
                         {
                             name: 'disabled',
@@ -39,25 +41,10 @@ export default class ButtonPage extends Component {
                         },
                     ]
                 },{
-                    name: 'SwitchInput',
+                    name: 'RadioInput',
                     property: [
                         {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активним'
-                        },
-                    ]
-                },{
-                    name: 'SwitchLabel',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'label',
-                            description: 'задає тег елемента'
+                            description: 'no specific props'
                         },
                     ]
                 },
@@ -65,42 +52,34 @@ export default class ButtonPage extends Component {
             used: `
 import React, {Component} from 'react'
 import {
-    Switch,
-    SwitchInput,
-    SwitchLabel,
+    Radio,
+    RadioInput,
     Elevation,
     TypographyDisplay,
 } from '../lib'
 
-class ButtonDemo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isSwitch: false,
-        }
-    }
+class RadioDemo extends Component {
+
     render() {
-    const { isSwitch } = this.state;
         return (
             <section>
                 <Elevation
                     zSpace="2"
                 >
-                    <TypographyDisplay size="1">Switch</TypographyDisplay>
-                    <TypographyHeadline size="1">Switch only CSS</TypographyHeadline>
-                    <Switch>
-                        <SwitchInput
-                            onChange={() => this.setState({
-                                isSwitch: !isSwitch,
-                            })}
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            name="radios"
                         />
-                    </Switch>
-                    <SwitchLabel>{(isSwitch)? 'On' : 'Off'}</SwitchLabel>
-                    <TypographyHeadline size="1">Switch only CSS - Disabled</TypographyHeadline>
-                    <Switch disabled>
-                        <SwitchInput disabled />
-                    </Switch>
-                    <SwitchLabel>disabled</SwitchLabel>
+                    </Radio>
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            name="radios"
+                        />
+                    </Radio>
                 </Elevation>
             </section>
         )
@@ -145,7 +124,7 @@ class ButtonDemo extends Component {
     }
 
     render() {
-const { isSwitch } = this.state;
+        const { checked, checked_1, checked_2 } = this.state;
         return (
             <section>
                 <Elevation
@@ -160,9 +139,20 @@ const { isSwitch } = this.state;
                         'height': '360px',
                     }}
                 >
-                    <Switch>
-                        <SwitchInput />
-                    </Switch>
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            name="radios"
+                        />
+                    </Radio>
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            name="radios"
+                        />
+                    </Radio>
                 </Elevation>
                 {this.renderTable()}
 
@@ -177,8 +167,8 @@ const { isSwitch } = this.state;
                 >
                     <TypographyDisplay size="1">Original documentation</TypographyDisplay>
                     <TypographyBody>
-                        This component is based on the MDC Button, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+                        This component is based on the MDC Radio, you can refer to its documentation <a
+                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio"
                     >here</a>.
                     </TypographyBody>
                 </Elevation>
@@ -194,21 +184,74 @@ const { isSwitch } = this.state;
                     zSpace="2"
                     className="demo-page-switch"
                 >
-                    <TypographyDisplay size="1">Switch</TypographyDisplay>
-                    <TypographyHeadline size="1">Switch only CSS</TypographyHeadline>
-                    <Switch>
-                        <SwitchInput
-                            onChange={() => this.setState({
-                                isSwitch: !isSwitch,
+                    <TypographyDisplay size="1">Radio</TypographyDisplay>
+                    <TypographyHeadline size="1">Radio with Ripple</TypographyHeadline>
+                    <FormField>
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            id="my-radio-demo1"
+                            name="radios1"
+                            onChange={({target}) => this.setState({
+                                checked_1: target.checked,
                             })}
                         />
-                    </Switch>
-                    <SwitchLabel>{(isSwitch)? 'On' : 'Off'}</SwitchLabel>
-                    <TypographyHeadline size="1">Switch only CSS - Disabled</TypographyHeadline>
-                    <Switch disabled>
-                        <SwitchInput disabled />
-                    </Switch>
-                    <SwitchLabel>disabled</SwitchLabel>
+                    </Radio>
+                    <label id="my-radio-label1" htmlFor="my-radio-demo1">Radio 1</label>
+                    </FormField>
+                    <FormField>
+                    <Radio
+                        ripple
+                    >
+                        <RadioInput
+                            id="my-radio-demo2"
+                            name="radios1"
+                            onChange={({target}) => this.setState({
+                                checked_1: target.checked,
+                            })}
+                        />
+                    </Radio>
+                    <label id="my-radio-label2" htmlFor="my-radio-demo2">Radio 2</label>
+                    </FormField>
+                    <TypographyHeadline size="1">Radio only CSS</TypographyHeadline>
+                    <FormField>
+                    <Radio>
+                        <RadioInput
+                            id="my-radio-demo3"
+                            name="radios2"
+
+                        />
+                    </Radio>
+                    <label id="my-radio-label3" htmlFor="my-radio-demo3">Radio 1</label>
+                    <Radio>
+                        <RadioInput
+                            id="my-radio-demo4"
+                            name="radios2"
+                        />
+                    </Radio>
+                    <label id="my-radio-label4" htmlFor="my-radio-demo4">Radio 2</label>
+                    </FormField>
+                    <TypographyHeadline size="1">Radio only CSS - Disable</TypographyHeadline>
+                    <FormField>
+                    <Radio disabled>
+                        <RadioInput
+                            id="my-radio-demo5"
+                            name="radios3"
+                            disabled
+                            checked
+                        />
+                    </Radio>
+                    <label id="my-radio-label5" htmlFor="my-radio-demo5">Radio 1</label>
+                    <Radio disabled>
+                        <RadioInput
+                            id="my-radio-demo6"
+                            name="radios3"
+                            disabled
+                        />
+                    </Radio>
+                    <label id="my-radio-label6" htmlFor="my-radio-demo6">Radio 2</label>
+                    </FormField>
                 </Elevation>
                 <Elevation
                     zSpace="2"

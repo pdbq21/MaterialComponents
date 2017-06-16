@@ -38,8 +38,6 @@ function supportsCssVariables(windowObj) {
 
 export default class Radio extends PureComponent {
     static propTypes = {
-        id: PropTypes.string,
-        labelId: PropTypes.string,
         checked: PropTypes.bool,
         disabled: PropTypes.bool,
         onChange: PropTypes.func

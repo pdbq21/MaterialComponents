@@ -107,7 +107,7 @@ export default class Drawer extends Component {
                     name: 'Radio',
                     icon: 'radio_button_checked',
                     link: '/radio',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Ripple',
                     icon: 'leak_add',
