@@ -25,7 +25,8 @@ import {
     FAB,
     LayoutGrid,
     Icon,
-    Ripple
+    Ripple,
+    FormField
 } from './pages'
 
 export default class Main extends Component {
@@ -89,6 +90,10 @@ export default class Main extends Component {
                 {
                     path: 'ripple',
                     component: Ripple
+                },
+{
+                    path: 'form_field',
+                    component: FormField
                 },
 
             ]

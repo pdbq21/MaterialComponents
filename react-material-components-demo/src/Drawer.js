@@ -79,6 +79,11 @@ export default class Drawer extends Component {
                     link: '/fab',
                     todo: false
                 },{
+                    name: 'FormField',
+                    icon: 'code',
+                    link: '/form_field',
+                    todo: false
+                },{
                     name: 'Grid List',
                     icon: 'grid_on',
                     link: '/grid_list',
