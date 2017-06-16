@@ -127,7 +127,7 @@ export default class Drawer extends Component {
                     name: 'Simple Menu',
                     icon: 'menu',
                     link: '/simple_menu',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Snackbar',
                     icon: 'video_label',

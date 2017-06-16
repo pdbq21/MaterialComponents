@@ -18,3 +18,4 @@ export Icon from './Icon';
 export Ripple from './Ripple';
 export FormField from './FormField';
 export GridList from './GridList';
+export SimpleMenu from './SimpleMenu';

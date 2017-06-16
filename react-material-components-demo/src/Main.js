@@ -27,7 +27,8 @@ import {
     Icon,
     Ripple,
     FormField,
-    GridList
+    GridList,
+    SimpleMenu
 } from './pages'
 
 export default class Main extends Component {
@@ -99,6 +100,10 @@ export default class Main extends Component {
                 {
                     path: 'grid_list',
                     component: GridList
+                },
+{
+                    path: 'simple_menu',
+                    component: SimpleMenu
                 },
 
             ]

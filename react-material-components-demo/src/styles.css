@@ -63,3 +63,18 @@ body{
 .demo-page-ripple>.mdc-ripple-surface{
     margin: 0 1em 1em 1em;
 }
+
+.demo-page-simple_menu_view{
+transform: scale(1)!important;
+    z-index: 0!important;
+    opacity: 1!important;
+    display: inline-block!important;
+}
+.demo-page-simple_menu_view .mdc-simple-menu__items>* {
+    opacity: 1;
+    will-change: opacity;
+}
+
+.demo-page-simple_menu .mdc-menu-anchor{
+    position: absolute;
+}

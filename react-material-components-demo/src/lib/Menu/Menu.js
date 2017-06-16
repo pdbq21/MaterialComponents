@@ -131,7 +131,7 @@ export default class Menu extends PureComponent {
             const items = this.items_();
             if (this.props.onSelected !== null) {
                 const itemsList = [].slice.call(items.querySelectorAll('.mdc-list-item[role]'));
-                this.props.onSelected(this, {
+                this.props.onSelected({
                     index: evtData.index,
                     item: itemsList[evtData.index]
                 });
@@ -139,7 +139,7 @@ export default class Menu extends PureComponent {
         },
         notifyCancel: () => {
             if (this.props.onCancel !== null) {
-                this.props.onCancel(this);
+                this.props.onCancel();
             }
         },
         saveFocus: () => {
