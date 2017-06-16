@@ -11,21 +11,23 @@ const propTypes = {
     inset: PropTypes.bool,
 };
 const Divider = ({
-    children,
-    className,
-    elementType,
-    inset,
-    ...otherProp
-}) => {
+                     children,
+                     className,
+                     elementType,
+                     inset,
+                     role,
+                     ...otherProp
+                 }) => {
     const classes = classnames(
         'mdc-list-divider', {
             'mdc-list-divider--inset': inset
         }, className);
-    const ElementType =  elementType || 'li';
+    const ElementType = elementType || 'li';
     return (
-        <ElementType className={classes}
-                     role="separator"
-                     {...otherProp}
+        <ElementType
+            className={classes}
+            role={role || "separator"}
+            {...otherProp}
         >
             {children}
         </ElementType>);

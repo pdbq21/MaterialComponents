@@ -15,8 +15,7 @@ const Text = ({
     elementType,
     ...otherProp
 }) => {
-    const classes = classnames(
-        'mdc-list-item__text',  className);
+    const classes = classnames('mdc-list-item__text',  className);
     const ElementType =  elementType || 'span';
     return (
         <ElementType className={classes}

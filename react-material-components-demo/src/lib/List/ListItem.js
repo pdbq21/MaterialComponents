@@ -109,17 +109,12 @@ export default class ListItem extends PureComponent {
             elementType,
             ...otherProp
         } = ownProps;
-
+const classes = classnames('mdc-list-item', this.state.classNamesRipple, className);
         const ElementType = elementType || 'li';
         return (
             <ElementType
                 ref="root"
-                className={
-                    classnames(
-                        'mdc-list-item',
-                        this.state.classNamesRipple,
-                        className
-                    )}
+                className={classes}
                 {...otherProp}
             >
                 {children}

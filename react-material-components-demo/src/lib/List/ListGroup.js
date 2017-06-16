@@ -15,8 +15,7 @@ const ListGroup = ({
     elementType,
     ...otherProp
 }) => {
-    const classes = classnames(
-        'mdc-list-group',  className);
+    const classes = classnames('mdc-list-group',  className);
     const ElementType =  elementType || 'div';
     return (
         <ElementType className={classes}

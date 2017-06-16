@@ -18,8 +18,9 @@ const Subheader = ({
     const classes = classnames('mdc-list-group__subheader', className);
     const ElementType = elementType || 'h3';
     return (
-        <ElementType className={classes}
-                     {...otherProp}
+        <ElementType
+            className={classes}
+            {...otherProp}
         >
             {children}
         </ElementType>);

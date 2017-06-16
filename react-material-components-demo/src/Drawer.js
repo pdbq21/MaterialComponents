@@ -92,7 +92,7 @@ export default class Drawer extends Component {
                     name: 'Icon Toggle',
                     icon: 'favorite',
                     link: '/icon_toggle',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Layout Grid',
                     icon: 'line_style',
@@ -102,7 +102,7 @@ export default class Drawer extends Component {
                     name: 'List',
                     icon: 'list',
                     link: '/list',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Radio',
                     icon: 'radio_button_checked',
@@ -157,7 +157,7 @@ export default class Drawer extends Component {
                     name: 'Typography',
                     icon: 'format_size',
                     link: '/typography',
-                    todo: true
+                    todo: false
                 },
 
             ]

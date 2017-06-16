@@ -44,7 +44,7 @@ function supportsCssVariables(windowObj) {
 }
 
 
-export default class Menu extends PureComponent {
+export default class IconToggle extends PureComponent {
     static propTypes = {
         children: PropTypes.node,
     };

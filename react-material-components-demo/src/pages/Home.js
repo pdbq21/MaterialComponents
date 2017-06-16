@@ -42,6 +42,9 @@ export default class Home extends Component {
         return (
             <div >
 home
+                Todo list:
+                - add basic structure for all Components
+                
             </div>
         )
     }

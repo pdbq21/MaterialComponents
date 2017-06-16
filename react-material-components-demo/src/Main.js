@@ -10,7 +10,7 @@ import {
 import {
     ToolbarMain,
 } from './lib'
-import {Home, Button, Card, Checkbox, Dialog, Elevation, Typography} from './pages'
+import {Home, Button, Card, Checkbox, Dialog, Elevation, Typography, List, IconToggle} from './pages'
 
 export default class Main extends Component {
     render() {
@@ -26,6 +26,8 @@ export default class Main extends Component {
                         <Route path='/dialog' component={Dialog}/>
                         <Route path='/elevation' component={Elevation}/>
                         <Route path='/typography' component={Typography}/>
+                        <Route path='/list' component={List}/>
+                        <Route path='/icon_toggle' component={IconToggle}/>
                     </SwitchRoute>
                 </ToolbarMain>
         )

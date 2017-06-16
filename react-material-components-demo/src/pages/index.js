@@ -8,3 +8,5 @@ export Checkbox from './Checkbox';
 export Dialog from './Dialog';
 export Elevation from './Elevation';
 export Typography from './Typography';
+export List from './List';
+export IconToggle from './IconToggle';

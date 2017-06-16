@@ -40,3 +40,14 @@ body{
 .todo-page{
     background-color: darkgray;
 }
+
+.demo-page-list>.mdc-list,
+.demo-page-list>.mdc-list-group{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 30em;
+    margin-left: 1em;
+}
+
+.demo-page-icon_toggle>.mdc-icon-toggle{
+    margin-left: 1em;
+}
