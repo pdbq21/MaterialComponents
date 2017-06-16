@@ -19,3 +19,5 @@ export Ripple from './Ripple';
 export FormField from './FormField';
 export GridList from './GridList';
 export SimpleMenu from './SimpleMenu';
+export Textfield from './Textfield';
+export Snackbar from './Snackbar';

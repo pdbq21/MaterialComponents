@@ -4,9 +4,10 @@
 import React, {Component} from 'react'
 import Highlight from 'react-highlight.js'
 import {
-    Switch,
-    SwitchInput,
-    SwitchLabel,
+    Textfield,
+    TextfieldInput,
+    TextfieldLabel,
+    TextfieldHelptext,
     Elevation,
     TypographyHeadline,
     TypographyDisplay,
@@ -14,14 +15,13 @@ import {
 } from '../lib'
 
 
-export default class SwitchPage extends Component {
+export default class TextfieldPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSwitch: false,
             components: [
                 {
-                    name: 'Switch',
+                    name: 'Textfield',
                     property: [
                         {
                             name: 'elementType',
@@ -30,77 +30,25 @@ export default class SwitchPage extends Component {
                             defaultValue: 'div',
                             description: 'задає тег елемента'
                         },
-                        {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активним'
-                        },
                     ]
-                },{
-                    name: 'SwitchInput',
-                    property: [
-                        {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активним'
-                        },
-                    ]
-                },{
-                    name: 'SwitchLabel',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'label',
-                            description: 'задає тег елемента'
-                        },
-                    ]
-                },
+                }
             ],
             used: `
 import React, {Component} from 'react'
 import {
-    Switch,
-    SwitchInput,
-    SwitchLabel,
+
     Elevation,
     TypographyDisplay,
 } from '../lib'
 
-class SwitchDemo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isSwitch: false,
-        }
-    }
+class TextfieldDemo extends Component {
     render() {
-    const { isSwitch } = this.state;
         return (
             <section>
                 <Elevation
                     zSpace="2"
                 >
-                    <TypographyDisplay size="1">Switch</TypographyDisplay>
-                    <TypographyHeadline size="1">Switch only CSS</TypographyHeadline>
-                    <Switch>
-                        <SwitchInput
-                            onChange={() => this.setState({
-                                isSwitch: !isSwitch,
-                            })}
-                        />
-                    </Switch>
-                    <SwitchLabel>{(isSwitch)? 'On' : 'Off'}</SwitchLabel>
-                    <TypographyHeadline size="1">Switch only CSS - Disabled</TypographyHeadline>
-                    <Switch disabled>
-                        <SwitchInput disabled />
-                    </Switch>
-                    <SwitchLabel>disabled</SwitchLabel>
+ 
                 </Elevation>
             </section>
         )
@@ -145,7 +93,6 @@ class SwitchDemo extends Component {
     }
 
     render() {
-const { isSwitch } = this.state;
         return (
             <section>
                 <Elevation
@@ -160,9 +107,10 @@ const { isSwitch } = this.state;
                         'height': '360px',
                     }}
                 >
-                    <Switch>
-                        <SwitchInput />
-                    </Switch>
+                    <Textfield>
+                        <TextfieldInput type="text"/>
+                        <TextfieldLabel >Text Field</TextfieldLabel>
+                    </Textfield>
                 </Elevation>
                 {this.renderTable()}
 
@@ -177,8 +125,8 @@ const { isSwitch } = this.state;
                 >
                     <TypographyDisplay size="1">Original documentation</TypographyDisplay>
                     <TypographyBody>
-                        This component is based on the MDC Button, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+                        This component is based on the MDC Textfield, you can refer to its documentation <a
+                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield"
                     >here</a>.
                     </TypographyBody>
                 </Elevation>
@@ -195,20 +143,6 @@ const { isSwitch } = this.state;
                     className="demo-page-switch"
                 >
                     <TypographyDisplay size="1">Switch</TypographyDisplay>
-                    <TypographyHeadline size="1">Switch only CSS</TypographyHeadline>
-                    <Switch>
-                        <SwitchInput
-                            onChange={() => this.setState({
-                                isSwitch: !isSwitch,
-                            })}
-                        />
-                    </Switch>
-                    <SwitchLabel>{(isSwitch)? 'On' : 'Off'}</SwitchLabel>
-                    <TypographyHeadline size="1">Switch only CSS - Disabled</TypographyHeadline>
-                    <Switch disabled>
-                        <SwitchInput disabled />
-                    </Switch>
-                    <SwitchLabel>disabled</SwitchLabel>
                 </Elevation>
                 <Elevation
                     zSpace="2"

@@ -78,3 +78,11 @@ transform: scale(1)!important;
 .demo-page-simple_menu .mdc-menu-anchor{
     position: absolute;
 }
+.demo-page-snackbar_view .mdc-snackbar--active {
+    transform: none;
+}
+
+.demo-page-snackbar_view .mdc-snackbar {
+    position: relative;
+    left: auto;
+}

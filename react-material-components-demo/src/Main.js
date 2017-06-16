@@ -28,7 +28,9 @@ import {
     Ripple,
     FormField,
     GridList,
-    SimpleMenu
+    SimpleMenu,
+    Textfield,
+    Snackbar
 } from './pages'
 
 export default class Main extends Component {
@@ -104,6 +106,14 @@ export default class Main extends Component {
 {
                     path: 'simple_menu',
                     component: SimpleMenu
+                },
+{
+                    path: 'textfield',
+                    component: Textfield
+                },
+{
+                    path: 'snackbar',
+                    component: Snackbar
                 },
 
             ]
