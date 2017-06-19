@@ -21,3 +21,5 @@ export GridList from './GridList';
 export SimpleMenu from './SimpleMenu';
 export Textfield from './Textfield';
 export Snackbar from './Snackbar';
+export Toolbar from './toolbar/Toolbar';
+export Theme from './Theme';

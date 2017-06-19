@@ -2,13 +2,9 @@
  * Created by ruslan on 11.05.17.
  */
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default class Theme extends PureComponent {
-    static propTypes = {
-        id: PropTypes.string,
-    };
 
     render() {
         const {
@@ -84,7 +80,6 @@ export default class Theme extends PureComponent {
                 'mdc-theme--text-disabled-on-dark': disabledDark,
                 'mdc-theme--text-icon-on-dark': iconDark,
             });
-
 
         return (ElementType) ? <ElementType
             className={classes}

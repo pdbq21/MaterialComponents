@@ -30,7 +30,9 @@ import {
     GridList,
     SimpleMenu,
     Textfield,
-    Snackbar
+    Snackbar,
+    Toolbar,
+    Theme,
 } from './pages'
 
 export default class Main extends Component {
@@ -103,19 +105,26 @@ export default class Main extends Component {
                     path: 'grid_list',
                     component: GridList
                 },
-{
+                {
                     path: 'simple_menu',
                     component: SimpleMenu
                 },
-{
+                {
                     path: 'textfield',
                     component: Textfield
                 },
-{
+                {
                     path: 'snackbar',
                     component: Snackbar
                 },
-
+                {
+                    path: 'toolbar',
+                    component: Toolbar
+                },
+                {
+                    path: 'theme',
+                    component: Theme
+                },
             ]
         };
         this.renderRoute = this.renderRoute.bind(this);

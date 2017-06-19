@@ -2,7 +2,7 @@
  * Created by ruslan on 15.06.17.
  */
 import React, {Component} from 'react'
-import Highlight from 'react-highlight.js'
+//import Highlight from 'react-highlight.js'
 import {
     Dialog,
     DialogHeader,
@@ -43,7 +43,7 @@ export default class ButtonPage extends Component {
                             required: 'no',
                             defaultValue: 'false',
                             description: '-'
-                        },{
+                        }, {
                             name: 'onOpen',
                             type: 'function',
                             required: 'no',
@@ -139,45 +139,46 @@ class ButtonDemo extends Component {
     }
 
 
-setOpen(open) {
-    this.setState({open});
-}
+    setOpen(open) {
+        this.setState({open});
+    }
 
-handle() {
-    this.setOpen(true);
-}
+    handle() {
+        this.setOpen(true);
+    }
 
-handleOpen() {
-    this.setOpen(true);
-}
+    handleOpen() {
+        this.setOpen(true);
+    }
 
-handleClose() {
-    this.setOpen(false);
-}
+    handleClose() {
+        this.setOpen(false);
+    }
 
-setOpenScroll(openScroll) {
-    this.setState({openScroll});
-}
+    setOpenScroll(openScroll) {
+        this.setState({openScroll});
+    }
 
-handleScroll() {
-    this.setOpenScroll(true);
-}
+    handleScroll() {
+        this.setOpenScroll(true);
+    }
 
-handleOpenScroll() {
-    this.setOpenScroll(true);
-}
+    handleOpenScroll() {
+        this.setOpenScroll(true);
+    }
 
-handleCloseScroll() {
-    this.setOpenScroll(false);
-}
+    handleCloseScroll() {
+        this.setOpenScroll(false);
+    }
 
-handleAccept() {
-    console.log("Accept");
-}
+    handleAccept() {
+        console.log("Accept");
+    }
 
-handleCancel() {
-    console.log("Decline");
-}
+    handleCancel() {
+        console.log("Decline");
+    }
+
     render() {
         const {open, openScroll} = this.state;
         return (
@@ -194,7 +195,6 @@ handleCancel() {
                         'height': '360px',
                     }}
                 >
-Todo
                 </Elevation>
                 {this.renderTable()}
 
@@ -218,13 +218,12 @@ Todo
                     zSpace="2"
                 >
                     <TypographyDisplay size="1">Demo code</TypographyDisplay>
-                    <Highlight language={'javascript'}>
+                    {/*<Highlight language={'javascript'}>
                         {this.state.used}
-                    </Highlight>
+                    </Highlight>*/}
                 </Elevation>
                 <Elevation
                     zSpace="2"
-                    className="demo-page-button"
                 >
                     <TypographyDisplay size="1">Dialog</TypographyDisplay>
                     <Button primary raised ripple onClick={this.handle}>Show Dialog</Button>
@@ -253,34 +252,7 @@ Todo
                     </Dialog>
                     <TypographyDisplay size="1">Dialog with List</TypographyDisplay>
                     <Button primary raised ripple onClick={this.handleScroll}>Show Scrolling Dialog</Button>
-                    <Dialog
-                        open={openScroll}
-                        onAccept={this.handleAccept}
-                        onCancel={this.handleCancel}
-                        onOpen={this.handleOpenScroll}
-                        onClose={this.handleCloseScroll}
-                    >
-                        <DialogSurface>
-                            <DialogHeader>
-                                <DialogTitle>
-                                    Choose?
-                                </DialogTitle>
-                            </DialogHeader>
-                            <DialogBody scrollable>
-                                <List>
-                                    <ListItem>Item 1</ListItem>
-                                    <ListItem>Item 2</ListItem>
-                                    <ListItem>Item 3</ListItem>
-                                    <ListItem>Item 4</ListItem>
-                                    <ListItem>Item 5</ListItem>
-                                </List>
-                            </DialogBody>
-                            <DialogFooter>
-                                <DialogFooterButton cancel>Decline</DialogFooterButton>
-                                <DialogFooterButton accept>Accept</DialogFooterButton>
-                            </DialogFooter>
-                        </DialogSurface>
-                    </Dialog>
+
                 </Elevation>
                 <Elevation
                     zSpace="2"

@@ -6,8 +6,7 @@ import ReactDOM from 'react-dom'
 import {
     BrowserRouter as Router,
     Route,
-    Link
-    // etc.
+    Switch as SwitchRoute
 } from 'react-router-dom'
 
 import './styles.css'
@@ -45,7 +44,6 @@ class App extends Component {
         this.setOpen(false);
     }
 
-
     render() {
         const {isOpenMenu} = this.state;
         return (
@@ -59,71 +57,14 @@ class App extends Component {
                     handleOpen={this.handleOpen}
                     handleClose={this.handleClose}
                 />
-                <Main>
-
-                </Main>
+                <Main />
             </div>
         </Router>
             )
     }
 }
 
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
-)
-
-const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-)
-
-const Topic = (e) => {
-    console.log(e);
-    return (<div>
-        <h3>{e.match.params.topicId}</h3>
-    </div>)
-}
-
-const Topics = ({ match }) => (
-    <div>
-        <h2>Topics</h2>
-        <ul>
-            <li>
-                <Link to={`${match.url}/rendering`}>
-                    Rendering with React
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/components`}>
-                    Components
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/props-v-state`}>
-                    Props v. State
-                </Link>
-            </li>
-        </ul>
-
-        <Route path={`${match.url}/:topicId`} component={Topic}/>
-        <Route exact path={match.url} render={() => (
-            <h3>Please select a topic.</h3>
-        )}/>
-    </div>
-)
 
 ReactDOM.render(
     <App/>, document.getElementById('root')
 );
-
-/*<div className='container'>
- <h1>App</h1>
- <ul>
- <li><Link to='/button'>button</Link></li>
- </ul>
- {/!* добавили вывод потомков *!/}
- {this.props.children}
- </div>*/
