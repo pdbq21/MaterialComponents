@@ -19,7 +19,6 @@ export default class Input extends PureComponent {
         const classes = classnames('mdc-textfield__input', className);
         const ElementType = elementType || 'input';
         return (
-
             <ElementType
                 className={classes}
                 {...otherProps}

@@ -132,7 +132,7 @@ export default class Drawer extends Component {
                     name: 'Snackbar',
                     icon: 'video_label',
                     link: '/snackbar',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Switch',
                     icon: 'toll',
@@ -147,7 +147,7 @@ export default class Drawer extends Component {
                     name: 'Textfield',
                     icon: 'text_format',
                     link: '/textfield',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Theme',
                     icon: 'palette',
