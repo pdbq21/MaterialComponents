@@ -11,15 +11,16 @@ export default class Text extends PureComponent {
     };
 
     render() {
-        const {children, className, ...otherProp} = this.props;
+        const {children, className, elementType, ...otherProp} = this.props;
         const classes = classnames('mdc-snackbar__text', className);
+        const ElementType = elementType || 'div';
         return (
-            <div
+            <ElementType
                 className={classes}
                 {...otherProp}
             >
                 {children}
-            </div>
+            </ElementType>
         );
     }
 

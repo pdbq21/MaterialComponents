@@ -86,3 +86,13 @@ transform: scale(1)!important;
     position: relative;
     left: auto;
 }
+
+.demo-page-snackbar_view .mdc-snackbar__action-button{
+    color: #ff4081!important;
+    opacity: 1!important;
+    visibility: visible!important;
+}
+
+.demo-page-snackbar .mdc-textfield{
+    margin-left: 1em;
+}

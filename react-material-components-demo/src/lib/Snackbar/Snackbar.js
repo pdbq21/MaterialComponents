@@ -235,8 +235,7 @@ export default class Snackbar extends PureComponent {
             <ElementType
                 ref='root'
                 className={classnames('mdc-snackbar', this.state.classNames, className)}
-                aria-live="assertive"
-                aria-atomic="true"
+
                 {...otherProp}
             >
                 {children}

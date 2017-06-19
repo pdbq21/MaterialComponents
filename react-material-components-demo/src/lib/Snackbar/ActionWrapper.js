@@ -15,7 +15,6 @@ export default class ActionWrapper extends PureComponent {
         const {
             children,
             className,
-            id,
             elementType,
             ...otherProp
         } = ownProps;
@@ -24,7 +23,6 @@ export default class ActionWrapper extends PureComponent {
         return (
             <ElementType
                 className={classes}
-                id={id}
                 {...otherProp}
             >
                 {children}

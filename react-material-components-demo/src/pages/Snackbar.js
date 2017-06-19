@@ -18,9 +18,11 @@ import {
     CheckboxLabel,
     CheckboxMixedmark,
     FormField,
+    Textfield,
+    TextfieldInput,
+    TextfieldLabel,
     TypographyDisplay,
     TypographyBody,
-    TypographyCaption as Caption
 } from '../lib'
 
 
@@ -89,6 +91,39 @@ export default class SnackbarPage extends Component {
                             description: '-'
                         },
                     ]
+                },{
+                    name: 'SnackbarText',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'div',
+                            description: 'задає тег елемента'
+                        }
+                    ]
+                },{
+                    name: 'SnackbarActionWrapper',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'div',
+                            description: 'задає тег елемента'
+                        }
+                    ]
+                },{
+                    name: 'SnackbarActionButton',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'Button',
+                            description: 'задає тег елемента'
+                        }
+                    ]
                 },
             ],
             used: `
@@ -97,20 +132,193 @@ import {
     Snackbar,
     SnackbarText,
     SnackbarActionWrapper,
-    SnackbarActionButton
+    SnackbarActionButton,
+    FormField,
+    Textfield,
+    TextfieldInput,
+    TextfieldLabel,
     Elevation,
+    Button,
+    Checkbox,
+    CheckboxInput,
     TypographyDisplay,
 } from '../lib'
 
 class SnackbarDemo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            checkedMultiline: false,
+            checkedAction: false,
+            valueMessage: 'default message',
+            valueAction: 'action',
+            valueTimeout: '2750',//default
+        }
+        this.handel = this.handel.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handelAction = this.handelAction.bind(this);
+        this.handleChangeMessage = this.handleChangeMessage.bind(this);
+        this.handleChangeAction = this.handleChangeAction.bind(this);
+        this.handleChangeTimeout = this.handleChangeTimeout.bind(this);
+        this.handleChangeCheckedMultiline = this.handleChangeCheckedMultiline.bind(this);
+        this.handleChangeCheckedAction = this.handleChangeCheckedAction.bind(this);
+    }
+    
+    handel() {
+        this.setState({
+            open: !this.state.open
+        })
+    }
 
+    handleChangeMessage({target}) {
+        this.setState({
+            valueMessage: target.value
+        })
+    }
+
+    handleChangeAction({target}) {
+        this.setState({
+            valueAction: target.value
+        })
+    }
+
+    handleChangeTimeout({target}) {
+        this.setState({
+            valueTimeout: target.value
+        })
+    }
+
+    handleChangeCheckedMultiline() {
+        this.setState({
+            checkedMultiline: !this.state.checkedMultiline
+        })
+    }
+
+    handleChangeCheckedAction() {
+        this.setState({
+            checkedAction: !this.state.checkedAction
+        })
+    }
+
+    handelAction() {
+        console.log('action')
+    }
+
+    handleClose() {
+        this.setState({
+            open: false
+        })
+    }
     render() {
+            const {
+            open,
+            checkedMultiline,
+            checkedAction,
+            valueMessage,
+            valueAction,
+            valueTimeout,
+        } = this.state;
+
         return (
             <section>
                 <Elevation
                     zSpace="2"
+                    style={{
+                        'display': 'flex',
+                        'flexFlow': 'column nowrap',
+                    }}
                 >
+                    <TypographyDisplay size="1">Snackbar</TypographyDisplay>
+                    <FormField>
+                        <Checkbox
+                            ripple
+                        >
+                            <CheckboxInput
+                                checked={checkedMultiline}
+                                onChange={this.handleChangeCheckedMultiline}
 
+                            />
+                            <CheckboxBackground>
+                                <CheckboxCheckmark>
+                                    <CheckboxPath/>
+                                </CheckboxCheckmark>
+                                <CheckboxMixedmark/>
+                            </CheckboxBackground>
+                        </Checkbox>
+                        <CheckboxLabel>
+                            Multiline
+                        </CheckboxLabel>
+                    </FormField>
+                    <FormField>
+                        <Checkbox
+                            ripple
+                        >
+                            <CheckboxInput
+                                checked={checkedAction}
+                                onChange={this.handleChangeCheckedAction}
+                            />
+                            <CheckboxBackground>
+                                <CheckboxCheckmark>
+                                    <CheckboxPath/>
+                                </CheckboxCheckmark>
+                                <CheckboxMixedmark/>
+                            </CheckboxBackground>
+                        </Checkbox>
+                        <CheckboxLabel>
+                            Action On Bottom
+                        </CheckboxLabel>
+                    </FormField>
+                    <FormField>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueMessage || ''}
+                                onChange={this.handleChangeMessage}
+                            />
+                            <TextfieldLabel>Message Text</TextfieldLabel>
+                        </Textfield>
+                    </FormField>
+                    <FormField>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueAction || ''}
+                                onChange={this.handleChangeAction}
+                            />
+                            <TextfieldLabel>Action Text</TextfieldLabel>
+                        </Textfield>
+                    </FormField>
+                    <FormField>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueTimeout || ''}
+                                onChange={this.handleChangeTimeout}
+                            />
+                            <TextfieldLabel>Timeout</TextfieldLabel>
+                        </Textfield>
+                    </FormField>
+
+                    <Button primary raised onClick={this.handel}>Show Snackbar</Button>
+
+                    <Snackbar
+                        open={open}
+                        message={valueMessage}
+                        timeout={valueTimeout}
+                        actionHandler={this.handelAction}
+                        actionText={valueAction}
+                        multiline={checkedMultiline}
+                        actionOnBottom={checkedAction}
+                        onClose={this.handleClose}
+                        aria-live="assertive"
+                        aria-atomic="true"
+                    >
+                        <SnackbarText/>
+                        <SnackbarActionWrapper>
+                            <SnackbarActionButton/>
+                        </SnackbarActionWrapper>
+                    </Snackbar>
                 </Elevation>
             </section>
         )
@@ -233,22 +441,17 @@ class SnackbarDemo extends Component {
                     }}
                     className="demo-page-snackbar_view"
                 >
-                    <Snackbar
-                        className="mdc-snackbar--active"
-                        open={true}
-                        message='Message sent'
-                        timeout={2750}
-                        //actionHandler={this.handelAction}
-                        actionText='UNDO'
-                        multiline={false}
-                        actionOnBottom={false}
-                        //onClose={this.handleClose}
+                    <div
+                        className="mdc-snackbar mdc-snackbar--active"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                        aria-hidden="true"
                     >
-                        <SnackbarText/>
-                        <SnackbarActionWrapper>
-                            <SnackbarActionButton/>
-                        </SnackbarActionWrapper>
-                    </Snackbar>
+                        <div className="mdc-snackbar__text">Message sent</div>
+                        <div className="mdc-snackbar__action-wrapper">
+                            <button type="button" className="mdc-button mdc-snackbar__action-button">Undo</button>
+                        </div>
+                    </div>
                 </Elevation>
                 {this.renderTable()}
 
@@ -326,16 +529,34 @@ class SnackbarDemo extends Component {
                         </CheckboxLabel>
                     </FormField>
                     <FormField>
-                        <Caption>Message Text:</Caption>
-                        <input type="text" value={valueMessage || ''} onChange={this.handleChangeMessage}/>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueMessage || ''}
+                                onChange={this.handleChangeMessage}
+                            />
+                            <TextfieldLabel>Message Text</TextfieldLabel>
+                        </Textfield>
                     </FormField>
                     <FormField>
-                        <Caption>Action Text:</Caption>
-                        <input type="text" value={valueAction || ''} onChange={this.handleChangeAction}/>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueAction || ''}
+                                onChange={this.handleChangeAction}
+                            />
+                            <TextfieldLabel>Action Text</TextfieldLabel>
+                        </Textfield>
                     </FormField>
                     <FormField>
-                        <Caption>timeout:</Caption>
-                        <input type="text" value={valueTimeout || ''} onChange={this.handleChangeTimeout}/>
+                        <Textfield>
+                            <TextfieldInput
+                                type="text"
+                                value={valueTimeout || ''}
+                                onChange={this.handleChangeTimeout}
+                            />
+                            <TextfieldLabel>Timeout</TextfieldLabel>
+                        </Textfield>
                     </FormField>
 
                     <Button primary raised onClick={this.handel}>Show Snackbar</Button>
@@ -349,6 +570,8 @@ class SnackbarDemo extends Component {
                         multiline={checkedMultiline}
                         actionOnBottom={checkedAction}
                         onClose={this.handleClose}
+                        aria-live="assertive"
+                        aria-atomic="true"
                     >
                         <SnackbarText/>
                         <SnackbarActionWrapper>
