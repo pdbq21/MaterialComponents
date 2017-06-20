@@ -38,3 +38,4 @@ export {
     PermanentAboveToolbar,
     PermanentBelowToolbar
 } from './drawer'
+export Select from './Select'

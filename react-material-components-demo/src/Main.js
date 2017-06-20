@@ -35,7 +35,8 @@ import {
     Theme,
     DrawerTemporary,
     DrawerPersistent,
-    DrawerPermanent
+    DrawerPermanent,
+    Select
 } from './pages'
 
 export default class Main extends Component {
@@ -139,6 +140,10 @@ export default class Main extends Component {
                 {
                     path: 'drawer_permanent',
                     component: DrawerPermanent
+                },
+                {
+                    path: 'select',
+                    component: Select
                 },
             ]
         };
