@@ -57,17 +57,12 @@ export default class Drawer extends Component {
                     name: 'Drawer Persistent',
                     icon: 'chrome_reader_mode',
                     link: '/drawer_persistent',
-                    todo: true
+                    todo: false
                 },{
-                    name: 'Drawer Permanent Above Toolbar',
+                    name: 'Drawer Permanent',
                     icon: 'chrome_reader_mode',
-                    link: '/drawer_permanent_above_toolbar',
-                    todo: true
-                },{
-                    name: 'Drawer Permanent Below Toolbar',
-                    icon: 'chrome_reader_mode',
-                    link: '/drawer_permanent_below_toolbar',
-                    todo: true
+                    link: '/drawer_permanent',
+                    todo: false
                 },{
                     name: 'Elevation',
                     icon: 'filter_none',

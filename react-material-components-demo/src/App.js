@@ -19,7 +19,9 @@ import {
     TemporaryToolbarSpacer,
     TemporaryHeader,
     PersistentHeader,
-    PersistentToolbarSpacer
+    PersistentToolbarSpacer,
+    PermanentBelowToolbar,
+    PermanentAboveToolbar
 } from './pages'
 
 class App extends Component {
@@ -80,6 +82,8 @@ ReactDOM.render(
             <Route path='/drawer/temporary_header' component={TemporaryHeader}/>
             <Route path='/drawer/persistent_header' component={PersistentHeader}/>
             <Route path='/drawer/persistent_toolbar_spacer' component={PersistentToolbarSpacer}/>
+            <Route path='/drawer/permanent_below_toolbar' component={PermanentBelowToolbar}/>
+            <Route path='/drawer/permanent_above_toolbar' component={PermanentAboveToolbar}/>
             <Route component={App}/>
         </SwitchRoute>
     </Router>, document.getElementById('root')

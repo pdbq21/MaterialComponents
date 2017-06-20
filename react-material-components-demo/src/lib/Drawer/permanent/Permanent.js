@@ -9,9 +9,10 @@ class Permanent extends PureComponent {
     render() {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'nav';
+        const classes = classnames('mdc-permanent-drawer', className);
         return (
             <ElementType
-                className={classnames('mdc-permanent-drawer', className)}
+                className={classes}
                 {...otherProps}
             >
                 {children}
@@ -21,28 +22,3 @@ class Permanent extends PureComponent {
 }
 
 export default Permanent;
-
-/*
- const propTypes = {
- children: PropTypes.node,
- className: PropTypes.string,
- };
- const Permanent = ({
- children,
- className,
- elementType,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-permanent-drawer',  className);
- const ElementType = elementType || 'nav';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
-
- Permanent.propTypes = propTypes;
- export default Permanent;*/

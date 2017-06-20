@@ -34,4 +34,7 @@ export {
     DrawerPersistent,
     PersistentToolbarSpacer,
     PersistentHeader,
+    DrawerPermanent,
+    PermanentAboveToolbar,
+    PermanentBelowToolbar
 } from './drawer'

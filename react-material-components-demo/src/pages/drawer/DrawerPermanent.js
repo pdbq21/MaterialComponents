@@ -15,30 +15,7 @@ export default class DrawerPersistentPage extends Component {
         this.state = {
             components: [
                 {
-                    name: 'DrawerPersistent',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'aside',
-                            description: 'задає тег елемента'
-                        }, {
-                            name: 'onOpen',
-                            type: 'function',
-                            required: 'no',
-                            defaultValue: '-',
-                            description: '-'
-                        }, {
-                            name: 'onClose',
-                            type: 'function',
-                            required: 'no',
-                            defaultValue: '-',
-                            description: '-'
-                        },
-                    ]
-                }, {
-                    name: 'PersistentContent',
+                    name: 'DrawerPermanent',
                     property: [
                         {
                             name: 'elementType',
@@ -46,10 +23,21 @@ export default class DrawerPersistentPage extends Component {
                             required: 'no',
                             defaultValue: 'nav',
                             description: 'задає тег елемента'
+                        }
+                    ]
+                }, {
+                    name: 'PermanentContent',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'div',
+                            description: 'задає тег елемента'
                         },
                     ]
                 }, {
-                    name: 'PersistentListItem',
+                    name: 'PermanentListItem',
                     property: [
                         {
                             name: 'elementType',
@@ -95,7 +83,7 @@ export default class DrawerPersistentPage extends Component {
                         },
                     ]
                 }, {
-                    name: 'PersistentDrawer',
+                    name: 'PermanentList',
                     property: [
                         {
                             name: 'elementType',
@@ -106,29 +94,7 @@ export default class DrawerPersistentPage extends Component {
                         }
                     ]
                 }, {
-                    name: 'PersistentHeader',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'header',
-                            description: 'задає тег елемента'
-                        }
-                    ]
-                }, {
-                    name: 'PersistentHeaderContent',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        }
-                    ]
-                }, {
-                    name: 'PersistentToolbarSpacer',
+                    name: 'PermanentToolbarSpacer',
                     property: [
                         {
                             name: 'elementType',
@@ -224,17 +190,17 @@ export default class DrawerPersistentPage extends Component {
                     zSpace="2"
                     className="demo-page-drawer_temporary"
                 >
-                    <TypographyDisplay size="1">Persistent Drawer</TypographyDisplay>
-                    <TypographyHeadline size="1">Persistent with ToolbarSpacer</TypographyHeadline>
+                    <TypographyDisplay size="1">Permanent Drawer</TypographyDisplay>
+                    <TypographyHeadline size="1">Permanent Above Toolbar</TypographyHeadline>
                     <iframe
-                        src="/drawer/persistent_toolbar_spacer"
+                        src="/drawer/permanent_above_toolbar"
                         frameBorder="0"
                         width='640px'
                         height='420px'
                     />
-                    <TypographyHeadline size="1">Persistent with Header</TypographyHeadline>
+                    <TypographyHeadline size="1">Permanent Below Toolbar</TypographyHeadline>
                     <iframe
-                        src="/drawer/persistent_header"
+                        src="/drawer/permanent_below_toolbar"
                         frameBorder="0"
                         width='640px'
                         height='420px'

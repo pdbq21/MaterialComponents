@@ -34,7 +34,8 @@ import {
     Toolbar,
     Theme,
     DrawerTemporary,
-    DrawerPersistent
+    DrawerPersistent,
+    DrawerPermanent
 } from './pages'
 
 export default class Main extends Component {
@@ -134,6 +135,10 @@ export default class Main extends Component {
                 {
                     path: 'drawer_persistent',
                     component: DrawerPersistent
+                },
+                {
+                    path: 'drawer_permanent',
+                    component: DrawerPermanent
                 },
             ]
         };
