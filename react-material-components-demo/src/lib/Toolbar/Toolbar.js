@@ -3,7 +3,6 @@
  */
 
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {toolbar}  from 'material-components-web/dist/material-components-web';
 const { util, MDCToolbarFoundation } = toolbar;
@@ -14,9 +13,6 @@ const {
     }
 } = MDCToolbarFoundation;
 export default class Toolbar extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-    };
 
     constructor(props, context) {
         super(props, context);
@@ -105,9 +101,6 @@ export default class Toolbar extends PureComponent {
        this.foundation.destroy();
     }
 
-    componentWillReceiveProps(props) {
-
-    }
 
     render() {
         const ownProps = Object.assign({}, this.props);

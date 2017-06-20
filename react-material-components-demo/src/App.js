@@ -13,6 +13,10 @@ import './styles.css'
 import Header from './Header'
 import Drawer from './Drawer'
 import Main from './Main'
+import {
+    ToolbarNormal,
+    ToolbarFixed
+} from './pages'
 
 class App extends Component {
     constructor(props) {
@@ -47,7 +51,6 @@ class App extends Component {
     render() {
         const {isOpenMenu} = this.state;
         return (
-        <Router>
             <div>
                 <Header
                     handleShowMenu={this.handleShowMenu}
@@ -59,12 +62,17 @@ class App extends Component {
                 />
                 <Main />
             </div>
-        </Router>
-            )
+        )
     }
 }
 
 
 ReactDOM.render(
-    <App/>, document.getElementById('root')
+    <Router>
+        <SwitchRoute>
+            <Route path='/toolbar_normal' component={ToolbarNormal}/>
+            <Route path='/toolbar_fixed' component={ToolbarFixed}/>
+            <Route component={App}/>
+        </SwitchRoute>
+    </Router>, document.getElementById('root')
 );

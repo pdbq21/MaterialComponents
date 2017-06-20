@@ -3,14 +3,9 @@
  */
 
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default class Row extends PureComponent {
-    static propTypes = {
-        className: PropTypes.string,
-    };
-
+export default class Section extends PureComponent {
     render() {
         const ownProps = Object.assign({}, this.props);
         const {

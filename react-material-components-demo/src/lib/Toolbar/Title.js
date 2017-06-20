@@ -3,14 +3,9 @@
  */
 
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default class Title extends PureComponent {
-    static propTypes = {
-        className: PropTypes.string,
-    };
-
     render() {
         const ownProps = Object.assign({}, this.props);
         const {
@@ -23,7 +18,6 @@ export default class Title extends PureComponent {
         const ElementType = elementType || 'span';
         return (
             <ElementType
-                ref='titleElement'
                 className={classes}
                 {...otherProp}
             >

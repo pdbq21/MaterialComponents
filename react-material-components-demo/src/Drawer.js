@@ -152,12 +152,12 @@ export default class Drawer extends Component {
                     name: 'Theme',
                     icon: 'palette',
                     link: '/theme',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Toolbar',
                     icon: 'web_asset',
                     link: '/toolbar',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Typography',
                     icon: 'format_size',

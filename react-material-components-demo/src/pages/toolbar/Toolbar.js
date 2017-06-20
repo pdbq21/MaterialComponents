@@ -22,7 +22,49 @@ export default class ToolbarPage extends Component {
         this.state = {
             components: [
                 {
-                    name: 'Switch',
+                    name: 'Toolbar',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'header',
+                            description: 'задає тег елемента'
+                        },
+                        {
+                            name: 'onChange',
+                            type: 'function',
+                            required: 'no',
+                            defaultValue: '-',
+                            description: '-'
+                        },{
+                            name: 'fixed',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },{
+                            name: 'waterfall',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },{
+                            name: 'lastrowOnly',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },{
+                            name: 'defaultBehavior',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },
+                    ]
+                },{
+                    name: 'ToolbarRow',
                     property: [
                         {
                             name: 'elementType',
@@ -31,35 +73,63 @@ export default class ToolbarPage extends Component {
                             defaultValue: 'div',
                             description: 'задає тег елемента'
                         },
-                        {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активним'
-                        },
                     ]
                 },{
-                    name: 'SwitchInput',
-                    property: [
-                        {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активним'
-                        },
-                    ]
-                },{
-                    name: 'SwitchLabel',
+                    name: 'ToolbarSection',
                     property: [
                         {
                             name: 'elementType',
                             type: 'string | React Component',
                             required: 'no',
-                            defaultValue: 'label',
+                            defaultValue: 'section',
                             description: 'задає тег елемента'
+                        },{
+                            name: 'start',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },{
+                            name: 'end',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },{
+                            name: 'shrink',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
                         },
+                    ]
+                },{
+                    name: 'ToolbarTitle',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'span',
+                            description: 'задає тег елемента'
+                        }
+                    ]
+                },{
+                    name: 'ToolbarMain',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'main',
+                            description: 'задає тег елемента'
+                        },{
+                            name: 'fixed',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        }
                     ]
                 },
             ],
@@ -132,8 +202,8 @@ export default class ToolbarPage extends Component {
                 >
                     <TypographyDisplay size="1">Original documentation</TypographyDisplay>
                     <TypographyBody>
-                        This component is based on the MDC Button, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+                        This component is based on the MDC Toolbar, you can refer to its documentation <a
+                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-toolbar"
                     >here</a>.
                     </TypographyBody>
                 </Elevation>
@@ -149,7 +219,19 @@ export default class ToolbarPage extends Component {
                 >
                     <TypographyDisplay size="1">Toolbar</TypographyDisplay>
                     <TypographyHeadline size="1">Normal Toolbar</TypographyHeadline>
-
+                    <iframe
+                        src="/toolbar_normal"
+                        frameBorder="0"
+                        width='320px'
+                        height='420px'
+                    />
+                    <TypographyHeadline size="1">Fixed Toolbar</TypographyHeadline>
+                    <iframe
+                        src="/toolbar_fixed"
+                        frameBorder="0"
+                        width='320px'
+                        height='420px'
+                    />
                 </Elevation>
                 <Elevation
                     zSpace="2"
