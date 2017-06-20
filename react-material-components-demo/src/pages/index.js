@@ -27,3 +27,11 @@ export {
     ToolbarFixed
 } from './toolbar';
 export Theme from './Theme';
+export {
+    DrawerTemporary,
+    TemporaryHeader,
+    TemporaryToolbarSpacer,
+    DrawerPersistent,
+    PersistentToolbarSpacer,
+    PersistentHeader,
+} from './drawer'

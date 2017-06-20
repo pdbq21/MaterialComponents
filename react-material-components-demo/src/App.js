@@ -15,7 +15,11 @@ import Drawer from './Drawer'
 import Main from './Main'
 import {
     ToolbarNormal,
-    ToolbarFixed
+    ToolbarFixed,
+    TemporaryToolbarSpacer,
+    TemporaryHeader,
+    PersistentHeader,
+    PersistentToolbarSpacer
 } from './pages'
 
 class App extends Component {
@@ -72,6 +76,10 @@ ReactDOM.render(
         <SwitchRoute>
             <Route path='/toolbar_normal' component={ToolbarNormal}/>
             <Route path='/toolbar_fixed' component={ToolbarFixed}/>
+            <Route path='/drawer/temporary_toolbar_spacer' component={TemporaryToolbarSpacer}/>
+            <Route path='/drawer/temporary_header' component={TemporaryHeader}/>
+            <Route path='/drawer/persistent_header' component={PersistentHeader}/>
+            <Route path='/drawer/persistent_toolbar_spacer' component={PersistentToolbarSpacer}/>
             <Route component={App}/>
         </SwitchRoute>
     </Router>, document.getElementById('root')

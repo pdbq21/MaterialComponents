@@ -52,7 +52,7 @@ export default class Drawer extends Component {
                     name: 'Drawer Temporary',
                     icon: 'chrome_reader_mode',
                     link: '/drawer_temporary',
-                    todo: true
+                    todo: false
                 },{
                     name: 'Drawer Persistent',
                     icon: 'chrome_reader_mode',

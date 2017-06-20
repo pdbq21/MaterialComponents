@@ -174,10 +174,11 @@ export default class Persistent extends PureComponent {
         } = ownProps;
 
         const ElementType = elementType || 'aside';
+        const classes = classnames('mdc-persistent-drawer', this.state.classNameDrawer, className);
         return (
             <ElementType
                 ref='root'
-                className={classnames('mdc-persistent-drawer', this.state.classNameDrawer, className)}
+                className={classes}
                 {...otherProp}
             >
                 {children}

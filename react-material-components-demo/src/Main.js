@@ -33,6 +33,8 @@ import {
     Snackbar,
     Toolbar,
     Theme,
+    DrawerTemporary,
+    DrawerPersistent
 } from './pages'
 
 export default class Main extends Component {
@@ -124,6 +126,14 @@ export default class Main extends Component {
                 {
                     path: 'theme',
                     component: Theme
+                },
+                {
+                    path: 'drawer_temporary',
+                    component: DrawerTemporary
+                },
+                {
+                    path: 'drawer_persistent',
+                    component: DrawerPersistent
                 },
             ]
         };

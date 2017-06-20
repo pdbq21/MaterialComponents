@@ -1,5 +1,5 @@
 /**
- * Created by ruslan on 19.06.17.
+ * Created by ruslan on 20.06.17.
  */
 import React, {Component} from 'react'
 import {
@@ -8,15 +8,112 @@ import {
     TypographyDisplay,
     TypographyBody,
 } from '../../lib/index'
-
-
-export default class ToolbarPage extends Component {
+/*    DrawerListItemDetail,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,*/
+export default class DrawerPersistentPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             components: [
                 {
-                    name: 'Toolbar',
+                    name: 'DrawerPersistent',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'aside',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'onOpen',
+                            type: 'function',
+                            required: 'no',
+                            defaultValue: '-',
+                            description: '-'
+                        }, {
+                            name: 'onClose',
+                            type: 'function',
+                            required: 'no',
+                            defaultValue: '-',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'PersistentContent',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'nav',
+                            description: 'задає тег елемента'
+                        },
+                    ]
+                }, {
+                    name: 'PersistentListItem',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'a',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'selected',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'DrawerListItemDetail',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'a',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'icon',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        }, {
+                            name: 'start',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        }, {
+                            name: 'end',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'PersistentDrawer',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'nav',
+                            description: 'задає тег елемента'
+                        }
+                    ]
+                }, {
+                    name: 'PersistentHeader',
                     property: [
                         {
                             name: 'elementType',
@@ -24,41 +121,10 @@ export default class ToolbarPage extends Component {
                             required: 'no',
                             defaultValue: 'header',
                             description: 'задає тег елемента'
-                        },
-                        {
-                            name: 'onChange',
-                            type: 'function',
-                            required: 'no',
-                            defaultValue: '-',
-                            description: '-'
-                        },{
-                            name: 'fixed',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'waterfall',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'lastrowOnly',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'defaultBehavior',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },
+                        }
                     ]
-                },{
-                    name: 'ToolbarRow',
+                }, {
+                    name: 'PersistentHeaderContent',
                     property: [
                         {
                             name: 'elementType',
@@ -66,63 +132,17 @@ export default class ToolbarPage extends Component {
                             required: 'no',
                             defaultValue: 'div',
                             description: 'задає тег елемента'
-                        },
-                    ]
-                },{
-                    name: 'ToolbarSection',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'section',
-                            description: 'задає тег елемента'
-                        },{
-                            name: 'start',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'end',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'shrink',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },
-                    ]
-                },{
-                    name: 'ToolbarTitle',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'span',
-                            description: 'задає тег елемента'
                         }
                     ]
-                },{
-                    name: 'ToolbarMain',
+                }, {
+                    name: 'PersistentToolbarSpacer',
                     property: [
                         {
                             name: 'elementType',
                             type: 'string | React Component',
                             required: 'no',
-                            defaultValue: 'main',
+                            defaultValue: 'div',
                             description: 'задає тег елемента'
-                        },{
-                            name: 'fixed',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
                         }
                     ]
                 },
@@ -196,8 +216,8 @@ export default class ToolbarPage extends Component {
                 >
                     <TypographyDisplay size="1">Original documentation</TypographyDisplay>
                     <TypographyBody>
-                        This component is based on the MDC Toolbar, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-toolbar"
+                        This component is based on the MDC Drawer, you can refer to its documentation <a
+                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer"
                     >here</a>.
                     </TypographyBody>
                 </Elevation>
@@ -209,21 +229,21 @@ export default class ToolbarPage extends Component {
                 </Elevation>
                 <Elevation
                     zSpace="2"
-                    className="demo-page-switch"
+                    className="demo-page-drawer_temporary"
                 >
-                    <TypographyDisplay size="1">Toolbar</TypographyDisplay>
-                    <TypographyHeadline size="1">Normal Toolbar</TypographyHeadline>
+                    <TypographyDisplay size="1">Persistent Drawer</TypographyDisplay>
+                    <TypographyHeadline size="1">Persistent with ToolbarSpacer</TypographyHeadline>
                     <iframe
-                        src="/toolbar_normal"
+                        src="/drawer/persistent_toolbar_spacer"
                         frameBorder="0"
-                        width='320px'
+                        width='640px'
                         height='420px'
                     />
-                    <TypographyHeadline size="1">Fixed Toolbar</TypographyHeadline>
+                    <TypographyHeadline size="1">Persistent with Header</TypographyHeadline>
                     <iframe
-                        src="/toolbar_fixed"
+                        src="/drawer/persistent_header"
                         frameBorder="0"
-                        width='320px'
+                        width='640px'
                         height='420px'
                     />
                 </Elevation>

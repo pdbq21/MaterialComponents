@@ -1,6 +1,3 @@
-/**
- * Created by ruslan on 19.06.17.
- */
 import React, {Component} from 'react'
 import {
     Elevation,
@@ -9,14 +6,104 @@ import {
     TypographyBody,
 } from '../../lib/index'
 
-
-export default class ToolbarPage extends Component {
+export default class DrawerTemporaryPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             components: [
                 {
-                    name: 'Toolbar',
+                    name: 'DrawerTemporary',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'aside',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'onOpen',
+                            type: 'function',
+                            required: 'no',
+                            defaultValue: '-',
+                            description: '-'
+                        }, {
+                            name: 'onClose',
+                            type: 'function',
+                            required: 'no',
+                            defaultValue: '-',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'TemporaryContent',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'nav',
+                            description: 'задає тег елемента'
+                        },
+                    ]
+                }, {
+                    name: 'TemporaryListItem',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'a',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'selected',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'DrawerListItemDetail',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'a',
+                            description: 'задає тег елемента'
+                        }, {
+                            name: 'icon',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        }, {
+                            name: 'start',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        }, {
+                            name: 'end',
+                            type: 'bool',
+                            required: 'no',
+                            defaultValue: 'false',
+                            description: '-'
+                        },
+                    ]
+                }, {
+                    name: 'TemporaryDrawer',
+                    property: [
+                        {
+                            name: 'elementType',
+                            type: 'string | React Component',
+                            required: 'no',
+                            defaultValue: 'nav',
+                            description: 'задає тег елемента'
+                        }
+                    ]
+                }, {
+                    name: 'TemporaryHeader',
                     property: [
                         {
                             name: 'elementType',
@@ -24,41 +111,10 @@ export default class ToolbarPage extends Component {
                             required: 'no',
                             defaultValue: 'header',
                             description: 'задає тег елемента'
-                        },
-                        {
-                            name: 'onChange',
-                            type: 'function',
-                            required: 'no',
-                            defaultValue: '-',
-                            description: '-'
-                        },{
-                            name: 'fixed',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'waterfall',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'lastrowOnly',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'defaultBehavior',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },
+                        }
                     ]
-                },{
-                    name: 'ToolbarRow',
+                }, {
+                    name: 'TemporaryHeaderContent',
                     property: [
                         {
                             name: 'elementType',
@@ -66,63 +122,17 @@ export default class ToolbarPage extends Component {
                             required: 'no',
                             defaultValue: 'div',
                             description: 'задає тег елемента'
-                        },
-                    ]
-                },{
-                    name: 'ToolbarSection',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'section',
-                            description: 'задає тег елемента'
-                        },{
-                            name: 'start',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'end',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },{
-                            name: 'shrink',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },
-                    ]
-                },{
-                    name: 'ToolbarTitle',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'span',
-                            description: 'задає тег елемента'
                         }
                     ]
-                },{
-                    name: 'ToolbarMain',
+                }, {
+                    name: 'TemporaryToolbarSpacer',
                     property: [
                         {
                             name: 'elementType',
                             type: 'string | React Component',
                             required: 'no',
-                            defaultValue: 'main',
+                            defaultValue: 'div',
                             description: 'задає тег елемента'
-                        },{
-                            name: 'fixed',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
                         }
                     ]
                 },
@@ -196,8 +206,8 @@ export default class ToolbarPage extends Component {
                 >
                     <TypographyDisplay size="1">Original documentation</TypographyDisplay>
                     <TypographyBody>
-                        This component is based on the MDC Toolbar, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-toolbar"
+                        This component is based on the MDC Drawer, you can refer to its documentation <a
+                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer"
                     >here</a>.
                     </TypographyBody>
                 </Elevation>
@@ -209,19 +219,19 @@ export default class ToolbarPage extends Component {
                 </Elevation>
                 <Elevation
                     zSpace="2"
-                    className="demo-page-switch"
+                    className="demo-page-drawer_temporary"
                 >
-                    <TypographyDisplay size="1">Toolbar</TypographyDisplay>
-                    <TypographyHeadline size="1">Normal Toolbar</TypographyHeadline>
+                    <TypographyDisplay size="1">Drawer Temporary</TypographyDisplay>
+                    <TypographyHeadline size="1">Temporary with ToolbarSpacer</TypographyHeadline>
                     <iframe
-                        src="/toolbar_normal"
+                        src="/drawer/temporary_toolbar_spacer"
                         frameBorder="0"
                         width='320px'
                         height='420px'
                     />
-                    <TypographyHeadline size="1">Fixed Toolbar</TypographyHeadline>
+                    <TypographyHeadline size="1">Temporary with Header</TypographyHeadline>
                     <iframe
-                        src="/toolbar_fixed"
+                        src="/drawer/temporary_header"
                         frameBorder="0"
                         width='320px'
                         height='420px'

@@ -13,13 +13,10 @@ class Header extends PureComponent {
     render() {
         const {elementType, children, className, ...otherProps} = this.props;
         const ElementType = elementType || 'header';
+        const classes = classnames('mdc-persistent-drawer__header', className);
         return (
             <ElementType
-                className={
-                    classnames(
-                        'mdc-persistent-drawer__header',
-                        className
-                    )}
+                className={classes}
                 {...otherProps}
             >
                 {children}
