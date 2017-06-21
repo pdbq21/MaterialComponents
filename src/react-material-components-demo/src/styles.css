@@ -99,3 +99,7 @@ transform: scale(1)!important;
 .demo-page-hint .my-mdc-hint{
     padding-left: 1em;
 }
+.content>div{
+padding: 1em;
+    margin-bottom: 1em;
+}

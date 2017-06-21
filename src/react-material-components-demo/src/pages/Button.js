@@ -3,276 +3,269 @@
  */
 import React, {Component} from 'react'
 import {
-    Button,
-    Elevation,
-    TypographyDisplay,
-    TypographyBody,
+  Button,
+  Elevation,
+  TypographyDisplay,
+  TypographyBody,
+  TypographyHeadline,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  Icon
 } from '../lib'
-
+import Highlight from 'react-fast-highlight';
 
 export default class ButtonPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            components: [
-                {
-                    name: 'Button',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        },
-                        {
-                            name: 'primary',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка з кольором primary'
-                        }, {
-                            name: 'accent',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка з кольором accent'
-                        }, {
-                            name: 'compact',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка з типом compact'
-                        }, {
-                            name: 'dense',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка з типом dense'
-                        }, {
-                            name: 'raised',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка з типом raised'
-                        }, {
-                            name: 'ripple',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'додає Ripple ефект'
-                        }, {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'кнопка не активна. працює якщо тип кнопки button'
-                        },
-                    ]
-                }
-            ],
-            used: `
-import React, {Component} from 'react'
-import {
-    Button,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActive: {
+        source1: false,
+        source2: false,
+      },
+      components: [
+        {
+          name: 'Button',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+            {
+              name: 'primary',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка з кольором primary'
+            }, {
+              name: 'accent',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка з кольором accent'
+            }, {
+              name: 'compact',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка з типом compact'
+            }, {
+              name: 'dense',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка з типом dense'
+            }, {
+              name: 'raised',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка з типом raised'
+            }, {
+              name: 'ripple',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'додає Ripple ефект'
+            }, {
+              name: 'disabled',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'кнопка не активна. працює якщо тип кнопки button'
+            },
+          ]
+        }
+      ],
+      used: ''
+    };
+    this.renderTable = this.renderTable.bind(this);
+    this.handleViewCode = this.handleViewCode.bind(this);
+  }
 
-class ButtonDemo extends Component {
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
-                    <Button ripple>Default</Button>
-                    <Button raised ripple>Raised</Button>
-                    <Button dense ripple>Dense</Button>
-                    <Button dense raised ripple>Dense Raised</Button>
-                    <Button compact ripple>Compact</Button>
-                    <Button compact raised ripple>Compact Raised</Button>
-                    <Button primary ripple>Primary</Button>
-                    <Button primary raised ripple>primary raised</Button>
-                    <Button accent ripple>accent</Button>
-                    <Button accent raised ripple>accent raised</Button>
-                    <Button elementType="div" raised ripple>div raised</Button>
-                    <TypographyDisplay size="1">Buttons CSS Only</TypographyDisplay>
-                    <Button>Default</Button>
-                    <Button raised>Raised</Button>
-                    <Button dense>Dense</Button>
-                    <Button dense raised>Dense Raised</Button>
-                    <Button compact>Compact</Button>
-                    <Button compact raised>Compact Raised</Button>
-                    <Button primary>Primary</Button>
-                    <Button primary>primary raised</Button>
-                    <Button accent>accent</Button>
-                    <Button accent raised>accent raised</Button>
-                    <Button elementType="div" raised>div raised</Button>
-                    <TypographyDisplay size="1">Disabled</TypographyDisplay>
-                    <Button disabled>Default</Button>
-                    <Button raised disabled>Raised</Button>
-                    <Button dense disabled>Dense</Button>
-                    <Button dense raised disabled>Dense Raised</Button>
-                    <Button compact disabled>Compact</Button>
-                    <Button compact raised disabled>Compact Raised</Button>
-                    <Button primary disabled>Primary</Button>
-                    <Button primary raised disabled>primary raised</Button>
-                    <Button accent disabled>accent</Button>
-                    <Button accent raised disabled>accent raised</Button>
-                </Elevation>
-            </section>
-        )
-    }
-}`
-        };
-        this.renderTable = this.renderTable.bind(this);
-    }
+  renderTable() {
+    const {components} = this.state;
+    return components.map((item, index) => (<Elevation
+          zSpace="2"
+          key={`key-table-${index}`}
+        >
+          <TypographyDisplay size="1">{item.name}</TypographyDisplay>
+          <table className="table-props">
+            <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {item.property.map((prop, index) => (
+              <tr key={`key-table-tr-${index}`}>
+                <td><code>{prop.name}</code></td>
+                <td><code>{prop.type}</code></td>
+                <td>{prop.defaultValue}</td>
+                <td>{prop.required}</td>
+                <td>{prop.description}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </Elevation>
+      )
+    )
+  }
 
-    renderTable() {
-        const {components} = this.state;
-        return components.map((item, index) => (<Elevation
-                    zSpace="2"
-                    key={`key-table-${index}`}
-                >
-                    <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-                    <table className="table-props">
-                        <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Required</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {item.property.map((prop, index) => (
-                            <tr key={`key-table-tr-${index}`}>
-                                <td><code>{prop.name}</code></td>
-                                <td><code>{prop.type}</code></td>
-                                <td>{prop.defaultValue}</td>
-                                <td>{prop.required}</td>
-                                <td>{prop.description}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </Elevation>
-            )
-        )
-    }
+  handleViewCode(source) {
+this.setState({
+  isActive: {
+    [source]: !this.state.isActive[source]
+  }
+})
+  }
 
-    render() {
+  render() {
 
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '360px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
-                    }}
-                >
-                    <Button
-                        ripple
-                        style={{
-                            'marginRight': '15px',
-                        }}
-                    >Flat</Button>
-                    <Button
-                        ripple
-                        raised
-                        primary
-                        style={{
-                            'marginLeft': '15px',
-                        }}
-                    >Raised</Button>
-                </Elevation>
-                {this.renderTable()}
+    return (
+      <section
+        className="content"
+      >
+        <Elevation
+          zSpace="2"
+          style={{
+            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
+            'minHeight': '360px',
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContent': 'center',
+            'flexFlow': 'row nowrap',
+            'height': '360px',
+          }}
+        >
+          <Button
+            ripple
+            style={{
+              'marginRight': '15px',
+            }}
+          >Flat</Button>
+          <Button
+            ripple
+            raised
+            primary
+            style={{
+              'marginLeft': '15px',
+            }}
+          >Raised</Button>
+        </Elevation>
+        {this.renderTable()}
 
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'minHeight': '10em',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'flexDirection': 'column'
-                    }}
-                >
-                    <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-                    <TypographyBody>
-                        This component is based on the MDC Button, you can refer to its documentation <a
-                            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
-                        >here</a>.
-                    </TypographyBody>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Demo code</TypographyDisplay>
+        <Elevation
+          zSpace="2"
+          style={{
+            'minHeight': '10em',
+            'display': 'flex',
+            'alignItems': 'center',
+            'flexDirection': 'column'
+          }}
+        >
+          <TypographyDisplay size="1">Original documentation</TypographyDisplay>
+          <TypographyBody>
+            This component is based on the MDC Button, you can refer to its documentation <a
+            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+          >here</a>.
+          </TypographyBody>
+        </Elevation>
 
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                    className="demo-page-button"
-                >
-                    <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
-                    <Button ripple>Default</Button>
-                    <Button raised ripple>Raised</Button>
-                    <Button dense ripple>Dense</Button>
-                    <Button dense raised ripple>Dense Raised</Button>
-                    <Button compact ripple>Compact</Button>
-                    <Button compact raised ripple>Compact Raised</Button>
-                    <Button primary ripple>Primary</Button>
-                    <Button primary raised ripple>primary raised</Button>
-                    <Button accent ripple>accent</Button>
-                    <Button accent raised ripple>accent raised</Button>
-                    <Button elementType="div" raised ripple>div raised</Button>
-                    <TypographyDisplay size="1">Buttons CSS Only</TypographyDisplay>
-                    <Button>Default</Button>
-                    <Button raised>Raised</Button>
-                    <Button dense>Dense</Button>
-                    <Button dense raised>Dense Raised</Button>
-                    <Button compact>Compact</Button>
-                    <Button compact raised>Compact Raised</Button>
-                    <Button primary>Primary</Button>
-                    <Button primary>primary raised</Button>
-                    <Button accent>accent</Button>
-                    <Button accent raised>accent raised</Button>
-                    <Button elementType="div" raised>div raised</Button>
-                    <TypographyDisplay size="1">Disabled</TypographyDisplay>
-                    <Button disabled>Default</Button>
-                    <Button raised disabled>Raised</Button>
-                    <Button dense disabled>Dense</Button>
-                    <Button dense raised disabled>Dense Raised</Button>
-                    <Button compact disabled>Compact</Button>
-                    <Button compact raised disabled>Compact Raised</Button>
-                    <Button primary disabled>Primary</Button>
-                    <Button primary raised disabled>primary raised</Button>
-                    <Button accent disabled>accent</Button>
-                    <Button accent raised disabled>accent raised</Button>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '50px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'marginTop': '1em'
-                    }}
-                >
-github
-                </Elevation>
-            </section>
-        )
-    }
+        <Elevation
+          zSpace="2"
+          className="demo-page-button "
+        >
+          <TypographyDisplay size="1">Buttons</TypographyDisplay>
+          <Elevation
+            zSpace="2"
+            className="demo-example"
+          >
+            <Toolbar>
+              <ToolbarRow>
+                <ToolbarSection start>
+                  <ToolbarTitle>Buttons with Ripple</ToolbarTitle>
+                </ToolbarSection>
+                <ToolbarSection end>
+                  <Icon
+                    onClick={() => this.handleViewCode('source1')}
+                    aria-label="Code" alt="Code"
+                  >code</Icon>
+                </ToolbarSection>
+              </ToolbarRow>
+            </Toolbar>
+            <Elevation
+              className="demo-code"
+              style={{
+                'overflow': 'auto',
+                'maxHeight': '0px',
+                'transition': 'max-height 800ms ease-in-out 0ms',
+              }}
+            >
+              code here
+            </Elevation>
+            <ToolbarMain>
+              <Button ripple>Default</Button>
+              <Button raised ripple>Raised</Button>
+              <Button dense ripple>Dense</Button>
+              <Button dense raised ripple>Dense Raised</Button>
+              <Button compact ripple>Compact</Button>
+              <Button compact raised ripple>Compact Raised</Button>
+              <Button primary ripple>Primary</Button>
+              <Button primary raised ripple>primary raised</Button>
+              <Button accent ripple>accent</Button>
+              <Button accent raised ripple>accent raised</Button>
+              <Button elementType="div" raised ripple>div raised</Button>
+            </ToolbarMain>
+          </Elevation>
+          <TypographyHeadline size="1">Buttons CSS Only</TypographyHeadline>
+          <Button>Default</Button>
+          <Button raised>Raised</Button>
+          <Button dense>Dense</Button>
+          <Button dense raised>Dense Raised</Button>
+          <Button compact>Compact</Button>
+          <Button compact raised>Compact Raised</Button>
+          <Button primary>Primary</Button>
+          <Button primary>primary raised</Button>
+          <Button accent>accent</Button>
+          <Button accent raised>accent raised</Button>
+          <Button elementType="div" raised>div raised</Button>
+          <TypographyHeadline size="1">Disabled</TypographyHeadline>
+          <Button disabled>Default</Button>
+          <Button raised disabled>Raised</Button>
+          <Button dense disabled>Dense</Button>
+          <Button dense raised disabled>Dense Raised</Button>
+          <Button compact disabled>Compact</Button>
+          <Button compact raised disabled>Compact Raised</Button>
+          <Button primary disabled>Primary</Button>
+          <Button primary raised disabled>primary raised</Button>
+          <Button accent disabled>accent</Button>
+          <Button accent raised disabled>accent raised</Button>
+        </Elevation>
+        <Elevation
+          zSpace="2"
+          style={{
+            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
+            'minHeight': '50px',
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContent': 'center',
+            'marginTop': '1em'
+          }}
+        >
+          github
+        </Elevation>
+      </section>
+    )
+  }
 }
