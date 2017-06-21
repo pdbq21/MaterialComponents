@@ -37,5 +37,6 @@ export {
     DrawerPermanent,
     PermanentAboveToolbar,
     PermanentBelowToolbar
-} from './drawer'
-export Select from './Select'
+} from './drawer';
+export Select from './Select';
+export HintList from './HintList';

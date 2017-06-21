@@ -12,6 +12,7 @@ export default class HintTextfield extends PureComponent {
             valueInput,
             handleInput,
             handleClickInput,
+            handleInputBlur,
             children,
             ...otherProps
         } = ownProps;
@@ -22,6 +23,7 @@ export default class HintTextfield extends PureComponent {
                     valueInput: valueInput,
                     handleInput: handleInput,
                     handleClickInput: handleClickInput,
+                    handleInputBlur: handleInputBlur,
                 })
             } else {
                 return child

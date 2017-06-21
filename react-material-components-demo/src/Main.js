@@ -36,7 +36,8 @@ import {
     DrawerTemporary,
     DrawerPersistent,
     DrawerPermanent,
-    Select
+    Select,
+    HintList
 } from './pages'
 
 export default class Main extends Component {
@@ -144,6 +145,10 @@ export default class Main extends Component {
                 {
                     path: 'select',
                     component: Select
+                },
+                {
+                    path: 'hint_list',
+                    component: HintList
                 },
             ]
         };

@@ -19,7 +19,6 @@ export default class SelectPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSwitch: false,
             components: [
                 {
                     name: 'Switch',

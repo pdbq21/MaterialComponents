@@ -14,13 +14,16 @@ export default class Input extends PureComponent {
             value,
             onClick,
             handleClickInput,
+            handleInputBlur,
             valueInput,
+            onBlur,
             ...otherProps} = this.props;
         return (
             <TextfieldInput
                 onClick={onClick || handleClickInput}
                 onChange={onChange || handleInput}
                 value={value || valueInput}
+                onBlur={onBlur || handleInputBlur}
                 {...otherProps}
             >
                 {children}

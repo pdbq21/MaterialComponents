@@ -96,3 +96,6 @@ transform: scale(1)!important;
 .demo-page-snackbar .mdc-textfield{
     margin-left: 1em;
 }
+.demo-page-hint .my-mdc-hint{
+    padding-left: 1em;
+}

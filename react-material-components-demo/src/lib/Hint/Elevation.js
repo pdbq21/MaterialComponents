@@ -15,6 +15,7 @@ export default class HintElevation extends PureComponent {
             widthInput,
             activeItems,
             zSpace,
+            style,
             children,
             ...otherProps
         } = ownProps;
@@ -33,10 +34,10 @@ export default class HintElevation extends PureComponent {
         };
 
         let renderChildren = React.Children.map(children, childElement);
-
-        return ((isOpen)? <Elevation
+        return ((isOpen) ? <Elevation
                 style={{
                     'width': widthInput,
+                    ...style
                 }}
                 zSpace={zSpaceNumber}
                 {...otherProps}

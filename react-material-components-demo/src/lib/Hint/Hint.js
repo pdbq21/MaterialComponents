@@ -25,6 +25,7 @@ export default class Hint extends PureComponent {
         this.handelItem = this.handelItem.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.handleTagRemove = this.handleTagRemove.bind(this);
+        this.handleInputBlur = this.handleInputBlur.bind(this);
     }
 
     handleClickInput() {
@@ -53,7 +54,7 @@ export default class Hint extends PureComponent {
     }
 
     fetchData(url, value) {
-        if (value.trim().length){
+        if (value.trim().length) {
             fetch(url + encodeURIComponent(value))
                 .then((res) => {
                     return res.json();
@@ -64,7 +65,7 @@ export default class Hint extends PureComponent {
                         isOpen: Boolean(res.results.length && value.length),
                     });
                 });
-        } else{
+        } else {
             this.setState({
                 data: [],
                 isOpen: false
@@ -73,9 +74,9 @@ export default class Hint extends PureComponent {
     }
 
     handelItem({currentTarget}, index) {
-        if (this.props.multiselect){
+        if (this.props.multiselect) {
             let activeItems = this.state.activeItems;
-            if (currentTarget.attributes['aria-selected'].value === 'false'){
+            if (currentTarget.attributes['aria-selected'].value === 'false') {
                 activeItems = activeItems.concat([{
                     name: this.state.data[index],
                     index: index
@@ -85,7 +86,7 @@ export default class Hint extends PureComponent {
                 activeItems = activeItems.filter(activeIndex => activeIndex.index !== index);
             }
             this.setState({
-                activeItems:  activeItems,
+                activeItems: activeItems,
             });
         } else {
             this.setState({
@@ -95,13 +96,17 @@ export default class Hint extends PureComponent {
         }
     }
 
-    handleTagRemove(index){
+    handleTagRemove(index) {
         let activeItems = this.state.activeItems.filter(activeIndex => activeIndex.index !== index);
         this.setState({
-            activeItems:  activeItems,
+            activeItems: activeItems,
         });
     }
-
+    handleInputBlur(){
+        this.setState({
+            isOpen: false
+        });
+    }
     render() {
         const {
             isOpen,
@@ -128,6 +133,7 @@ export default class Hint extends PureComponent {
                     valueInput: value,
                     handleInput: this.handleInput,
                     handleClickInput: this.handleClickInput,
+                    handleInputBlur: this.handleInputBlur,
                 })
             } else if (child.type.name === 'HintElevation') {
                 return React.cloneElement(child, {
@@ -148,10 +154,10 @@ export default class Hint extends PureComponent {
         };
 
         let renderChildren = React.Children.map(children, childElement);
-
+        const classes = classnames('my-mdc-hint', className);
         return (
             <ElementType
-                className={classnames('my-mdc-hint', className)}
+                className={classes}
                 {...otherProps}
             >
                 {renderChildren}

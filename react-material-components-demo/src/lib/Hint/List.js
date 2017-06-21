@@ -27,7 +27,7 @@ export default class Items extends PureComponent {
                         <ListItem
                             aria-selected={this.filterActiveItem(item, activeItems)}
                             onClick={(e) => handelItem(e, index)}
-                            key={`key-${Date.now()}-${index}`}
+                            key={`key-list_item-${index}`}
                         >
                             {item}
                         </ListItem>
