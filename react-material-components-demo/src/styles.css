@@ -1,0 +1,101 @@
+
+body{
+    font-family: Roboto, sans-serif;
+}
+.table-props{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8em;
+    text-align: left;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.table-props thead tr:last-child {
+    border: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #CCC;
+}
+.table-props tbody tr {
+    border: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #CCC;
+}
+.table-props tbody tr:last-child {
+    border-bottom: 0;
+}
+.table-props tbody tr:hover {
+    background: #EEEEEE;
+}
+.table-props td, .table-props th {
+    padding: 8px;
+}
+.demo-page-button > .mdc-button,
+.demo-page-card > .mdc-card{
+    margin: 10px;
+}
+
+.todo-page{
+    background-color: darkgray;
+}
+
+.demo-page-list>.mdc-list,
+.demo-page-list>.mdc-list-group{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 30em;
+    margin-left: 1em;
+}
+
+
+.demo-page-icon_toggle>.mdc-icon-toggle,
+.demo-page-switch>.mdc-switch,
+.demo-page-fab>.mdc-fab{
+    margin-left: 1em;
+}
+.demo-page-icon_toggle>.mdc-icon-toggle:last-child,
+.demo-page-switch>.mdc-switch:last-child,
+.demo-page-fab>.mdc-fab:last-child{
+    margin-bottom: 1em;
+}
+.demo-page-icon>.material-icons,
+.demo-page-ripple>.mdc-ripple-surface{
+    margin: 0 1em 1em 1em;
+}
+
+.demo-page-simple_menu_view{
+transform: scale(1)!important;
+    z-index: 0!important;
+    opacity: 1!important;
+    display: inline-block!important;
+}
+.demo-page-simple_menu_view .mdc-simple-menu__items>* {
+    opacity: 1;
+    will-change: opacity;
+}
+
+.demo-page-simple_menu .mdc-menu-anchor{
+    position: absolute;
+}
+.demo-page-snackbar_view .mdc-snackbar--active {
+    transform: none;
+}
+
+.demo-page-snackbar_view .mdc-snackbar {
+    position: relative;
+    left: auto;
+}
+
+.demo-page-snackbar_view .mdc-snackbar__action-button{
+    color: #ff4081!important;
+    opacity: 1!important;
+    visibility: visible!important;
+}
+
+.demo-page-snackbar .mdc-textfield{
+    margin-left: 1em;
+}
+.demo-page-hint .my-mdc-hint{
+    padding-left: 1em;
+}
