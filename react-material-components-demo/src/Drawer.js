@@ -99,6 +99,11 @@ export default class Drawer extends Component {
                     icon: 'line_style',
                     link: '/layout_grid',
                     todo: true
+                },{
+                    name: 'Linear Progress',
+                    icon: 'data_usage',
+                    link: '/linear_progress',
+                    todo: true
                 }, {
                     name: 'List',
                     icon: 'list',
@@ -123,6 +128,11 @@ export default class Drawer extends Component {
                     name: 'Simple Menu',
                     icon: 'menu',
                     link: '/simple_menu',
+                    todo: false
+                },{
+                    name: 'Slider',
+                    icon: 'linear_scale',
+                    link: '/slider',
                     todo: false
                 }, {
                     name: 'Snackbar',

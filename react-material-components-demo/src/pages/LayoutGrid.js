@@ -2,7 +2,7 @@
  * Created by ruslan on 16.06.17.
  */
 import React, {Component} from 'react'
-import Highlight from 'react-highlight.js'
+//import Highlight from 'react-highlight.js'
 import {
 
     Elevation,
@@ -72,27 +72,7 @@ export default class LayoutGridPage extends Component {
                     ]
                 }
             ],
-            used: `
-import React, {Component} from 'react'
-import {
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
-
-class ButtonDemo extends Component {
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
-
-                </Elevation>
-            </section>
-        )
-    }
-}`
+            used: ''
         };
         this.renderTable = this.renderTable.bind(this);
     }
@@ -171,13 +151,11 @@ class ButtonDemo extends Component {
                     zSpace="2"
                 >
                     <TypographyDisplay size="1">Demo code</TypographyDisplay>
-                    <Highlight language={'javascript'}>
-                        {this.state.used}
-                    </Highlight>
+
                 </Elevation>
                 <Elevation
                     zSpace="2"
-                    className="demo-page-button"
+                    className="demo-page-layout_grid"
                 >
                     <TypographyDisplay size="1">Buttons with Ripple</TypographyDisplay>
 
