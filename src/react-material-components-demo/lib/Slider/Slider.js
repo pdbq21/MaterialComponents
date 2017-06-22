@@ -144,10 +144,14 @@ export default class Slider extends PureComponent {
       className,
       tabIndex,
       role,
+      disabled,
       children
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider',
+      {
+        'mdc-slider--disabled': disabled
+      },
       this.state.classNames,
       className
     );
@@ -157,6 +161,7 @@ export default class Slider extends PureComponent {
         className={classes}
         tabIndex={tabIndex || "0"}
         role={role || "slider"}
+        aria-disabled={(disabled)? 'true' : null}
       >
         {children}
       </ElementType>
