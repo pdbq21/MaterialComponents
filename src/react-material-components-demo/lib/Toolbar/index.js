@@ -7,3 +7,4 @@ export { default as ToolbarRow} from './Row';
 export { default as ToolbarSection} from './Section';
 export { default as ToolbarTitle} from './Title';
 export { default as ToolbarMain} from './Main';
+export { default as ToolbarIcon} from './Icon';

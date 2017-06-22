@@ -22,21 +22,25 @@ export {default as SimpleMenu} from './SimpleMenu';
 export {default as Textfield} from './Textfield';
 export {default as Snackbar} from './Snackbar';
 export {
-    Toolbar,
-    ToolbarNormal,
-    ToolbarFixed
+  Toolbar,
+  ToolbarNormal,
+  ToolbarFixed,
+  ToolbarWaterFall,
+  ToolbarFlexiblePage,
+  ToolbarWaterfallFlexiblePage,
+  ToolbarWaterfallFixLastRowPage
 } from './toolbar';
 export {default as Theme} from './Theme';
 export {
-    DrawerTemporary,
-    TemporaryHeader,
-    TemporaryToolbarSpacer,
-    DrawerPersistent,
-    PersistentToolbarSpacer,
-    PersistentHeader,
-    DrawerPermanent,
-    PermanentAboveToolbar,
-    PermanentBelowToolbar
+  DrawerTemporary,
+  TemporaryHeader,
+  TemporaryToolbarSpacer,
+  DrawerPersistent,
+  PersistentToolbarSpacer,
+  PersistentHeader,
+  DrawerPermanent,
+  PermanentAboveToolbar,
+  PermanentBelowToolbar
 } from './drawer';
 export {default as Select} from './Select';
 export {default as HintList} from './HintList';

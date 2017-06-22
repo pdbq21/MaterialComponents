@@ -272,7 +272,9 @@ export default class ButtonDisabled extends Component {
             zSpace="2"
             className="demo-example"
           >
-            <Toolbar>
+            <Toolbar
+              className="toolbar-view_example"
+            >
               <ToolbarRow>
                 <ToolbarSection start>
                   <ToolbarTitle>Buttons with Ripple</ToolbarTitle>
@@ -318,7 +320,9 @@ export default class ButtonDisabled extends Component {
             zSpace="2"
             className="demo-example"
           >
-            <Toolbar>
+            <Toolbar
+              className="toolbar-view_example"
+            >
               <ToolbarRow>
                 <ToolbarSection start>
                   <ToolbarTitle>Buttons CSS Only</ToolbarTitle>
@@ -364,7 +368,9 @@ export default class ButtonDisabled extends Component {
             zSpace="2"
             className="demo-example"
           >
-            <Toolbar>
+            <Toolbar
+              className="toolbar-view_example"
+            >
               <ToolbarRow>
                 <ToolbarSection start>
                   <ToolbarTitle>Buttons Disabled</ToolbarTitle>
