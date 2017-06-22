@@ -103,3 +103,15 @@ transform: scale(1)!important;
 padding: 1em;
     margin-bottom: 1em;
 }
+
+.demo-page-button_demo-components>.mdc-button{
+    margin: 1em;
+}
+
+.demo-example{
+    margin-bottom: 1em;
+}
+
+.demo-icon_toggle{
+    cursor: pointer;
+}

@@ -7,7 +7,6 @@ import {
   Elevation,
   TypographyDisplay,
   TypographyBody,
-  TypographyHeadline,
   Toolbar,
   ToolbarRow,
   ToolbarSection,
@@ -24,6 +23,7 @@ export default class ButtonPage extends Component {
       isActive: {
         source1: false,
         source2: false,
+        source3: false,
       },
       components: [
         {
@@ -82,7 +82,83 @@ export default class ButtonPage extends Component {
           ]
         }
       ],
-      used: ''
+      used: {
+        source1: `import React, {Component} from 'react'
+import {
+  Button
+} from '../lib'
+
+export default class ButtonWithRipple extends Component {
+
+  render() {
+    return (
+      <div>
+         <Button ripple>Default</Button>
+         <Button raised ripple>Raised</Button>
+         <Button dense ripple>Dense</Button>
+         <Button dense raised ripple>Dense Raised</Button>
+         <Button compact ripple>Compact</Button>
+         <Button compact raised ripple>Compact Raised</Button>
+         <Button primary ripple>Primary</Button>
+         <Button primary raised ripple>primary raised</Button>
+         <Button accent ripple>accent</Button>
+         <Button accent raised ripple>accent raised</Button>
+         <Button elementType="div" raised ripple>div raised</Button>
+      </div>
+    );
+  }
+}
+`,
+        source2: `import React, {Component} from 'react'
+import {
+  Button
+} from '../lib'
+
+export default class ButtonOnlyCSS extends Component {
+
+  render() {
+    return (
+      <div>
+              <Button>Default</Button>
+              <Button raised>Raised</Button>
+              <Button dense>Dense</Button>
+              <Button dense raised>Dense Raised</Button>
+              <Button compact>Compact</Button>
+              <Button compact raised>Compact Raised</Button>
+              <Button primary>Primary</Button>
+              <Button primary>primary raised</Button>
+              <Button accent>accent</Button>
+              <Button accent raised>accent raised</Button>
+              <Button elementType="div" raised>div raised</Button>
+      </div>
+    );
+  }
+}`,
+        source3: `import React, {Component} from 'react'
+import {
+  Button
+} from '../lib'
+
+export default class ButtonDisabled extends Component {
+
+  render() {
+    return (
+      <div>
+              <Button disabled>Default</Button>
+              <Button raised disabled>Raised</Button>
+              <Button dense disabled>Dense</Button>
+              <Button dense raised disabled>Dense Raised</Button>
+              <Button compact disabled>Compact</Button>
+              <Button compact raised disabled>Compact Raised</Button>
+              <Button primary disabled>Primary</Button>
+              <Button primary raised disabled>primary raised</Button>
+              <Button accent disabled>accent</Button>
+              <Button accent raised disabled>accent raised</Button>
+      </div>
+    );
+  }
+}`
+      }
     };
     this.renderTable = this.renderTable.bind(this);
     this.handleViewCode = this.handleViewCode.bind(this);
@@ -123,15 +199,20 @@ export default class ButtonPage extends Component {
   }
 
   handleViewCode(source) {
-this.setState({
-  isActive: {
-    [source]: !this.state.isActive[source]
-  }
-})
+    this.setState({
+      isActive: {
+        ...this.state.isActive,
+        [source]: !this.state.isActive[source]
+      }
+    })
   }
 
   render() {
-
+    const {
+      isActive: {
+        source1, source2, source3
+      }
+    } = this.state;
     return (
       <section
         className="content"
@@ -200,6 +281,7 @@ this.setState({
                   <Icon
                     onClick={() => this.handleViewCode('source1')}
                     aria-label="Code" alt="Code"
+                    className="demo-icon_toggle"
                   >code</Icon>
                 </ToolbarSection>
               </ToolbarRow>
@@ -208,13 +290,17 @@ this.setState({
               className="demo-code"
               style={{
                 'overflow': 'auto',
-                'maxHeight': '0px',
+                'maxHeight': (source1) ? '20em' : '0px',
                 'transition': 'max-height 800ms ease-in-out 0ms',
               }}
             >
-              code here
+              <Highlight language='javascript'>
+                {this.state.used.source1}
+              </Highlight>
             </Elevation>
-            <ToolbarMain>
+            <ToolbarMain
+              className="demo-page-button_demo-components"
+            >
               <Button ripple>Default</Button>
               <Button raised ripple>Raised</Button>
               <Button dense ripple>Dense</Button>
@@ -228,29 +314,97 @@ this.setState({
               <Button elementType="div" raised ripple>div raised</Button>
             </ToolbarMain>
           </Elevation>
-          <TypographyHeadline size="1">Buttons CSS Only</TypographyHeadline>
-          <Button>Default</Button>
-          <Button raised>Raised</Button>
-          <Button dense>Dense</Button>
-          <Button dense raised>Dense Raised</Button>
-          <Button compact>Compact</Button>
-          <Button compact raised>Compact Raised</Button>
-          <Button primary>Primary</Button>
-          <Button primary>primary raised</Button>
-          <Button accent>accent</Button>
-          <Button accent raised>accent raised</Button>
-          <Button elementType="div" raised>div raised</Button>
-          <TypographyHeadline size="1">Disabled</TypographyHeadline>
-          <Button disabled>Default</Button>
-          <Button raised disabled>Raised</Button>
-          <Button dense disabled>Dense</Button>
-          <Button dense raised disabled>Dense Raised</Button>
-          <Button compact disabled>Compact</Button>
-          <Button compact raised disabled>Compact Raised</Button>
-          <Button primary disabled>Primary</Button>
-          <Button primary raised disabled>primary raised</Button>
-          <Button accent disabled>accent</Button>
-          <Button accent raised disabled>accent raised</Button>
+          <Elevation
+            zSpace="2"
+            className="demo-example"
+          >
+            <Toolbar>
+              <ToolbarRow>
+                <ToolbarSection start>
+                  <ToolbarTitle>Buttons CSS Only</ToolbarTitle>
+                </ToolbarSection>
+                <ToolbarSection end>
+                  <Icon
+                    onClick={() => this.handleViewCode('source2')}
+                    aria-label="Code" alt="Code"
+                    className="demo-icon_toggle"
+                  >code</Icon>
+                </ToolbarSection>
+              </ToolbarRow>
+            </Toolbar>
+            <Elevation
+              className="demo-code"
+              style={{
+                'overflow': 'auto',
+                'maxHeight': (source2) ? '20em' : '0px',
+                'transition': 'max-height 800ms ease-in-out 0ms',
+              }}
+            >
+              <Highlight language='javascript'>
+                {this.state.used.source1}
+              </Highlight>
+            </Elevation>
+            <ToolbarMain
+              className="demo-page-button_demo-components"
+            >
+              <Button>Default</Button>
+              <Button raised>Raised</Button>
+              <Button dense>Dense</Button>
+              <Button dense raised>Dense Raised</Button>
+              <Button compact>Compact</Button>
+              <Button compact raised>Compact Raised</Button>
+              <Button primary>Primary</Button>
+              <Button primary>primary raised</Button>
+              <Button accent>accent</Button>
+              <Button accent raised>accent raised</Button>
+              <Button elementType="div" raised>div raised</Button>
+            </ToolbarMain>
+          </Elevation>
+          <Elevation
+            zSpace="2"
+            className="demo-example"
+          >
+            <Toolbar>
+              <ToolbarRow>
+                <ToolbarSection start>
+                  <ToolbarTitle>Buttons Disabled</ToolbarTitle>
+                </ToolbarSection>
+                <ToolbarSection end>
+                  <Icon
+                    onClick={() => this.handleViewCode('source3')}
+                    aria-label="Code" alt="Code"
+                    className="demo-icon_toggle"
+                  >code</Icon>
+                </ToolbarSection>
+              </ToolbarRow>
+            </Toolbar>
+            <Elevation
+              className="demo-code"
+              style={{
+                'overflow': 'auto',
+                'maxHeight': (source3) ? '20em' : '0px',
+                'transition': 'max-height 800ms ease-in-out 0ms',
+              }}
+            >
+              <Highlight language='javascript'>
+                {this.state.used.source1}
+              </Highlight>
+            </Elevation>
+            <ToolbarMain
+              className="demo-page-button_demo-components"
+            >
+              <Button disabled>Default</Button>
+              <Button raised disabled>Raised</Button>
+              <Button dense disabled>Dense</Button>
+              <Button dense raised disabled>Dense Raised</Button>
+              <Button compact disabled>Compact</Button>
+              <Button compact raised disabled>Compact Raised</Button>
+              <Button primary disabled>Primary</Button>
+              <Button primary raised disabled>primary raised</Button>
+              <Button accent disabled>accent</Button>
+              <Button accent raised disabled>accent raised</Button>
+            </ToolbarMain>
+          </Elevation>
         </Elevation>
         <Elevation
           zSpace="2"

@@ -27,6 +27,7 @@ export default class Header extends Component {
                             start
                         >
                             <Icon
+                              className="demo-icon_toggle"
                             onClick={handleShowMenu}
                             >menu</Icon>
 
