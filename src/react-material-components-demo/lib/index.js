@@ -162,3 +162,10 @@ export {
   SliderThumb,
   SliderTrack
 } from './Slider'
+export {
+  LinearProgress,
+  LinearProgressBar,
+  LinearProgressBuffering,
+  LinearProgressBuffer,
+  LinearProgressInner
+} from './LinearProgress'

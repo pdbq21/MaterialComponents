@@ -45,3 +45,4 @@ export {
 export {default as Select} from './Select';
 export {default as HintList} from './HintList';
 export {default as Slider} from './Slider';
+export {default as LinearProgress} from './LinearProgress';

@@ -38,7 +38,8 @@ import {
   DrawerPermanent,
   Select,
   HintList,
-  Slider
+  Slider,
+  LinearProgress
 } from './pages'
 
 export default class Main extends Component {
@@ -154,6 +155,10 @@ export default class Main extends Component {
         {
           path: 'hint_list',
           component: HintList
+        },
+        {
+          path: 'linear_progress',
+          component: LinearProgress
         },
       ]
     };
