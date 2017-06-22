@@ -133,7 +133,7 @@ export default class Drawer extends Component {
                     name: 'Slider',
                     icon: 'linear_scale',
                     link: '/slider',
-                    todo: false
+                    todo: true
                 }, {
                     name: 'Snackbar',
                     icon: 'video_label',

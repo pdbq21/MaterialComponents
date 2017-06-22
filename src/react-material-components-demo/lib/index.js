@@ -1,9 +1,9 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-export {Button} from './Button/index';
-export {Elevation} from './Elevation/index';
-export {Ripple} from './Ripple/index';
+export {Button} from './Button';
+export {Elevation} from './Elevation';
+export {Ripple} from './Ripple';
 export {
   Card,
   CardHorizontalBlock,
@@ -15,7 +15,7 @@ export {
   CardPrimarySubtitle,
   CardActions,
   CardActionItem
-} from './Card/index';
+} from './Card';
 export {
   Typography,
   TypographyDisplay,
@@ -24,11 +24,11 @@ export {
   TypographySubheading,
   TypographyBody,
   TypographyCaption
-} from './Typography/index';
+} from './Typography';
 export {
   LayoutGrid,
   LayoutGridCell
-} from './LayoutGrid/index';
+} from './LayoutGrid';
 export {
   List,
   ListGroup,
@@ -39,8 +39,8 @@ export {
   ListItemTextPrimary,
   ListItemTextSecondary,
   ListItemDetail
-} from './List/index';
-export {FAB, FABIcon} from './FAB/index';
+} from './List';
+export {FAB, FABIcon} from './FAB';
 export {
   Toolbar,
   ToolbarRow,
@@ -48,23 +48,23 @@ export {
   ToolbarTitle,
   ToolbarMain,
   ToolbarIcon,
-} from './Toolbar/index';
+} from './Toolbar';
 export {
   Switch,
   SwitchInput,
   SwitchLabel
-} from './Switch/index';
+} from './Switch';
 export {
   Textfield,
   TextfieldInput,
   TextfieldLabel,
   TextfieldHelptext
-} from './Textfield/index';
-export {FormField} from './FormField/index';
+} from './Textfield';
+export {FormField} from './FormField';
 export {
   Radio,
   RadioInput
-} from './Radio/index';
+} from './Radio';
 export {
   Checkbox,
   CheckboxLabel,
@@ -73,7 +73,7 @@ export {
   CheckboxInput,
   CheckboxMixedmark,
   CheckboxPath
-} from './Checkbox/index';
+} from './Checkbox';
 
 export {
   DrawerTemporary,
@@ -96,7 +96,7 @@ export {
   PersistentHeader,
   PersistentHeaderContent,
   PersistentListItem
-} from './Drawer/index'
+} from './Drawer'
 export {
   Dialog,
   DialogHeader,
@@ -105,7 +105,7 @@ export {
   DialogFooterButton,
   DialogSurface,
   DialogTitle
-} from './Dialog/index'
+} from './Dialog'
 export {
   GridList,
   GridListTiles,
@@ -116,32 +116,32 @@ export {
   GridListTileTitle,
   GridListTileSupportText,
   GridListTileIcon
-} from './GridList/index'
+} from './GridList'
 export {
   Snackbar,
   SnackbarText,
   SnackbarActionWrapper,
   SnackbarActionButton
-} from './Snackbar/index'
+} from './Snackbar'
 export {
   SimpleMenu,
   SimpleMenuItems,
   SimpleMenuListItem,
   SimpleMenuAnchor
-} from './Menu/index'
+} from './Menu'
 export {
   IconToggle
-} from './IconToggle/index'
+} from './IconToggle'
 export {
   Select,
   SelectMenu,
   SelectText,
   SelectItems,
   SelectItem
-} from './Select/index'
+} from './Select'
 export {
   Theme
-} from './Theme/index'
+} from './Theme'
 export {
   Icon
 } from './base'
@@ -153,4 +153,12 @@ export {
   HintLabel,
   HintList,
   HintTags
-} from './Hint/index'
+} from './Hint'
+export {
+  Slider,
+  SliderContainerTrack,
+  SliderContainerThumb,
+  SliderFocusRing,
+  SliderThumb,
+  SliderTrack
+} from './Slider'

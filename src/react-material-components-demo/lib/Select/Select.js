@@ -37,7 +37,6 @@ export default class Select extends PureComponent {
             evt = document.createEvent('CustomEvent');
             evt.initCustomEvent(evtType, false, false, evtData);
         }
-
         root.dispatchEvent(evt);
     };
     items_ = () => (this.refs.root.querySelector('.mdc-list.mdc-simple-menu__items'));

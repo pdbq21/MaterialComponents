@@ -7,7 +7,6 @@ import classnames from 'classnames';
 
 import {iconToggle}  from 'material-components-web/dist/material-components-web';
 const {MDCIconToggleFoundation} = iconToggle;
-import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple} from 'material-components-web/dist/material-components-web';
 const {MDCRippleFoundation} = ripple;
 const {
