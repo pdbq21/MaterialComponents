@@ -59,7 +59,7 @@ export default class Ripple extends PureComponent {
         },
         registerInteractionHandler: (evtType, handler) => {
             if (this.refs.root) {
-                return this.refs.root.addEventListener(evtType, handler);
+                return this.refs.root.addEventListener(evtType, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (evtType, handler) => {
@@ -68,7 +68,7 @@ export default class Ripple extends PureComponent {
             }
         },
         registerResizeHandler: handler => {
-            window.addEventListener('resize', handler);
+            window.addEventListener('resize', handler, {passive: true});
         },
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);

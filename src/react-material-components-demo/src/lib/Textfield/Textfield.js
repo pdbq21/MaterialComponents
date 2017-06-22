@@ -64,25 +64,25 @@ export default class Textfield extends PureComponent {
             registerInputFocusHandler: handler => {
                 const rootInput = this.rootInput_();
                 if (rootInput) {
-                    return rootInput.addEventListener('focus', handler);
+                    return rootInput.addEventListener('focus', handler, {passive: true});
                 }
             },
             registerInputBlurHandler: handler => {
                 const rootInput = this.rootInput_();
                 if (rootInput) {
-                    return rootInput.addEventListener('blur', handler);
+                    return rootInput.addEventListener('blur', handler, {passive: true});
                 }
             },
             registerInputInputHandler: handler => {
                 const rootInput = this.rootInput_();
                 if (rootInput) {
-                    return rootInput.addEventListener('input', handler);
+                    return rootInput.addEventListener('input', handler, {passive: true});
                 }
             },
             registerInputKeydownHandler: handler => {
                 const rootInput = this.rootInput_();
                 if (rootInput) {
-                    return rootInput.addEventListener('keydown', handler);
+                    return rootInput.addEventListener('keydown', handler, {passive: true});
                 }
             },
             deregisterInputFocusHandler: handler => {

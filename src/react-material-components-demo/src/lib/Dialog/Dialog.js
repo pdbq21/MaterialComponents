@@ -63,7 +63,7 @@ export default class Dialog extends PureComponent {
         removeBodyClass: className => (document.body.classList.remove(className)),
         registerInteractionHandler: (evt, handler) => {
             if (this.refs.root) {
-                this.refs.root.addEventListener(evt, handler);
+                this.refs.root.addEventListener(evt, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (evt, handler) => {
@@ -74,7 +74,7 @@ export default class Dialog extends PureComponent {
         registerSurfaceInteractionHandler: (evt, handler) => {
             const dialogSurface = this.dialogSurface_();
             if (dialogSurface) {
-                return dialogSurface.addEventListener(evt, handler);
+                return dialogSurface.addEventListener(evt, handler, {passive: true});
             }
         },
         deregisterSurfaceInteractionHandler: (evt, handler) => {
@@ -83,7 +83,7 @@ export default class Dialog extends PureComponent {
                 return dialogSurface.removeEventListener(evt, handler);
             }
         },
-        registerDocumentKeydownHandler: handler => (document.addEventListener('keydown', handler)),
+        registerDocumentKeydownHandler: handler => (document.addEventListener('keydown', handler, {passive: true})),
         deregisterDocumentKeydownHandler: handler => (document.removeEventListener('keydown', handler)),
         trapFocusOnSurface: () => {
             const dialogSurface = this.dialogSurface_();

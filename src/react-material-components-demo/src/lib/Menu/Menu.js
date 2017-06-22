@@ -89,7 +89,7 @@ export default class Menu extends PureComponent {
         },
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                return this.refs.root.addEventListener(type, handler);
+                return this.refs.root.addEventListener(type, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (type, handler) => {
@@ -98,7 +98,7 @@ export default class Menu extends PureComponent {
             }
         },
         registerDocumentClickHandler: handler => {
-            return document.addEventListener('click', handler);
+            return document.addEventListener('click', handler, {passive: true});
         },
         deregisterDocumentClickHandler: handler => {
             return document.removeEventListener('click', handler);

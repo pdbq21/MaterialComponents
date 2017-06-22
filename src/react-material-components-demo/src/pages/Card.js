@@ -18,7 +18,7 @@ import {
     TypographyBody,
 } from '../lib'
 
-import Highlight from 'react-fast-highlight';
+//import Highlight from 'react-fast-highlight';
 
 export default class CardPage extends Component {
     constructor(props) {

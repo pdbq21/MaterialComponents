@@ -76,7 +76,7 @@ export default class Temporary extends PureComponent {
             const drawer = this.drawer_();
             // todo: evtType !== 'click' make selectively
             if (drawer && evtType !== 'click'){
-             return  drawer.addEventListener(remapEvent(evtType), handler);
+             return  drawer.addEventListener(remapEvent(evtType), handler, {passive: true});
             }
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
@@ -88,7 +88,7 @@ export default class Temporary extends PureComponent {
         registerTransitionEndHandler: handler => {
             const drawer = this.drawer_();
             if (drawer){
-                return  drawer.addEventListener('transitionend', handler);
+                return  drawer.addEventListener('transitionend', handler, {passive: true});
             }
         },
         deregisterTransitionEndHandler: handler => {
@@ -98,7 +98,7 @@ export default class Temporary extends PureComponent {
             }
         },
         registerDocumentKeydownHandler: handler => {
-            document.addEventListener('keydown', handler);
+            document.addEventListener('keydown', handler, {passive: true});
         },
         deregisterDocumentKeydownHandler: handler => {
             document.removeEventListener('keydown', handler);

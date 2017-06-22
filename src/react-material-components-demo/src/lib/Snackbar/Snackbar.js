@@ -160,7 +160,7 @@ export default class Snackbar extends PureComponent {
             registerActionClickHandler: handler => {
                 const actionButton = this.actionButton_();
                 if (actionButton) {
-                    actionButton.addEventListener('click', handler);
+                    actionButton.addEventListener('click', handler, {passive: true});
                 }
             },
             deregisterActionClickHandler: handler => {
@@ -171,7 +171,7 @@ export default class Snackbar extends PureComponent {
             },
             registerTransitionEndHandler: handler => {
                 if (this.refs.root) {
-                    this.refs.root.addEventListener(getCorrectEventName(window, 'transitionend'), handler);
+                    this.refs.root.addEventListener(getCorrectEventName(window, 'transitionend'), handler, {passive: true});
                 }
             },
             deregisterTransitionEndHandler: handler => {

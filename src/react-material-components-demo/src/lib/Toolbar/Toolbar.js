@@ -40,7 +40,7 @@ export default class Toolbar extends PureComponent {
             return window.removeEventListener('scroll', handler, applyPassive());
         },
         registerResizeHandler: handler => {
-            return window.addEventListener('resize', handler);
+            return window.addEventListener('resize', handler, {passive: true});
         },
         deregisterResizeHandler: handler => {
             return window.removeEventListener('resize', handler);

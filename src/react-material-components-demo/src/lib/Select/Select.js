@@ -111,7 +111,7 @@ export default class Select extends PureComponent {
         registerInteractionHandler: (type, handler) => {
             const menuEl = this.menuEl_();
             if (menuEl) {
-                menuEl.addEventListener(type, handler);
+                menuEl.addEventListener(type, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (type, handler) => {
@@ -121,7 +121,7 @@ export default class Select extends PureComponent {
             }
         },
         registerDocumentClickHandler: handler => {
-            return document.addEventListener('click', handler);
+            return document.addEventListener('click', handler, {passive: true});
         },
         deregisterDocumentClickHandler: handler => {
             return document.removeEventListener('click', handler);
@@ -253,7 +253,7 @@ export default class Select extends PureComponent {
 
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                return this.refs.root.addEventListener(type, handler)
+                return this.refs.root.addEventListener(type, handler, {passive: true})
             }
         },
         deregisterInteractionHandler: (type, handler) => {
@@ -371,7 +371,7 @@ export default class Select extends PureComponent {
         registerMenuInteractionHandler: (type, handler) => {
             const menuEl = this.menuEl_();
             if (menuEl) {
-                return menuEl.addEventListener(type, handler);
+                return menuEl.addEventListener(type, handler, {passive: true});
             }
         },
         deregisterMenuInteractionHandler: (type, handler) => {

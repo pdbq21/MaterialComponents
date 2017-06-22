@@ -75,7 +75,7 @@ export default class Persistent extends PureComponent {
         registerDrawerInteractionHandler: (evtType, handler) => {
             const drawer = this.drawer_();
             if (drawer){
-                return drawer.addEventListener(remapEvent(evtType), handler);
+                return drawer.addEventListener(remapEvent(evtType), handler, {passive: true});
             }
         },
         deregisterDrawerInteractionHandler: (evtType, handler) => {
@@ -85,13 +85,13 @@ export default class Persistent extends PureComponent {
             }
         },
         registerTransitionEndHandler: handler => {
-            this.refs.root.addEventListener('transitionend', handler);
+            this.refs.root.addEventListener('transitionend', handler, {passive: true});
         },
         deregisterTransitionEndHandler: handler => {
             this.refs.root.removeEventListener('transitionend', handler);
         },
         registerDocumentKeydownHandler: handler => {
-            document.addEventListener('keydown', handler);
+            document.addEventListener('keydown', handler, {passive: true});
         },
         deregisterDocumentKeydownHandler: handler => {
             document.removeEventListener('keydown', handler);

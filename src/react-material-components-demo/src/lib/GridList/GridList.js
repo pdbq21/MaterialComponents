@@ -31,7 +31,7 @@ export default class Radio extends PureComponent {
             }
         },
         registerResizeHandler: handler => {
-            window.addEventListener('resize', handler);
+            window.addEventListener('resize', handler, {passive: true});
         },
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);

@@ -89,7 +89,7 @@ export default class Radio extends PureComponent {
         registerInteractionHandler: (evtType, handler) => {
             const rootInput = this.rootInput_();
             if (rootInput) {
-                return rootInput.addEventListener(evtType, handler);
+                return rootInput.addEventListener(evtType, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (evtType, handler) => {
@@ -99,7 +99,7 @@ export default class Radio extends PureComponent {
             }
         },
         registerResizeHandler: handler => {
-            window.addEventListener('resize', handler);
+            window.addEventListener('resize', handler, {passive: true});
         },
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);

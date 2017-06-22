@@ -61,7 +61,7 @@ export default class IconToggle extends PureComponent {
     foundation = new MDCIconToggleFoundation({
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                this.refs.root.addEventListener(type, handler);
+                this.refs.root.addEventListener(type, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (type, handler) => {
@@ -132,7 +132,7 @@ export default class IconToggle extends PureComponent {
         },
         registerInteractionHandler: (evtType, handler) => {
             if (this.refs.root) {
-                this.refs.root.addEventListener(evtType, handler);
+                this.refs.root.addEventListener(evtType, handler, {passive: true});
             }
         },
         deregisterInteractionHandler: (evtType, handler) => {
@@ -141,7 +141,7 @@ export default class IconToggle extends PureComponent {
             }
         },
         registerResizeHandler: handler => {
-            window.addEventListener('resize', handler);
+            window.addEventListener('resize', handler, {passive: true});
         },
         deregisterResizeHandler: handler => {
             window.removeEventListener('resize', handler);
