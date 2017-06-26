@@ -1,8 +1,9 @@
 
-body{
+body {
     font-family: Roboto, sans-serif;
 }
-.table-props{
+
+.table-props {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8em;
@@ -17,67 +18,75 @@ body{
     border-style: solid;
     border-color: #CCC;
 }
+
 .table-props tbody tr {
     border: 0;
     border-bottom: 1px;
     border-style: solid;
     border-color: #CCC;
 }
+
 .table-props tbody tr:last-child {
     border-bottom: 0;
 }
+
 .table-props tbody tr:hover {
     background: #EEEEEE;
 }
+
 .table-props td, .table-props th {
     padding: 8px;
 }
+
 .demo-page-button > .mdc-button,
-.demo-page-card > .mdc-card{
+.demo-page-card > .mdc-card {
     margin: 10px;
 }
 
-.todo-page{
+.todo-page {
     background-color: darkgray;
 }
 
-.demo-page-list>.mdc-list,
-.demo-page-list>.mdc-list-group{
+.demo-page-list > .mdc-list,
+.demo-page-list > .mdc-list-group {
     border: 1px solid rgba(0, 0, 0, 0.1);
     width: 30em;
     margin-left: 1em;
 }
 
-
-.demo-page-icon_toggle>.mdc-icon-toggle,
-.demo-page-switch>.mdc-switch,
-.demo-page-fab>.mdc-fab{
+.demo-page-icon_toggle > .mdc-icon-toggle,
+.demo-page-switch > .mdc-switch,
+.demo-page-fab > .mdc-fab {
     margin-left: 1em;
 }
-.demo-page-icon_toggle>.mdc-icon-toggle:last-child,
-.demo-page-switch>.mdc-switch:last-child,
-.demo-page-fab>.mdc-fab:last-child{
+
+.demo-page-icon_toggle > .mdc-icon-toggle:last-child,
+.demo-page-switch > .mdc-switch:last-child,
+.demo-page-fab > .mdc-fab:last-child {
     margin-bottom: 1em;
 }
-.demo-page-icon>.material-icons,
-.demo-page-ripple>.mdc-ripple-surface{
+
+.demo-page-icon > .material-icons,
+.demo-page-ripple > .mdc-ripple-surface {
     margin: 0 1em 1em 1em;
 }
 
-.demo-page-simple_menu_view{
-transform: scale(1)!important;
-    z-index: 0!important;
-    opacity: 1!important;
-    display: inline-block!important;
+.demo-page-simple_menu_view {
+    transform: scale(1) !important;
+    z-index: 0 !important;
+    opacity: 1 !important;
+    display: inline-block !important;
 }
-.demo-page-simple_menu_view .mdc-simple-menu__items>* {
+
+.demo-page-simple_menu_view .mdc-simple-menu__items > * {
     opacity: 1;
     will-change: opacity;
 }
 
-.demo-page-simple_menu .mdc-menu-anchor{
+.demo-page-simple_menu .mdc-menu-anchor {
     position: absolute;
 }
+
 .demo-page-snackbar_view .mdc-snackbar--active {
     transform: none;
 }
@@ -87,35 +96,38 @@ transform: scale(1)!important;
     left: auto;
 }
 
-.demo-page-snackbar_view .mdc-snackbar__action-button{
-    color: #ff4081!important;
-    opacity: 1!important;
-    visibility: visible!important;
+.demo-page-snackbar_view .mdc-snackbar__action-button {
+    color: #ff4081 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
-.demo-page-snackbar .mdc-textfield{
+.demo-page-snackbar .mdc-textfield {
     margin-left: 1em;
 }
-.demo-page-hint .my-mdc-hint{
+
+.demo-page-hint .my-mdc-hint {
     padding-left: 1em;
 }
-.content>div{
-padding: 1em;
+
+.content > div:not(:last-child) {
+    padding: 1em;
     margin-bottom: 1em;
 }
 
-.demo-page-button_demo-components>.mdc-button{
+.demo-page-button_demo-components > .mdc-button {
     margin: 1em;
 }
 
-.demo-example{
+.demo-example {
     margin-bottom: 1em;
 }
 
-.demo-icon_toggle{
+.demo-icon_toggle {
     cursor: pointer;
 }
-.demo-page-toolbar_flexible:first-child::after{
+
+.demo-page-toolbar_flexible:first-child::after {
     background-image: url('https://material-components-web.appspot.com/images/4-3.jpg');
     background-size: cover;
     background-position: center;

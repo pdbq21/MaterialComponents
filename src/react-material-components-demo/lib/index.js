@@ -72,7 +72,8 @@ export {
   CheckboxCheckmark,
   CheckboxInput,
   CheckboxMixedmark,
-  CheckboxPath
+  CheckboxPath,
+  CheckboxBG
 } from './Checkbox';
 
 export {

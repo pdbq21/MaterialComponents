@@ -59,6 +59,7 @@ export default class Slider extends PureComponent {
     },
     registerInteractionHandler: (type, handler) => {
       if (this.refs.root) {
+        //todo: {passive: true} - error for events key
         return this.refs.root.addEventListener(type, handler, {passive: true});
       }
     },
@@ -94,16 +95,14 @@ export default class Slider extends PureComponent {
     },
 
     notifyInput: () => {
-      if (this.props.onSliderInput !== null) {
+      if (typeof this.props.onSliderInput !== 'undefined') {
         return this.props.onSliderInput(this.foundation.value_);
       }
     },
     notifyChange: () => {
-      if (this.props.onSliderChange !== null) {
+      if (typeof this.props.onSliderChange !== 'undefined') {
         return this.props.onSliderChange(this.foundation.value_);
       }
-
-
     },
     setThumbContainerStyleProperty: (propertyName, value) => {
       const thumbContainer = this.thumbContainer_();
@@ -127,7 +126,40 @@ export default class Slider extends PureComponent {
 
   componentDidMount() {
     this.foundation.init();
+//initial / 0 - false - default === 0
+    if (this.props['data-step']) {
+      this.foundation.setStep(Number(this.props['data-step']))
+    }
+    if (this.props['aria-valuemin']) {
+      this.foundation.setMin(Number(this.props['aria-valuemin']));
+    }
+    if (this.props['aria-valuemax']) {
+      this.foundation.setMax(Number(this.props['aria-valuemax']));
+    }
+    if (this.props['aria-valuenow']) {
+      this.foundation.setValue(Number(this.props['aria-valuenow']));
+    }
+    if (this.props.disabled) {
+      this.foundation.setDisabled(Boolean(this.props.disabled))
+    }
+  }
 
+  componentWillReceiveProps(props) {
+    if (props['data-step'] !== this.props['data-step']) {
+      this.foundation.setStep(Number(props['data-step']))
+    }
+    if (props['aria-valuemin'] !== this.props['aria-valuemin']) {
+      this.foundation.setMin(Number(props['aria-valuemin']));
+    }
+    if (props['aria-valuemax'] !== this.props['aria-valuemax']) {
+      this.foundation.setMax(Number(props['aria-valuemax']));
+    }
+    if (props['aria-valuenow'] !== this.props['aria-valuenow']) {
+      this.foundation.setValue(Number(props['aria-valuenow']));
+    }
+    if (props.disabled !== this.props.disabled) {
+      this.foundation.setDisabled(Boolean(props.disabled))
+    }
   }
 
   componentWillUnmount() {
@@ -139,29 +171,28 @@ export default class Slider extends PureComponent {
     const ownProps = Object.assign({}, this.props);
     delete ownProps.onSliderInput;
     delete ownProps.onSliderChange;
+    delete ownProps.disabled;
     const {
       elementType,
       className,
       tabIndex,
       role,
-      disabled,
-      children
+      children,
+      ...otherProps
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider',
-      {
-        'mdc-slider--disabled': disabled
-      },
       this.state.classNames,
       className
     );
+
     return (
       <ElementType
         ref="root"
         className={classes}
         tabIndex={tabIndex || "0"}
         role={role || "slider"}
-        aria-disabled={(disabled)? 'true' : null}
+        {...otherProps}
       >
         {children}
       </ElementType>

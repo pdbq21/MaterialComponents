@@ -9,3 +9,4 @@ export { default as CheckboxCheckmark} from './Checkmark';
 export { default as CheckboxInput } from './Input';
 export { default as CheckboxMixedmark } from './Mixedmark';
 export { default as CheckboxPath } from './Path';
+export { default as CheckboxBG } from './BG';
