@@ -12,12 +12,6 @@ import {
   Elevation,
   TypographyDisplay,
   TypographyBody,
-  Toolbar,
-  ToolbarRow,
-  ToolbarSection,
-  ToolbarTitle,
-  ToolbarMain,
-  ToolbarIcon,
   FormField,
   Textfield,
   TextfieldInput,
@@ -27,7 +21,7 @@ import {
   CheckboxBG,
   CheckboxLabel
 } from '../lib'
-import Highlight from 'react-fast-highlight';
+import Example from '../templates/Example'
 
 export default class LinearProgressPage extends Component {
   constructor(props) {
@@ -37,15 +31,6 @@ export default class LinearProgressPage extends Component {
       accent: false,
       progress: 0.5, // 0...1
       buffer: 0.75, // 0...1
-      isActive: {
-        source1: false,
-        source2: false,
-        source3: false,
-        source4: false,
-        source5: false,
-        source6: false,
-        source7: false,
-      },
       examples: [
         {
           name: 'Determinate',
@@ -151,13 +136,13 @@ export default class LinearProgressPage extends Component {
               required: 'no',
               defaultValue: 'false',
               description: '-'
-            },{
+            }, {
               name: 'buffer',
               type: 'number',
               required: 'no',
               defaultValue: '0',
               description: '0..1'
-            },{
+            }, {
               name: 'progress',
               type: 'number',
               required: 'no',
@@ -533,64 +518,32 @@ export default class LinearProgressAccent extends Component {
   }
 
   renderExapmle() {
-    const {open, progress, buffer, accent, examples, isActive} = this.state;
+    const {open, progress, buffer, accent, examples} = this.state;
 
     return examples.map(({name, source, determinate, isAccent, isBuffer, reverse}, index) => (
-      <Elevation
-        zSpace="2"
-        className="demo-example"
+      <Example
         key={`key-demo_example-${index}`}
+        title={name}
+        code={this.state.used[source]}
       >
-        <Toolbar
-          className="toolbar-view_example"
+        <LinearProgress
+          open={open}
+          determinate={determinate}
+          progress={progress}
+          accent={accent || isAccent}
+          buffer={(isBuffer) ? buffer : null}
+          reverse={reverse}
         >
-          <ToolbarRow>
-            <ToolbarSection start>
-              <ToolbarTitle>{name}</ToolbarTitle>
-            </ToolbarSection>
-            <ToolbarSection end>
-              <ToolbarIcon
-                onClick={() => this.handleViewCode(source)}
-                aria-label="Code" alt="Code"
-                className="demo-icon_toggle"
-              >code</ToolbarIcon>
-            </ToolbarSection>
-          </ToolbarRow>
-        </Toolbar>
-        <Elevation
-          className="demo-code"
-          style={{
-            'overflow': 'auto',
-            'maxHeight': (isActive[source]) ? '20em' : '0px',
-            'transition': 'max-height 800ms ease-in-out 0ms',
-          }}
-        >
-          <Highlight language='javascript'>
-            {this.state.used[source]}
-          </Highlight>
-        </Elevation>
-        <ToolbarMain
-          className="demo-page_demo-components"
-        >
-          <LinearProgress
-            open={open}
-            determinate={determinate}
-            progress={progress}
-            accent={accent || isAccent}
-            buffer={(isBuffer) ? buffer : null}
-            reverse={reverse}
-          >
-            <LinearProgressBuffering/>
-            <LinearProgressBuffer/>
-            <LinearProgressBar primary>
-              <LinearProgressInner/>
-            </LinearProgressBar>
-            <LinearProgressBar secondary>
-              <LinearProgressInner/>
-            </LinearProgressBar>
-          </LinearProgress>
-        </ToolbarMain>
-      </Elevation>
+          <LinearProgressBuffering/>
+          <LinearProgressBuffer/>
+          <LinearProgressBar primary>
+            <LinearProgressInner/>
+          </LinearProgressBar>
+          <LinearProgressBar secondary>
+            <LinearProgressInner/>
+          </LinearProgressBar>
+        </LinearProgress>
+      </Example>
     ))
   }
 

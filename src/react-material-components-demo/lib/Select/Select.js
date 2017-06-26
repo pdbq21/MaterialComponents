@@ -65,7 +65,6 @@ export default class Select extends PureComponent {
             }
         },
         hasNecessaryDom: () => {
-
             return Boolean(this.items_());
         },
         getInnerDimensions: () => {
@@ -147,7 +146,7 @@ export default class Select extends PureComponent {
             }
         },
         notifySelected: evtData => {
-            if (this.props.onSelected !== null) {
+            if (typeof this.props.onSelected !== 'undefined') {
                 const items = this.items();
                 this.props.onSelected({
                     index: evtData.index,
@@ -166,7 +165,7 @@ export default class Select extends PureComponent {
         },
         notifyCancel: () => {
             const menuEl = this.menuEl_();
-            if (this.props.onCancel !== null) {
+            if (typeof this.props.onCancel !== 'undefined') {
                 this.props.onCancel(this);
             }
             if (menuEl) {
@@ -252,7 +251,7 @@ export default class Select extends PureComponent {
 
         registerInteractionHandler: (type, handler) => {
             if (this.refs.root) {
-                return this.refs.root.addEventListener(type, handler, {passive: true})
+                return this.refs.root.addEventListener(type, handler)
             }
         },
         deregisterInteractionHandler: (type, handler) => {
@@ -322,7 +321,7 @@ export default class Select extends PureComponent {
         getWindowInnerHeight: () => (window.innerHeight),
 
         notifyChange: () => {
-            if (this.props.onChange !== null) {
+            if (typeof this.props.onChange !== 'undefined') {
                 return this.props.onChange(this);
             }
         },

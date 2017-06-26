@@ -27,7 +27,8 @@ export {
 } from './Typography';
 export {
   LayoutGrid,
-  LayoutGridCell
+  LayoutGridCell,
+  LayoutGridInner
 } from './LayoutGrid';
 export {
   List,
