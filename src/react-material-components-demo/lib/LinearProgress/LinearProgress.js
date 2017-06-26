@@ -53,6 +53,27 @@ export default class LinearProgress extends Component {
 
   componentDidMount() {
     this.foundation.init();
+    if (this.props.open) {
+      this.foundation.open();
+    } else {
+      this.foundation.close();
+    }
+    if (this.props.determinate) {
+      this.foundation.setDeterminate(this.props.determinate);
+    } else {
+      this.foundation.setDeterminate(this.props.determinate);
+    }
+    if (this.props.progress) {
+      this.foundation.setProgress(this.props.progress);
+    }
+    if (this.props.buffer) {
+      this.foundation.setBuffer(this.props.buffer);
+    }
+    if (this.props.reverse) {
+      this.foundation.setReverse(this.props.reverse);
+    } else {
+      this.foundation.setReverse(this.props.reverse);
+    }
   }
 
   componentWillUnmount() {
@@ -72,13 +93,9 @@ export default class LinearProgress extends Component {
     }
     if (props.progress) {
       this.foundation.setProgress(props.progress);
-    } else {
-      //this.foundation.setProgress(props.progress);
     }
     if (props.buffer) {
       this.foundation.setBuffer(props.buffer);
-    } else {
-      //this.foundation.setBuffer(props.buffer);
     }
     if (props.reverse) {
       this.foundation.setReverse(props.reverse);

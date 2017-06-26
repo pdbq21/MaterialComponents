@@ -132,3 +132,7 @@ body {
     background-size: cover;
     background-position: center;
 }
+
+.demo-page_demo-components{
+    padding: 1em;
+}

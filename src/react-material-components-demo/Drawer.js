@@ -103,7 +103,7 @@ export default class Drawer extends Component {
                     name: 'Linear Progress',
                     icon: 'data_usage',
                     link: '/linear_progress',
-                    todo: true
+                    todo: false
                 }, {
                     name: 'List',
                     icon: 'list',
