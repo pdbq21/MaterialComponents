@@ -171,3 +171,10 @@ export {
   LinearProgressBuffer,
   LinearProgressInner
 } from './LinearProgress'
+export {
+  TabBar,
+  Tab,
+  TabIndicator,
+  TabIcon,
+  TabText
+} from './Tabs'

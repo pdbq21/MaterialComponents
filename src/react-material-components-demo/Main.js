@@ -39,7 +39,8 @@ import {
   Select,
   HintList,
   Slider,
-  LinearProgress
+  LinearProgress,
+  Tabs
 } from './pages'
 
 export default class Main extends Component {
@@ -159,6 +160,10 @@ export default class Main extends Component {
         {
           path: 'linear_progress',
           component: LinearProgress
+        },
+        {
+          path: 'tabs',
+          component: Tabs
         },
       ]
     };

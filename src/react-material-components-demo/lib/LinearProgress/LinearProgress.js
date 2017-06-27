@@ -2,7 +2,7 @@
  * Created by ruslan on 22.06.17.
  */
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 
 import {linearProgress}  from 'material-components-web/dist/material-components-web';
@@ -15,7 +15,7 @@ const {
   }
 } = MDCLinearProgressFoundation;
 
-export default class LinearProgress extends Component {
+export default class LinearProgress extends PureComponent {
   state = {
     classNames: [],
   };

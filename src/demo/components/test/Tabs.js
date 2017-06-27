@@ -163,11 +163,11 @@ export default class TabsTest extends Component {
         this.switchToTabAtIndex(indexOfTab, notifyChange);
     }
 
+
     tabSelectedHandler_ = ({detail}) => {
         const {tab} = detail;
         this.setActiveTab_(tab, true);
     };
-
     /* foundation = new MDCTabFoundation({
      addClass: className => {
      const menuEl = this.menuEl_();
@@ -413,7 +413,6 @@ export default class TabsTest extends Component {
     render() {
         return (
             <div
-
                 className="">
                 <nav
                     ref='root'
