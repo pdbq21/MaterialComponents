@@ -98,7 +98,7 @@ export default class Drawer extends Component {
           name: 'Layout Grid',
           icon: 'line_style',
           link: '/layout_grid',
-          todo: true
+          todo: false
         }, {
           name: 'Linear Progress',
           icon: 'data_usage',

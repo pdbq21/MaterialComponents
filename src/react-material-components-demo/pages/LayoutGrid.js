@@ -9,7 +9,6 @@ import {
   LayoutGridInner,
   Elevation,
   TypographyDisplay,
-  TypographyBody,
   FormField,
   Select,
   SelectMenu,
@@ -18,7 +17,7 @@ import {
   SelectItem,
 } from '../lib'
 
-import Example from '../templates/Example'
+import {Example, OriginalDoc, Footer} from '../templates'
 
 export default class LayoutGridPage extends Component {
   constructor(props) {
@@ -247,7 +246,7 @@ export default class LayoutGridPage extends Component {
       ],
       components: [
         {
-          name: 'Button',
+          name: 'LayoutGrid',
           property: [
             {
               name: 'elementType',
@@ -257,48 +256,115 @@ export default class LayoutGridPage extends Component {
               description: 'задає тег елемента'
             },
             {
-              name: 'primary',
-              type: 'bool',
+              name: 'gutter',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка з кольором primary'
+              defaultValue: '24px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'accent',
-              type: 'bool',
+              name: 'margin',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка з кольором accent'
+              defaultValue: '24px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'compact',
-              type: 'bool',
+              name: 'marginDesktop',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка з типом compact'
+              defaultValue: '24px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'dense',
-              type: 'bool',
+              name: 'gutterDesktop',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка з типом dense'
+              defaultValue: '24px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'raised',
-              type: 'bool',
+              name: 'marginTablet',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка з типом raised'
+              defaultValue: '16px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'ripple',
-              type: 'bool',
+              name: 'gutterTablet',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'додає Ripple ефект'
+              defaultValue: '16px',
+              description: '8px | 16px | 24px | 40px'
             }, {
-              name: 'disabled',
-              type: 'bool',
+              name: 'marginPhone',
+              type: 'string',
               required: 'no',
-              defaultValue: 'false',
-              description: 'кнопка не активна. працює якщо тип кнопки button'
+              defaultValue: '16px',
+              description: '8px | 16px | 24px | 40px'
+            }, {
+              name: 'gutterPhone',
+              type: 'string',
+              required: 'no',
+              defaultValue: '16px',
+              description: '8px | 16px | 24px | 40px'
             },
+          ]
+        },
+        {
+          name: 'LayoutGridInner',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            }
+          ]
+        },
+        {
+          name: 'LayoutGridCell',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+            {
+              name: 'columns',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: '1..12'
+            }, {
+              name: 'desktop',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: '1..12'
+            }, {
+              name: 'tablet',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: '1..12'
+            }, {
+              name: 'phone',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: '1..12'
+            }, {
+              name: 'order',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: '1..12'
+            }, {
+              name: 'position',
+              type: 'string',
+              required: 'no',
+              defaultValue: `''`,
+              description: 'top | middle | bottom'
+            }
           ]
         }
       ],
@@ -352,7 +418,6 @@ export default class LayoutGridPage extends Component {
     )
   }
 
-
   renderExapmle() {
     const {
       marginDesktop,
@@ -372,7 +437,10 @@ export default class LayoutGridPage extends Component {
       >
         <LayoutGrid
           style={{
-            'backgroundColor': '#DDDDDD'
+            'backgroundColor': '#DDDDDD',
+            'maxWidth': (index >= examples.length - 2) ? '1280px' : null,
+            'marginLeft': (index === examples.length - 1) ? 0 : null,
+            'marginRight': (index === examples.length - 1) ? 'auto' : null
           }}
           marginDesktop={marginDesktop}
           gutterDesktop={gutterDesktop}
@@ -391,31 +459,31 @@ export default class LayoutGridPage extends Component {
                 position={(position) ? position : null}
                 style={{
                   'boxSizing': 'border-box',
-                  'backgroundColor': '#666666',
                   'height': '200px',
                   'padding': '8px',
                   'color': 'white',
                   'fontSize': '1.5em',
+                  'backgroundColor': '#666666'
                 }}
               >
                 {(child) ?
                   child.map(({cell, span, text}, index) => (
-                    <LayoutGrid
+                    (cell) ? <LayoutGridInner
                       key={`key-demo_example-cell-grid-${index}`}
                     >
-                      <LayoutGridInner>
-                        {(cell) ?
-                          cell.map(({text, span}, index) => (
-                            <LayoutGridCell
-                              key={`key-demo_example-cell-grid-cell-${index}`}
-                              columns={(span) ? span : null}
-                            >
-                              <span>{text}</span>
-                            </LayoutGridCell>
-                          )) : <span>{text}</span>}
-                      </LayoutGridInner>
-                    </LayoutGrid>
-                  )) : text
+                      {cell.map(({text, span}, index) => (
+                        <LayoutGridCell
+                          key={`key-demo_example-cell-grid-cell-${index}`}
+                          columns={(span) ? span : null}
+                        >
+                          <span>{text}</span>
+                        </LayoutGridCell>
+                      ))}
+                    </LayoutGridInner>
+                      : <span
+                      key={`key-demo_example-cell-grid-${index}`}
+                    >{text}</span>
+                  )) : <span>{text}</span>
                 }
               </LayoutGridCell>
             ))}
@@ -501,24 +569,50 @@ export default class LayoutGridPage extends Component {
             'height': '360px',
           }}
         >
+          <LayoutGrid
+            style={{
+              'backgroundColor': '#DDDDDD',
+            }}
+          >
+            <LayoutGridInner>
+              <LayoutGridCell
+                style={{
+                  'boxSizing': 'border-box',
+                  'height': '4em',
+                  'padding': '8px',
+                  'color': 'white',
+                  'fontSize': '1.5em',
+                  'backgroundColor': '#666666'
+                }}
+              />
+              <LayoutGridCell
+                style={{
+                  'boxSizing': 'border-box',
+                  'height': '4em',
+                  'padding': '8px',
+                  'color': 'white',
+                  'fontSize': '1.5em',
+                  'backgroundColor': '#666666'
+                }}
+              />
+              <LayoutGridCell
+                style={{
+                  'boxSizing': 'border-box',
+                  'height': '4em',
+                  'padding': '8px',
+                  'color': 'white',
+                  'fontSize': '1.5em',
+                  'backgroundColor': '#666666'
+                }}
+              />
+            </LayoutGridInner>
+          </LayoutGrid>
         </Elevation>
         {this.renderTable()}
-        <Elevation
-          zSpace="2"
-          style={{
-            'minHeight': '10em',
-            'display': 'flex',
-            'alignItems': 'center',
-            'flexDirection': 'column'
-          }}
-        >
-          <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-          <TypographyBody>
-            This component is based on the MDC Button, you can refer to its documentation <a
-            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
-          >here</a>.
-          </TypographyBody>
-        </Elevation>
+        <OriginalDoc
+          name="Layout Grid"
+          href="mdc-layout-grid"
+        />
         <Elevation
           zSpace="2"
           className="demo-page-layout_grid"
@@ -534,19 +628,7 @@ export default class LayoutGridPage extends Component {
           </Elevation>
           {this.renderExapmle()}
         </Elevation>
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '50px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'marginTop': '1em'
-          }}
-        >
-          github
-        </Elevation>
+        <Footer/>
       </section>
     )
   }
