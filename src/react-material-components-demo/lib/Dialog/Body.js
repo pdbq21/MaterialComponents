@@ -8,12 +8,10 @@ import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    id: PropTypes.string,
 };
 const Body = ({
                   children,
                   className,
-                  id,
                   scrollable,
                   elementType,
                   ...otherProp
@@ -25,7 +23,6 @@ const Body = ({
     return (
         <ElementType
             className={classes}
-            id={id}
             {...otherProp}
         >
             {children}

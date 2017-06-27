@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-
 import React, {PureComponent}from 'react';
 import classnames from 'classnames';
 // After (15.5)
 import PropTypes from 'prop-types';
-
-import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCRippleFoundation} = ripple;
 //Ripple
@@ -46,10 +43,6 @@ export default class Button extends PureComponent {
     raised: PropTypes.bool,
   };
 
-  static defaultProps = {
-//empty
-  };
-
   state = {
     classNamesRipple: [],
     rippleCss: {},
@@ -61,7 +54,7 @@ export default class Button extends PureComponent {
       return supportsCssVariables(window);
     },
     isSurfaceActive: () => this.refs.root[MATCHES](':active'),
-    /*addClass: className => this.setState(({classNamesRipple}) => ({
+    addClass: className => this.setState(({classNamesRipple}) => ({
      classNamesRipple: classNamesRipple.concat([className])
      })),
      removeClass: className => {
@@ -70,8 +63,8 @@ export default class Button extends PureComponent {
      classNamesRipple: classNamesRipple.filter(cn => cn !== className)
      }))
      }
-     },*/
-    addClass: (className) => {
+     },
+    /*addClass: (className) => {
       if (this.refs.root) {
         return this.refs.root.classList.add(className);
       }
@@ -80,7 +73,7 @@ export default class Button extends PureComponent {
       if (this.refs.root) {
         return this.refs.root.classList.remove(className);
       }
-    },
+    },*/
     registerInteractionHandler: (evtType, handler) => {
       if (this.refs.root) {
         this.refs.root.addEventListener(evtType, handler, {passive: true});

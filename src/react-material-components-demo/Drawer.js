@@ -48,7 +48,7 @@ export default class Drawer extends Component {
           name: 'Dialog',
           icon: 'chat_bubble',
           link: '/dialog',
-          todo: true
+          todo: false
         }, {
           name: 'Drawer Temporary',
           icon: 'chrome_reader_mode',
@@ -170,7 +170,6 @@ export default class Drawer extends Component {
           link: '/typography',
           todo: false
         },
-
       ],
       widgetList: [
         {

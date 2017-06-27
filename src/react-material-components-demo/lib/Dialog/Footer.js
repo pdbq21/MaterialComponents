@@ -10,13 +10,11 @@ export default class Footer extends PureComponent {
         className: PropTypes.string,
     };
 
-
     render() {
         const ownProps = Object.assign({}, this.props);
         const {
             children,
             className,
-            id,
             elementType,
             ...otherProp
         } = ownProps;
@@ -26,7 +24,6 @@ export default class Footer extends PureComponent {
         return (
             <ElementType
                 className={classes}
-                id={id}
                 {...otherProp}
             >
                 {children}

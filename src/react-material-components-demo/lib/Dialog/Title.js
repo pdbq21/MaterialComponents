@@ -8,12 +8,10 @@ import classnames from 'classnames';
 const propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    id: PropTypes.string,
 };
 const Title = ({
                    children,
                    className,
-                   id,
                    elementType,
                    ...otherProp
                }) => {
@@ -22,7 +20,6 @@ const Title = ({
     return (
         <ElementType
             className={classes}
-            id={id}
             {...otherProp}
         >
             {children}
