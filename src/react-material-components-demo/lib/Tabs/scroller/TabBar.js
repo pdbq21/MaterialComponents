@@ -23,48 +23,6 @@ export default class TabBar extends PureComponent {
     classNames: [],
   };
 
-  tabSelectedHandler_ = ({detail}) => {
-    const {tab} = detail;
-    this.setActiveTab_(tab, true);
-  };
-
-  setActiveTab_(activeTab, notifyChange) {
-    const tabs = this.tabs();
-
-    const indexOfTab = tabs.map(function (tab) {
-      return tab.root_;
-    }).indexOf(activeTab.root_);
-
-    if (indexOfTab < 0) {
-      throw new Error('Invalid tab component given as activeTab: Tab not found within this component\'s tab list');
-    }
-    this.setActiveTabIndex_(indexOfTab, notifyChange);
-  }
-
-  tabs = () => this.tabs_;
-
-  gatherTabs_(tabFactory) {
-    const tabElements = [].slice.call(this.refs.root.querySelectorAll(TAB_SELECTOR_NAME));
-    return tabElements.map((el) => tabFactory(el));
-  }
-
-  setActiveTabIndex_(activeTabIndex, notifyChange) {
-    this.foundation.switchToTabAtIndex(activeTabIndex, notifyChange);
-  }
-
-  indicator_ = () => this.refs.root.querySelector(INDICATOR_SELECTOR_NAME);
-
-  emit = (root, evtType, evtData) => {
-    let evt;
-    if (typeof CustomEvent === 'function') {
-      evt = new CustomEvent(evtType, {detail: evtData});
-    } else {
-      evt = document.createEvent('CustomEvent');
-      evt.initCustomEvent(evtType, false, false, evtData);
-    }
-    root.dispatchEvent(evt);
-  };
-
   foundation = new MDCTabBarFoundation({
     addClass: className => this.setState(({classNames}) => ({
       classNames: classNames.concat([className])
@@ -187,7 +145,7 @@ export default class TabBar extends PureComponent {
   });
 
   componentDidMount() {
-    this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
+    //this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
     //this.indicator_ = this.refs.root.querySelector(INDICATOR_SELECTOR_NAME);
     /*this.tabSelectedHandler_ = ({detail}) => {
      const {tab} = detail;
@@ -205,19 +163,10 @@ export default class TabBar extends PureComponent {
     const {
       elementType,
       className,
-      iconTab,
-      iconText,
-      accent,
-      scroll,
       children
     } = ownProps;
-    const ElementType = elementType || 'nav';
-    const classes = classnames('mdc-tab-bar', {
-      'mdc-tab-bar--icon-tab-bar': iconTab,
-      'mdc-tab-bar--icons-with-text': iconText,
-      'mdc-tab-bar--indicator-accent': accent,
-      'mdc-tab-bar-scroller__scroll-frame__tabs': scroll
-    }, this.state.classNames, className);
+    const ElementType = elementType || 'div';
+    const classes = classnames('mdc-tab-bar-scroller', this.state.classNames, className);
     return (
       <ElementType
         ref='root'

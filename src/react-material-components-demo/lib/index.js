@@ -176,5 +176,9 @@ export {
   Tab,
   TabIndicator,
   TabIcon,
-  TabText
+  TabText,
+  TabBarScrollIndicator,
+  TabBarScrollInner,
+  TabBarScrollFrame,
+  TabBarScroll
 } from './Tabs'

@@ -11,6 +11,10 @@ import {
   TabIndicator,
   TabIcon,
   TabText,
+  TabBarScrollIndicator,
+  TabBarScrollInner,
+  TabBarScrollFrame,
+  TabBarScroll,
   Elevation,
   TypographyDisplay,
 } from '../lib'
@@ -204,6 +208,33 @@ constructor(props) {
             </Tab>
             <TabIndicator/>
           </TabBar>
+
+          <TabBarScroll>
+            <TabBarScrollIndicator back>
+              <TabBarScrollInner>
+                navigate_before
+              </TabBarScrollInner>
+            </TabBarScrollIndicator>
+            <TabBarScrollFrame>
+              <TabBar scroll>
+                <Tab active>Item One</Tab>
+                <Tab>Item Two</Tab>
+                <Tab>Item Three</Tab>
+                <Tab>Item Four</Tab>
+                <Tab>Item Five</Tab>
+                <Tab>Item Six</Tab>
+                <Tab>Item Seven</Tab>
+                <Tab>Item Eight</Tab>
+                <Tab>Item Nine</Tab>
+                <TabIndicator/>
+              </TabBar>
+            </TabBarScrollFrame>
+            <TabBarScrollIndicator forward>
+              <TabBarScrollInner>
+                navigate_next
+              </TabBarScrollInner>
+            </TabBarScrollIndicator>
+          </TabBarScroll>
           <Example
             title={'Dialog with List'}
             code={used.source1}

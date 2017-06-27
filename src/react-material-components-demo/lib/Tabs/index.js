@@ -7,3 +7,9 @@ export { default as Tab} from './Tab';
 export { default as TabIndicator} from './Indicator';
 export { default as TabIcon} from './Icon';
 export { default as TabText} from './Text';
+export {
+  TabBarScrollIndicator,
+  TabBarScrollInner,
+  TabBarScrollFrame,
+  TabBarScroll
+} from './scroller/index';
