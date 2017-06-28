@@ -105,7 +105,6 @@ export default class TabBar extends PureComponent {
         return indicator.offsetWidth
       }
     },
-
     getNumberOfTabs: () => {
       const tabs = this.tabs();
       if (tabs) {
@@ -140,29 +139,21 @@ export default class TabBar extends PureComponent {
     measureTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        //return tabs[index].measureSelf();
-        // todo: width and left save in each foundation Tab, need change it
         tabs[index].foundation_.computedWidth_ = tabs[index].foundation_.adapter_.getOffsetWidth();
         tabs[index].foundation_.computedLeft_ = tabs[index].foundation_.adapter_.getOffsetLeft();
-        console.log('width', tabs[index].foundation_.computedWidth_, tabs[index].foundation_.adapter_.getOffsetWidth());
       }
     },
     getComputedWidthForTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        console.log('width', tabs[index].computedWidth, tabs[index].foundation_.adapter_.getOffsetWidth());
-        //return tabs[index].computedWidth
         return tabs[index].foundation_.adapter_.getOffsetWidth();
-        //return tabs[index].computedWidth;
       }
     },
 
     getComputedLeftForTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        //console.log(tabs[index].computedLeft, tabs[index].foundation_.adapter_.getOffsetLeft());
         return tabs[index].foundation_.adapter_.getOffsetLeft();
-        //return tabs[index].computedLeft;
       }
     },
     notifyChange: evtData => {
@@ -170,29 +161,10 @@ export default class TabBar extends PureComponent {
         return this.emit(this.refs.root, CHANGE_EVENT_NAME, evtData);
       }
     },
-//todo below
-
-    /*bindOnMDCTabSelectedEvent: () => this.listen(
-     MDCTabFoundation.strings.SELECTED_EVENT, this.tabSelectedHandler_),
-     unbindOnMDCTabSelectedEvent: () => this.unlisten(
-     MDCTabFoundation.strings.SELECTED_EVENT, this.tabSelectedHandler_),*/
-
-
-
-    //notifyChange: (evtData) => this.emit(MDCTabBarFoundation.strings.CHANGE_EVENT, evtData),
-
-    //measureTabAtIndex: (index) => this.tabs[index].measureSelf(),
-    //getComputedWidthForTabAtIndex: (index) => this.tabs[index].computedWidth,
-    //getComputedLeftForTabAtIndex: (index) => this.tabs[index].computedLeft,
   });
 
   componentDidMount() {
     this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
-    //this.indicator_ = this.refs.root.querySelector(INDICATOR_SELECTOR_NAME);
-    /*this.tabSelectedHandler_ = ({detail}) => {
-     const {tab} = detail;
-     this.setActiveTab_(tab, true);
-     };*/
     this.foundation.init();
   }
 
