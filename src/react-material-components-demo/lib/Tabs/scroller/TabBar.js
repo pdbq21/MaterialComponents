@@ -229,16 +229,21 @@ export default class TabBar extends PureComponent {
   });
 
   componentDidMount() {
-    this.tabBar_ = [].slice.call(this.tabBarEl_().querySelectorAll(TAB_SELECTOR_NAME));
-    this.foundation.init();
+    if (!this.props.cssOnly) {
+      this.tabBar_ = [].slice.call(this.tabBarEl_().querySelectorAll(TAB_SELECTOR_NAME));
+      this.foundation.init();
+    }
   }
 
   componentWillUnmount() {
-    this.foundation.destroy();
+    if (!this.props.cssOnly){
+      this.foundation.destroy();
+    }
   }
 
   render() {
     const ownProps = Object.assign({}, this.props);
+    delete ownProps.cssOnly;
     const {
       elementType,
       className,

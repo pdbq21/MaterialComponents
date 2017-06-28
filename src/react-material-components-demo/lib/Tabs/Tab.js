@@ -19,10 +19,13 @@ function applyPassive(globalObj = window, forceRefresh = false) {
   if (supportsPassive_ === undefined || forceRefresh) {
     let isSupported = false;
     try {
-      globalObj.document.addEventListener('test', null, {get passive() {
-        isSupported = true;
-      }});
-    } catch (e) { }
+      globalObj.document.addEventListener('test', null, {
+        get passive() {
+          isSupported = true;
+        }
+      });
+    } catch (e) {
+    }
 
     supportsPassive_ = isSupported;
   }
@@ -111,9 +114,9 @@ export default class Tab extends PureComponent {
       return supportsCssVariables(window);
     },
     isSurfaceActive: () => {
-     if (this.refs.root){
-       return this.refs.root[MATCHES](':active')
-     }
+      if (this.refs.root) {
+        return this.refs.root[MATCHES](':active')
+      }
     },
     addClass: className => {
       this.setState(({classNamesRipple}) => ({
@@ -149,10 +152,10 @@ export default class Tab extends PureComponent {
       }
     },
     computeBoundingRect: () => {
-      if (this.refs.root){
+      if (this.refs.root) {
         return this.refs.root.getBoundingClientRect()
       }
-      },
+    },
 
     getWindowPageOffset: () => {
       return {
@@ -161,31 +164,36 @@ export default class Tab extends PureComponent {
       }
     },
 
-/*
- Whether or not the ripple is attached to a disabled component. If true, the ripple will not activate.
-    isSurfaceDisabled: () => {disabled},
+    /*
+     Whether or not the ripple is attached to a disabled component. If true, the ripple will not activate.
+     isSurfaceDisabled: () => {disabled},
 
-*/
+     */
   });
 
   componentDidMount() {
-    this.foundation.init();
-    if (this.props.ripple) {
-      this.foundationRipple.init();
+    if (!this.props.cssOnly) {
+      this.foundation.init();
+      if (this.props.ripple) {
+        this.foundationRipple.init();
+      }
     }
   }
 
   componentWillUnmount() {
-    if (this.props.ripple) {
-      this.foundationRipple.destroy();
+    if (!this.props.cssOnly) {
+      if (this.props.ripple) {
+        this.foundationRipple.destroy();
+      }
+      this.foundation.destroy();
     }
-    this.foundation.destroy();
   }
 
   render() {
     const ownProps = Object.assign({}, this.props);
     delete ownProps.onSelected;
     delete ownProps.ripple;
+    delete ownProps.cssOnly;
     const {
       elementType,
       className,
@@ -201,13 +209,13 @@ export default class Tab extends PureComponent {
     }, this.state.classNames, this.state.classNamesRipple, className);
 
     return (
-        <ElementType
-          ref="root"
-          className={classes}
-          {...otherProp}
-        >
-          {children}
-        </ElementType>
+      <ElementType
+        ref="root"
+        className={classes}
+        {...otherProp}
+      >
+        {children}
+      </ElementType>
     );
   }
 }

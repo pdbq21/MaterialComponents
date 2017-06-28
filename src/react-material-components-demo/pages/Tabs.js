@@ -24,6 +24,19 @@ export default class TabsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      exapmles: [
+        {
+          name: 'Basic Tab Bar',
+          source: 'source1',
+          ripple: true,
+        },
+        {
+          name: 'CSS-Only Tab Bar',
+          source: 'source2',
+          ripple: false,
+        },
+
+      ],
       components: [
         {
           name: 'Dialog',
@@ -142,6 +155,25 @@ constructor(props) {
     )
   }
 
+  renderExample(){
+    const {examples} = this.state;
+
+    return examples.map(({name, source, ripple}, index) => (
+      <Example
+        key={`key-demo_example-${index}`}
+        title={name}
+        code={this.state.used[source]}
+      >
+        <TabBar cssOnly={!ripple}>
+          <Tab ripple={ripple} active>Item One</Tab>
+          <Tab ripple={ripple}>Item Two</Tab>
+          <Tab ripple={ripple}>Three</Tab>
+          <TabIndicator/>
+        </TabBar>
+      </Example>
+    ))
+  }
+
   render() {
     const { used } = this.state;
     return (
@@ -160,7 +192,12 @@ constructor(props) {
             'height': '360px',
           }}
         >
-
+          <TabBar>
+            <Tab active>Item one</Tab>
+            <Tab>Item two</Tab>
+            <Tab>Three</Tab>
+            <TabIndicator/>
+          </TabBar>
         </Elevation>
         {this.renderTable()}
         <OriginalDoc
