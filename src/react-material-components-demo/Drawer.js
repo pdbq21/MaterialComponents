@@ -148,7 +148,7 @@ export default class Drawer extends Component {
           name: 'Tabs',
           icon: 'tab',
           link: '/tabs',
-          todo: true
+          todo: false
         }, {
           name: 'Textfield',
           icon: 'text_format',

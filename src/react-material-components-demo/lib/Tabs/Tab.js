@@ -101,9 +101,11 @@ export default class Tab extends PureComponent {
       }
     },
     notifySelected: () => {
-      this.emit(this.refs.root, SELECTED_EVENT_NAME, {tab: this}, true);
-      if (typeof this.props.onSelected !== 'undefined') {
-        this.props.onSelected({tab: this});
+      if (this.refs.root){
+        if (typeof this.props.onSelected !== 'undefined') {
+          this.props.onSelected({tab: this});
+        }
+        return this.emit(this.refs.root, SELECTED_EVENT_NAME, {tab: this}, true);
       }
     },
   });

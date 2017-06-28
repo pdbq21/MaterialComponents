@@ -297,6 +297,9 @@ export default class TabBar extends PureComponent {
     },
     notifyChange: evtData => {
       if (this.refs.root) {
+        if (typeof this.props.onSelected !== 'undefined') {
+          this.props.onSelected(evtData);
+        }
         return this.emit(this.refs.root, CHANGE_EVENT_NAME, evtData);
       }
     },
@@ -323,12 +326,14 @@ export default class TabBar extends PureComponent {
   render() {
     const ownProps = Object.assign({}, this.props);
     delete ownProps.cssOnly;
+    delete ownProps.onSelected;
     const {
       elementType,
       className,
       iconTab,
       iconText,
       accent,
+      primary,
       scroll,
       children,
       ...otherProp
@@ -338,6 +343,7 @@ export default class TabBar extends PureComponent {
       'mdc-tab-bar--icon-tab-bar': iconTab,
       'mdc-tab-bar--icons-with-text': iconText,
       'mdc-tab-bar--indicator-accent': accent,
+      'mdc-tab-bar--indicator-primary': primary,
       'mdc-tab-bar-scroller__scroll-frame__tabs': scroll
     }, this.state.classNames, className);
     return (
