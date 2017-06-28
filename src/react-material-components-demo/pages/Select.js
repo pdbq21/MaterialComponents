@@ -8,12 +8,14 @@ import {
   SelectText,
   SelectItems,
   SelectItem,
+  ListGroup,
+  ListItem,
+  ListDivider,
   Elevation,
-  TypographyHeadline,
   TypographyDisplay,
-  TypographyBody,
 } from '../lib'
 
+import {OriginalDoc, Footer, Example} from '../templates'
 
 export default class SelectPage extends Component {
   constructor(props) {
@@ -21,7 +23,7 @@ export default class SelectPage extends Component {
     this.state = {
       components: [
         {
-          name: 'Switch',
+          name: 'Select',
           property: [
             {
               name: 'elementType',
@@ -31,33 +33,107 @@ export default class SelectPage extends Component {
               description: 'задає тег елемента'
             },
             {
-              name: 'disabled',
-              type: 'bool',
+              name: 'onSelected',
+              type: 'function',
               required: 'no',
-              defaultValue: 'false',
-              description: 'стає не активним'
+              defaultValue: '-',
+              description: '-'
             },
-          ]
-        }, {
-          name: 'SwitchInput',
-          property: [
             {
-              name: 'disabled',
+              name: 'onCancel',
+              type: 'function',
+              required: 'no',
+              defaultValue: '-',
+              description: '-'
+            },
+            {
+              name: 'onChange',
+              type: 'function',
+              required: 'no',
+              defaultValue: '-',
+              description: '-'
+            },
+            {
+              name: 'cssOnly',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: 'стає не активним'
+              description: '-'
+            },
+            {
+              name: 'multiple',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             },
           ]
         }, {
-          name: 'SwitchLabel',
+          name: 'SelectMenu',
           property: [
             {
               name: 'elementType',
               type: 'string | React Component',
               required: 'no',
-              defaultValue: 'label',
+              defaultValue: 'div',
               description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectText',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'span',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectItems',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'ul',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectItem',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'li',
+              description: 'задає тег елемента'
+            },
+            {
+              name: 'tabIndex',
+              type: 'number | string',
+              required: 'no',
+              defaultValue: '0',
+              description: '-'
+            },
+            {
+              name: 'role',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'option'`,
+              description: '-'
+            },
+            {
+              name: 'disabled',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             },
           ]
         },
@@ -103,7 +179,9 @@ export default class SelectPage extends Component {
 
   render() {
     return (
-      <section>
+      <section
+      className="content"
+      >
         <Elevation
           zSpace="2"
           style={{
@@ -150,109 +228,100 @@ export default class SelectPage extends Component {
         </Elevation>
         {this.renderTable()}
 
-        <Elevation
-          zSpace="2"
-          style={{
-            'minHeight': '10em',
-            'display': 'flex',
-            'alignItems': 'center',
-            'flexDirection': 'column'
-          }}
-        >
-          <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-          <TypographyBody>
-            This component is based on the MDC Button, you can refer to its documentation <a
-            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
-          >here</a>.
-          </TypographyBody>
-        </Elevation>
-        <Elevation
-          zSpace="2"
-        >
-          <TypographyDisplay size="1">Demo code</TypographyDisplay>
+        <OriginalDoc
+          name="Select"
+          href="mdc-select"
+        />
 
-        </Elevation>
         <Elevation
           zSpace="2"
-          className="demo-page-switch"
+          className="demo-page-select"
         >
           <TypographyDisplay size="1">Select</TypographyDisplay>
-          <TypographyHeadline size="1">Fully-Featured Component</TypographyHeadline>
-          <Select
-            onSelected={(event) => console.log(event)}
-            onCancel={(event) => console.log(event)}
-            onChange={(event) => console.log(event)}
+
+          <Example
+            title="Fully-Featured Component"
+            code=""
           >
-            <SelectText>Pick a food group</SelectText>
-            <SelectMenu>
-              <SelectItems>
-                <SelectItem>
-                  Pick a food group
-                </SelectItem><SelectItem>
-                Bread, Cereal, Rice, and Pasta
-              </SelectItem>
-                <SelectItem>
-                  Vegetables
+            <Select
+              onSelected={(event) => console.log(event)}
+              onCancel={(event) => console.log(event)}
+              onChange={(event) => console.log(event)}
+            >
+              <SelectText>Milk, Yogurt, and Cheese</SelectText>
+              <SelectMenu>
+                <SelectItems>
+                  <SelectItem>
+                    Pick a food group
+                  </SelectItem><SelectItem>
+                  Bread, Cereal, Rice, and Pasta
                 </SelectItem>
-                <SelectItem>
-                  Fruit
-                </SelectItem>
-                <SelectItem>
-                  Milk, Yogurt, and Cheese
-                </SelectItem>
-                <SelectItem>
-                  Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
-                </SelectItem>
-                <SelectItem>
-                  Fats, Oils, and Sweets
-                </SelectItem>
-              </SelectItems>
-            </SelectMenu>
-          </Select>
-          Currently selected: (none)
-          <TypographyHeadline size="1">Select Only CSS</TypographyHeadline>
-          <select className="mdc-select">
-            <option value="" default selected>Pick a food</option>
-            <option value="grains">Bread, Cereal, Rice, and Pasta</option>
-            <option value="vegetables">Vegetables</option>
-            <optgroup label="Fruits">
-              <option value="apple">Apple</option>
-              <option value="oranges">Orange</option>
-              <option value="banana">Banana</option>
-            </optgroup>
-            <option value="dairy">Milk, Yogurt, and Cheese</option>
-            <option value="meat">Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts</option>
-            <option value="fats">Fats, Oils, and Sweets</option>
-          </select>
-          <TypographyHeadline size="1">Select Multiple - CSS Only</TypographyHeadline>
-          <select multiple size="6" className="mdc-multi-select mdl-list">
-            <optgroup className="mdc-list-group" label="Starches">
-              <option className="mdc-list-item">
-                Potato
-              </option>
-              <option className="mdc-list-item">
-                Cereal
-              </option>
-            </optgroup>
-            <option className="mdc-list-divider" role="presentation" disabled/>
-            <option>
-              misc...
-            </option>
-          </select>
+                  <SelectItem>
+                    Vegetables
+                  </SelectItem>
+                  <SelectItem
+                    disabled
+                    aria-disabled="true"
+                  >
+                    Fruit
+                  </SelectItem>
+                  <SelectItem>
+                    Milk, Yogurt, and Cheese
+                  </SelectItem>
+                  <SelectItem>
+                    Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
+                  </SelectItem>
+                  <SelectItem>
+                    Fats, Oils, and Sweets
+                  </SelectItem>
+                </SelectItems>
+              </SelectMenu>
+            </Select>
+            Currently selected: (none)
+          </Example>
+          <Example
+          title="Select Multiple - CSS Only"
+          code=""
+          >
+            <Select
+              cssOnly
+            >
+              <option value="" default selected>Pick a food</option>
+              <option value="grains">Bread, Cereal, Rice, and Pasta</option>
+              <option value="vegetables">Vegetables</option>
+              <optgroup label="Fruits">
+                <option value="apple">Apple</option>
+                <option value="oranges">Orange</option>
+                <option value="banana">Banana</option>
+              </optgroup>
+              <option value="dairy">Milk, Yogurt, and Cheese</option>
+              <option value="meat">Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts</option>
+              <option value="fats">Fats, Oils, and Sweets</option>
+            </Select>
+          </Example>
+          <Example
+          title="Select Only CSS"
+          code=""
+          >
+            <Select cssOnly multiple size="8">
+              <ListGroup elementType="optgroup" label="Fats, Oils, &amp; Sweets">
+                <ListItem elementType='option' className="mdc-list-item">Olive Oil</ListItem>
+                <ListItem elementType='option'>Brown Sugar</ListItem>
+                <ListItem elementType='option'>Ice Cream</ListItem>
+              </ListGroup>
+              <ListDivider elementType='option' role="presentation" disabled=""/>
+              <ListGroup elementType="optgroup" label="Dairy">
+                <ListItem elementType='option'>Milk</ListItem>
+                <ListItem elementType='option'>Cheese</ListItem>
+                <ListItem elementType='option'>More Cheese</ListItem>
+              </ListGroup>
+
+            </Select>
+          </Example>
+
         </Elevation>
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '50px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'marginTop': '1em'
-          }}
-        >
-          github
-        </Elevation>
+
+        <Footer/>
       </section>
     )
   }

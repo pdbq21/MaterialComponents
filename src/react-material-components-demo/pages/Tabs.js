@@ -625,9 +625,9 @@ export default class TabsExample extends Component {
           }}
         >
           <TabBar>
-            <Tab active>Item one</Tab>
-            <Tab>Item two</Tab>
-            <Tab>Three</Tab>
+            <Tab ripple active>Item one</Tab>
+            <Tab ripple>Item two</Tab>
+            <Tab ripple>Three</Tab>
             <TabIndicator/>
           </TabBar>
         </Elevation>
