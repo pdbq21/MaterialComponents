@@ -2,6 +2,7 @@
  * Created by ruslan on 27.06.17.
  */
 import '@material/tabs/dist/mdc.tabs.min.css';
+import '@material/ripple/dist/mdc.ripple.min.css';
 export { default as TabBar} from './TabBar';
 export { default as Tab} from './Tab';
 export { default as TabIndicator} from './Indicator';

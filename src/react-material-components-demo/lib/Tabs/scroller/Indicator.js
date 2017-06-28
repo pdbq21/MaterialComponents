@@ -13,7 +13,8 @@ export default class Indicator extends PureComponent {
       className,
       children,
       back,
-      forward
+      forward,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller__indicator', {
@@ -23,6 +24,7 @@ export default class Indicator extends PureComponent {
     return (
       <ElementType
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>

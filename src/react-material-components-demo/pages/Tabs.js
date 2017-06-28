@@ -181,28 +181,28 @@ constructor(props) {
 
           Tab Bar with icon labels
           <TabBar iconTab>
-            <Tab active>
+            <Tab ripple >
               <TabIcon>phone</TabIcon>
             </Tab>
-            <Tab>
-              <TabIcon>favorite</TabIcon>
+            <Tab ripple active>
+              <TabIcon  >favorite</TabIcon>
             </Tab>
-            <Tab>
-              <TabIcon>person_pin</TabIcon>
+            <Tab ripple >
+              <TabIcon >person_pin</TabIcon>
             </Tab>
             <TabIndicator/>
           </TabBar>
           Tab Bar with icon and text labels
           <TabBar iconText>
-            <Tab iconText active>
+            <Tab ripple iconText active>
               <TabIcon>phone</TabIcon>
               <TabText>Recents</TabText>
             </Tab>
-            <Tab iconText>
+            <Tab ripple iconText>
               <TabIcon>favorite</TabIcon>
               <TabText>Favorites</TabText>
             </Tab>
-            <Tab iconText>
+            <Tab ripple iconText>
               <TabIcon>person_pin</TabIcon>
               <TabText>Nearby</TabText>
             </Tab>
@@ -218,14 +218,14 @@ constructor(props) {
             <TabBarScrollFrame>
               <TabBar scroll>
                 <Tab active>Item One</Tab>
-                <Tab>Item Two</Tab>
-                <Tab>Item Three</Tab>
-                <Tab>Item Four</Tab>
-                <Tab>Item Five</Tab>
-                <Tab>Item Six</Tab>
-                <Tab>Item Seven</Tab>
-                <Tab>Item Eight</Tab>
-                <Tab>Item Nine</Tab>
+                <Tab ripple>Item Two</Tab>
+                <Tab ripple>Item Three</Tab>
+                <Tab ripple>Item Four</Tab>
+                <Tab ripple>Item Five</Tab>
+                <Tab ripple>Item Six</Tab>
+                <Tab ripple>Item Seven</Tab>
+                <Tab ripple>Item Eight</Tab>
+                <Tab ripple>Item Nine</Tab>
                 <TabIndicator/>
               </TabBar>
             </TabBarScrollFrame>

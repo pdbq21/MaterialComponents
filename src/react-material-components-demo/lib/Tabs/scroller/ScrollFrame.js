@@ -12,12 +12,14 @@ export default class ScrollFrame extends PureComponent {
       elementType,
       className,
       children,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller__scroll-frame', className);
     return (
       <ElementType
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>

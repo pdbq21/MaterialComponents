@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 import {tabs}  from 'material-components-web/dist/material-components-web';
-const {MDCTabBarFoundation, MDCTab, MDCTabFoundation} = tabs;
+const {MDCTabBarFoundation, MDCTabFoundation} = tabs;
 
 const {
   strings: {
@@ -14,13 +14,90 @@ const {
   }
 } = MDCTabBarFoundation;
 const {
+  cssClasses: {
+    ACTIVE: ACTIVE_NAME
+  },
   strings: {
     SELECTED_EVENT: SELECTED_EVENT_NAME,
   }
 } = MDCTabFoundation;
+const eventTypeMap = {
+  'animationstart': {
+    noPrefix: 'animationstart',
+    webkitPrefix: 'webkitAnimationStart',
+    styleProperty: 'animation',
+  },
+  'animationend': {
+    noPrefix: 'animationend',
+    webkitPrefix: 'webkitAnimationEnd',
+    styleProperty: 'animation',
+  },
+  'animationiteration': {
+    noPrefix: 'animationiteration',
+    webkitPrefix: 'webkitAnimationIteration',
+    styleProperty: 'animation',
+  },
+  'transitionend': {
+    noPrefix: 'transitionend',
+    webkitPrefix: 'webkitTransitionEnd',
+    styleProperty: 'transition',
+  },
+};
+
+const cssPropertyMap = {
+  'animation': {
+    noPrefix: 'animation',
+    webkitPrefix: '-webkit-animation',
+  },
+  'transform': {
+    noPrefix: 'transform',
+    webkitPrefix: '-webkit-transform',
+  },
+  'transition': {
+    noPrefix: 'transition',
+    webkitPrefix: '-webkit-transition',
+  },
+};
+
+function eventFoundInMaps(eventType) {
+  return (eventType in eventTypeMap || eventType in cssPropertyMap);
+}
+
+function hasProperShape(windowObj) {
+  return (windowObj['document'] !== undefined && typeof windowObj['document']['createElement'] === 'function');
+}
+function getJavaScriptEventName(eventType, map, el) {
+  return map[eventType].styleProperty in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
+}
+function getAnimationName(windowObj, eventType) {
+  if (!hasProperShape(windowObj) || !eventFoundInMaps(eventType)) {
+    return eventType;
+  }
+
+  const map = (
+    eventType in eventTypeMap ? eventTypeMap : cssPropertyMap
+  );
+  const el = windowObj['document']['createElement']('div');
+  let eventName = '';
+
+  if (map === eventTypeMap) {
+    eventName = getJavaScriptEventName(eventType, map, el);
+  } else {
+    eventName = map[eventType].noPrefix in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
+  }
+
+  return eventName;
+}
+
+function getCorrectPropertyName(windowObj, eventType) {
+  return getAnimationName(windowObj, eventType);
+}
+
+
 export default class TabBar extends PureComponent {
   state = {
     classNames: [],
+    activeTabIndex: 0,
   };
 
   tabSelectedHandler_ = ({detail}) => {
@@ -30,11 +107,7 @@ export default class TabBar extends PureComponent {
 
   setActiveTab_(activeTab, notifyChange) {
     const tabs = this.tabs();
-
-    const indexOfTab = tabs.map(function (tab) {
-      return tab.root_;
-    }).indexOf(activeTab.root_);
-
+    const indexOfTab = tabs.indexOf(activeTab.refs.root);
     if (indexOfTab < 0) {
       throw new Error('Invalid tab component given as activeTab: Tab not found within this component\'s tab list');
     }
@@ -49,8 +122,63 @@ export default class TabBar extends PureComponent {
   }
 
   setActiveTabIndex_(activeTabIndex, notifyChange) {
-    this.foundation.switchToTabAtIndex(activeTabIndex, notifyChange);
+    this.switchToTabAtIndex(activeTabIndex, notifyChange);
   }
+
+  switchToTabAtIndex(index, shouldNotify) {
+    const { activeTabIndex } = this.state;
+    if (index === activeTabIndex) {
+      return;
+    }
+
+    if (index < 0 || index >= this.foundation.adapter_.getNumberOfTabs()) {
+      throw new Error(`Out of bounds index specified for tab: ${index}`);
+    }
+    const prevActiveTabIndex = activeTabIndex;
+    requestAnimationFrame(() => {
+      if (prevActiveTabIndex >= 0) {
+        this.foundation.adapter_.setTabActiveAtIndex(prevActiveTabIndex, false);
+      }
+      this.foundation.adapter_.setTabActiveAtIndex(index, true);
+      this.layoutIndicator_();
+      if (shouldNotify) {
+        this.foundation.adapter_.notifyChange({activeTabIndex: index});
+      }
+    });
+    this.setState({
+      activeTabIndex: index
+    });
+  };
+
+  layoutIndicator_() {
+    const { activeTabIndex } = this.state;
+    //const isIndicatorFirstRender = !isIndicatorShown;
+
+    // Ensure that indicator appears in the right position immediately for correct first render.
+    /*if (isIndicatorFirstRender) {
+      this.foundation.adapter_.setStyleForIndicator('transition', 'none');
+    }*/
+
+    const translateAmtForActiveTabLeft = this.foundation.adapter_.getComputedLeftForTabAtIndex(activeTabIndex);
+    const scaleAmtForActiveTabWidth =
+      this.foundation.adapter_.getComputedWidthForTabAtIndex(activeTabIndex) / this.foundation.adapter_.getOffsetWidth();
+
+    const transformValue = `translateX(${translateAmtForActiveTabLeft}px) scale(${scaleAmtForActiveTabWidth}, 1)`;
+    this.foundation.adapter_.setStyleForIndicator(getCorrectPropertyName(window, 'transform'), transformValue);
+
+    /*if (isIndicatorFirstRender) {
+      // Force layout so that transform styles to take effect.
+      this.foundation.adapter_.getOffsetWidthForIndicator();
+      this.foundation.adapter_.setStyleForIndicator('transition', '');
+      this.foundation.adapter_.setStyleForIndicator('visibility', 'visible');
+      //this.isIndicatorShown_ = true;
+      this.setState({
+        isIndicatorShown: true
+      })
+    }*/
+  }
+
+
 
   indicator_ = () => this.refs.root.querySelector(INDICATOR_SELECTOR_NAME);
 
@@ -115,45 +243,56 @@ export default class TabBar extends PureComponent {
     isTabActiveAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        return tabs[index].isActive;
+        return tabs[index].classList.contains(ACTIVE_NAME)
       }
     },
     setTabActiveAtIndex: (index, isActive) => {
       const tabs = this.tabs();
       if (tabs) {
-        return tabs[index].isActive = isActive;
+        if (isActive) {
+          tabs[index].classList.add(ACTIVE_NAME);
+        } else {
+          tabs[index].classList.remove(ACTIVE_NAME);
+        }
       }
     },
     isDefaultPreventedOnClickForTabAtIndex: index => {
       const tabs = this.tabs();
+      console.log('preventDefaultOnClick', tabs[index]);
       if (tabs) {
         return tabs[index].preventDefaultOnClick;
       }
     },
     setPreventDefaultOnClickForTabAtIndex: (index, preventDefaultOnClick) => {
       const tabs = this.tabs();
+      console.log('setPreventDefaultOnClickForTabAtIndex', tabs[index]);
       if (tabs) {
         return tabs[index].preventDefaultOnClick = preventDefaultOnClick;
       }
     },
-    measureTabAtIndex: index => {
+    /*measureTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        tabs[index].foundation_.computedWidth_ = tabs[index].foundation_.adapter_.getOffsetWidth();
-        tabs[index].foundation_.computedLeft_ = tabs[index].foundation_.adapter_.getOffsetLeft();
+        //console.log(tabs[index].offsetWidth);
+        //tabs[index].foundation_.computedWidth_ = tabs[index].foundation_.adapter_.getOffsetWidth();
+       // tabs[index].foundation_.computedWidth_ = tabs[index].offsetWidth;
+        //tabs[index].foundation_.computedLeft_ = tabs[index].foundation_.adapter_.getOffsetLeft();
+        //tabs[index].foundation_.computedLeft_ = tabs[index].offsetLeft;
       }
-    },
+    },*/
     getComputedWidthForTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        return tabs[index].foundation_.adapter_.getOffsetWidth();
+        //return tabs[index].foundation_.adapter_.getOffsetWidth();
+        return tabs[index].offsetWidth;
       }
     },
 
     getComputedLeftForTabAtIndex: index => {
       const tabs = this.tabs();
       if (tabs) {
-        return tabs[index].foundation_.adapter_.getOffsetLeft();
+        //return tabs[index].foundation_.adapter_.getOffsetLeft();
+        return tabs[index].offsetLeft;
       }
     },
     notifyChange: evtData => {
@@ -164,7 +303,10 @@ export default class TabBar extends PureComponent {
   });
 
   componentDidMount() {
-    this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
+    this.tabs_ = [].slice.call(this.refs.root.querySelectorAll(TAB_SELECTOR_NAME));
+    //this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
+    //this.isActive = this.root_.classList.contains(ACTIVE_NAME);
+    //this.gatherTabs_((el) => new MDCTab(el));
     this.foundation.init();
   }
 
@@ -181,7 +323,8 @@ export default class TabBar extends PureComponent {
       iconText,
       accent,
       scroll,
-      children
+      children,
+      ...otherProp
     } = ownProps;
     const ElementType = elementType || 'nav';
     const classes = classnames('mdc-tab-bar', {
@@ -194,6 +337,7 @@ export default class TabBar extends PureComponent {
       <ElementType
         ref='root'
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>

@@ -5,11 +5,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {checkbox}  from 'material-components-web/dist/material-components-web';
+import {checkbox, ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = checkbox;
-
-import '@material/ripple/dist/mdc.ripple.min.css';
-import {ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCRippleFoundation} = ripple;
 
 const eventTypeMap = {

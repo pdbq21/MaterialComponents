@@ -162,12 +162,12 @@ export default class TabBar extends PureComponent {
     },
     registerCapturedInteractionHandler: (evt, handler) => {
       if (this.refs.root) {
-        return this.refs.root.addEventListener(evt, handler, true)
+        return this.refs.root.addEventListener(evt, handler, {passive: true})
       }
     },
     deregisterCapturedInteractionHandler: (evt, handler) => {
       if (this.refs.root) {
-        return this.refs.root.removeEventListener(evt, handler, true)
+        return this.refs.root.removeEventListener(evt, handler, {passive: true})
       }
     },
     registerWindowResizeHandler: (handler) =>
@@ -242,7 +242,8 @@ export default class TabBar extends PureComponent {
     const {
       elementType,
       className,
-      children
+      children,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller', this.state.classNames, className);
@@ -250,6 +251,7 @@ export default class TabBar extends PureComponent {
       <ElementType
         ref='root'
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>

@@ -55,25 +55,25 @@ export default class Button extends PureComponent {
     },
     isSurfaceActive: () => this.refs.root[MATCHES](':active'),
     addClass: className => this.setState(({classNamesRipple}) => ({
-     classNamesRipple: classNamesRipple.concat([className])
-     })),
-     removeClass: className => {
-     if (this.refs.root) {
-     this.setState(({classNamesRipple}) => ({
-     classNamesRipple: classNamesRipple.filter(cn => cn !== className)
-     }))
-     }
-     },
-    /*addClass: (className) => {
+      classNamesRipple: classNamesRipple.concat([className])
+    })),
+    removeClass: className => {
       if (this.refs.root) {
-        return this.refs.root.classList.add(className);
+        this.setState(({classNamesRipple}) => ({
+          classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+        }))
       }
     },
-    removeClass: (className) => {
-      if (this.refs.root) {
-        return this.refs.root.classList.remove(className);
-      }
-    },*/
+    /*addClass: (className) => {
+     if (this.refs.root) {
+     return this.refs.root.classList.add(className);
+     }
+     },
+     removeClass: (className) => {
+     if (this.refs.root) {
+     return this.refs.root.classList.remove(className);
+     }
+     },*/
     registerInteractionHandler: (evtType, handler) => {
       if (this.refs.root) {
         this.refs.root.addEventListener(evtType, handler, {passive: true});
@@ -105,7 +105,7 @@ export default class Button extends PureComponent {
         return this.refs.root.style.setProperty(varName, value);
       }
     },
-    computeBoundingRect: () => (this.refs.root.getBoundingClientRect()),
+    computeBoundingRect: () => this.refs.root.getBoundingClientRect(),
     getWindowPageOffset: () => ({
       x: window.pageXOffset,
       y: window.pageYOffset

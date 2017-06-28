@@ -11,13 +11,15 @@ export default class Text extends PureComponent {
     const {
       elementType,
       className,
-      children
+      children,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller', className);
     return (
       <ElementType
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>

@@ -12,7 +12,8 @@ export default class Inner extends PureComponent {
     const {
       elementType,
       className,
-      children
+      children,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || Icon;
     const classes = classnames('mdc-tab-bar-scroller__indicator__inner', className);
@@ -20,6 +21,7 @@ export default class Inner extends PureComponent {
       <ElementType
         className={classes}
         elementType={(!elementType)? "a" : null}
+        {...otherProp}
       >
         {children}
       </ElementType>

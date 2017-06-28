@@ -12,13 +12,15 @@ export default class TabIcon extends PureComponent {
     const {
       elementType,
       className,
-      children
+      children,
+    ...otherProp
     } = ownProps;
     const ElementType = elementType || Icon;
     const classes = classnames('mdc-tab__icon', className);
     return (
       <ElementType
         className={classes}
+        {...otherProp}
       >
         {children}
       </ElementType>
