@@ -19,16 +19,19 @@ export default class Item extends PureComponent {
       role,
       tabIndex,
       disabled,
+      style,
       ...otherProps
     } = this.props;
     const ElementType = elementType || 'li';
     const classes = classnames('mdc-list-item', className);
+    const styles = (disabled) ? Object.assign({}, style, {'pointerEvents': 'none'}) : style;
     return (
       <ElementType
         className={classes}
         role={role || 'option'}
-        tabIndex={tabIndex || (disabled)? '-1': '0'}
+        tabIndex={tabIndex || (disabled) ? '-1' : '0'}
         {...otherProps}
+        style={styles}
       >
         {children}
       </ElementType>

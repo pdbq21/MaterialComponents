@@ -8,6 +8,11 @@ import {select}  from 'material-components-web/dist/material-components-web';
 const {MDCSelectFoundation} = select;
 import {menu}  from 'material-components-web/dist/material-components-web';
 const {MDCSimpleMenuFoundation} = menu;
+const {
+  strings: {
+    CHANGE_EVENT: CHANGE_EVENT_NAME
+  }
+} = MDCSimpleMenuFoundation;
 
 let storedTransformPropertyName_;
 // Returns the name of the correct transform property to use on the current browser.
@@ -30,24 +35,27 @@ export default class Select extends PureComponent {
     };
   }
 
-  emit = (root, evtType, evtData) => {
+  emit = (root, evtType, evtData, shouldBubble = false) => {
     let evt;
     if (typeof CustomEvent === 'function') {
-      evt = new CustomEvent(evtType, {detail: evtData});
+      evt = new CustomEvent(evtType, {
+        detail: evtData,
+        bubbles: shouldBubble
+      });
     } else {
       evt = document.createEvent('CustomEvent');
-      evt.initCustomEvent(evtType, false, false, evtData);
+      evt.initCustomEvent(evtType, shouldBubble, false, evtData);
     }
     root.dispatchEvent(evt);
   };
-  items_ = () => (this.refs.root.querySelector('.mdc-list.mdc-simple-menu__items'));
-  menuEl_ = () => (this.refs.root.querySelector('.mdc-select__menu.mdc-simple-menu'));
-  selectedText_ = () => (this.refs.root.querySelector('.mdc-select__selected-text'));
+  items_ = () => this.refs.root.querySelector('.mdc-list.mdc-simple-menu__items');
+  menuEl_ = () => this.refs.root.querySelector('.mdc-select__menu.mdc-simple-menu');
+  selectedText_ = () => this.refs.root.querySelector('.mdc-select__selected-text');
 
   items = () => [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'));
-    //[].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]:not([tabindex="-1"])'))
+  //[].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]:not([tabindex="-1"])'))
 
-   //return [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'))
+  //return [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'))
 
 
   foundationMenu = new MDCSimpleMenuFoundation({
@@ -90,9 +98,7 @@ export default class Select extends PureComponent {
         return menuEl.parentElement.getBoundingClientRect();
       }
     },
-    getWindowDimensions: () => {
-      return {width: window.innerWidth, height: window.innerHeight};
-    },
+    getWindowDimensions: () => ({width: window.innerWidth, height: window.innerHeight}),
     setScale: (x, y) => {
       const menuEl = this.menuEl_();
       if (menuEl) {
@@ -151,7 +157,7 @@ export default class Select extends PureComponent {
       }
     },
     notifySelected: evtData => {
-     if (typeof this.props.onSelected !== 'undefined') {
+      if (typeof this.props.onSelected !== 'undefined') {
         const items = this.items();
         this.props.onSelected({
           index: evtData.index,
@@ -229,12 +235,20 @@ export default class Select extends PureComponent {
       menuEl.style.bottom = 'bottom' in position ? position.bottom : null;
     },
     getAccurateTime: () => window.performance.now(),
+
+    //todo: new methods
+    getAttributeForEventTarget: (target, attributeName) => target.getAttribute(attributeName),
+    registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler),
+    deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
   });
 
   foundation = new MDCSelectFoundation({
-    addClass: className => this.setState(({classNames}) => ({
-      classNames: classNames.concat([className])
-    })),
+    addClass: className => {
+      //if(!this.state.classNames.includes(className)){
+        //console.log(className);
+        this.setState(({classNames}) => ({classNames: classNames.concat([className])}))
+     // }
+    },
     removeClass: className => this.setState(({classNames}) => ({
       classNames: classNames.filter(cn => cn !== className)
     })),
@@ -290,9 +304,7 @@ export default class Select extends PureComponent {
         return this.refs.root.style.setProperty(propertyName, value);
       }
     },
-    create2dRenderingContext: () => {
-      return document.createElement('canvas').getContext('2d');
-    },
+    create2dRenderingContext: () => document.createElement('canvas').getContext('2d'),
     setMenuElStyle: (propertyName, value) => {
       const menuEl = this.menuEl_();
       if (menuEl) {
@@ -323,13 +335,17 @@ export default class Select extends PureComponent {
         return this.selectedText_().textContent = selectedTextContent;
       }
     },
-    getWindowInnerHeight: () => (window.innerHeight),
+    getWindowInnerHeight: () => window.innerHeight,
 
     notifyChange: () => {
       if (typeof this.props.onChange !== 'undefined') {
-        return this.props.onChange(this);
+        this.props.onChange(this);
+      }
+      if (this.refs.root) {
+        return this.emit(this.refs.root, CHANGE_EVENT_NAME, this)
       }
     },
+
     openMenu: (focusIndex) => {
       return this.foundationMenu.open({focusIndex: focusIndex});
     },
@@ -387,7 +403,8 @@ export default class Select extends PureComponent {
   });
 
   componentDidMount() {
-    if (!this.props.cssOnly){
+    console.log(this.foundationMenu, this.foundation);
+    if (!this.props.cssOnly) {
       this.foundationMenu.init();
       this.foundation.init();
     }
@@ -414,7 +431,7 @@ export default class Select extends PureComponent {
       ...otherProps
     } = ownProps;
 
-    const ElementType = elementType || (cssOnly)? 'select' :  'div';
+    const ElementType = elementType || (cssOnly) ? 'select' : 'div';
     const classes = classnames({
       'mdc-select': !(cssOnly && multiple),
       'mdc-multi-select mdc-list': cssOnly && multiple,

@@ -10,6 +10,11 @@ import {
   SelectItem,
   ListGroup,
   ListItem,
+  FormField,
+  Checkbox,
+  CheckboxInput,
+  CheckboxBG,
+  CheckboxLabel,
   ListDivider,
   Elevation,
   TypographyDisplay,
@@ -21,6 +26,7 @@ export default class SelectPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      disabled: false,
       components: [
         {
           name: 'Select',
@@ -141,6 +147,7 @@ export default class SelectPage extends Component {
       used: ``
     };
     this.renderTable = this.renderTable.bind(this);
+    this.handleDisabled = this.handleDisabled.bind(this);
   }
 
   renderTable() {
@@ -176,8 +183,13 @@ export default class SelectPage extends Component {
       )
     )
   }
-
+  handleDisabled(){
+    this.setState({
+      disabled: !this.state.disabled
+    })
+  }
   render() {
+    const { disabled } = this.state;
     return (
       <section
       className="content"
@@ -202,7 +214,9 @@ export default class SelectPage extends Component {
             <SelectText>Pick a food group</SelectText>
             <SelectMenu>
               <SelectItems>
-                <SelectItem>
+                <SelectItem
+                  aria-disabled="true"
+                >
                   Pick a food group
                 </SelectItem><SelectItem>
                 Bread, Cereal, Rice, and Pasta
@@ -244,6 +258,7 @@ export default class SelectPage extends Component {
             code=""
           >
             <Select
+              disabled={disabled}
               onSelected={(event) => console.log(event)}
               onCancel={(event) => console.log(event)}
               onChange={(event) => console.log(event)}
@@ -253,7 +268,8 @@ export default class SelectPage extends Component {
                 <SelectItems>
                   <SelectItem>
                     Pick a food group
-                  </SelectItem><SelectItem>
+                  </SelectItem>
+                  <SelectItem>
                   Bread, Cereal, Rice, and Pasta
                 </SelectItem>
                   <SelectItem>
@@ -261,9 +277,8 @@ export default class SelectPage extends Component {
                   </SelectItem>
                   <SelectItem
                     disabled
-                    aria-disabled="true"
                   >
-                    Fruit
+                    Fruit (Disabled)
                   </SelectItem>
                   <SelectItem>
                     Milk, Yogurt, and Cheese
@@ -278,6 +293,20 @@ export default class SelectPage extends Component {
               </SelectMenu>
             </Select>
             Currently selected: (none)
+            <FormField>
+              <Checkbox
+                ripple
+              >
+                <CheckboxInput
+                  checked={disabled}
+                  onChange={this.handleDisabled}
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel>
+                Disabled
+              </CheckboxLabel>
+            </FormField>
           </Example>
           <Example
           title="Select Multiple - CSS Only"
