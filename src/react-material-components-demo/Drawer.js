@@ -123,7 +123,7 @@ export default class Drawer extends Component {
           name: 'Select',
           icon: 'select_all',
           link: '/select',
-          todo: true
+          todo: false
         }, {
           name: 'Simple Menu',
           icon: 'menu',

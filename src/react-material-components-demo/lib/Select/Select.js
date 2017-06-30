@@ -53,9 +53,6 @@ export default class Select extends PureComponent {
   selectedText_ = () => this.refs.root.querySelector('.mdc-select__selected-text');
 
   items = () => [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'));
-  //[].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]:not([tabindex="-1"])'))
-
-  //return [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'))
 
 
   foundationMenu = new MDCSimpleMenuFoundation({
@@ -129,12 +126,12 @@ export default class Select extends PureComponent {
         menuEl.removeEventListener(type, handler);
       }
     },
-    registerDocumentClickHandler: handler => {
+    /*registerDocumentClickHandler: handler => {
       return document.addEventListener('click', handler, {passive: true});
     },
     deregisterDocumentClickHandler: handler => {
       return document.removeEventListener('click', handler);
-    },
+    },*/
     getYParamsForItemAtIndex: index => {
       const items = this.items();
       if (items) {
@@ -235,19 +232,14 @@ export default class Select extends PureComponent {
       menuEl.style.bottom = 'bottom' in position ? position.bottom : null;
     },
     getAccurateTime: () => window.performance.now(),
-
-    //todo: new methods
     getAttributeForEventTarget: (target, attributeName) => target.getAttribute(attributeName),
-    registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler),
+    registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler,{passive: true}),
     deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
   });
 
   foundation = new MDCSelectFoundation({
     addClass: className => {
-      //if(!this.state.classNames.includes(className)){
-        //console.log(className);
         this.setState(({classNames}) => ({classNames: classNames.concat([className])}))
-     // }
     },
     removeClass: className => this.setState(({classNames}) => ({
       classNames: classNames.filter(cn => cn !== className)
@@ -346,22 +338,15 @@ export default class Select extends PureComponent {
       }
     },
 
-    openMenu: (focusIndex) => {
-      return this.foundationMenu.open({focusIndex: focusIndex});
-    },
-    isMenuOpen: () => {
-      return this.foundationMenu.open();
-    },
+    openMenu: (focusIndex) => this.foundationMenu.open({focusIndex: focusIndex}),
+    isMenuOpen: () => this.foundationMenu.open(),
 //items
-    getNumberOfOptions: () => {
-      return this.foundationMenu.adapter_.getNumberOfItems();
-    },
+    getNumberOfOptions: () => this.foundationMenu.adapter_.getNumberOfItems(),
     getTextForOptionAtIndex: (index) => {
       const items = this.items();
       if (items) {
         return items[index].textContent;
       }
-
     },
     getValueForOptionAtIndex: (index) => {
       const items = this.items();
@@ -403,7 +388,6 @@ export default class Select extends PureComponent {
   });
 
   componentDidMount() {
-    console.log(this.foundationMenu, this.foundation);
     if (!this.props.cssOnly) {
       this.foundationMenu.init();
       this.foundation.init();
