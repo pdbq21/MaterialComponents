@@ -3,403 +3,447 @@
  */
 import React, {Component} from 'react'
 import {
-    Checkbox,
-    CheckboxLabel,
-    CheckboxBackground,
-    CheckboxCheckmark,
-    CheckboxInput,
-    CheckboxMixedmark,
-    CheckboxPath,
-    Elevation,
-    Button,
-    FormField,
-    TypographyDisplay,
-    TypographyBody,
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxBG,
+  Elevation,
+  Button,
+  FormField,
+  TypographyDisplay,
 } from '../lib'
-
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class CheckboxPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: false,
-            disabled: false,
-            indeterminate: false,
-            components: [
-                {
-                    name: 'Checkbox',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        }, {
-                            name: 'ripple',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'додає Ripple ефект'
-                        }, {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: 'стає не активний'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxLabel',
-                    property: [
-                        {
-                            description: 'no specific props'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxBackground',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxCheckmark',
-                    property: [
-                        {
-                            name: 'viewBox',
-                            type: 'string',
-                            required: 'no',
-                            defaultValue: `'0 0 24 24'`,
-                            description: 'svg option'
-                        },{
-                            name: 'xmlns',
-                            type: 'string',
-                            required: 'no',
-                            defaultValue: `'http://www.w3.org/2000/svg'`,
-                            description: 'svg option'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxInput',
-                    property: [
-                        {
-                            name: 'disabled',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: `false`,
-                            description: 'стає не активним'
-                        },{
-                            name: 'checked',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: `false`,
-                            description: 'checkbox option'
-                        },{
-                            name: 'indeterminate',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: `false`,
-                            description: 'checkbox option'
-                        },{
-                            name: 'onChange',
-                            type: 'function',
-                            required: 'no',
-                            defaultValue: `no`,
-                            description: 'зміна стану checkbox'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxMixedmark',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        },
-                    ]
-                },{
-                    name: 'CheckboxPath',
-                    property: [
-                        {
-                            name: 'fill',
-                            type: 'string',
-                            required: 'no',
-                            defaultValue: `'none'`,
-                            description: 'svg option'
-                        },{
-                            name: 'stroke',
-                            type: 'string',
-                            required: 'no',
-                            defaultValue: `'white'`,
-                            description: 'svg option'
-                        },{
-                            name: 'd',
-                            type: 'string',
-                            required: 'no',
-                            defaultValue: `'M1.73,12.91 8.1,19.28 22.79,4.59'`,
-                            description: 'svg option'
-                        },
-                    ]
-                },
-            ],
-            used: `
-import React, {Component} from 'react'
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+      disabled: false,
+      indeterminate: false,
+      components: [
+        {
+          name: 'Checkbox',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            }, {
+              name: 'ripple',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'додає Ripple ефект'
+            }, {
+              name: 'disabled',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: 'стає не активний'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxLabel',
+          property: [
+            {
+              description: 'no specific props'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxBackground',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxCheckmark',
+          property: [
+            {
+              name: 'viewBox',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'0 0 24 24'`,
+              description: 'svg option'
+            }, {
+              name: 'xmlns',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'http://www.w3.org/2000/svg'`,
+              description: 'svg option'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxInput',
+          property: [
+            {
+              name: 'disabled',
+              type: 'bool',
+              required: 'no',
+              defaultValue: `false`,
+              description: 'стає не активним'
+            }, {
+              name: 'checked',
+              type: 'bool',
+              required: 'no',
+              defaultValue: `false`,
+              description: 'checkbox option'
+            }, {
+              name: 'indeterminate',
+              type: 'bool',
+              required: 'no',
+              defaultValue: `false`,
+              description: 'checkbox option'
+            }, {
+              name: 'onChange',
+              type: 'function',
+              required: 'no',
+              defaultValue: `no`,
+              description: 'зміна стану checkbox'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxMixedmark',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxPath',
+          property: [
+            {
+              name: 'fill',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'none'`,
+              description: 'svg option'
+            }, {
+              name: 'stroke',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'white'`,
+              description: 'svg option'
+            }, {
+              name: 'd',
+              type: 'string',
+              required: 'no',
+              defaultValue: `'M1.73,12.91 8.1,19.28 22.79,4.59'`,
+              description: 'svg option'
+            },
+          ]
+        },
+        {
+          name: 'CheckboxBG',
+          property: [
+            {
+              description: `це компонент CheckboxBackground який поєднує в собі CheckboxBackground, CheckboxCheckmark, CheckboxPath 
+              з default props`
+            },
+          ]
+        },
+      ],
+      used: {
+        source1: `import React, {Component} from 'react'
 import {
-    Checkbox,
-    CheckboxLabel,
-    CheckboxBackground,
-    CheckboxCheckmark,
-    CheckboxInput,
-    CheckboxMixedmark,
-    CheckboxPath,
-    Elevation,
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxBG,
+  Button,
+  FormField,
+  Elevation
 } from '../lib'
 
-class CheckboxDemo extends Component {
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                   <Checkbox
-                        ripple
-                    >
-                        <CheckboxInput
-                            onChange={({target}) => this.setState({
-                                checked: target.checked,
-                            })}
-                        />
-                        <CheckboxBackground>
-                            <CheckboxCheckmark>
-                                <CheckboxPath/>
-                            </CheckboxCheckmark>
-                            <CheckboxMixedmark/>
-                        </CheckboxBackground>
-                    </Checkbox>
-                    <CheckboxLabel>
-                        Checkbox
-                    </CheckboxLabel>
-                </Elevation>
-            </section>
-        )
+export default class CheckboxWithJS extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+      disabled: false,
+      indeterminate: false,
     }
+    this.handelIndeterminate = this.handelIndeterminate.bind(this);
+    this.handelDisabled = this.handelDisabled.bind(this);
+  }
+  handelIndeterminate() {
+    this.setState({
+      indeterminate: true
+    })
+  }
+
+  handelDisabled() {
+    this.setState({
+      disabled: !this.state.disabled
+    })
+  }
+  render() {
+  const {disabled, indeterminate} = this.state;
+    return (
+      <div>
+         <FormField>
+              <Checkbox
+                ripple
+                disabled={disabled}
+              >
+                <CheckboxInput
+                  id="checkbox1"
+                  onChange={({target}) => this.setState({
+                    checked: target.checked,
+                    indeterminate: false
+                  })}
+                  aria-labelledby="checkbox_label1"
+                  disabled={disabled}
+                  indeterminate={indeterminate}
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel id="checkbox_label1" htmlFor="checkbox1">
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'row nowrap',
+              }}
+            >
+              <Button
+                primary
+                raised
+                ripple
+                onClick={this.handelIndeterminate}
+                style={{'marginRight': '0.5em'}}
+              >Make indeterminate</Button>
+              <Button primary raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
+            </Elevation>
+      </div>
+    );
+  }
+}`,
+        source2: `import React, {Component} from 'react'
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxBG,
+  FormField,
+  Elevation
+} from '../lib'
+
+export default class CheckboxCSSOnly extends Component {
+
+  render() {
+    return (
+      <div>
+          <FormField>
+              <Checkbox
+              >
+                <CheckboxInput
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel>
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+      </div>
+    );
+  }
+}`,
+        source3: `import React, {Component} from 'react'
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxBG,
+  FormField,
+  Elevation
+} from '../lib'
+
+export default class CheckboxCSSOnlyDisabled extends Component {
+
+  render() {
+    return (
+      <div>
+          <FormField>
+              <Checkbox
+              disabled
+              >
+                <CheckboxInput
+                disabled
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel>
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+      </div>
+    );
+  }
 }`
-        };
-        this.renderTable = this.renderTable.bind(this);
+      }
+    };
+    this.renderTable = this.renderTable.bind(this);
 
-        this.handelIndeterminate = this.handelIndeterminate.bind(this);
-        this.handelDisabled = this.handelDisabled.bind(this);
-    }
+    this.handelIndeterminate = this.handelIndeterminate.bind(this);
+    this.handelDisabled = this.handelDisabled.bind(this);
+  }
 
-    renderTable() {
-        const {components} = this.state;
-        return components.map((item, index) => (<Elevation
-                    zSpace="2"
-                    key={`key-table-${index}`}
-                >
-                    <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-                    <table className="table-props">
-                        <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Required</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {item.property.map((prop, index) => (
-                            <tr key={`key-table-tr-${index}`}>
-                                <td><code>{prop.name}</code></td>
-                                <td><code>{prop.type}</code></td>
-                                <td>{prop.defaultValue}</td>
-                                <td>{prop.required}</td>
-                                <td>{prop.description}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </Elevation>
-            )
-        )
-    }
+  renderTable() {
+    const {components} = this.state;
+    return components.map(({name, property}, index) => (
+        <Table
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
+      )
+    )
+  }
 
-    handelIndeterminate() {
-        this.setState({
-            indeterminate: true
-        })
-    }
+  handelIndeterminate() {
+    this.setState({
+      indeterminate: true
+    })
+  }
 
-    handelDisabled() {
-        this.setState({
-            disabled: !this.state.disabled
-        })
-    }
-    render() {
-        const {disabled, indeterminate} = this.state;
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '360px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
-                    }}
-                >
-                    <Checkbox
-                        ripple
-                    >
-                        <CheckboxInput
-                            onChange={({target}) => this.setState({
-                                checked: target.checked,
-                            })}
-                        />
-                        <CheckboxBackground>
-                            <CheckboxCheckmark>
-                                <CheckboxPath/>
-                            </CheckboxCheckmark>
-                            <CheckboxMixedmark/>
-                        </CheckboxBackground>
-                    </Checkbox>
-                    <CheckboxLabel>
-                        Checkbox
-                    </CheckboxLabel>
-                </Elevation>
-                {this.renderTable()}
+  handelDisabled() {
+    this.setState({
+      disabled: !this.state.disabled
+    })
+  }
 
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'minHeight': '10em',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'flexDirection': 'column'
-                    }}
-                >
-                    <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-                    <TypographyBody>
-                        This component is based on the MDC Checkbox, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox"
-                    >here</a>.
-                    </TypographyBody>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Demo code</TypographyDisplay>
+  render() {
+    const {disabled, indeterminate, used} = this.state;
+    return (
+      <section
+        className="content"
+      >
+        <Demo>
+          <Checkbox
+            ripple
+          >
+            <CheckboxInput
+              onChange={({target}) => this.setState({
+                checked: target.checked,
+              })}
+            />
+            <CheckboxBG/>
+          </Checkbox>
+          <CheckboxLabel>
+            Checkbox
+          </CheckboxLabel>
+        </Demo>
+        {this.renderTable()}
+        <OriginalDoc
+          name="Checkbox"
+          href="mdc-checkbox"
+        />
 
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                >
-                    <Button primary raised ripple onClick={this.handelIndeterminate}>Make indeterminate</Button>
-                    <Button primary raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
-                    <TypographyDisplay size="1">With Javascript</TypographyDisplay>
-
-                        <FormField>
-                            <Checkbox
-                                ripple
-                                disabled={disabled}
-                            >
-                                <CheckboxInput
-                                    id="my-checkbox"
-                                    onChange={({target}) => this.setState({
-                                        checked: target.checked,
-                                        indeterminate: false
-                                    })}
-                                    aria-labelledby="my-checkbox-label"
-                                    disabled={disabled}
-                                    indeterminate={indeterminate}
-                                />
-                                <CheckboxBackground>
-                                    <CheckboxCheckmark>
-                                        <CheckboxPath/>
-                                    </CheckboxCheckmark>
-                                    <CheckboxMixedmark/>
-                                </CheckboxBackground>
-                            </Checkbox>
-
-                            <CheckboxLabel id="my-checkbox-label" htmlFor="my-checkbox">
-                                The checkbox is currently
-                            </CheckboxLabel>
-                        </FormField>
-
-                    <TypographyDisplay size="1">CSS Only</TypographyDisplay>
-                    <FormField>
-                    <Checkbox
-                        disabled={disabled}
-                    >
-                        <CheckboxInput
-                            onChange={({target}) => this.setState({
-                                checked: target.checked,
-                                indeterminate: false
-                            })}
-                            disabled={disabled}
-                            indeterminate={indeterminate}
-                        />
-                        <CheckboxBackground>
-                            <CheckboxCheckmark>
-                                <CheckboxPath/>
-                            </CheckboxCheckmark>
-                            <CheckboxMixedmark/>
-                        </CheckboxBackground>
-                    </Checkbox>
-                    <CheckboxLabel>
-                        The checkbox is currently
-                    </CheckboxLabel>
-                    </FormField>
-                    <TypographyDisplay size="1">CSS Only - Disabled</TypographyDisplay>
-                    <FormField>
-                        <Checkbox
-                            disabled
-                        >
-                            <CheckboxInput
-                                onChange={({target}) => this.setState({
-                                    checked: target.checked,
-                                    indeterminate: false
-                                })}
-                                disabled={true}
-                            />
-                            <CheckboxBackground>
-                                <CheckboxCheckmark>
-                                    <CheckboxPath/>
-                                </CheckboxCheckmark>
-                                <CheckboxMixedmark/>
-                            </CheckboxBackground>
-                        </Checkbox>
-                    <CheckboxLabel>
-                        The checkbox is disabled
-                    </CheckboxLabel>
-                    </FormField>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '50px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'marginTop': '1em'
-                    }}
-                >
-                    github
-                </Elevation>
-            </section>
-        )
-    }
+        <Elevation
+          zSpace="2"
+        >
+          <TypographyDisplay size="1">Checkbox</TypographyDisplay>
+          <Example
+            title="Checkbox With JS"
+            code={used.source1}
+          >
+            <FormField>
+              <Checkbox
+                ripple
+                disabled={disabled}
+              >
+                <CheckboxInput
+                  id="checkbox1"
+                  onChange={({target}) => this.setState({
+                    checked: target.checked,
+                    indeterminate: false
+                  })}
+                  aria-labelledby="checkbox_label1"
+                  disabled={disabled}
+                  indeterminate={indeterminate}
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel id="checkbox_label1" htmlFor="checkbox1">
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'row nowrap',
+              }}
+            >
+              <Button
+                primary
+                raised
+                ripple
+                onClick={this.handelIndeterminate}
+                style={{'marginRight': '0.5em'}}
+              >Make indeterminate</Button>
+              <Button primary raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
+            </Elevation>
+          </Example>
+          <Example
+            title="Checkbox - CSS Only"
+            code={used.source2}
+          >
+            <FormField>
+              <Checkbox
+                disabled={disabled}
+              >
+                <CheckboxInput
+                  disabled={disabled}
+                  indeterminate={indeterminate}
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel>
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+          </Example>
+          <Example
+            title="Checkbox - CSS Only + Disabled"
+            code={used.source3}
+          >
+            <FormField>
+              <Checkbox
+                disabled
+              >
+                <CheckboxInput
+                  disabled={true}
+                />
+                <CheckboxBG/>
+              </Checkbox>
+              <CheckboxLabel>
+                The checkbox is currently
+              </CheckboxLabel>
+            </FormField>
+          </Example>
+        </Elevation>
+        <Footer/>
+      </section>
+    )
+  }
 }

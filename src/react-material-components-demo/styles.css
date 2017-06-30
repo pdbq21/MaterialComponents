@@ -38,9 +38,8 @@ body {
     padding: 8px;
 }
 
-.demo-page-button > .mdc-button,
-.demo-page-card > .mdc-card {
-    margin: 10px;
+.demo-page-card .mdc-card {
+    margin: 0.5em;
 }
 
 .todo-page {
@@ -115,8 +114,8 @@ body {
     margin-bottom: 1em;
 }
 
-.demo-page-button_demo-components > .mdc-button {
-    margin: 1em;
+.demo-page-button_demo-components .mdc-button {
+    margin: 0.5em;
 }
 
 .demo-example {

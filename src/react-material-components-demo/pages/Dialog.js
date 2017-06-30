@@ -16,7 +16,7 @@ import {
   ListItem,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class DialogPage extends Component {
   constructor(props) {
@@ -342,34 +342,12 @@ constructor(props) {
 
   renderTable() {
     const {components} = this.state;
-    return components.map((item, index) => (<Elevation
-          zSpace="2"
+    return components.map(({name, property}, index) => (
+        <Table
           key={`key-table-${index}`}
-        >
-          <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-          <table className="table-props">
-            <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {item.property.map((prop, index) => (
-              <tr key={`key-table-tr-${index}`}>
-                <td><code>{prop.name}</code></td>
-                <td><code>{prop.type}</code></td>
-                <td>{prop.defaultValue}</td>
-                <td>{prop.required}</td>
-                <td>{prop.description}</td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </Elevation>
+          name={name}
+          property={property}
+        />
       )
     )
   }
@@ -419,26 +397,16 @@ constructor(props) {
     const {open, openScroll, used} = this.state;
     return (
       <section
-      className="content"
+        className="content"
       >
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '360px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'flexFlow': 'row nowrap',
-            'height': '360px',
-          }}
-        >
-          <aside className="mdc-dialog mdc-dialog--open"
-          style={{
-            'position': 'relative',
-            'zIndex': 0,
-            'width': '80%'
-          }}
+        <Demo>
+          <aside
+            className="mdc-dialog mdc-dialog--open"
+            style={{
+              'position': 'relative',
+              'zIndex': 0,
+              'width': '80%'
+            }}
           >
             <div className="mdc-dialog__surface">
               <header className="mdc-dialog__header">
@@ -453,15 +421,17 @@ constructor(props) {
                 <button
                   type="button"
                   className="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel mdc-ripple-upgraded"
-                  >Cancel</button>
+                >Cancel
+                </button>
                 <button
                   type="button"
                   className="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-ripple-upgraded"
-                  >Continue</button>
+                >Continue
+                </button>
               </footer>
             </div>
           </aside>
-        </Elevation>
+        </Demo>
         {this.renderTable()}
         <OriginalDoc
           name="Dialog"
@@ -528,8 +498,8 @@ constructor(props) {
                   </List>
                 </DialogBody>
                 <DialogFooter>
-                  <DialogFooterButton cancel >Decline</DialogFooterButton>
-                  <DialogFooterButton accept >Accept</DialogFooterButton>
+                  <DialogFooterButton cancel>Decline</DialogFooterButton>
+                  <DialogFooterButton accept>Accept</DialogFooterButton>
                 </DialogFooter>
               </DialogSurface>
             </Dialog>
