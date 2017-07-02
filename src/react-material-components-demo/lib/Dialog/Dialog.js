@@ -119,12 +119,12 @@ export default class Dialog extends PureComponent {
     },
     eventTargetHasClass: (target, className) => target.classList.contains(className),
     notifyAccept: () => {
-      if (this.props.onAccept !== null) {
+      if (typeof this.props.onAccept !== 'undefined') {
         this.props.onAccept(this);
       }
     },
     notifyCancel: () => {
-      if (this.props.onCancel !== null) {
+      if (typeof this.props.onCancel !== 'undefined') {
         this.props.onCancel(this);
       }
     },

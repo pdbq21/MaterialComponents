@@ -59,7 +59,8 @@ export {
   Textfield,
   TextfieldInput,
   TextfieldLabel,
-  TextfieldHelptext
+  TextfieldHelptext,
+  TextfieldLine
 } from './Textfield';
 export {FormField} from './FormField';
 export {

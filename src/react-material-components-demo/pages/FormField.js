@@ -3,181 +3,135 @@
  */
 import React, {Component} from 'react'
 import {
-    FormField,
-    Elevation,
-    TypographyDisplay,
-    TypographyBody,
+  FormField,
+  Elevation,
+  TypographyDisplay,
 } from '../lib'
-
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class FormFieldPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            components: [
-                {
-                    name: 'FormField',
-                    property: [
-                        {
-                            name: 'elementType',
-                            type: 'string | React Component',
-                            required: 'no',
-                            defaultValue: 'div',
-                            description: 'задає тег елемента'
-                        }, {
-                            name: 'alignEnd',
-                            type: 'bool',
-                            required: 'no',
-                            defaultValue: 'false',
-                            description: '-'
-                        },
-                    ]
-                }
-            ],
-            used: `
+  constructor(props) {
+    super(props);
+    this.state = {
+      components: [
+        {
+          name: 'FormField',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            }, {
+              name: 'alignEnd',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            },
+          ]
+        }
+      ],
+      used: {
+        source1: `
 import React, {Component} from 'react'
 import {
     FormField,
-    Elevation,
-    TypographyDisplay,
 } from '../lib'
 
-class FormFieldDemo extends Component {
+export default class FormFieldDemo extends Component {
     render() {
         return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">FormField</TypographyDisplay>
-                    <FormField>
-                        <input type="checkbox"/>
-                        <label>Input Label</label>
-                    </FormField>
-                    <TypographyDisplay size="1">Form Field Align End</TypographyDisplay>
-                    <FormField alignEnd>
-                        <input type="checkbox"/>
-                        <label>Input Label</label>
-                    </FormField>
-                </Elevation>
-            </section>
+            <div>
+              <FormField>
+                <input type="checkbox"/>
+                <label>Input Label</label>
+              </FormField>
+            </div>
+        )
+    }
+}`,
+        source2: `import React, {Component} from 'react'
+import {
+    FormField,
+} from '../lib'
+
+export default class FormFieldDemo extends Component {
+    render() {
+        return (
+            <div>
+              <FormField alignEnd>
+                <input type="checkbox"/>
+                <label>Input Label</label>
+              </FormField>
+            </div>
         )
     }
 }`
-        };
-        this.renderTable = this.renderTable.bind(this);
-    }
+      }
+    };
+    this.renderTable = this.renderTable.bind(this);
+  }
 
-    renderTable() {
-        const {components} = this.state;
-        return components.map((item, index) => (<Elevation
-                    zSpace="2"
-                    key={`key-table-${index}`}
-                >
-                    <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-                    <table className="table-props">
-                        <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Required</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {item.property.map((prop, index) => (
-                            <tr key={`key-table-tr-${index}`}>
-                                <td><code>{prop.name}</code></td>
-                                <td><code>{prop.type}</code></td>
-                                <td>{prop.defaultValue}</td>
-                                <td>{prop.required}</td>
-                                <td>{prop.description}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </Elevation>
-            )
-        )
-    }
+  renderTable() {
+    const {components} = this.state;
+    return components.map(({name, property}, index) => (
+        <Table
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
+      )
+    )
+  }
 
-    render() {
+  render() {
+const {used} = this.state;
+    return (
+      <section
+        className="content"
+      >
+        <Demo>
+          <FormField>
+            <input type="checkbox" id="input"/>
+            <label htmlFor="input">Input Label</label>
+          </FormField>
+        </Demo>
+        {this.renderTable()}
+        <OriginalDoc
+          name="Form Field"
+          href="mdc-form-field"
+        />
 
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '360px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
-                    }}
-                >
-                    <FormField>
-                        <input type="checkbox" id="input"/>
-                        <label htmlFor="input">Input Label</label>
-                    </FormField>
-                </Elevation>
-                {this.renderTable()}
+        <Elevation
+          zSpace="2"
+          className="demo-page-form_field"
 
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'minHeight': '10em',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'flexDirection': 'column'
-                    }}
-                >
-                    <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-                    <TypographyBody>
-                        This component is based on the MDC Form Field, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-form-field"
-                    >here</a>.
-                    </TypographyBody>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Demo code</TypographyDisplay>
+        >
+          <TypographyDisplay size="1">FormField</TypographyDisplay>
+          <Example
+            title="FormField"
+            code={used.source1}
+          >
+            <FormField>
+              <input type="checkbox"/>
+              <label>Input Label</label>
+            </FormField>
+          </Example>
+          <Example
+            title="Form Field Align End"
+            code={used.source2}
+          >
+            <FormField alignEnd>
+              <input type="checkbox"/>
+              <label>Input Label</label>
+            </FormField>
+          </Example>
 
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                    className="demo-page-form_field"
-
-                >
-                    <TypographyDisplay size="1">FormField</TypographyDisplay>
-                    <FormField>
-                        <input type="checkbox"/>
-                        <label>Input Label</label>
-                    </FormField>
-                    <TypographyDisplay size="1">Form Field Align End</TypographyDisplay>
-                    <FormField alignEnd>
-                        <input type="checkbox"/>
-                        <label>Input Label</label>
-                    </FormField>
-
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '50px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'marginTop': '1em'
-                    }}
-                >
-                    github
-                </Elevation>
-            </section>
-        )
-    }
+        </Elevation>
+        <Footer/>
+      </section>
+    )
+  }
 }

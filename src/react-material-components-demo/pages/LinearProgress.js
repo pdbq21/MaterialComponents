@@ -11,7 +11,6 @@ import {
   LinearProgressInner,
   Elevation,
   TypographyDisplay,
-  TypographyBody,
   FormField,
   Textfield,
   TextfieldInput,
@@ -21,7 +20,7 @@ import {
   CheckboxBG,
   CheckboxLabel
 } from '../lib'
-import Example from '../templates/Example'
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class LinearProgressPage extends Component {
   constructor(props) {
@@ -464,39 +463,17 @@ export default class LinearProgressAccent extends Component {
     this.renderTable = this.renderTable.bind(this);
     this.handleViewCode = this.handleViewCode.bind(this);
     this.handleOptions = this.handleOptions.bind(this);
-    this.renderExapmle = this.renderExapmle.bind(this);
+    this.renderExample = this.renderExample.bind(this);
   }
 
   renderTable() {
     const {components} = this.state;
-    return components.map((item, index) => (<Elevation
-          zSpace="2"
-          key={`key-table-${index}`}
-        >
-          <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-          <table className="table-props">
-            <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {item.property.map((prop, index) => (
-              <tr key={`key-table-tr-${index}`}>
-                <td><code>{prop.name}</code></td>
-                <td><code>{prop.type}</code></td>
-                <td>{prop.defaultValue}</td>
-                <td>{prop.required}</td>
-                <td>{prop.description}</td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </Elevation>
+    return components.map(({name, property}, index) => (
+    <Table
+      key={`key-table-${index}`}
+    name={name}
+    property={property}
+    />
       )
     )
   }
@@ -517,7 +494,7 @@ export default class LinearProgressAccent extends Component {
     })
   }
 
-  renderExapmle() {
+  renderExample() {
     const {open, progress, buffer, accent, examples} = this.state;
 
     return examples.map(({name, source, determinate, isAccent, isBuffer, reverse}, index) => (
@@ -555,17 +532,7 @@ export default class LinearProgressAccent extends Component {
       <section
         className="content"
       >
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '360px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'flexFlow': 'row nowrap',
-            'height': '360px',
-          }}
+        <Demo
         >
 
           <LinearProgress
@@ -581,32 +548,19 @@ export default class LinearProgressAccent extends Component {
               <LinearProgressInner/>
             </LinearProgressBar>
           </LinearProgress>
-        </Elevation>
+        </Demo>
         {this.renderTable()}
-
-        <Elevation
-          zSpace="2"
-          style={{
-            'minHeight': '10em',
-            'display': 'flex',
-            'alignItems': 'center',
-            'flexDirection': 'column'
-          }}
-        >
-          <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-          <TypographyBody>
-            This component is based on the MDC Linear Progress, you can refer to its documentation <a
-            href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress"
-          >here</a>.
-          </TypographyBody>
-        </Elevation>
+        <OriginalDoc
+        name="Linear Progress"
+        href="mdc-linear-progress"
+        />
 
         <Elevation
           zSpace="2"
           className="demo-page-linear_progress "
         >
           <TypographyDisplay size="1">Linear Progress</TypographyDisplay>
-          {this.renderExapmle()}
+          {this.renderExample()}
           <Elevation
             style={{
               'display': 'flex',
@@ -667,19 +621,7 @@ export default class LinearProgressAccent extends Component {
             </FormField>
           </Elevation>
         </Elevation>
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '50px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'marginTop': '1em'
-          }}
-        >
-          github
-        </Elevation>
+        <Footer/>
       </section>
     )
   }

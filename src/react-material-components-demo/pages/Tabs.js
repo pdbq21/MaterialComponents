@@ -1,9 +1,6 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-/**
- * Created by ruslan on 15.06.17.
- */
 import React, {Component} from 'react'
 import {
   TabBar,
@@ -22,7 +19,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class TabsPage extends Component {
   constructor(props) {
@@ -574,34 +571,12 @@ export default class TabsExample extends Component {
 
   renderTable() {
     const {components} = this.state;
-    return components.map((item, index) => (<Elevation
-          zSpace="2"
+    return components.map(({name, property}, index) => (
+        <Table
           key={`key-table-${index}`}
-        >
-          <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-          <table className="table-props">
-            <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {item.property.map((prop, index) => (
-              <tr key={`key-table-tr-${index}`}>
-                <td><code>{prop.name}</code></td>
-                <td><code>{prop.type}</code></td>
-                <td>{prop.defaultValue}</td>
-                <td>{prop.required}</td>
-                <td>{prop.description}</td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </Elevation>
+          name={name}
+          property={property}
+        />
       )
     )
   }
@@ -612,25 +587,14 @@ export default class TabsExample extends Component {
       <section
         className="content"
       >
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '360px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'flexFlow': 'row nowrap',
-            'height': '360px',
-          }}
-        >
+        <Demo>
           <TabBar>
             <Tab ripple active>Item one</Tab>
             <Tab ripple>Item two</Tab>
             <Tab ripple>Three</Tab>
             <TabIndicator/>
           </TabBar>
-        </Elevation>
+        </Demo>
         {this.renderTable()}
         <OriginalDoc
           name="Tabs"

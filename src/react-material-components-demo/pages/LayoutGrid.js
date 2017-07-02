@@ -17,7 +17,7 @@ import {
   SelectItem,
 } from '../lib'
 
-import {Example, OriginalDoc, Footer} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class LayoutGridPage extends Component {
   constructor(props) {
@@ -386,34 +386,12 @@ export default class LayoutGridPage extends Component {
 
   renderTable() {
     const {components} = this.state;
-    return components.map((item, index) => (<Elevation
-          zSpace="2"
-          key={`key-table-${index}`}
-        >
-          <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-          <table className="table-props">
-            <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {item.property.map((prop, index) => (
-              <tr key={`key-table-tr-${index}`}>
-                <td><code>{prop.name}</code></td>
-                <td><code>{prop.type}</code></td>
-                <td>{prop.defaultValue}</td>
-                <td>{prop.required}</td>
-                <td>{prop.description}</td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </Elevation>
+    return components.map(({name, property}, index) => (
+    <Table
+      key={`key-table-${index}`}
+      name={name}
+      property={property}
+    />
       )
     )
   }
@@ -557,18 +535,7 @@ export default class LayoutGridPage extends Component {
       <section
         className="content"
       >
-        <Elevation
-          zSpace="2"
-          style={{
-            'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-            'minHeight': '360px',
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContent': 'center',
-            'flexFlow': 'row nowrap',
-            'height': '360px',
-          }}
-        >
+        <Demo>
           <LayoutGrid
             style={{
               'backgroundColor': '#DDDDDD',
@@ -607,7 +574,7 @@ export default class LayoutGridPage extends Component {
               />
             </LayoutGridInner>
           </LayoutGrid>
-        </Elevation>
+        </Demo>
         {this.renderTable()}
         <OriginalDoc
           name="Layout Grid"

@@ -9,9 +9,8 @@ import {
     Elevation,
     TypographyHeadline,
     TypographyDisplay,
-    TypographyBody,
 } from '../lib'
-
+import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
 
 export default class SwitchPage extends Component {
     constructor(props) {
@@ -109,84 +108,32 @@ class SwitchDemo extends Component {
         this.renderTable = this.renderTable.bind(this);
     }
 
-    renderTable() {
-        const {components} = this.state;
-        return components.map((item, index) => (<Elevation
-                    zSpace="2"
-                    key={`key-table-${index}`}
-                >
-                    <TypographyDisplay size="1">{item.name}</TypographyDisplay>
-                    <table className="table-props">
-                        <thead>
-                        <tr>
-                            <th>Property</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Required</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {item.property.map((prop, index) => (
-                            <tr key={`key-table-tr-${index}`}>
-                                <td><code>{prop.name}</code></td>
-                                <td><code>{prop.type}</code></td>
-                                <td>{prop.defaultValue}</td>
-                                <td>{prop.required}</td>
-                                <td>{prop.description}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </Elevation>
-            )
-        )
-    }
+  renderTable() {
+    const {components} = this.state;
+    return components.map(({name, property}, index) => (
+        <Table
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
+      )
+    )
+  }
 
     render() {
 const { isSwitch } = this.state;
         return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '360px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'flexFlow': 'row nowrap',
-                        'height': '360px',
-                    }}
-                >
+            <section className="content">
+                <Demo>
                     <Switch>
                         <SwitchInput />
                     </Switch>
-                </Elevation>
+                </Demo>
                 {this.renderTable()}
-
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'minHeight': '10em',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'flexDirection': 'column'
-                    }}
-                >
-                    <TypographyDisplay size="1">Original documentation</TypographyDisplay>
-                    <TypographyBody>
-                        This component is based on the MDC Button, you can refer to its documentation <a
-                        href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
-                    >here</a>.
-                    </TypographyBody>
-                </Elevation>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Demo code</TypographyDisplay>
-
-                </Elevation>
+              <OriginalDoc
+                name="Switch"
+                href="mdc-switch"
+              />
                 <Elevation
                     zSpace="2"
                     className="demo-page-switch"
@@ -207,19 +154,7 @@ const { isSwitch } = this.state;
                     </Switch>
                     <SwitchLabel>disabled</SwitchLabel>
                 </Elevation>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'backgroundColor': 'rgba(0, 0, 0, 0.05)',
-                        'minHeight': '50px',
-                        'display': 'flex',
-                        'alignItems': 'center',
-                        'justifyContent': 'center',
-                        'marginTop': '1em'
-                    }}
-                >
-                    github
-                </Elevation>
+              <Footer/>
             </section>
         )
     }

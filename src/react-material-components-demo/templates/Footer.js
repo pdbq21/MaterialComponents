@@ -24,7 +24,7 @@ export default class Footer extends Component {
         }}
         {...otherProps}
       >
-        github
+        footer
       </Elevation>
     )
   }

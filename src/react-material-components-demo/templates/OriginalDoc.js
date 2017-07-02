@@ -14,6 +14,7 @@ export default class OriginalDoc extends Component {
       name,
       url,
       href,
+      text,
       ...otherProps
     } = this.props;
     return (
@@ -29,7 +30,7 @@ export default class OriginalDoc extends Component {
       >
         <TypographyDisplay size="1">Original documentation</TypographyDisplay>
         <TypographyBody>
-          This component is based on the MDC {name}, you can refer to its documentation <a
+          {(text)? text : `This component is based on the MDC ${name}, you can refer to its documentation`} <a
           href={
             (url) ? url :
               `https://github.com/material-components/material-components-web/tree/master/packages/${href}`
