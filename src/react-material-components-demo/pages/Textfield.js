@@ -16,37 +16,22 @@ import {
   CheckboxLabel,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table, code, Todo} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class TextfieldPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todo: [
-        {
-          name: 'Add example for .box',
-          completed: true
-        },
-        {
-          name: 'Add options function',
-          completed: false
-        },
-        {
-          name: 'Add code for all examples',
-          completed: false
-        },
-        {
-          name: 'Add new Component - TextfieldLine',
-          completed: true
-        },
-      ],
       options: {
         disabled: false,
         dense: false,
         required: false,
         helper: false,
         persistent: false,
-        validation: false
+        validation: false,
+
+        disabledBox: false,
+        denseBox: false
       },
       components: [
         {
@@ -164,6 +149,18 @@ export default class TextfieldPage extends Component {
             },
           ]
         },
+        {
+          name: 'TextfieldLine',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'p',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
       ],
     };
     this.renderTable = this.renderTable.bind(this);
@@ -200,7 +197,9 @@ export default class TextfieldPage extends Component {
         required,
         helper,
         persistent,
-        validation
+        validation,
+        disabledBox,
+        denseBox
       }
     } = this.state;
     return (
@@ -222,18 +221,22 @@ export default class TextfieldPage extends Component {
         >
           <TypographyDisplay
             size="1"
-          >Textfield with JS</TypographyDisplay>
+          >Textfield</TypographyDisplay>
 
           <Example
             title="Full Functionality JS Component"
             code={code.textfield.source1}
           >
-            <Textfield upgraded>
+            <Textfield
+              upgraded
+              disabled={disabled}
+              dense={dense}
+            >
               <TextfieldInput
                 id="demo-full-textfield"
                 name="email"
                 aria-controls="my-textfield-helptext"
-                required
+                required={required}
               />
               <TextfieldLabel
                 htmlFor="demo-full-textfield"
@@ -242,9 +245,12 @@ export default class TextfieldPage extends Component {
               </TextfieldLabel>
             </Textfield>
             <TextfieldHelptext
+              style={{
+                'display': (helper) ? 'block' : 'none'
+              }}
               aria-hidden="true"
-              persistent
-              validation
+              persistent={persistent}
+              validation={validation}
             >
               Help Text (possibly validation message)
             </TextfieldHelptext>
@@ -313,8 +319,10 @@ export default class TextfieldPage extends Component {
               <FormField>
                 <Checkbox
                   ripple
+                  disabled={!helper}
                 >
                   <CheckboxInput
+                    disabled={!helper}
                     checked={persistent}
                     onChange={({target}) => this.handleOptions('persistent', target)}
                   />
@@ -327,9 +335,11 @@ export default class TextfieldPage extends Component {
               <FormField>
                 <Checkbox
                   ripple
+                  disabled={!helper}
                 >
                   <CheckboxInput
                     checked={validation}
+                    disabled={!helper}
                     onChange={({target}) => this.handleOptions('validation', target)}
                   />
                   <CheckboxBG/>
@@ -342,17 +352,56 @@ export default class TextfieldPage extends Component {
           </Example>
           <Example
             title="Text Field Boxes"
-            code=""
+            code={code.textfield.source2}
           >
-            <Textfield box>
+            <Textfield
+              box
+              disabled={disabledBox}
+              dense={denseBox}
+            >
               <TextfieldInput type="text" id="tf-box"/>
               <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
               <TextfieldLine />
             </Textfield>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'column nowrap',
+              }}
+            >
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={disabledBox}
+                    onChange={({target}) => this.handleOptions('disabledBox', target)}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Disabled
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={denseBox}
+                    onChange={({target}) => this.handleOptions('denseBox', target)}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Dense
+                </CheckboxLabel>
+              </FormField>
+            </Elevation>
           </Example>
           <Example
             title="Label float above"
-            code=""
+            code={code.textfield.source3}
           >
             <Textfield>
               <TextfieldInput id="demo-label-above" type="text"/>
@@ -361,7 +410,7 @@ export default class TextfieldPage extends Component {
           </Example>
           <Example
             title="Multi-line Textfields"
-            code=""
+            code={code.textfield.source4}
           >
             <Textfield
               multiline
@@ -378,7 +427,7 @@ export default class TextfieldPage extends Component {
           </Example>
           <Example
             title="Password field with validation"
-            code=""
+            code={code.textfield.source5}
           >
             <Textfield
               upgraded
@@ -400,14 +449,9 @@ export default class TextfieldPage extends Component {
               Must be at least 8 characters long
             </TextfieldHelptext>
           </Example>
-
-
-          <TypographyDisplay
-            size="1"
-          >Textfield Only CSS</TypographyDisplay>
           <Example
             title="Textfields - CSS Only"
-            code=""
+            code={code.textfield.source6}
           >
             <FormField alignEnd>
               <Textfield cssOnly>
@@ -421,7 +465,7 @@ export default class TextfieldPage extends Component {
           </Example>
           <Example
             title="Multi-line Textfields - CSS Only"
-            code=""
+            code={code.textfield.source7}
           >
             <label htmlFor="css-only-multiline">About you:</label>
             <Textfield
@@ -438,8 +482,8 @@ export default class TextfieldPage extends Component {
             </Textfield>
           </Example>
           <Example
-            title="Full-Width Textfields"
-            code=""
+            title="Full-Width Textfields - CSS Only"
+            code={code.textfield.source8}
           >
             <Textfield upgraded fullwidth cssOnly>
               <TextfieldInput
@@ -458,21 +502,16 @@ export default class TextfieldPage extends Component {
               />
             </Textfield>
           </Example>
-
           <Example
             title="CSS-only text field boxes"
-            code=""
+            code={code.textfield.source9}
           >
             <label htmlFor="css-only-textfield-box">Your name:</label>
             <Textfield box cssOnly>
               <TextfieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
             </Textfield>
           </Example>
-
         </Elevation>
-        <Todo
-          list={todo}
-        />
         <Footer/>
       </section>
     )

@@ -476,45 +476,67 @@ export default class ThemeExample extends Component {
   'textfield': {
     source1: `import React, {Component} from 'react'
 import {
-  Typography,
-  TypographyDisplay,
-  TypographyHeadline,
-  TypographyTitle,
-  TypographySubheading,
-  TypographyBody,
-  TypographyCaption
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  Elevation,
+  FormField,
+  Checkbox,
+  CheckboxInput,
+  CheckboxBG,
+  CheckboxLabel,
 } from '../lib'
 
-export default class TypographyExample extends Component {
-constructor(props) {
+export default class TextfieldPage extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      valueInput: 0,
-    }
+      options: {
+        disabled: false,
+        dense: false,
+        required: false,
+        helper: false,
+        persistent: false,
+        validation: false
+      },
+    };
     this.handleOptions = this.handleOptions.bind(this);
   }
-    handleOptions(option, value) {
-    const newValue = (value) ? value : !this.state.options[option];
+  
+
+  handleOptions(name, value) {
     this.setState({
       options: {
         ...this.state.options,
-        [option]: newValue
+        [name]: value.checked
       }
     })
   }
 
   render() {
     const {
-      valueInput,
+      options: {
+        disabled,
+        dense,
+        required,
+        helper,
+        persistent,
+        validation
+      }
     } = this.state;
     return (
-      <div>
-      <Textfield upgraded>
+      <section >
+            <Textfield
+              upgraded
+              disabled={disabled}
+              dense={dense}
+            >
               <TextfieldInput
                 id="demo-full-textfield"
                 name="email"
                 aria-controls="my-textfield-helptext"
-                required
+                required={required}
               />
               <TextfieldLabel
                 htmlFor="demo-full-textfield"
@@ -523,9 +545,12 @@ constructor(props) {
               </TextfieldLabel>
             </Textfield>
             <TextfieldHelptext
+              style={{
+                'display': (helper)? 'block' : 'none'
+              }}
               aria-hidden="true"
-              persistent
-              validation
+              persistent={persistent}
+              validation={validation}
             >
               Help Text (possibly validation message)
             </TextfieldHelptext>
@@ -540,8 +565,8 @@ constructor(props) {
                   ripple
                 >
                   <CheckboxInput
-                    checked={isDisabled}
-                    onChange={this.handleChangeDisabled}
+                    checked={disabled}
+                    onChange={({target}) => this.handleOptions('disabled', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -554,8 +579,8 @@ constructor(props) {
                   ripple
                 >
                   <CheckboxInput
-                    checked={isDense}
-                    onChange={this.handleChangeDense}
+                    checked={dense}
+                    onChange={({target}) => this.handleOptions('dense', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -568,8 +593,8 @@ constructor(props) {
                   ripple
                 >
                   <CheckboxInput
-                    checked={isRequired}
-                    onChange={this.handleChangeRequired}
+                    checked={required}
+                    onChange={({target}) => this.handleOptions('required', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -582,8 +607,8 @@ constructor(props) {
                   ripple
                 >
                   <CheckboxInput
-                    checked={isHelper}
-                    onChange={this.handleChangeHelper}
+                    checked={helper}
+                    onChange={({target}) => this.handleOptions('helper', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -594,10 +619,12 @@ constructor(props) {
               <FormField>
                 <Checkbox
                   ripple
+                  disabled={!helper}
                 >
                   <CheckboxInput
-                    checked={isHelperPersistent}
-                    onChange={this.handleChangeHelperPersistent}
+                    disabled={!helper}
+                    checked={persistent}
+                    onChange={({target}) => this.handleOptions('persistent', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -608,10 +635,12 @@ constructor(props) {
               <FormField>
                 <Checkbox
                   ripple
+                  disabled={!helper}
                 >
                   <CheckboxInput
-                    checked={isHelperValidation}
-                    onChange={this.handleChangeHelperValidation}
+                    checked={validation}
+                    disabled={!helper}
+                    onChange={({target}) => this.handleOptions('validation', target)}
                   />
                   <CheckboxBG/>
                 </Checkbox>
@@ -620,16 +649,306 @@ constructor(props) {
                 </CheckboxLabel>
               </FormField>
             </Elevation>
-      </div>
-    );
+      </section>
+    )
   }
 }`,
-    source2: ``,
-    source3: ``,
-    source4: ``,
-    source5: ``,
-    source6: ``,
-    source7: ``,
+    source2: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldLine,
+  Elevation,
+  FormField,
+  Checkbox,
+  CheckboxInput,
+  CheckboxBG,
+  CheckboxLabel,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: {
+        disabledBox: false,
+        denseBox: false
+      },
+    };
+    this.handleOptions = this.handleOptions.bind(this);
+  }
+
+
+  handleOptions(name, value) {
+    this.setState({
+      options: {
+        ...this.state.options,
+        [name]: value.checked
+      }
+    })
+  }
+
+  render() {
+    const {
+      options: {
+        disabledBox,
+        denseBox
+      }
+    } = this.state;
+    return (
+      <section>
+        <Textfield
+          box
+          disabled={disabledBox}
+          dense={denseBox}
+        >
+          <TextfieldInput type="text" id="tf-box"/>
+          <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
+          <TextfieldLine />
+        </Textfield>
+        <Elevation
+          style={{
+            'display': 'flex',
+            'flexFlow': 'column nowrap',
+          }}
+        >
+          <FormField>
+            <Checkbox
+              ripple
+            >
+              <CheckboxInput
+                checked={disabledBox}
+                onChange={({target}) => this.handleOptions('disabledBox', target)}
+              />
+              <CheckboxBG/>
+            </Checkbox>
+            <CheckboxLabel>
+              Disabled
+            </CheckboxLabel>
+          </FormField>
+          <FormField>
+            <Checkbox
+              ripple
+            >
+              <CheckboxInput
+                checked={denseBox}
+                onChange={({target}) => this.handleOptions('denseBox', target)}
+              />
+              <CheckboxBG/>
+            </Checkbox>
+            <CheckboxLabel>
+              Dense
+            </CheckboxLabel>
+          </FormField>
+        </Elevation>
+      </section>
+    )
+  }
+}`,
+    source3: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Textfield>
+              <TextfieldInput id="demo-label-above" type="text"/>
+              <TextfieldLabel htmlFor="demo-label-above">Label float above</TextfieldLabel>
+            </Textfield>
+      </section>
+    )
+  }
+}`,
+    source4: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Textfield
+              multiline
+              upgraded
+            >
+              <TextfieldInput
+                elementType="textarea"
+                rows="8"
+                cols="40"
+                id="multi-line-demo"
+              />
+              <TextfieldLabel htmlFor="multi-line-demo">Multi-line Label</TextfieldLabel>
+            </Textfield>
+      </section>
+    )
+  }
+}`,
+    source5: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Textfield
+              upgraded
+            >
+              <TextfieldInput
+                type="password"
+                id="password-validation-demo"
+                aria-controls="pw-validation-msg"
+                required
+                pattern=".{8,}"
+              />
+              <TextfieldLabel htmlFor="password-validation-demo">Choose password</TextfieldLabel>
+            </Textfield>
+            <TextfieldHelptext
+              persistent
+              validation
+              id="pw-validation-msg"
+            >
+              Must be at least 8 characters long
+            </TextfieldHelptext>
+      </section>
+    )
+  }
+}`,
+    source6: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <FormField alignEnd>
+              <Textfield cssOnly>
+                <TextfieldInput id="textfield-only-css" placeholder="Hint text"/>
+              </Textfield>
+              <label
+                style={{'alignSelf': 'flex-start'}}
+                htmlFor="textfield-only-css"
+              >Hint text: </label>
+            </FormField>
+      </section>
+    )
+  }
+}`,
+    source7: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <label htmlFor="css-only-multiline">About you:</label>
+            <Textfield
+              multiline
+              cssOnly
+            >
+              <TextfieldInput
+                elementType="textarea"
+                id="css-only-multiline"
+                rows="8"
+                cols="40"
+                placeholder="Tell the world something about yourself!"
+              />
+            </Textfield>
+      </section>
+    )
+  }
+}`,
+    source8: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Textfield upgraded fullwidth cssOnly>
+              <TextfieldInput
+                type="text"
+                placeholder="Subject"
+                aria-label="Subject"
+              />
+            </Textfield>
+            <Textfield multiline upgraded fullwidth cssOnly>
+              <TextfieldInput
+                elementType="textarea"
+                rows="8"
+                cols="40"
+                placeholder="Message"
+                aria-label="Message"
+              />
+            </Textfield>
+      </section>
+    )
+  }
+}`,
+    source9: `import React, {Component} from 'react'
+import {
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
+  TextfieldHelptext,
+  FormField,
+} from '../lib'
+
+export default class TextfieldPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <label htmlFor="css-only-textfield-box">Your name:</label>
+            <Textfield box cssOnly>
+              <TextfieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
+            </Textfield>
+      </section>
+    )
+  }
+}`,
 
   },
   'tabs': {
