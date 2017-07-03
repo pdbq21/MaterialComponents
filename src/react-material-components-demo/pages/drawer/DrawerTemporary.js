@@ -3,7 +3,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../../lib/index'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../../templates'
 export default class DrawerTemporaryPage extends Component {
   constructor(props) {
     super(props);
@@ -135,202 +135,6 @@ export default class DrawerTemporaryPage extends Component {
           ]
         },
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-    DrawerTemporary,
-    TemporaryContent,
-    DrawerListItemDetail,
-    TemporaryDrawer,
-    TemporaryListItem,
-    TemporaryToolbarSpacer,
-    Toolbar,
-    ToolbarRow,
-    ToolbarSection,
-    ToolbarTitle,
-    ToolbarMain,
-    Icon
-} from '../../lib/index'
-
-
-export default class TemporaryToolbarSpacerPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false
-        };
-
-        this.handle = this.handle.bind(this);
-        this.handleOpen = this.handleOpen.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-
-    setOpen(open) {
-        this.setState({open});
-    }
-
-    handle() {
-        this.setOpen(true);
-    }
-
-    handleOpen() {
-        this.setOpen(true);
-    }
-
-    handleClose() {
-        this.setOpen(false);
-    }
-
-    render() {
-        const {open} = this.state;
-        return (
-            <section>
-                <Toolbar>
-                    <ToolbarRow>
-                        <ToolbarSection start>
-                            <Icon
-                                onClick={this.handle}
-                            >menu</Icon>
-                            <ToolbarTitle>Temporary Drawer</ToolbarTitle>
-                        </ToolbarSection>
-                    </ToolbarRow>
-                </Toolbar>
-                <DrawerTemporary
-                    open={open}
-                    onOpen={this.handleOpen}
-                    onClose={this.handleClose}
-                >
-                    <TemporaryDrawer>
-                        <TemporaryToolbarSpacer/>
-                        <TemporaryContent>
-                            <TemporaryListItem selected>
-                                <DrawerListItemDetail start>
-                                    inbox
-                                </DrawerListItemDetail>
-                                Inbox
-                            </TemporaryListItem>
-                            <TemporaryListItem >
-                                <DrawerListItemDetail start>
-                                    star
-                                </DrawerListItemDetail>
-                                Star
-                            </TemporaryListItem>
-                        </TemporaryContent>
-                    </TemporaryDrawer>
-                </DrawerTemporary>
-                <ToolbarMain>
-                    <h2>Temporary Drawer with Toolbar Spacer</h2>
-                    <p>
-                        Click the menu icon above to open.
-                    </p>
-                </ToolbarMain>
-            </section>
-        )
-    }
-}`,
-        source2: `import React, {Component} from 'react'
-import {
-    DrawerTemporary,
-    TemporaryContent,
-    DrawerListItemDetail,
-    TemporaryDrawer,
-    TemporaryHeader,
-    TemporaryHeaderContent,
-    TemporaryListItem,
-    Toolbar,
-    ToolbarRow,
-    ToolbarSection,
-    ToolbarTitle,
-    ToolbarMain,
-    Icon,
-    Theme
-} from '../../lib/index'
-
-
-export default class TemporaryHeaderPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-        };
-
-        this.handle = this.handle.bind(this);
-        this.handleOpen = this.handleOpen.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-
-    setOpen(open) {
-        this.setState({open});
-    }
-
-    handle() {
-        this.setOpen(true);
-    }
-
-    handleOpen() {
-        this.setOpen(true);
-    }
-
-    handleClose() {
-        this.setOpen(false);
-    }
-
-    render() {
-        const {open} = this.state;
-        return (
-            <section>
-                <Toolbar>
-                    <ToolbarRow>
-                        <ToolbarSection start>
-                            <Icon
-                                onClick={this.handle}
-                            >menu</Icon>
-                            <ToolbarTitle>Temporary Drawer</ToolbarTitle>
-                        </ToolbarSection>
-                    </ToolbarRow>
-                </Toolbar>
-                <DrawerTemporary
-                    open={open}
-                    onOpen={this.handleOpen}
-                    onClose={this.handleClose}
-                >
-                    <TemporaryDrawer>
-                        <Theme
-                            primaryBg
-                        >
-                            <TemporaryHeader>
-                                <TemporaryHeaderContent>
-                                    Header here
-                                </TemporaryHeaderContent>
-                            </TemporaryHeader>
-                        </Theme>
-                        <TemporaryContent>
-                            <TemporaryListItem selected>
-                                <DrawerListItemDetail start>
-                                    inbox
-                                </DrawerListItemDetail>
-                                Inbox
-                            </TemporaryListItem>
-                            <TemporaryListItem >
-                                <DrawerListItemDetail start>
-                                    star
-                                </DrawerListItemDetail>
-                                Star
-                            </TemporaryListItem>
-                        </TemporaryContent>
-                    </TemporaryDrawer>
-                </DrawerTemporary>
-                <ToolbarMain>
-                    <h2>Temporary Drawer with Header</h2>
-                    <p>
-                        Click the menu icon above to open.
-                    </p>
-                </ToolbarMain>
-            </section>
-        )
-    }
-}`
-      }
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -348,7 +152,6 @@ export default class TemporaryHeaderPage extends Component {
   }
 
   render() {
-    const { used } = this.state;
     return (
       <section
         className="content"
@@ -369,7 +172,7 @@ export default class TemporaryHeaderPage extends Component {
 
           <Example
             title="Temporary with ToolbarSpacer"
-            code={used.source1}
+            code={code.drawer.temporary.source1}
           >
             <iframe
               src="/drawer/temporary_toolbar_spacer"
@@ -380,7 +183,7 @@ export default class TemporaryHeaderPage extends Component {
           </Example>
           <Example
             title="Temporary with Header"
-            code={used.source2}
+            code={code.drawer.temporary.source2}
           >
             <iframe
               src="/drawer/temporary_header"

@@ -17,7 +17,7 @@ import {
   SelectItem,
 } from '../lib'
 
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class LayoutGridPage extends Component {
   constructor(props) {
@@ -368,15 +368,6 @@ export default class LayoutGridPage extends Component {
           ]
         }
       ],
-      used: {
-        source1: ``,
-        source2: ``,
-        source3: ``,
-        source4: ``,
-        source5: ``,
-        source6: ``,
-        source7: ``,
-      }
     };
     this.renderTable = this.renderTable.bind(this);
     this.renderExapmle = this.renderExapmle.bind(this);
@@ -387,11 +378,11 @@ export default class LayoutGridPage extends Component {
   renderTable() {
     const {components} = this.state;
     return components.map(({name, property}, index) => (
-    <Table
-      key={`key-table-${index}`}
-      name={name}
-      property={property}
-    />
+        <Table
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
       )
     )
   }
@@ -411,7 +402,7 @@ export default class LayoutGridPage extends Component {
       <Example
         key={`key-demo_example-${index}`}
         title={name}
-        code={this.state.used[source]}
+        code={code.layoutGrid[source]}
       >
         <LayoutGrid
           style={{

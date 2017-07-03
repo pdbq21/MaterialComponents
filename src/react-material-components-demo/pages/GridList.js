@@ -16,7 +16,7 @@ import {
   TypographyHeadline,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class GridListPage extends Component {
   constructor(props) {
@@ -167,89 +167,6 @@ export default class GridListPage extends Component {
           ]
         },
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    GridList,
-    GridListTiles,
-    GridListTile,
-    GridListTilePrimary,
-    GridListTileContent,
-    GridListTileSecondary,
-    GridListTileTitle,
-    Elevation,
-    TypographyDisplay,
-    TypographyHeadline,
-} from '../lib'
-
-class ButtonDemo extends Component {
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Grid List</TypographyDisplay>
-                    <TypographyHeadline>
-                        Grid List (Default): tile aspect ratio 1x1 with oneline footer caption
-                    </TypographyHeadline>
-                    <GridList>
-                        <GridListTiles>
-                            <GridListTile>
-                                <GridListTilePrimary>
-                                    <GridListTileContent
-                                        src="https://material-components-web.appspot.com/images/1-1.jpg"
-                                    />
-                                </GridListTilePrimary>
-                                <GridListTileSecondary>
-                                    <GridListTileTitle>
-                                        Single Very Long Grid Title Line
-                                    </GridListTileTitle>
-                                </GridListTileSecondary>
-                            </GridListTile>
-                            <GridListTile>
-                            <GridListTilePrimary>
-                                <GridListTileContent
-                                    src="https://material-components-web.appspot.com/images/1-1.jpg"
-                                />
-                            </GridListTilePrimary>
-                            <GridListTileSecondary>
-                                <GridListTileTitle>
-                                    Single Very Long Grid Title Line
-                                </GridListTileTitle>
-                            </GridListTileSecondary>
-                        </GridListTile>
-                        <GridListTile>
-                            <GridListTilePrimary>
-                                <GridListTileContent
-                                    src="https://material-components-web.appspot.com/images/1-1.jpg"
-                                />
-                            </GridListTilePrimary>
-                            <GridListTileSecondary>
-                                <GridListTileTitle>
-                                    Single Very Long Grid Title Line
-                                </GridListTileTitle>
-                            </GridListTileSecondary>
-                        </GridListTile>
-                        <GridListTile>
-                            <GridListTilePrimary>
-                                <GridListTileContent
-                                    src="https://material-components-web.appspot.com/images/1-1.jpg"
-                                />
-                            </GridListTilePrimary>
-                            <GridListTileSecondary>
-                                <GridListTileTitle>
-                                    Single Very Long Grid Title Line
-                                </GridListTileTitle>
-                            </GridListTileSecondary>
-                        </GridListTile>
-                        </GridListTiles>
-                    </GridList>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
     this.renderDemo = this.renderDemo.bind(this);
@@ -314,14 +231,101 @@ class ButtonDemo extends Component {
           <TypographyDisplay size="1">Grid List</TypographyDisplay>
           <Example
           title=""
-          code=""
+          code={code.gridList.source1}
           >
+            <TypographyHeadline>Grid List (Default): tile aspect ratio 1x1 with oneline footer
+              caption</TypographyHeadline>
+            <GridList>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                  <GridListTileSecondary>
+                    <GridListTileTitle>
+                      Single Very Long Grid Title Line
+                    </GridListTileTitle>
+                  </GridListTileSecondary>
+                </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
           </Example>
-          <TypographyHeadline>Grid List (Default): tile aspect ratio 1x1 with oneline footer
-            caption</TypographyHeadline>
-          <GridList>
-            <GridListTiles>
-              <GridListTile>
+          <Example
+          title=""
+          code={code.gridList.source2}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with 1px gutter</TypographyHeadline>
+            <GridList gutter>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                  <GridListTileSecondary>
+                    <GridListTileTitle>
+                      Single Very Long Grid Title Line
+                    </GridListTileTitle>
+                  </GridListTileSecondary>
+                </GridListTile><GridListTile>
                 <GridListTilePrimary>
                   <GridListTileContent
                     src="https://material-components-web.appspot.com/images/1-1.jpg"
@@ -333,69 +337,6 @@ class ButtonDemo extends Component {
                   </GridListTileTitle>
                 </GridListTileSecondary>
               </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile>
-            </GridListTiles>
-          </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with 1px gutter</TypographyHeadline>
-          <GridList gutter>
-            <GridListTiles>
-              <GridListTile>
                 <GridListTilePrimary>
                   <GridListTileContent
                     src="https://material-components-web.appspot.com/images/1-1.jpg"
@@ -407,110 +348,94 @@ class ButtonDemo extends Component {
                   </GridListTileTitle>
                 </GridListTileSecondary>
               </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-              <GridListTileSecondary>
-                <GridListTileTitle>
-                  Single Very Long Grid Title Line
-                </GridListTileTitle>
-              </GridListTileSecondary>
-            </GridListTile>
-            </GridListTiles>
-          </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 image only</TypographyHeadline>
-          <GridList>
-            <GridListTiles>
-              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source3}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 image only</TypographyHeadline>
+            <GridList>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                </GridListTile><GridListTile>
                 <GridListTilePrimary>
                   <GridListTileContent
                     src="https://material-components-web.appspot.com/images/1-1.jpg"
                   />
                 </GridListTilePrimary>
               </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-            </GridListTile><GridListTile>
-              <GridListTilePrimary>
-                <GridListTileContent
-                  src="https://material-components-web.appspot.com/images/1-1.jpg"
-                />
-              </GridListTilePrimary>
-            </GridListTile>
-            </GridListTiles>
-          </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline header
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source4}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline header
             caption</TypographyHeadline>
           <GridList header>
             <GridListTiles>
@@ -583,9 +508,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source5}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer
             caption</TypographyHeadline>
           <GridList twoline>
             <GridListTiles>
@@ -676,9 +604,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at start
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source6}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at start
             of the
             caption</TypographyHeadline>
           <GridList alignStart>
@@ -770,9 +701,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at start
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source7}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at start
             of the
             caption</TypographyHeadline>
           <GridList twoline alignStart>
@@ -882,9 +816,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at end of
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source8}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at end of
             the caption</TypographyHeadline>
           <GridList alignEnd>
             <GridListTiles>
@@ -975,9 +912,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at end of
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source9}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at end of
             the caption</TypographyHeadline>
           <GridList twoline alignEnd>
             <GridListTiles>
@@ -1086,9 +1026,12 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
-
-
-          <TypographyHeadline>Grid List: tile aspect ratio 16x9 with oneline footer caption (Support: 16:9,
+          </Example>
+          <Example
+          title=""
+          code={code.gridList.source10}
+          >
+            <TypographyHeadline>Grid List: tile aspect ratio 16x9 with oneline footer caption (Support: 16:9,
             4:3, 3:4, 2:3, 3:2
             as well)</TypographyHeadline>
           <GridList aspect="16x9">
@@ -1157,6 +1100,7 @@ class ButtonDemo extends Component {
             </GridListTile>
             </GridListTiles>
           </GridList>
+          </Example>
 
         </Elevation>
         <Footer/>

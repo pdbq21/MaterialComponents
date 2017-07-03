@@ -25,7 +25,7 @@ export default class TextfieldPage extends Component {
       todo: [
         {
           name: 'Add example for .box',
-          completed: false
+          completed: true
         },
         {
           name: 'Add options function',
@@ -181,7 +181,8 @@ export default class TextfieldPage extends Component {
       )
     )
   }
-  handleOptions(name, value){
+
+  handleOptions(name, value) {
     this.setState({
       options: {
         ...this.state.options,
@@ -189,6 +190,7 @@ export default class TextfieldPage extends Component {
       }
     })
   }
+
   render() {
     const {
       todo,
@@ -223,8 +225,8 @@ export default class TextfieldPage extends Component {
           >Textfield with JS</TypographyDisplay>
 
           <Example
-          title="Full Functionality JS Component"
-          code={code.textfield.source1}
+            title="Full Functionality JS Component"
+            code={code.textfield.source1}
           >
             <Textfield upgraded>
               <TextfieldInput
@@ -447,11 +449,29 @@ export default class TextfieldPage extends Component {
               />
             </Textfield>
           </Example>
-
+          <Example
+            title="Text Field Boxes"
+            code=""
+          >
+            <Textfield box>
+              <TextfieldInput type="text" id="tf-box"/>
+              <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
+              <TextfieldLine />
+            </Textfield>
+          </Example>
+          <Example
+            title="CSS-only text field boxes"
+            code=""
+          >
+            <label htmlFor="css-only-textfield-box">Your name:</label>
+            <Textfield box>
+              <TextfieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
+            </Textfield>
+          </Example>
 
         </Elevation>
         <Todo
-        list={todo}
+          list={todo}
         />
         <Footer/>
       </section>

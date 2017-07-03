@@ -11,10 +11,9 @@ import {
   HintList,
   HintTags,
   Elevation,
-  TypographyHeadline,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class HintListPage extends Component {
   constructor(props) {
@@ -135,7 +134,6 @@ export default class HintListPage extends Component {
           ]
         },
       ],
-      used: ``
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -190,76 +188,79 @@ export default class HintListPage extends Component {
         >
           <TypographyDisplay size="1">Hint List</TypographyDisplay>
           <Example
-            title=""
-            code=""
+            title="Hint List"
+            code={code.hintList.source1}
           >
+            <Hint
+              //url=""
+              list={hintList}
+            >
+              <HintTextfield
+                style={{
+                  'width': '80%',
+                  'marginTop': 0
+                }}
+              >
+                <HintInput
+                  style={{
+                    'width': '100%'
+                  }}
+                />
+                <HintLabel>Hint Label</HintLabel>
+              </HintTextfield>
+              <HintElevation
+                style={{
+                  'position': 'absolute',
+                  'backgroundColor': 'white',
+                  'zIndex': 1
+                }}
+              >
+                <HintList/>
+              </HintElevation>
+            </Hint>
           </Example>
-          <TypographyHeadline size="1">Hint List</TypographyHeadline>
-          <Hint
-            //url=""
-            list={hintList}
+          <Example
+            title="Hint List with Multiselect"
+            code={code.hintList.source2}
           >
-            <HintTextfield
-              style={{
-                'width': '80%',
-                'marginTop': 0
-              }}
+            <Hint
+              list={hintList}
+              multiselect
             >
-              <HintInput
+              <HintTags
+                dense
                 style={{
-                  'width': '100%'
+                  'display': 'flex',
+                  'flexDirection': 'row',
+                  'padding': 0,
+                  'color': 'white',
+                  'flexWrap': 'wrap'
                 }}
               />
-              <HintLabel>Hint Label</HintLabel>
-            </HintTextfield>
-            <HintElevation
-              style={{
-                'position': 'absolute',
-                'backgroundColor': 'white',
-                'zIndex': 1
-              }}
-            >
-              <HintList/>
-            </HintElevation>
-          </Hint>
-          <TypographyHeadline size="1">Hint List with Multiselect</TypographyHeadline>
-          <Hint
-            list={hintList}
-            multiselect
-          >
-            <HintTags
-              dense
-              style={{
-                'display': 'flex',
-                'flexDirection': 'row',
-                'padding': 0,
-                'color': 'white',
-                'flexWrap': 'wrap'
-              }}
-            />
-            <HintTextfield
-              style={{
-                'width': '80%',
-                'marginTop': 0
-              }}
-            >
-              <HintInput
+              <HintTextfield
                 style={{
-                  'width': '100%'
+                  'width': '80%',
+                  'marginTop': 0
                 }}
-              />
-              <HintLabel>Hint Label</HintLabel>
-            </HintTextfield>
-            <HintElevation
-              style={{
-                'position': 'absolute',
-                'backgroundColor': 'white',
-                'zIndex': 1
-              }}
-            >
-              <HintList/>
-            </HintElevation>
-          </Hint>
+              >
+                <HintInput
+                  style={{
+                    'width': '100%'
+                  }}
+                />
+                <HintLabel>Hint Label</HintLabel>
+              </HintTextfield>
+              <HintElevation
+                style={{
+                  'position': 'absolute',
+                  'backgroundColor': 'white',
+                  'zIndex': 1
+                }}
+              >
+                <HintList/>
+              </HintElevation>
+            </Hint>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

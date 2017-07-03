@@ -3635,7 +3635,229 @@ export default class LinearProgressAccent extends Component {
 }`,
   },
   'layoutGrid': {
-    source1: ``,
+    source1: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+  <LayoutGrid>
+            <LayoutGridInner>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+            </LayoutGridInner>
+          </LayoutGrid>
+ </div>
+ );
+ }
+ }`,
+    source2: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <LayoutGrid>
+            <LayoutGridInner>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>1</span>
+              </LayoutGridCell>
+            </LayoutGridInner>
+          </LayoutGrid>
+ </div>
+ );
+ }
+ }`,
+    source3: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <LayoutGrid>
+                        <LayoutGridCell columns="6">6</LayoutGridCell>
+                        <LayoutGridCell columns="4">4</LayoutGridCell>
+                        <LayoutGridCell columns="2">2</LayoutGridCell>
+                    </LayoutGrid>
+ </div>
+ );
+ }
+ }`,
+    source4: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <LayoutGrid >
+                        <LayoutGridCell columns="6" tablet="8">6 tablet 8</LayoutGridCell>
+                        <LayoutGridCell columns="4" tablet="6">4 tablet 6</LayoutGridCell>
+                        <LayoutGridCell columns="2" phone="4">2 phone 4</LayoutGridCell>
+                    </LayoutGrid>
+ </div>
+ );
+ }
+ }`,
+    source5: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+<LayoutGrid>
+            <LayoutGridInner>
+              <LayoutGridCell columns="4">
+                <LayoutGridInner>
+                  <LayoutGridCell columns="4">
+                    <span>Child 4</span>
+                  </LayoutGridCell>
+                  <LayoutGridCell columns="4">
+                    <span>Child 4</span>
+                  </LayoutGridCell>
+                  <LayoutGridCell columns="4">
+                    <span>Child 4</span>
+                  </LayoutGridCell>
+                </LayoutGridInner>
+                <span>Parent 4</span>
+              </LayoutGridCell>
+              <LayoutGridCell columns="4">4</LayoutGridCell>
+              <LayoutGridCell columns="4">4</LayoutGridCell>
+            </LayoutGridInner>
+          </LayoutGrid>
+ </div>
+ );
+ }
+ }`,
+    source6: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+   <LayoutGrid style={{'maxWidth': '1280px'}}>
+            <LayoutGridInner>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+            </LayoutGridInner>
+          </LayoutGrid>
+ </div>
+ </div>
+ );
+ }
+ }`,
+    source7: `import React, {Component} from 'react'
+ import {
+  LayoutGrid,
+  LayoutGridCell,
+  LayoutGridInner,
+ } from '../lib'
+
+ export default class LayoutGridExample extends Component {
+
+ render() {
+ return (
+ <div>
+   <LayoutGrid style={{'maxWidth': '1280px', 'marginLeft': '0px', 'marginRight': 'auto'}}>
+            <LayoutGridInner>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+              <LayoutGridCell>
+                <span>4</span>
+              </LayoutGridCell>
+            </LayoutGridInner>
+          </LayoutGrid>
+ </div>
+ </div>
+ );
+ }
+ }`,
   },
   'iconToggle': {
     source1: `import React, {Component} from 'react'
@@ -3875,10 +4097,1135 @@ class IconDemo extends Component {
 }`,
   },
   'hintList': {
-    source1: ``,
+    source1: `import React, {Component} from 'react'
+import {
+  Hint,
+  HintElevation,
+  HintTextfield,
+  HintInput,
+  HintLabel,
+  HintList,
+} from '../lib'
+
+export default class HintListPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hintList: [
+        'Lorem',
+        'Ipsum',
+        'is',
+        'simply',
+        'dummy',
+        'text',
+        'of',
+        'the',
+        'printing',
+        'and',
+        'typesetting',
+        'industry'
+      ],
+    };
+  }
+
+  render() {
+    const {hintList} = this.state;
+    return (
+      <div>
+        <Hint
+          //url=""
+          list={hintList}
+        >
+          <HintTextfield
+            style={{
+              'width': '80%',
+              'marginTop': 0
+            }}
+          >
+            <HintInput
+              style={{
+                'width': '100%'
+              }}
+            />
+            <HintLabel>Hint Label</HintLabel>
+          </HintTextfield>
+          <HintElevation
+            style={{
+              'position': 'absolute',
+              'backgroundColor': 'white',
+              'zIndex': 1
+            }}
+          >
+            <HintList/>
+          </HintElevation>
+        </Hint>
+      </div>
+    )
+  }
+}`,
+    source2: `import React, {Component} from 'react'
+import {
+  Hint,
+  HintElevation,
+  HintTextfield,
+  HintInput,
+  HintLabel,
+  HintList,
+  HintTags,
+} from '../lib'
+
+export default class HintListPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hintList: [
+        'Lorem',
+        'Ipsum',
+        'is',
+        'simply',
+        'dummy',
+        'text',
+        'of',
+        'the',
+        'printing',
+        'and',
+        'typesetting',
+        'industry'
+      ],
+    };
+  }
+
+  render() {
+    const {hintList} = this.state;
+    return (
+      <section>
+            <Hint
+              list={hintList}
+              multiselect
+            >
+              <HintTags
+                dense
+                style={{
+                  'display': 'flex',
+                  'flexDirection': 'row',
+                  'padding': 0,
+                  'color': 'white',
+                  'flexWrap': 'wrap'
+                }}
+              />
+              <HintTextfield
+                style={{
+                  'width': '80%',
+                  'marginTop': 0
+                }}
+              >
+                <HintInput
+                  style={{
+                    'width': '100%'
+                  }}
+                />
+                <HintLabel>Hint Label</HintLabel>
+              </HintTextfield>
+              <HintElevation
+                style={{
+                  'position': 'absolute',
+                  'backgroundColor': 'white',
+                  'zIndex': 1
+                }}
+              >
+                <HintList/>
+              </HintElevation>
+            </Hint>
+      </section>
+    )
+  }
+}`,
   },
   'gridList': {
-    source1: ``,
+    source1: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ 
+ </div>
+ );
+ }
+ }`,
+    source2: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List (Default): tile aspect ratio 1x1 with oneline footer
+              caption</TypographyHeadline>
+            <GridList>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                  <GridListTileSecondary>
+                    <GridListTileTitle>
+                      Single Very Long Grid Title Line
+                    </GridListTileTitle>
+                  </GridListTileSecondary>
+                </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
+ </div>
+ );
+ }
+ }`,
+    source3: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with 1px gutter</TypographyHeadline>
+            <GridList gutter>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                  <GridListTileSecondary>
+                    <GridListTileTitle>
+                      Single Very Long Grid Title Line
+                    </GridListTileTitle>
+                  </GridListTileSecondary>
+                </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
+ </div>
+ );
+ }
+ }`,
+    source4: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 image only</TypographyHeadline>
+            <GridList>
+              <GridListTiles>
+                <GridListTile>
+                  <GridListTilePrimary>
+                    <GridListTileContent
+                      src="https://material-components-web.appspot.com/images/1-1.jpg"
+                    />
+                  </GridListTilePrimary>
+                </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile><GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+              </GridListTile>
+              </GridListTiles>
+            </GridList>
+ </div>
+ );
+ }
+ }`,
+    source5: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline header
+            caption</TypographyHeadline>
+          <GridList header>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
+    source6: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer
+            caption</TypographyHeadline>
+          <GridList twoline>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                  <GridListTileSupportText>
+                    Support text
+                  </GridListTileSupportText>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
+    source7: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at start
+            of the
+            caption</TypographyHeadline>
+          <GridList alignStart>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileIcon icon>
+                    star_border
+                  </GridListTileIcon>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
+    source8: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at start
+            of the
+            caption</TypographyHeadline>
+          <GridList twoline alignStart>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileIcon icon>
+                    star_border
+                  </GridListTileIcon>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                  <GridListTileSupportText>
+                    Support Text
+                  </GridListTileSupportText>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
+    source9: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+  <TypographyHeadline>Grid List: tile aspect ratio 1x1 with oneline footer caption and icon at end of
+            the caption</TypographyHeadline>
+          <GridList alignEnd>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileIcon icon>
+                    star_border
+                  </GridListTileIcon>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
+    source10: `import React, {Component} from 'react'
+ import {
+  GridList,
+  GridListTiles,
+  GridListTile,
+  GridListTilePrimary,
+  GridListTileContent,
+  GridListTileSecondary,
+  GridListTileTitle,
+  GridListTileSupportText,
+  GridListTileIcon,
+  TypographyHeadline
+ } from '../lib'
+
+ export default class GridListExample extends Component {
+
+ render() {
+ return (
+ <div>
+ <TypographyHeadline>Grid List: tile aspect ratio 1x1 with twoline footer caption and icon at end of
+            the caption</TypographyHeadline>
+          <GridList twoline alignEnd>
+            <GridListTiles>
+              <GridListTile>
+                <GridListTilePrimary>
+                  <GridListTileContent
+                    src="https://material-components-web.appspot.com/images/1-1.jpg"
+                  />
+                </GridListTilePrimary>
+                <GridListTileSecondary>
+                  <GridListTileIcon icon>
+                    star_border
+                  </GridListTileIcon>
+                  <GridListTileTitle>
+                    Single Very Long Grid Title Line
+                  </GridListTileTitle>
+                  <GridListTileSupportText>
+                    Support Text
+                  </GridListTileSupportText>
+                </GridListTileSecondary>
+              </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile><GridListTile>
+              <GridListTilePrimary>
+                <GridListTileContent
+                  src="https://material-components-web.appspot.com/images/1-1.jpg"
+                />
+              </GridListTilePrimary>
+              <GridListTileSecondary>
+                <GridListTileIcon icon>
+                  star_border
+                </GridListTileIcon>
+                <GridListTileTitle>
+                  Single Very Long Grid Title Line
+                </GridListTileTitle>
+                <GridListTileSupportText>
+                  Support Text
+                </GridListTileSupportText>
+              </GridListTileSecondary>
+            </GridListTile>
+            </GridListTiles>
+          </GridList>
+ </div>
+ );
+ }
+ }`,
   },
   'formField': {
     source1: `
@@ -4690,46 +6037,1047 @@ export default class ButtonDisabled extends Component {
     );
   }
 }`
+  },
+  'toolbar': {
+    source1: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+export default class ToolbarNormalPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Toolbar>
+          <ToolbarRow>
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page" alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page"
+                           alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+      </section>
+    )
+  }
+}`,
+    source2: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+
+
+export default class ToolbarFixedPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Toolbar
+          fixed
+        >
+          <ToolbarRow>
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page"
+                           alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page" alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain fixed>
+          <h3>Is Top</h3>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+      </section>
+    )
+  }
+}`,
+    source3: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+
+
+export default class ToolbarWaterFallPage extends Component {
+
+  render() {
+    return (
+      <section>
+        <Toolbar
+          fixed
+          waterfall
+        >
+          <ToolbarRow>
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page"
+                           alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page" alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain fixed>
+          <h3>Is Top</h3>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+      </section>
+    )
+  }
+}`,
+    source4: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+
+
+export default class ToolbarFlexiblePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flexibleExpansionRatio: 0
+    }
   }
 
+  render() {
+    const { flexibleExpansionRatio } = this.state;
+    return (
+      <section>
+        <Toolbar
+          flexible
+          defaultBehavior
+          onChange={(event) => this.setState({
+            flexibleExpansionRatio: event.flexibleExpansionRatio.toFixed(2)
+          })}
+        >
+          <ToolbarRow
+            className="demo-page-toolbar_flexible"
+          >
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page"
+                           alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page" alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain fixed>
+          <h3>Is Top</h3>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+        <footer
+        style={{
+          'position': 'fixed',
+          'bottom': '20px',
+          'width': '100%',
+          'textAlign': 'center',
+          'color': 'red',
+          'backgroundColor': 'rgba(0, 0, 0, 0.8)',
+        }}
+        >
+          <span>Flexible Expansion Ratio: {flexibleExpansionRatio}</span>
+        </footer>
+      </section>
+    )
+  }
+}
+`,
+    source5: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+
+
+export default class ToolbarWaterfallFlexiblePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flexibleExpansionRatio: 0
+    }
+  }
+
+  render() {
+    const { flexibleExpansionRatio } = this.state;
+    return (
+      <section>
+        <Toolbar
+          fixed
+          waterfall
+          flexible
+          defaultBehavior
+          onChange={(event) => this.setState({
+            flexibleExpansionRatio: event.flexibleExpansionRatio.toFixed(2)
+          })}
+        >
+          <ToolbarRow
+            className="demo-page-toolbar_flexible"
+          >
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page"
+                           alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page" alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain fixed>
+          <h3>Is Top</h3>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+        <footer
+          style={{
+            'position': 'fixed',
+            'bottom': '20px',
+            'width': '100%',
+            'textAlign': 'center',
+            'color': 'red',
+            'backgroundColor': 'rgba(0, 0, 0, 0.8)',
+          }}
+        >
+          <span>Flexible Expansion Ratio: {flexibleExpansionRatio}</span>
+        </footer>
+      </section>
+    )
+  }
+}
+`,
+    source6: `import React, {Component} from 'react'
+import {
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib'
+
+
+export default class ToolbarWaterfallFixLastRowPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flexibleExpansionRatio: 0
+    }
+  }
+
+  render() {
+    const { flexibleExpansionRatio } = this.state;
+    return (
+      <section>
+        <Toolbar
+          fixed
+          waterfall
+          flexible
+          lastrowOnly
+          defaultBehavior
+          onChange={(event) => this.setState({
+            flexibleExpansionRatio: event.flexibleExpansionRatio.toFixed(2)
+          })}
+        >
+          <ToolbarRow
+            className="demo-page-toolbar_flexible"
+          >
+            <ToolbarSection start>
+              <ToolbarIcon menu>menu</ToolbarIcon>
+              <ToolbarTitle>Title</ToolbarTitle>
+            </ToolbarSection>
+          </ToolbarRow>
+          <ToolbarRow>
+            <ToolbarSection end>
+              <ToolbarIcon aria-label="Download" alt="Download">file_download</ToolbarIcon>
+              <ToolbarIcon aria-label="Print this page"
+                           alt="Print this page">print</ToolbarIcon>
+              <ToolbarIcon aria-label="Bookmark this page" alt="Bookmark this page">more_vert</ToolbarIcon>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <ToolbarMain fixed>
+          <h3>Is Top</h3>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+            Donec
+            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+            habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+            tortor
+            quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+            quam
+            egestas semper. Aenean ultricies mi vitae est.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+            egestas.
+            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+            libero
+            sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+            quam,
+            feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas
+            semper. Aenean ultricies mi vitae est.
+          </p>
+        </ToolbarMain>
+        <footer
+          style={{
+            'position': 'fixed',
+            'bottom': '20px',
+            'width': '100%',
+            'textAlign': 'center',
+            'color': 'red',
+            'backgroundColor': 'rgba(0, 0, 0, 0.8)',
+          }}
+        >
+          <span>Flexible Expansion Ratio: {flexibleExpansionRatio}</span>
+        </footer>
+      </section>
+    )
+  }
+}
+`,
+  },
+  'drawer': {
+    'persistent': {
+      source1: `import React, {Component} from 'react'
+import {
+  DrawerListItemDetail,
+  DrawerPersistent,
+  PersistentContent,
+  PersistentToolbarSpacer,
+  PersistentDrawer,
+  PersistentListItem,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon
+} from '../../lib/index'
+
+
+export default class PersistentToolbarSpacerPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  setOpen(open) {
+    this.setState({open});
+  }
+
+  handleOpen() {
+    this.setOpen(true);
+  }
+
+  handleClose() {
+    this.setOpen(false);
+  }
+
+  render() {
+    const {open} = this.state;
+    return (
+      <section
+        style={{
+          'display': 'flex',
+          'flexDirection': 'row',
+          'padding': 0,
+          'margin': 0,
+          'boxSizing': 'border-box',
+          'height': '100%',
+          'width': '100%',
+        }}
+      >
+        <DrawerPersistent
+          open={open}
+          onOpen={this.handleOpen}
+          onClose={this.handleClose}
+        >
+          <PersistentDrawer>
+            <PersistentToolbarSpacer/>
+            <PersistentContent>
+              <PersistentListItem selected>
+                <DrawerListItemDetail start>
+                  inbox
+                </DrawerListItemDetail>
+                Inbox
+              </PersistentListItem>
+              <PersistentListItem >
+                <DrawerListItemDetail start>
+                  star
+                </DrawerListItemDetail>
+                Star
+              </PersistentListItem>
+            </PersistentContent>
+          </PersistentDrawer>
+        </DrawerPersistent>
+        <div
+          style={{
+            'display': 'inline-flex',
+            'flexDirection': 'column',
+            'flexGrow': 1,
+            'height': '100%',
+            'boxSizing': 'border-box'
+          }}
+        >
+          <Toolbar>
+            <ToolbarRow>
+              <ToolbarSection start>
+                <ToolbarIcon
+                  onClick={() => this.setState({
+                    open: !open
+                  })}
+                >menu</ToolbarIcon>
+                <ToolbarTitle>Persistent Drawer</ToolbarTitle>
+              </ToolbarSection>
+            </ToolbarRow>
+          </Toolbar>
+
+          <ToolbarMain>
+            <h2>Persistent Drawer with Toolbar Spacer</h2>
+            <p>
+              Click the menu icon above to open.
+            </p>
+          </ToolbarMain>
+        </div>
+      </section>
+    )
+  }
+}
+`,
+      source2: `import React, {Component} from 'react'
+import {
+  DrawerListItemDetail,
+  DrawerPersistent,
+  PersistentContent,
+  PersistentDrawer,
+  PersistentHeader,
+  PersistentHeaderContent,
+  PersistentListItem,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon,
+  Theme
+} from '../../lib/index'
+
+
+export default class PersistentHeaderPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  setOpen(open) {
+    this.setState({open});
+  }
+
+  handleOpen() {
+    this.setOpen(true);
+  }
+
+  handleClose() {
+    this.setOpen(false);
+  }
+
+  render() {
+    const {open} = this.state;
+    return (
+      <section
+        style={{
+          'display': 'flex',
+          'flexDirection': 'row',
+          'padding': 0,
+          'margin': 0,
+          'boxSizing': 'border-box',
+          'height': '100%',
+          'width': '100%',
+        }}
+      >
+        <DrawerPersistent
+          open={open}
+          onOpen={this.handleOpen}
+          onClose={this.handleClose}
+        >
+          <PersistentDrawer>
+            <Theme
+              primaryBg
+            >
+              <PersistentHeader>
+                <PersistentHeaderContent>
+                  Header here
+                </PersistentHeaderContent>
+              </PersistentHeader>
+            </Theme>
+            <PersistentContent>
+              <PersistentListItem selected>
+                <DrawerListItemDetail start>
+                  inbox
+                </DrawerListItemDetail>
+                Inbox
+              </PersistentListItem>
+              <PersistentListItem >
+                <DrawerListItemDetail start>
+                  star
+                </DrawerListItemDetail>
+                Star
+              </PersistentListItem>
+            </PersistentContent>
+          </PersistentDrawer>
+        </DrawerPersistent>
+        <div
+          style={{
+            'display': 'inline-flex',
+            'flexDirection': 'column',
+            'flexGrow': 1,
+            'height': '100%',
+            'boxSizing': 'border-box'
+          }}
+        >
+          <Toolbar>
+            <ToolbarRow>
+              <ToolbarSection start>
+                <ToolbarIcon
+                  onClick={() => this.setState({
+                    open: !open
+                  })}
+                >menu</ToolbarIcon>
+                <ToolbarTitle>Persistent Drawer</ToolbarTitle>
+              </ToolbarSection>
+            </ToolbarRow>
+          </Toolbar>
+          <ToolbarMain>
+            <h2>Persistent Drawer with Header</h2>
+            <p>
+              Click the menu icon above to open.
+            </p>
+          </ToolbarMain>
+        </div>
+      </section>
+    )
+  }
+}`,
+    },
+    'temporary': {
+      source1: `import React, {Component} from 'react'
+import {
+    DrawerTemporary,
+    TemporaryContent,
+    DrawerListItemDetail,
+    TemporaryDrawer,
+    TemporaryListItem,
+    TemporaryToolbarSpacer,
+    Toolbar,
+    ToolbarRow,
+    ToolbarSection,
+    ToolbarTitle,
+    ToolbarMain,
+    Icon
+} from '../../lib/index'
+
+
+export default class TemporaryToolbarSpacerPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        };
+
+        this.handle = this.handle.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    setOpen(open) {
+        this.setState({open});
+    }
+
+    handle() {
+        this.setOpen(true);
+    }
+
+    handleOpen() {
+        this.setOpen(true);
+    }
+
+    handleClose() {
+        this.setOpen(false);
+    }
+
+    render() {
+        const {open} = this.state;
+        return (
+            <section>
+                <Toolbar>
+                    <ToolbarRow>
+                        <ToolbarSection start>
+                            <Icon
+                                onClick={this.handle}
+                            >menu</Icon>
+                            <ToolbarTitle>Temporary Drawer</ToolbarTitle>
+                        </ToolbarSection>
+                    </ToolbarRow>
+                </Toolbar>
+                <DrawerTemporary
+                    open={open}
+                    onOpen={this.handleOpen}
+                    onClose={this.handleClose}
+                >
+                    <TemporaryDrawer>
+                        <TemporaryToolbarSpacer/>
+                        <TemporaryContent>
+                            <TemporaryListItem selected>
+                                <DrawerListItemDetail start>
+                                    inbox
+                                </DrawerListItemDetail>
+                                Inbox
+                            </TemporaryListItem>
+                            <TemporaryListItem >
+                                <DrawerListItemDetail start>
+                                    star
+                                </DrawerListItemDetail>
+                                Star
+                            </TemporaryListItem>
+                        </TemporaryContent>
+                    </TemporaryDrawer>
+                </DrawerTemporary>
+                <ToolbarMain>
+                    <h2>Temporary Drawer with Toolbar Spacer</h2>
+                    <p>
+                        Click the menu icon above to open.
+                    </p>
+                </ToolbarMain>
+            </section>
+        )
+    }
+}`,
+      source2: `import React, {Component} from 'react'
+import {
+    DrawerTemporary,
+    TemporaryContent,
+    DrawerListItemDetail,
+    TemporaryDrawer,
+    TemporaryHeader,
+    TemporaryHeaderContent,
+    TemporaryListItem,
+    Toolbar,
+    ToolbarRow,
+    ToolbarSection,
+    ToolbarTitle,
+    ToolbarMain,
+    Icon,
+    Theme
+} from '../../lib/index'
+
+
+export default class TemporaryHeaderPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        };
+
+        this.handle = this.handle.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    setOpen(open) {
+        this.setState({open});
+    }
+
+    handle() {
+        this.setOpen(true);
+    }
+
+    handleOpen() {
+        this.setOpen(true);
+    }
+
+    handleClose() {
+        this.setOpen(false);
+    }
+
+    render() {
+        const {open} = this.state;
+        return (
+            <section>
+                <Toolbar>
+                    <ToolbarRow>
+                        <ToolbarSection start>
+                            <Icon
+                                onClick={this.handle}
+                            >menu</Icon>
+                            <ToolbarTitle>Temporary Drawer</ToolbarTitle>
+                        </ToolbarSection>
+                    </ToolbarRow>
+                </Toolbar>
+                <DrawerTemporary
+                    open={open}
+                    onOpen={this.handleOpen}
+                    onClose={this.handleClose}
+                >
+                    <TemporaryDrawer>
+                        <Theme
+                            primaryBg
+                        >
+                            <TemporaryHeader>
+                                <TemporaryHeaderContent>
+                                    Header here
+                                </TemporaryHeaderContent>
+                            </TemporaryHeader>
+                        </Theme>
+                        <TemporaryContent>
+                            <TemporaryListItem selected>
+                                <DrawerListItemDetail start>
+                                    inbox
+                                </DrawerListItemDetail>
+                                Inbox
+                            </TemporaryListItem>
+                            <TemporaryListItem >
+                                <DrawerListItemDetail start>
+                                    star
+                                </DrawerListItemDetail>
+                                Star
+                            </TemporaryListItem>
+                        </TemporaryContent>
+                    </TemporaryDrawer>
+                </DrawerTemporary>
+                <ToolbarMain>
+                    <h2>Temporary Drawer with Header</h2>
+                    <p>
+                        Click the menu icon above to open.
+                    </p>
+                </ToolbarMain>
+            </section>
+        )
+    }
+}`
+    },
+    'permanent': {
+      source1: `import React, {Component} from 'react'
+import {
+  DrawerPermanent,
+  PermanentList,
+  PermanentListItem,
+  DrawerListItemDetail,
+  PermanentContent,
+  PermanentToolbarSpacer,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon,
+} from '../../lib/index'
+
+
+export default class PermanentAboveToolbarPage extends Component {
+
+  render() {
+    return (
+      <section
+        style={{
+          'display': 'flex',
+          'flexDirection': 'row',
+          'padding': 0,
+          'margin': 0,
+          'boxSizing': 'border-box',
+          'height': '100%',
+          'width': '100%',
+        }}
+      >
+        <DrawerPermanent>
+          <PermanentToolbarSpacer/>
+          <PermanentContent>
+            <PermanentList>
+              <PermanentListItem selected>
+                <DrawerListItemDetail icon start>inbox
+                </DrawerListItemDetail>
+                Inbox
+              </PermanentListItem>
+              <PermanentListItem>
+                <DrawerListItemDetail icon start>star
+                </DrawerListItemDetail>
+                Star
+              </PermanentListItem>
+            </PermanentList>
+          </PermanentContent>
+        </DrawerPermanent>
+        <div
+          style={{
+            'display': 'inline-flex',
+            'flexDirection': 'column',
+            'flexGrow': 1,
+            'height': '100%',
+            'boxSizing': 'border-box'
+          }}
+        >
+          <Toolbar>
+            <ToolbarRow>
+              <ToolbarSection start>
+                <ToolbarIcon>menu</ToolbarIcon>
+                <ToolbarTitle>Permanent Drawer Above Toolbar</ToolbarTitle>
+              </ToolbarSection>
+            </ToolbarRow>
+          </Toolbar>
+          <ToolbarMain>
+            <h2>Permanent Drawer Above Toolbar</h2>
+            <p>
+              Lorem...
+            </p>
+          </ToolbarMain>
+        </div>
+      </section>
+    )
+  }
+}`,
+      source2: `import React, {Component} from 'react'
+import {
+  DrawerPermanent,
+  PermanentList,
+  PermanentListItem,
+  DrawerListItemDetail,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon,
+} from '../../lib/index'
+
+
+export default class PermanentBelowToolbarPage extends Component {
+
+  render() {
+    return (
+      <section
+        style={{
+          'display': 'flex',
+          'flexDirection': 'column',
+          'padding': 0,
+          'margin': 0,
+          'boxSizing': 'border-box',
+          'minHeight': '100%',
+        }}
+      >
+        <Toolbar>
+          <ToolbarRow>
+            <ToolbarSection start>
+              <ToolbarIcon>menu</ToolbarIcon>
+              <ToolbarTitle>Permanent Drawer Below Toolbar</ToolbarTitle>
+            </ToolbarSection>
+          </ToolbarRow>
+        </Toolbar>
+        <div
+          style={{
+            'display': 'flex',
+            'flex': '1 1 auto'
+          }}
+        >
+          <DrawerPermanent>
+            <PermanentList>
+              <PermanentListItem selected>
+                <DrawerListItemDetail icon start>
+                  inbox
+                </DrawerListItemDetail>
+                Inbox
+              </PermanentListItem>
+              <PermanentListItem>
+                <DrawerListItemDetail icon start>
+                  star
+                </DrawerListItemDetail>
+                Star
+              </PermanentListItem>
+            </PermanentList>
+          </DrawerPermanent>
+          <ToolbarMain>
+            <h2>Permanent Drawer Below Toolbar</h2>
+            <p>
+              Lorem...
+            </p>
+          </ToolbarMain>
+        </div>
+      </section>
+    )
+  }
+}`,
+    }
+  },
+
 };
-/*
- `import React, {Component} from 'react'
- import {
- Typography,
- TypographyDisplay,
- TypographyHeadline,
- TypographyTitle,
- TypographySubheading,
- TypographyBody,
- TypographyCaption
- } from '../lib'
 
- export default class Example extends Component {
- constructor(props) {
- super(props);
- this.state = {
- valueInput: 0,
- }
- this.handleOptions = this.handleOptions.bind(this);
- }
- handleOptions(option, value) {
- const newValue = (value) ? value : !this.state.options[option];
- this.setState({
- options: {
- ...this.state.options,
- [option]: newValue
- }
- })
- }
-
- render() {
- const {
- valueInput,
- } = this.state;
- return (
- <div>
- </div>
- );
- }
- }`;*/
