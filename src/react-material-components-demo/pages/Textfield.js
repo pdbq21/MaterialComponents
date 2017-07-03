@@ -37,7 +37,7 @@ export default class TextfieldPage extends Component {
         },
         {
           name: 'Add new Component - TextfieldLine',
-          completed: false
+          completed: true
         },
       ],
       options: {
@@ -340,7 +340,16 @@ export default class TextfieldPage extends Component {
               </FormField>
             </Elevation>
           </Example>
-
+          <Example
+            title="Text Field Boxes"
+            code=""
+          >
+            <Textfield box>
+              <TextfieldInput type="text" id="tf-box"/>
+              <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
+              <TextfieldLine />
+            </Textfield>
+          </Example>
           <Example
             title="Label float above"
             code=""
@@ -449,22 +458,13 @@ export default class TextfieldPage extends Component {
               />
             </Textfield>
           </Example>
-          <Example
-            title="Text Field Boxes"
-            code=""
-          >
-            <Textfield box>
-              <TextfieldInput type="text" id="tf-box"/>
-              <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
-              <TextfieldLine />
-            </Textfield>
-          </Example>
+
           <Example
             title="CSS-only text field boxes"
             code=""
           >
             <label htmlFor="css-only-textfield-box">Your name:</label>
-            <Textfield box>
+            <Textfield box cssOnly>
               <TextfieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
             </Textfield>
           </Example>

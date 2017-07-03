@@ -4,14 +4,56 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {textfield}  from 'material-components-web/dist/material-components-web';
+import {textfield, ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCTextfieldFoundation} = textfield;
+const {MDCRippleFoundation} = ripple;
 const {
   strings: {
     LABEL_SELECTOR: LABEL_SELECTOR_NAME,
     INPUT_SELECTOR: INPUT_SELECTOR_NAME
-  }
+  },
 } = MDCTextfieldFoundation;
+let supportsPassive_;
+
+function applyPassive(globalObj = window, forceRefresh = false) {
+  if (supportsPassive_ === undefined || forceRefresh) {
+    let isSupported = false;
+    try {
+      globalObj.document.addEventListener('test', null, {
+        get passive() {
+          isSupported = true;
+        }
+      });
+    } catch (e) {
+    }
+
+    supportsPassive_ = isSupported;
+  }
+
+  return supportsPassive_ ? {passive: true} : false;
+}
+function getMatchesProperty(HTMLElementPrototype) {
+  return [
+    'webkitMatchesSelector', 'msMatchesSelector', 'matches',
+  ].filter((p) => p in HTMLElementPrototype).pop();
+}
+function supportsCssVariables(windowObj) {
+  const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === 'function';
+  if (!supportsFunctionPresent) {
+    return;
+  }
+
+  const explicitlySupportsCssVars = windowObj.CSS.supports('--css-vars', 'yes');
+  // See: https://bugs.webkit.org/show_bug.cgi?id=154669
+  // See: README section on Safari
+  const weAreFeatureDetectingSafari10plus = (
+    windowObj.CSS.supports('(--css-vars: yes)') &&
+    windowObj.CSS.supports('color', '#00000000')
+  );
+  return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
+}
+const MATCHES = getMatchesProperty(HTMLElement.prototype);
+
 export default class Textfield extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
@@ -24,6 +66,7 @@ export default class Textfield extends PureComponent {
 
   state = {
     classNames: [],
+    classNamesRipple: [],
   };
 
   rootInput_ = () => this.refs.root.querySelector(INPUT_SELECTOR_NAME);
@@ -145,14 +188,83 @@ export default class Textfield extends PureComponent {
 
   });
 
+  foundationRipple = new MDCRippleFoundation({
+    isUnbounded: () => false,
+    browserSupportsCssVars: () => {
+      return supportsCssVariables(window);
+    },
+    isSurfaceActive: () => {
+      if (this.refs.root) {
+        return this.refs.root[MATCHES](':active')
+      }
+    },
+    addClass: className => {
+      this.setState(({classNamesRipple}) => ({
+        classNamesRipple: classNamesRipple.concat([className])
+      }))
+    },
+    removeClass: className => {
+      if (this.refs.root) {
+        this.setState(({classNamesRipple}) => ({
+          classNamesRipple: classNamesRipple.filter(cn => cn !== className)
+        }))
+      }
+    },
+    registerInteractionHandler: (evtType, handler) => {
+      if (this.refs.root) {
+        return this.refs.root.addEventListener(evtType, handler, applyPassive());
+      }
+    },
+    deregisterInteractionHandler: (evtType, handler) => {
+      if (this.refs.root) {
+        return this.refs.root.removeEventListener(evtType, handler, applyPassive());
+      }
+    },
+    registerResizeHandler: handler => {
+      window.addEventListener('resize', handler);
+    },
+    deregisterResizeHandler: handler => {
+      window.removeEventListener('resize', handler);
+    },
+    updateCssVariable: (varName, value) => {
+      if (this.refs.root) {
+        return this.refs.root.style.setProperty(varName, value);
+      }
+    },
+    computeBoundingRect: () => {
+      if (this.refs.root) {
+        return this.refs.root.getBoundingClientRect()
+      }
+    },
+
+    getWindowPageOffset: () => {
+      return {
+        x: window.pageXOffset,
+        y: window.pageYOffset
+      }
+    },
+
+    /*
+     Whether or not the ripple is attached to a disabled component. If true, the ripple will not activate.
+     isSurfaceDisabled: () => {disabled},
+
+     */
+  });
+
   componentDidMount() {
     if (!this.props.cssOnly) {
       this.foundation.init();
+      if (this.props.box) {
+        this.foundationRipple.init();
+      }
     }
   }
 
   componentWillUnmount() {
     if (!this.props.cssOnly) {
+      if (this.props.box) {
+        this.foundationRipple.destroy();
+      }
       this.foundation.destroy();
     }
   }
@@ -181,7 +293,7 @@ export default class Textfield extends PureComponent {
         'mdc-textfield--fullwidth': fullwidth,
         'mdc-textfield--dense': dense,
         'mdc-textfield--box': box,
-      }, this.state.classNames, className);
+      }, this.state.classNames, this.state.classNamesRipple, className);
     const ElementType = elementType || 'div';
     return (
       <ElementType
