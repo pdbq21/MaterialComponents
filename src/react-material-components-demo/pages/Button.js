@@ -7,7 +7,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class ButtonPage extends Component {
   constructor(props) {
@@ -70,83 +70,6 @@ export default class ButtonPage extends Component {
           ]
         }
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-  Button
-} from '../lib'
-
-export default class ButtonWithRipple extends Component {
-
-  render() {
-    return (
-      <div>
-         <Button ripple>Default</Button>
-         <Button raised ripple>Raised</Button>
-         <Button dense ripple>Dense</Button>
-         <Button dense raised ripple>Dense Raised</Button>
-         <Button compact ripple>Compact</Button>
-         <Button compact raised ripple>Compact Raised</Button>
-         <Button primary ripple>Primary</Button>
-         <Button primary raised ripple>primary raised</Button>
-         <Button accent ripple>accent</Button>
-         <Button accent raised ripple>accent raised</Button>
-         <Button elementType="div" raised ripple>div raised</Button>
-      </div>
-    );
-  }
-}
-`,
-        source2: `import React, {Component} from 'react'
-import {
-  Button
-} from '../lib'
-
-export default class ButtonOnlyCSS extends Component {
-
-  render() {
-    return (
-      <div>
-              <Button>Default</Button>
-              <Button raised>Raised</Button>
-              <Button dense>Dense</Button>
-              <Button dense raised>Dense Raised</Button>
-              <Button compact>Compact</Button>
-              <Button compact raised>Compact Raised</Button>
-              <Button primary>Primary</Button>
-              <Button primary>primary raised</Button>
-              <Button accent>accent</Button>
-              <Button accent raised>accent raised</Button>
-              <Button elementType="div" raised>div raised</Button>
-      </div>
-    );
-  }
-}`,
-        source3: `import React, {Component} from 'react'
-import {
-  Button
-} from '../lib'
-
-export default class ButtonDisabled extends Component {
-
-  render() {
-    return (
-      <div>
-              <Button disabled>Default</Button>
-              <Button raised disabled>Raised</Button>
-              <Button dense disabled>Dense</Button>
-              <Button dense raised disabled>Dense Raised</Button>
-              <Button compact disabled>Compact</Button>
-              <Button compact raised disabled>Compact Raised</Button>
-              <Button primary disabled>Primary</Button>
-              <Button primary raised disabled>primary raised</Button>
-              <Button accent disabled>accent</Button>
-              <Button accent raised disabled>accent raised</Button>
-      </div>
-    );
-  }
-}`
-      }
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -164,7 +87,6 @@ export default class ButtonDisabled extends Component {
   }
 
   render() {
-    const {used} = this.state;
     return (
       <section
         className="content"
@@ -198,7 +120,7 @@ export default class ButtonDisabled extends Component {
 
           <Example
             title="Buttons with Ripple"
-            code={used.source1}
+            code={code.button.source1}
             className="demo-page-button_demo-components"
           >
             <Button ripple>Default</Button>
@@ -215,7 +137,7 @@ export default class ButtonDisabled extends Component {
           </Example>
           <Example
             title="Buttons CSS Only"
-            code={used.source2}
+            code={code.button.source2}
             className="demo-page-button_demo-components"
           >
             <Button>Default</Button>
@@ -232,7 +154,7 @@ export default class ButtonDisabled extends Component {
           </Example>
           <Example
             title="Buttons Disabled"
-            code={used.source3}
+            code={code.button.source3}
             className="demo-page-button_demo-components"
           >
             <Button disabled>Default</Button>

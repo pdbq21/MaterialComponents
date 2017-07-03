@@ -7,19 +7,14 @@ import {
   RadioInput,
   Elevation,
   FormField,
-  TypographyHeadline,
   TypographyDisplay,
-  TypographyBody,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class RadioPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: true,
-      checked_1: true,
-      checked_2: true,
       components: [
         {
           name: 'Radio',
@@ -48,42 +43,6 @@ export default class RadioPage extends Component {
           ]
         },
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    Radio,
-    RadioInput,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
-
-class RadioDemo extends Component {
-
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <Radio
-                        ripple
-                    >
-                        <RadioInput
-                            name="radios"
-                        />
-                    </Radio>
-                    <Radio
-                        ripple
-                    >
-                        <RadioInput
-                            name="radios"
-                        />
-                    </Radio>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -101,7 +60,6 @@ class RadioDemo extends Component {
   }
 
   render() {
-    //const { checked, checked_1, checked_2 } = this.state;
     return (
       <section className="content">
         <Demo
@@ -132,73 +90,79 @@ class RadioDemo extends Component {
           className="demo-page-radio"
         >
           <TypographyDisplay size="1">Radio</TypographyDisplay>
-          <TypographyHeadline size="1">Radio with Ripple</TypographyHeadline>
-          <FormField>
-            <Radio
-              ripple
-            >
-              <RadioInput
-                id="my-radio-demo1"
-                name="radios1"
-                onChange={({target}) => this.setState({
-                  checked_1: target.checked,
-                })}
-              />
-            </Radio>
-            <label id="my-radio-label1" htmlFor="my-radio-demo1">Radio 1</label>
-          </FormField>
-          <FormField>
-            <Radio
-              ripple
-            >
-              <RadioInput
-                id="my-radio-demo2"
-                name="radios1"
-                onChange={({target}) => this.setState({
-                  checked_1: target.checked,
-                })}
-              />
-            </Radio>
-            <label id="my-radio-label2" htmlFor="my-radio-demo2">Radio 2</label>
-          </FormField>
-          <TypographyHeadline size="1">Radio only CSS</TypographyHeadline>
-          <FormField>
-            <Radio>
-              <RadioInput
-                id="my-radio-demo3"
-                name="radios2"
+          <Example
+          title="Radio with Ripple"
+          code={code.radio.source1}
+          >
+            <FormField>
+              <Radio
+                ripple
+              >
+                <RadioInput
+                  id="my-radio-demo1"
+                  name="radios1"
+                />
+              </Radio>
+              <label id="my-radio-label1" htmlFor="my-radio-demo1">Radio 1</label>
+            </FormField>
+            <FormField>
+              <Radio
+                ripple
+              >
+                <RadioInput
+                  id="my-radio-demo2"
+                  name="radios1"
+                />
+              </Radio>
+              <label id="my-radio-label2" htmlFor="my-radio-demo2">Radio 2</label>
+            </FormField>
+          </Example>
+          <Example
+          title="Radio only CSS"
+          code={code.radio.source2}
+          >
+            <FormField>
+              <Radio>
+                <RadioInput
+                  id="my-radio-demo3"
+                  name="radios2"
 
-              />
-            </Radio>
-            <label id="my-radio-label3" htmlFor="my-radio-demo3">Radio 1</label>
-            <Radio>
-              <RadioInput
-                id="my-radio-demo4"
-                name="radios2"
-              />
-            </Radio>
-            <label id="my-radio-label4" htmlFor="my-radio-demo4">Radio 2</label>
-          </FormField>
-          <TypographyHeadline size="1">Radio only CSS - Disable</TypographyHeadline>
-          <FormField>
-            <Radio disabled>
-              <RadioInput
-                id="my-radio-demo5"
-                name="radios3"
-                disabled
-                checked
-              />
-            </Radio>
-            <label id="my-radio-label5" htmlFor="my-radio-demo5">Radio 1</label>
-            <Radio disabled>
-              <RadioInput
-                id="my-radio-demo6"
-                name="radios3"
-                disabled
-              />
-            </Radio>
-            <label id="my-radio-label6" htmlFor="my-radio-demo6">Radio 2</label>
-          </FormField>
+                />
+              </Radio>
+              <label id="my-radio-label3" htmlFor="my-radio-demo3">Radio 1</label>
+              <Radio>
+                <RadioInput
+                  id="my-radio-demo4"
+                  name="radios2"
+                />
+              </Radio>
+              <label id="my-radio-label4" htmlFor="my-radio-demo4">Radio 2</label>
+            </FormField>
+          </Example>
+          <Example
+          title="Radio only CSS - Disable"
+          code={code.radio.source3}
+          >
+            <FormField>
+              <Radio disabled>
+                <RadioInput
+                  id="my-radio-demo5"
+                  name="radios3"
+                  disabled
+                  checked
+                />
+              </Radio>
+              <label id="my-radio-label5" htmlFor="my-radio-demo5">Radio 1</label>
+              <Radio disabled>
+                <RadioInput
+                  id="my-radio-demo6"
+                  name="radios3"
+                  disabled
+                />
+              </Radio>
+              <label id="my-radio-label6" htmlFor="my-radio-demo6">Radio 2</label>
+            </FormField>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

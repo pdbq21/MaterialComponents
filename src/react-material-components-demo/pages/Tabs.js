@@ -19,7 +19,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class TabsPage extends Component {
   constructor(props) {
@@ -234,337 +234,6 @@ export default class TabsPage extends Component {
           ]
         },
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar>
-              <Tab ripple active>Home</Tab>
-              <Tab ripple>Merchandise</Tab>
-              <Tab ripple>About Us</Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source2: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar cssOnly>
-              <Tab cssOnly active>Home</Tab>
-              <Tab cssOnly>Merchandise</Tab>
-              <Tab cssOnly>About Us</Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source3: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  TabBarScroll,
-  TabBarScrollIndicator,
-  TabBarScrollInner,
-  TabBarScrollFrame
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBarScroll>
-              <TabBarScrollIndicator back>
-                <TabBarScrollInner>
-                  navigate_before
-                </TabBarScrollInner>
-              </TabBarScrollIndicator>
-              <TabBarScrollFrame>
-                <TabBar scroll>
-                  <Tab ripple active>Item One</Tab>
-                  <Tab ripple>Item Two</Tab>
-                  <Tab ripple>Item Three</Tab>
-                  <Tab ripple>Item Four</Tab>
-                  <Tab ripple>Item Five</Tab>
-                  <Tab ripple>Item Six</Tab>
-                  <Tab ripple>Item Seven</Tab>
-                  <Tab ripple>Item Eight</Tab>
-                  <Tab ripple>Item Nine</Tab>
-                  <TabIndicator/>
-                </TabBar>
-              </TabBarScrollFrame>
-              <TabBarScrollIndicator forward>
-                <TabBarScrollInner>
-                  navigate_next
-                </TabBarScrollInner>
-              </TabBarScrollIndicator>
-            </TabBarScroll>
-      </div>
-    );
-  }
-}`,
-        source4: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  TabIcon
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar iconTab>
-              <Tab ripple active>
-                <TabIcon>phone</TabIcon>
-              </Tab>
-              <Tab ripple>
-                <TabIcon  >favorite</TabIcon>
-              </Tab>
-              <Tab ripple>
-                <TabIcon >person_pin</TabIcon>
-              </Tab>
-              <TabIndicator/>
-          </TabBar>
-      </div>
-    );
-  }
-}`,
-        source5: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  TabIcon
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar cssOnly iconTab>
-              <Tab cssOnly active>
-                <TabIcon>phone</TabIcon>
-              </Tab>
-              <Tab cssOnly>
-                <TabIcon  >favorite</TabIcon>
-              </Tab>
-              <Tab cssOnly>
-                <TabIcon >person_pin</TabIcon>
-              </Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source6: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  TabIcon,
-  TabText
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar iconText>
-              <Tab ripple iconText active>
-                <TabIcon>phone</TabIcon>
-                <TabText>Recents</TabText>
-              </Tab>
-              <Tab ripple iconText>
-                <TabIcon>favorite</TabIcon>
-                <TabText>Favorites</TabText>
-              </Tab>
-              <Tab ripple iconText>
-                <TabIcon>person_pin</TabIcon>
-                <TabText>Nearby</TabText>
-              </Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source7: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar primary>
-              <Tab ripple active>Home</Tab>
-              <Tab ripple>Merchandise</Tab>
-              <Tab ripple>About Us</Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source8: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <TabBar accent>
-              <Tab ripple active>Home</Tab>
-              <Tab ripple>Merchandise</Tab>
-              <Tab ripple>About Us</Tab>
-              <TabIndicator/>
-            </TabBar>
-      </div>
-    );
-  }
-}`,
-        source9: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  Toolbar,
-  ToolbarRow,
-  ToolbarSection,
-  ToolbarTitle,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <Toolbar>
-              <ToolbarRow>
-                <ToolbarSection shrink start>
-                  <ToolbarTitle>Title</ToolbarTitle>
-                </ToolbarSection>
-                <ToolbarSection end>
-                  <div>
-                    <TabBar>
-                      <Tab ripple active>Home</Tab>
-                      <Tab ripple>Merchandise</Tab>
-                      <Tab ripple>About Us</Tab>
-                      <TabIndicator/>
-                    </TabBar>
-                  </div>
-                </ToolbarSection>
-              </ToolbarRow>
-            </Toolbar>
-      </div>
-    );
-  }
-}`,
-        source10: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  Toolbar,
-  ToolbarRow,
-  ToolbarSection,
-  ToolbarTitle,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <Toolbar>
-              <ToolbarRow>
-                <ToolbarSection shrink start>
-                  <ToolbarTitle>Title</ToolbarTitle>
-                </ToolbarSection>
-                <ToolbarSection
-                  style={{
-                    'position': 'absolute',
-                    'right': 0,
-                    'bottom': '-16px'
-                  }}
-                >
-                  <TabBar>
-                    <Tab ripple active>Home</Tab>
-                    <Tab ripple>Merchandise</Tab>
-                    <Tab ripple>About Us</Tab>
-                    <TabIndicator/>
-                  </TabBar>
-                </ToolbarSection>
-              </ToolbarRow>
-            </Toolbar>
-      </div>
-    );
-  }
-}`,
-        source11: `import React, {Component} from 'react'
-import {
-  TabBar,
-  Tab,
-  TabIndicator,
-  Toolbar,
-  ToolbarRow,
-  ToolbarSection,
-  ToolbarTitle,
-} from '../lib'
-
-export default class TabsExample extends Component {  
-  render() {
-    return (
-      <div>
-          <Toolbar>
-              <ToolbarRow>
-                <ToolbarSection shrink start>
-                  <ToolbarTitle>Title</ToolbarTitle>
-                </ToolbarSection>
-                <ToolbarSection end>
-                  <div>
-                    <TabBar accent>
-                      <Tab ripple active>Home</Tab>
-                      <Tab ripple>Merchandise</Tab>
-                      <Tab ripple>About Us</Tab>
-                      <TabIndicator/>
-                    </TabBar>
-                  </div>
-                </ToolbarSection>
-              </ToolbarRow>
-            </Toolbar>
-      </div>
-    );
-  }
-}`,
-      }
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -582,7 +251,6 @@ export default class TabsExample extends Component {
   }
 
   render() {
-    const {used} = this.state;
     return (
       <section
         className="content"
@@ -607,7 +275,7 @@ export default class TabsExample extends Component {
 
           <Example
             title='Basic Tab Bar'
-            code={used.source1}
+            code={code.tabs.source1}
           >
             <TabBar>
               <Tab ripple active>Home</Tab>
@@ -618,7 +286,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='CSS-Only Tab Bar'
-            code={used.source2}
+            code={code.tabs.source2}
           >
             <TabBar cssOnly>
               <Tab cssOnly active>Home</Tab>
@@ -629,7 +297,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Tab Bar with Scroller'
-            code={used.source3}
+            code={code.tabs.source3}
           >
             <TabBarScroll>
               <TabBarScrollIndicator back>
@@ -660,7 +328,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Icon Tab Labels'
-            code={used.source4}
+            code={code.tabs.source4}
           >
             <TabBar iconTab>
               <Tab ripple active>
@@ -677,7 +345,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='CSS-Only Icon Tab Labels'
-            code={used.source5}
+            code={code.tabs.source5}
           >
             <TabBar cssOnly iconTab>
               <Tab cssOnly active>
@@ -694,7 +362,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Icon & Text Labels'
-            code={used.source6}
+            code={code.tabs.source6}
           >
             <TabBar iconText>
               <Tab ripple iconText active>
@@ -714,7 +382,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Primary Color Indicator'
-            code={used.source7}
+            code={code.tabs.source7}
           >
             <TabBar primary>
               <Tab ripple active>Home</Tab>
@@ -725,7 +393,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Accent Color Indicator'
-            code={used.source8}
+            code={code.tabs.source8}
           >
             <TabBar accent>
               <Tab ripple active>Home</Tab>
@@ -736,7 +404,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Within Toolbar'
-            code={used.source9}
+            code={code.tabs.source9}
           >
             <Toolbar>
               <ToolbarRow>
@@ -758,7 +426,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Within Toolbar - fixed to bottom of toolbar'
-            code={used.source10}
+            code={code.tabs.source10}
           >
             <Toolbar>
               <ToolbarRow>
@@ -784,7 +452,7 @@ export default class TabsExample extends Component {
           </Example>
           <Example
             title='Within Toolbar - accent indicator'
-            code={used.source11}
+            code={code.tabs.source11}
           >
             <Toolbar>
               <ToolbarRow>

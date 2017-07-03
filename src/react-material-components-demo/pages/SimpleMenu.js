@@ -15,7 +15,7 @@ import {
   TypographyDisplay,
   TypographyBody,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class MenuPage extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ export default class MenuPage extends Component {
       open: false,
       openAnchor: false,
       select: {},
+      selectAnchor: {},
       styles: {},
       components: [
         {
@@ -117,81 +118,6 @@ export default class MenuPage extends Component {
           ]
         },
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    SimpleMenu,
-    SimpleMenuItems,
-    SimpleMenuListItem,
-    SimpleMenuAnchor,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
-
-class SimpleMenuDemo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-            openAnchor: false,
-            select: {},
-        }
-        this.handleSelected = this.handleSelected.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
-    }
-    
-    handleSelected(data) {
-        console.log(data);
-        this.setState({
-            select: data,
-            open: false
-        })
-    }
-
-    handleCancel() {
-        this.setState({
-            open: false
-        })
-    }
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <TypographyDisplay size="1">Sample Menu</TypographyDisplay>
-                    <Button
-                        primary raised
-                        onClick={() => this.setState({
-                            open: !open,
-                        })}
-                    >Open Menu
-                    </Button>
-                    <SimpleMenu
-                        open={open}
-                        onSelected={this.handleSelected}
-                        onCancel={this.handleCancel}
-                    >
-                        <SimpleMenuItems>
-                            <SimpleMenuListItem>
-                                Item Menu 1
-                            </SimpleMenuListItem>
-                            <SimpleMenuListItem>
-                                Item Menu 2
-                            </SimpleMenuListItem>
-                            <SimpleMenuListItem>
-                                Item Menu 3
-                            </SimpleMenuListItem>
-                            <SimpleMenuListItem>
-                                Item Menu 4
-                            </SimpleMenuListItem>
-                        </SimpleMenuItems>
-                    </SimpleMenu>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
@@ -212,7 +138,6 @@ class SimpleMenuDemo extends Component {
   }
 
   handleSelected(data) {
-    console.log(data);
     this.setState({
       select: data,
       open: false
@@ -235,11 +160,10 @@ class SimpleMenuDemo extends Component {
   }
 
   render() {
-    const {open, select, openAnchor, styles} = this.state;
+    const {open, select, openAnchor, selectAnchor, styles} = this.state;
     return (
       <section className="content">
-        <Demo
-        >
+        <Demo>
           <SimpleMenu
             className="demo-page-simple_menu_view"
           >
@@ -269,121 +193,133 @@ class SimpleMenuDemo extends Component {
           className="demo-page-simple_menu"
         >
           <TypographyDisplay size="1">Sample Menu</TypographyDisplay>
-          <TypographyBody>
-            {`Selected item: ${(select.index || select.index === 0) ?
-              select.index : 'none'} - ${(select.item) ? select.item.innerText : 'selected'}`}
-          </TypographyBody>
-          <Button
-            primary raised
-            onClick={() => this.setState({
-              open: !open,
-            })}
-          >Open Menu
-          </Button>
-          <SimpleMenu
-            open={open}
-            onSelected={this.handleSelected}
-            onCancel={this.handleCancel}
+          <Example
+            title="Sample Menu"
+            code={code.menu.source1}
           >
-            <SimpleMenuItems>
-              <SimpleMenuListItem>
-                Item Menu 1
-              </SimpleMenuListItem>
-              <SimpleMenuListItem>
-                Item Menu 2
-              </SimpleMenuListItem>
-              <SimpleMenuListItem>
-                Item Menu 3
-              </SimpleMenuListItem>
-              <SimpleMenuListItem>
-                Item Menu 4
-              </SimpleMenuListItem>
-            </SimpleMenuItems>
-          </SimpleMenu>
-          <TypographyDisplay size="1">Sample Menu with Anchor</TypographyDisplay>
-          <div>
-            <FormField
-              onClick={this.handlePosition}
+            <Button
+              primary raised
+              onClick={() => this.setState({
+                open: !open,
+              })}
+            >Open Menu
+            </Button>
+            <SimpleMenu
+              open={open}
+              onSelected={this.handleSelected}
+              onCancel={this.handleCancel}
             >
-              Position: Top left
-              <Radio
-                ripple
-              >
-                <RadioInput
-                  name="radios"
-                  data-position="top left"
-                />
-              </Radio>
-              Top right
-              <Radio
-                ripple
-              >
-                <RadioInput
-                  name="radios"
-                  data-position="top right"
-                />
-              </Radio>
-              Bottom left
-              <Radio
-                ripple
-              >
-                <RadioInput
-                  name="radios"
-                  data-position="bottom left"
-                />
-              </Radio>
-              Bottom right
-              <Radio
-                ripple
-              >
-                <RadioInput
-                  name="radios"
-                  data-position="bottom right"
-                />
-              </Radio>
-            </FormField>
-          </div>
-          <div
-            style={{
-              'position': 'relative',
-              'height': '30em'
-            }}
+              <SimpleMenuItems>
+                <SimpleMenuListItem>
+                  Item Menu 1
+                </SimpleMenuListItem>
+                <SimpleMenuListItem>
+                  Item Menu 2
+                </SimpleMenuListItem>
+                <SimpleMenuListItem>
+                  Item Menu 3
+                </SimpleMenuListItem>
+                <SimpleMenuListItem>
+                  Item Menu 4
+                </SimpleMenuListItem>
+              </SimpleMenuItems>
+            </SimpleMenu>
+            <TypographyBody>
+              {`Selected item: ${(select.index || select.index === 0) ?
+                `index ${select.index}` : 'none'} - ${(select.item) ? select.item.innerText : 'selected'}`}
+            </TypographyBody>
+          </Example>
+          <Example
+            title="Sample Menu with Anchor"
+            code={code.menu.source2}
           >
-            <SimpleMenuAnchor
-              style={styles}
+            <div
+              style={{
+                'position': 'relative',
+                'height': '30em'
+              }}
             >
-              <Button
-                primary raised onClick={() => this.setState({
-                openAnchor: !openAnchor,
-              })}>Open Menu</Button>
-              <SimpleMenu
-                open={openAnchor}
-                onCancel={() => this.setState({
-                  openAnchor: false
-                })}
-                onSelected={(data) => this.setState({
-                  select: data,
-                  openAnchor: false
-                })}
+              <SimpleMenuAnchor
+                style={styles}
               >
-                <SimpleMenuItems>
-                  <SimpleMenuListItem>
-                    Item Menu Anchor 1
-                  </SimpleMenuListItem>
-                  <SimpleMenuListItem>
-                    Item Menu Anchor 2
-                  </SimpleMenuListItem>
-                  <SimpleMenuListItem>
-                    Item Menu Anchor 3
-                  </SimpleMenuListItem>
-                  <SimpleMenuListItem>
-                    Item Menu Anchor 4
-                  </SimpleMenuListItem>
-                </SimpleMenuItems>
-              </SimpleMenu>
-            </SimpleMenuAnchor>
-          </div>
-
+                <Button
+                  primary raised onClick={() => this.setState({
+                  openAnchor: !openAnchor,
+                })}>Open Menu</Button>
+                <SimpleMenu
+                  open={openAnchor}
+                  onCancel={() => this.setState({
+                    openAnchor: false
+                  })}
+                  onSelected={(data) => this.setState({
+                    selectAnchor: data,
+                    openAnchor: false
+                  })}
+                >
+                  <SimpleMenuItems>
+                    <SimpleMenuListItem>
+                      Item Menu Anchor 1
+                    </SimpleMenuListItem>
+                    <SimpleMenuListItem>
+                      Item Menu Anchor 2
+                    </SimpleMenuListItem>
+                    <SimpleMenuListItem>
+                      Item Menu Anchor 3
+                    </SimpleMenuListItem>
+                    <SimpleMenuListItem>
+                      Item Menu Anchor 4
+                    </SimpleMenuListItem>
+                  </SimpleMenuItems>
+                </SimpleMenu>
+              </SimpleMenuAnchor>
+            </div>
+            <div>
+              <FormField
+                onClick={this.handlePosition}
+              >
+                Position: Top left
+                <Radio
+                  ripple
+                >
+                  <RadioInput
+                    name="radios"
+                    data-position="top left"
+                  />
+                </Radio>
+                Top right
+                <Radio
+                  ripple
+                >
+                  <RadioInput
+                    name="radios"
+                    data-position="top right"
+                  />
+                </Radio>
+                Bottom left
+                <Radio
+                  ripple
+                >
+                  <RadioInput
+                    name="radios"
+                    data-position="bottom left"
+                  />
+                </Radio>
+                Bottom right
+                <Radio
+                  ripple
+                >
+                  <RadioInput
+                    name="radios"
+                    data-position="bottom right"
+                  />
+                </Radio>
+              </FormField>
+            </div>
+            <TypographyBody>
+              {`Selected item: ${(selectAnchor.index || selectAnchor.index === 0) ?
+                `index ${selectAnchor.index}` : 'none'} - ${(selectAnchor.item) ? selectAnchor.item.innerText : 'selected'}`}
+            </TypographyBody>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

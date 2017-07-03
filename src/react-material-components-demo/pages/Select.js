@@ -21,7 +21,7 @@ import {
   TypographyBody,
 } from '../lib'
 
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class SelectPage extends Component {
   constructor(props) {
@@ -146,170 +146,6 @@ export default class SelectPage extends Component {
           ]
         },
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-  Select,
-  SelectMenu,
-  SelectText,
-  SelectItems,
-  SelectItem,
-  ListGroup,
-  ListItem,
-  Elevation,
-  TypographyBody,
-  FormField,
-  Checkbox,
-  CheckboxInput,
-  CheckboxBG,
-  CheckboxLabel,
-} from '../lib'
-
-export default class FullyFeaturedSelect extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      disabled: false,
-      selected: '',
-    }
-    this.handleDisabled = this.handleDisabled.bind(this);
-    this.handleSelected = this.handleSelected.bind(this);
-  }
-  handleDisabled(){
-    this.setState({
-      disabled: !this.state.disabled
-    })
-  }
-  handleSelected({index, item}){
-    this.setState({
-      selected: \`'\${item.innerText}' at index \${index}\`
-    })
-  }
-  render() {
-    return (
-      <div>
-          <Select
-              disabled={disabled}
-              onSelected={this.handleSelected}
-              onCancel={(event) => console.log(event)}
-              onChange={(event) => console.log(event)}
-            >
-              <SelectText>Pick a food group</SelectText>
-              <SelectMenu>
-                <SelectItems>
-                  <SelectItem disabled>
-                    Pick a food group
-                  </SelectItem>
-                  <SelectItem>
-                  Bread, Cereal, Rice, and Pasta
-                </SelectItem>
-                  <SelectItem>
-                    Vegetables
-                  </SelectItem>
-                  <SelectItem
-                    disabled
-                  >
-                    Fruit (Disabled)
-                  </SelectItem>
-                  <SelectItem>
-                    Milk, Yogurt, and Cheese
-                  </SelectItem>
-                  <SelectItem>
-                    Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts
-                  </SelectItem>
-                  <SelectItem>
-                    Fats, Oils, and Sweets
-                  </SelectItem>
-                </SelectItems>
-              </SelectMenu>
-            </Select>
-            <Elevation
-              style={{
-                'display': 'flex',
-                'flexFlow': 'column nowrap',
-              }}
-            >
-              <TypographyBody>
-                Currently selected: {(selected)? selected : '(none)'}
-              </TypographyBody>
-              <FormField>
-                <Checkbox
-                  ripple
-                >
-                  <CheckboxInput
-                    checked={disabled}
-                    onChange={this.handleDisabled}
-                  />
-                  <CheckboxBG/>
-                </Checkbox>
-                <CheckboxLabel>
-                  Disabled
-                </CheckboxLabel>
-              </FormField>
-            </Elevation>
-      </div>
-    );
-  }
-}`,
-        source2: `import React, {Component} from 'react'
-import {
-  Select
-} from '../lib'
-
-export default class OnlyCSSSelect extends Component {
-
-  render() {
-    return (
-      <div>
-          <Select
-              cssOnly
-            >
-              <option value="" default selected>Pick a food</option>
-              <option value="grains">Bread, Cereal, Rice, and Pasta</option>
-              <option value="vegetables">Vegetables</option>
-              <optgroup label="Fruits">
-                <option value="apple">Apple</option>
-                <option value="oranges">Orange</option>
-                <option value="banana">Banana</option>
-              </optgroup>
-              <option value="dairy">Milk, Yogurt, and Cheese</option>
-              <option value="meat">Meat, Poultry, Fish, Dry Beans, Eggs, and Nuts</option>
-              <option value="fats">Fats, Oils, and Sweets</option>
-            </Select>
-      </div>
-    );
-  }
-}`,
-        source3: `import React, {Component} from 'react'
-import {
-  Select,
-  ListGroup,
-  ListItem
-} from '../lib'
-
-export default class OnlyCSSMultipleSelect extends Component {
-
-  render() {
-    return (
-      <div>
-          <Select cssOnly multiple size="8">
-              <ListGroup elementType="optgroup" label="Fats, Oils, &amp; Sweets">
-                <ListItem elementType='option' className="mdc-list-item">Olive Oil</ListItem>
-                <ListItem elementType='option'>Brown Sugar</ListItem>
-                <ListItem elementType='option'>Ice Cream</ListItem>
-              </ListGroup>
-              <ListDivider elementType='option' role="presentation" disabled=""/>
-              <ListGroup elementType="optgroup" label="Dairy">
-                <ListItem elementType='option'>Milk</ListItem>
-                <ListItem elementType='option'>Cheese</ListItem>
-                <ListItem elementType='option'>More Cheese</ListItem>
-              </ListGroup>
-            </Select>
-      </div>
-    );
-  }
-}`,
-      }
     };
     this.renderTable = this.renderTable.bind(this);
     this.handleDisabled = this.handleDisabled.bind(this);
@@ -338,7 +174,7 @@ export default class OnlyCSSMultipleSelect extends Component {
     })
   }
   render() {
-    const { disabled, selected, used } = this.state;
+    const { disabled, selected } = this.state;
     return (
       <section
       className="content"
@@ -391,7 +227,7 @@ export default class OnlyCSSMultipleSelect extends Component {
 
           <Example
             title="Fully-Featured Component"
-            code={used.source1}
+            code={code.select.source1}
           >
             <Select
               disabled={disabled}
@@ -455,7 +291,7 @@ export default class OnlyCSSMultipleSelect extends Component {
           </Example>
           <Example
           title="Select Only CSS"
-          code={used.source2}
+          code={code.select.source2}
           >
             <Select
               cssOnly
@@ -475,7 +311,7 @@ export default class OnlyCSSMultipleSelect extends Component {
           </Example>
           <Example
           title="Select Multiple - CSS Only"
-          code={used.source3}
+          code={code.select.source3}
           >
             <Select cssOnly multiple size="8">
               <ListGroup elementType="optgroup" label="Fats, Oils, &amp; Sweets">
@@ -492,9 +328,7 @@ export default class OnlyCSSMultipleSelect extends Component {
 
             </Select>
           </Example>
-
         </Elevation>
-
         <Footer/>
       </section>
     )

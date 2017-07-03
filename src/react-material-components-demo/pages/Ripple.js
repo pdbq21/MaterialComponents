@@ -6,10 +6,8 @@ import {
   Ripple,
   Elevation,
   TypographyDisplay,
-  TypographyBody,
-  TypographyHeadline,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class RipplePage extends Component {
   constructor(props) {
@@ -38,7 +36,7 @@ export default class RipplePage extends Component {
               defaultValue: 'false',
               description: '-'
             }, {
-              name: 'data-no-js',
+              name: 'onlyCSS',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
@@ -47,37 +45,6 @@ export default class RipplePage extends Component {
           ]
         }
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    Ripple,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
-
-class RippleDemo extends Component {
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <Ripple>
-                        <div
-                            className="mdc-elevation--z2"
-                            tabIndex="0"
-                            style={{
-                                'backgroundColor': 'white',
-                                'height': '10em',
-                                'width': '10em'
-                            }}
-                        />
-                    </Ripple>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -124,144 +91,177 @@ class RippleDemo extends Component {
 
         >
           <TypographyDisplay size="1">Ripple</TypographyDisplay>
-          <TypographyHeadline size="1">Bounded</TypographyHeadline>
-          <Ripple>
-
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
-            >
-              Interact with me!
-            </div>
-          </Ripple>
-          <TypographyHeadline>Unbounded</TypographyHeadline>
-
-          <Ripple
-            unbounded
+          <Example
+            title="Ripple - Bounded"
+            code={code.ripple.source1}
           >
-            <div className="material-icons demo-surface"
-                 aria-label="Favorite"
-                 tabIndex="0"
-            >
-              favorite
-            </div>
-          </Ripple>
-
-          <TypographyHeadline>Theme Styles</TypographyHeadline>
-
-          <Ripple
-            primary
+            <Ripple>
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Interact with me!
+              </div>
+            </Ripple>
+          </Example>
+          <Example
+            title="Ripple - Unbounded"
+            code={code.ripple.source2}
           >
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
+            <Ripple
+              unbounded
             >
-              Primary
-            </div>
-          </Ripple>
-
-
-          <Ripple
-            accent
+              <div
+                className="material-icons demo-surface"
+                aria-label="Favorite"
+                tabIndex="0"
+                style={{
+                  'display': 'flex',
+                  'alignItems': 'center',
+                  'justifyContent': 'center',
+                  'cursor': 'pointer',
+                  'userSelect': 'none',
+                  'WebkitUserSelect': 'none',
+                  'width': '40px',
+                  'height': '40px',
+                }}
+              >
+                favorite
+              </div>
+            </Ripple>
+          </Example>
+          <Example
+            title="Ripple - Theme Styles"
+            code={code.ripple.source3}
           >
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
+            <Ripple
+              primary
             >
-              Accent
-            </div>
-          </Ripple>
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Primary
+              </div>
+            </Ripple>
+            <Ripple
+              accent
+            >
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Accent
+              </div>
+            </Ripple>
+          </Example>
 
           <TypographyDisplay size="1">Ripple only CSS</TypographyDisplay>
-
-          <TypographyHeadline>Bounded</TypographyHeadline>
-          <Ripple
-            data-no-js
+          <Example
+            title="Ripple only CSS - Bounded"
+            code={code.ripple.source4}
           >
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
+            <Ripple
+              onlyCSS
             >
-              Interact with me!
-            </div>
-          </Ripple>
-
-          <TypographyHeadline>Unbounded</TypographyHeadline>
-
-          <Ripple
-            data-no-js
-            unbounded
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Interact with me!
+              </div>
+            </Ripple>
+          </Example>
+          <Example
+            title="Ripple only CSS - Unbounded"
+            code={code.ripple.source5}
           >
-            <div className="material-icons demo-surface"
-                 aria-label="Favorite"
-                 tabIndex="0"
+            <Ripple
+              onlyCSS
+              unbounded
             >
-              favorite
-            </div>
-          </Ripple>
-          <TypographyHeadline>Theme Styles</TypographyHeadline>
-
-          <Ripple
-            data-no-js
-            primary
+              <div
+                className="material-icons demo-surface"
+                aria-label="Favorite"
+                tabIndex="0"
+                style={{
+                  'display': 'flex',
+                  'alignItems': 'center',
+                  'justifyContent': 'center',
+                  'cursor': 'pointer',
+                  'userSelect': 'none',
+                  'WebkitUserSelect': 'none',
+                  'width': '40px',
+                  'height': '40px',
+                }}
+              >
+                favorite
+              </div>
+            </Ripple>
+          </Example>
+          <Example
+            title="Ripple only CSS - Theme Styles"
+            code={code.ripple.source6}
           >
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
+            <Ripple
+              onlyCSS
+              primary
             >
-              Primary
-            </div>
-          </Ripple>
-
-
-          <Ripple
-            data-no-js
-            accent
-          >
-            <div className="mdc-elevation--z2"
-                 tabIndex="0"
-                 style={{
-                   'height': '10em',
-                   'width': '10em',
-                   'display': 'flex',
-                   'alignItems': 'center',
-                   'justifyContent': 'center',
-                 }}
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Primary
+              </div>
+            </Ripple>
+            <Ripple
+              onlyCSS
+              accent
             >
-              Accent
-            </div>
-          </Ripple>
-
+              <div className="mdc-elevation--z2"
+                   tabIndex="0"
+                   style={{
+                     'height': '10em',
+                     'width': '10em',
+                     'display': 'flex',
+                     'alignItems': 'center',
+                     'justifyContent': 'center',
+                   }}
+              >
+                Accent
+              </div>
+            </Ripple>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

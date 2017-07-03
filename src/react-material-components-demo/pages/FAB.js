@@ -9,7 +9,7 @@ import {
   TypographyHeadline,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class FABPage extends Component {
   constructor(props) {
@@ -65,31 +65,7 @@ export default class FABPage extends Component {
           ]
         }
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    FAB,
-    FABIcon,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
 
-export default class FABDemo extends Component {
-
-    render() {
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                >
-                    <FAB ripple icon>
-                        <FABIcon>favorite</FABIcon>
-                    </FAB>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -127,8 +103,8 @@ export default class FABDemo extends Component {
         >
           <TypographyDisplay size="1">Floating Action Buttons</TypographyDisplay>
           <Example
-          title="Normal FABs"
-          code=""
+            title="Normal FABs"
+            code={code.fab.source1}
           >
             <TypographyHeadline size="1">FAB Default</TypographyHeadline>
             <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
@@ -140,24 +116,32 @@ export default class FABDemo extends Component {
             <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
           </Example>
 
-          <TypographyDisplay size="1">CSS Only FABs</TypographyDisplay>
-          <TypographyHeadline>FAB Default</TypographyHeadline>
-          <FAB icon><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB mini</TypographyHeadline>
-          <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB plain</TypographyHeadline>
-          <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-          <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
-          <TypographyDisplay size="1">Disabled FABs</TypographyDisplay>
-          <TypographyHeadline>FAB Default</TypographyHeadline>
-          <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB mini</TypographyHeadline>
-          <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB plain</TypographyHeadline>
-          <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
-          <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-          <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+          <Example
+            title="CSS Only FABs"
+            code={code.fab.source2}
+          >
+            <TypographyHeadline>FAB Default</TypographyHeadline>
+            <FAB icon><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB mini</TypographyHeadline>
+            <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB plain</TypographyHeadline>
+            <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
+            <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
+          </Example>
+          <Example
+            title="Disabled FABs"
+            code={code.fab.source3}
+          >
+            <TypographyHeadline>FAB Default</TypographyHeadline>
+            <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB mini</TypographyHeadline>
+            <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB plain</TypographyHeadline>
+            <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
+            <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

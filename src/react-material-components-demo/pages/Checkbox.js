@@ -12,7 +12,7 @@ import {
   FormField,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class CheckboxPage extends Component {
   constructor(props) {
@@ -160,147 +160,6 @@ export default class CheckboxPage extends Component {
           ]
         },
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-  Checkbox,
-  CheckboxLabel,
-  CheckboxInput,
-  CheckboxBG,
-  Button,
-  FormField,
-  Elevation
-} from '../lib'
-
-export default class CheckboxWithJS extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false,
-      disabled: false,
-      indeterminate: false,
-    }
-    this.handelIndeterminate = this.handelIndeterminate.bind(this);
-    this.handelDisabled = this.handelDisabled.bind(this);
-  }
-  handelIndeterminate() {
-    this.setState({
-      indeterminate: true
-    })
-  }
-
-  handelDisabled() {
-    this.setState({
-      disabled: !this.state.disabled
-    })
-  }
-  render() {
-  const {disabled, indeterminate} = this.state;
-    return (
-      <div>
-         <FormField>
-              <Checkbox
-                ripple
-                disabled={disabled}
-              >
-                <CheckboxInput
-                  id="checkbox1"
-                  onChange={({target}) => this.setState({
-                    checked: target.checked,
-                    indeterminate: false
-                  })}
-                  aria-labelledby="checkbox_label1"
-                  disabled={disabled}
-                  indeterminate={indeterminate}
-                />
-                <CheckboxBG/>
-              </Checkbox>
-              <CheckboxLabel id="checkbox_label1" htmlFor="checkbox1">
-                The checkbox is currently
-              </CheckboxLabel>
-            </FormField>
-            <Elevation
-              style={{
-                'display': 'flex',
-                'flexFlow': 'row nowrap',
-              }}
-            >
-              <Button
-                primary
-                raised
-                ripple
-                onClick={this.handelIndeterminate}
-                style={{'marginRight': '0.5em'}}
-              >Make indeterminate</Button>
-              <Button primary raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
-            </Elevation>
-      </div>
-    );
-  }
-}`,
-        source2: `import React, {Component} from 'react'
-import {
-  Checkbox,
-  CheckboxLabel,
-  CheckboxInput,
-  CheckboxBG,
-  FormField,
-  Elevation
-} from '../lib'
-
-export default class CheckboxCSSOnly extends Component {
-
-  render() {
-    return (
-      <div>
-          <FormField>
-              <Checkbox
-              >
-                <CheckboxInput
-                />
-                <CheckboxBG/>
-              </Checkbox>
-              <CheckboxLabel>
-                The checkbox is currently
-              </CheckboxLabel>
-            </FormField>
-      </div>
-    );
-  }
-}`,
-        source3: `import React, {Component} from 'react'
-import {
-  Checkbox,
-  CheckboxLabel,
-  CheckboxInput,
-  CheckboxBG,
-  FormField,
-  Elevation
-} from '../lib'
-
-export default class CheckboxCSSOnlyDisabled extends Component {
-
-  render() {
-    return (
-      <div>
-          <FormField>
-              <Checkbox
-              disabled
-              >
-                <CheckboxInput
-                disabled
-                />
-                <CheckboxBG/>
-              </Checkbox>
-              <CheckboxLabel>
-                The checkbox is currently
-              </CheckboxLabel>
-            </FormField>
-      </div>
-    );
-  }
-}`
-      }
     };
     this.renderTable = this.renderTable.bind(this);
 
@@ -333,7 +192,7 @@ export default class CheckboxCSSOnlyDisabled extends Component {
   }
 
   render() {
-    const {disabled, indeterminate, used} = this.state;
+    const {disabled, indeterminate} = this.state;
     return (
       <section
         className="content"
@@ -365,7 +224,7 @@ export default class CheckboxCSSOnlyDisabled extends Component {
           <TypographyDisplay size="1">Checkbox</TypographyDisplay>
           <Example
             title="Checkbox With JS"
-            code={used.source1}
+            code={code.checkbox.source1}
           >
             <FormField>
               <Checkbox
@@ -406,7 +265,7 @@ export default class CheckboxCSSOnlyDisabled extends Component {
           </Example>
           <Example
             title="Checkbox - CSS Only"
-            code={used.source2}
+            code={code.checkbox.source2}
           >
             <FormField>
               <Checkbox
@@ -425,7 +284,7 @@ export default class CheckboxCSSOnlyDisabled extends Component {
           </Example>
           <Example
             title="Checkbox - CSS Only + Disabled"
-            code={used.source3}
+            code={code.checkbox.source3}
           >
             <FormField>
               <Checkbox

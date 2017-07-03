@@ -7,7 +7,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class FormFieldPage extends Component {
   constructor(props) {
@@ -33,43 +33,6 @@ export default class FormFieldPage extends Component {
           ]
         }
       ],
-      used: {
-        source1: `
-import React, {Component} from 'react'
-import {
-    FormField,
-} from '../lib'
-
-export default class FormFieldDemo extends Component {
-    render() {
-        return (
-            <div>
-              <FormField>
-                <input type="checkbox"/>
-                <label>Input Label</label>
-              </FormField>
-            </div>
-        )
-    }
-}`,
-        source2: `import React, {Component} from 'react'
-import {
-    FormField,
-} from '../lib'
-
-export default class FormFieldDemo extends Component {
-    render() {
-        return (
-            <div>
-              <FormField alignEnd>
-                <input type="checkbox"/>
-                <label>Input Label</label>
-              </FormField>
-            </div>
-        )
-    }
-}`
-      }
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -87,7 +50,6 @@ export default class FormFieldDemo extends Component {
   }
 
   render() {
-const {used} = this.state;
     return (
       <section
         className="content"
@@ -112,7 +74,7 @@ const {used} = this.state;
           <TypographyDisplay size="1">FormField</TypographyDisplay>
           <Example
             title="FormField"
-            code={used.source1}
+            code={code.formField.source1}
           >
             <FormField>
               <input type="checkbox"/>
@@ -121,7 +83,7 @@ const {used} = this.state;
           </Example>
           <Example
             title="Form Field Align End"
-            code={used.source2}
+            code={code.formField.source2}
           >
             <FormField alignEnd>
               <input type="checkbox"/>

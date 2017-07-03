@@ -11,18 +11,15 @@ import {
   Button,
   Checkbox,
   CheckboxInput,
-  CheckboxBackground,
-  CheckboxCheckmark,
-  CheckboxPath,
+  CheckboxBG,
   CheckboxLabel,
-  CheckboxMixedmark,
   FormField,
   Textfield,
   TextfieldInput,
   TextfieldLabel,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class SnackbarPage extends Component {
   constructor(props) {
@@ -124,204 +121,6 @@ export default class SnackbarPage extends Component {
           ]
         },
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    Snackbar,
-    SnackbarText,
-    SnackbarActionWrapper,
-    SnackbarActionButton,
-    FormField,
-    Textfield,
-    TextfieldInput,
-    TextfieldLabel,
-    Elevation,
-    Button,
-    Checkbox,
-    CheckboxInput,
-    TypographyDisplay,
-} from '../lib'
-
-class SnackbarDemo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-            checkedMultiline: false,
-            checkedAction: false,
-            valueMessage: 'default message',
-            valueAction: 'action',
-            valueTimeout: '2750',//default
-        }
-        this.handel = this.handel.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handelAction = this.handelAction.bind(this);
-        this.handleChangeMessage = this.handleChangeMessage.bind(this);
-        this.handleChangeAction = this.handleChangeAction.bind(this);
-        this.handleChangeTimeout = this.handleChangeTimeout.bind(this);
-        this.handleChangeCheckedMultiline = this.handleChangeCheckedMultiline.bind(this);
-        this.handleChangeCheckedAction = this.handleChangeCheckedAction.bind(this);
-    }
-    
-    handel() {
-        this.setState({
-            open: !this.state.open
-        })
-    }
-
-    handleChangeMessage({target}) {
-        this.setState({
-            valueMessage: target.value
-        })
-    }
-
-    handleChangeAction({target}) {
-        this.setState({
-            valueAction: target.value
-        })
-    }
-
-    handleChangeTimeout({target}) {
-        this.setState({
-            valueTimeout: target.value
-        })
-    }
-
-    handleChangeCheckedMultiline() {
-        this.setState({
-            checkedMultiline: !this.state.checkedMultiline
-        })
-    }
-
-    handleChangeCheckedAction() {
-        this.setState({
-            checkedAction: !this.state.checkedAction
-        })
-    }
-
-    handelAction() {
-        console.log('action')
-    }
-
-    handleClose() {
-        this.setState({
-            open: false
-        })
-    }
-    render() {
-            const {
-            open,
-            checkedMultiline,
-            checkedAction,
-            valueMessage,
-            valueAction,
-            valueTimeout,
-        } = this.state;
-
-        return (
-            <section>
-                <Elevation
-                    zSpace="2"
-                    style={{
-                        'display': 'flex',
-                        'flexFlow': 'column nowrap',
-                    }}
-                >
-                    <TypographyDisplay size="1">Snackbar</TypographyDisplay>
-                    <FormField>
-                        <Checkbox
-                            ripple
-                        >
-                            <CheckboxInput
-                                checked={checkedMultiline}
-                                onChange={this.handleChangeCheckedMultiline}
-
-                            />
-                            <CheckboxBackground>
-                                <CheckboxCheckmark>
-                                    <CheckboxPath/>
-                                </CheckboxCheckmark>
-                                <CheckboxMixedmark/>
-                            </CheckboxBackground>
-                        </Checkbox>
-                        <CheckboxLabel>
-                            Multiline
-                        </CheckboxLabel>
-                    </FormField>
-                    <FormField>
-                        <Checkbox
-                            ripple
-                        >
-                            <CheckboxInput
-                                checked={checkedAction}
-                                onChange={this.handleChangeCheckedAction}
-                            />
-                            <CheckboxBackground>
-                                <CheckboxCheckmark>
-                                    <CheckboxPath/>
-                                </CheckboxCheckmark>
-                                <CheckboxMixedmark/>
-                            </CheckboxBackground>
-                        </Checkbox>
-                        <CheckboxLabel>
-                            Action On Bottom
-                        </CheckboxLabel>
-                    </FormField>
-                    <FormField>
-                        <Textfield>
-                            <TextfieldInput
-                                type="text"
-                                value={valueMessage || ''}
-                                onChange={this.handleChangeMessage}
-                            />
-                            <TextfieldLabel>Message Text</TextfieldLabel>
-                        </Textfield>
-                    </FormField>
-                    <FormField>
-                        <Textfield>
-                            <TextfieldInput
-                                type="text"
-                                value={valueAction || ''}
-                                onChange={this.handleChangeAction}
-                            />
-                            <TextfieldLabel>Action Text</TextfieldLabel>
-                        </Textfield>
-                    </FormField>
-                    <FormField>
-                        <Textfield>
-                            <TextfieldInput
-                                type="text"
-                                value={valueTimeout || ''}
-                                onChange={this.handleChangeTimeout}
-                            />
-                            <TextfieldLabel>Timeout</TextfieldLabel>
-                        </Textfield>
-                    </FormField>
-
-                    <Button primary raised onClick={this.handel}>Show Snackbar</Button>
-
-                    <Snackbar
-                        open={open}
-                        message={valueMessage}
-                        timeout={valueTimeout}
-                        actionHandler={this.handelAction}
-                        actionText={valueAction}
-                        multiline={checkedMultiline}
-                        actionOnBottom={checkedAction}
-                        onClose={this.handleClose}
-                        aria-live="assertive"
-                        aria-atomic="true"
-                    >
-                        <SnackbarText/>
-                        <SnackbarActionWrapper>
-                            <SnackbarActionButton/>
-                        </SnackbarActionWrapper>
-                    </Snackbar>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
     this.handel = this.handel.bind(this);
@@ -433,96 +232,96 @@ class SnackbarDemo extends Component {
           }}
         >
           <TypographyDisplay size="1">Snackbar</TypographyDisplay>
-
-          <FormField>
-            <Checkbox
-              ripple
-            >
-              <CheckboxInput
-                checked={checkedMultiline}
-                onChange={this.handleChangeCheckedMultiline}
-
-              />
-              <CheckboxBackground>
-                <CheckboxCheckmark>
-                  <CheckboxPath/>
-                </CheckboxCheckmark>
-                <CheckboxMixedmark/>
-              </CheckboxBackground>
-            </Checkbox>
-            <CheckboxLabel>
-              Multiline
-            </CheckboxLabel>
-          </FormField>
-          <FormField>
-            <Checkbox
-              ripple
-            >
-              <CheckboxInput
-                checked={checkedAction}
-                onChange={this.handleChangeCheckedAction}
-              />
-              <CheckboxBackground>
-                <CheckboxCheckmark>
-                  <CheckboxPath/>
-                </CheckboxCheckmark>
-                <CheckboxMixedmark/>
-              </CheckboxBackground>
-            </Checkbox>
-            <CheckboxLabel>
-              Action On Bottom
-            </CheckboxLabel>
-          </FormField>
-          <FormField>
-            <Textfield>
-              <TextfieldInput
-                type="text"
-                value={valueMessage || ''}
-                onChange={this.handleChangeMessage}
-              />
-              <TextfieldLabel>Message Text</TextfieldLabel>
-            </Textfield>
-          </FormField>
-          <FormField>
-            <Textfield>
-              <TextfieldInput
-                type="text"
-                value={valueAction || ''}
-                onChange={this.handleChangeAction}
-              />
-              <TextfieldLabel>Action Text</TextfieldLabel>
-            </Textfield>
-          </FormField>
-          <FormField>
-            <Textfield>
-              <TextfieldInput
-                type="text"
-                value={valueTimeout || ''}
-                onChange={this.handleChangeTimeout}
-              />
-              <TextfieldLabel>Timeout</TextfieldLabel>
-            </Textfield>
-          </FormField>
-
-          <Button primary raised onClick={this.handel}>Show Snackbar</Button>
-
-          <Snackbar
-            open={open}
-            message={valueMessage}
-            timeout={valueTimeout}
-            actionHandler={this.handelAction}
-            actionText={valueAction}
-            multiline={checkedMultiline}
-            actionOnBottom={checkedAction}
-            onClose={this.handleClose}
-            aria-live="assertive"
-            aria-atomic="true"
+          <Example
+            title="Snackbar"
+            code={code.snackbar.source1}
           >
-            <SnackbarText/>
-            <SnackbarActionWrapper>
-              <SnackbarActionButton/>
-            </SnackbarActionWrapper>
-          </Snackbar>
+            <Button primary raised onClick={this.handel}>Show Snackbar</Button>
+
+            <Snackbar
+              open={open}
+              message={valueMessage}
+              timeout={valueTimeout}
+              actionHandler={this.handelAction}
+              actionText={valueAction}
+              multiline={checkedMultiline}
+              actionOnBottom={checkedAction}
+              onClose={this.handleClose}
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <SnackbarText/>
+              <SnackbarActionWrapper>
+                <SnackbarActionButton/>
+              </SnackbarActionWrapper>
+            </Snackbar>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'column nowrap',
+              }}
+            >
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={checkedMultiline}
+                    onChange={this.handleChangeCheckedMultiline}
+
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Multiline
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={checkedAction}
+                    onChange={this.handleChangeCheckedAction}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Action On Bottom
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="text"
+                    value={valueMessage || ''}
+                    onChange={this.handleChangeMessage}
+                  />
+                  <TextfieldLabel>Message Text</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="text"
+                    value={valueAction || ''}
+                    onChange={this.handleChangeAction}
+                  />
+                  <TextfieldLabel>Action Text</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="text"
+                    value={valueTimeout || ''}
+                    onChange={this.handleChangeTimeout}
+                  />
+                  <TextfieldLabel>Timeout</TextfieldLabel>
+                </Textfield>
+              </FormField>
+            </Elevation>
+          </Example>
         </Elevation>
         <Footer/>
       </section>

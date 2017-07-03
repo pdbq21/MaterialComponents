@@ -20,7 +20,7 @@ import {
   TextfieldInput,
   TextfieldLabel,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class SliderPage extends Component {
   constructor(props) {
@@ -195,172 +195,7 @@ export default class SliderPage extends Component {
           ]
         },
       ],
-      used: {
-        source1: `import React, {Component} from 'react'
-import {
-  Elevation,
-  Slider,
-  SliderContainerTrack,
-  SliderContainerThumb,
-  SliderFocusRing,
-  SliderThumb,
-  SliderTrack,
-  FormField,
-  Checkbox,
-  CheckboxInput,
-  CheckboxBG,
-  CheckboxLabel,
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
-} from '../lib'
 
-export default class ContinuousSlider extends Component {
-constructor(props) {
-    super(props);
-    this.state = {
-      valueInput: 0,
-      valueChange: 0,
-      isActive: {
-        source1: false,
-      },
-      options: {
-        bgColor: false,
-        disabled: false,
-        min: 0,
-        max: 100,
-        step: 0,
-      },
-    }
-    this.handleOptions = this.handleOptions.bind(this);
-  }
-    handleOptions(option, value) {
-    const newValue = (value) ? value : !this.state.options[option];
-    this.setState({
-      options: {
-        ...this.state.options,
-        [option]: newValue
-      }
-    })
-  }
-
-  render() {
-    const {
-      valueInput,
-      valueChange,
-      isActive: {
-        source1
-      },
-      options: {
-        bgColor,
-        disabled,
-        min,
-        max,
-        step,
-      },
-    } = this.state;
-    return (
-      <div>
-              <Slider
-                style={{
-                  'backgroundColor': (bgColor) ? '#eeefff' : '',
-                }}
-                disabled={disabled}
-                onSliderInput={(value) => this.setState({
-                  valueInput: value
-                })}
-                onSliderChange={(value) => this.setState({
-                  valueChange: value
-                })}
-                aria-valuemin={min}
-                aria-valuemax={max}
-                data-step={step}
-                aria-label="Select Value"
-              >
-                <SliderContainerTrack>
-                  <SliderTrack/>
-                </SliderContainerTrack>
-                <SliderContainerThumb>
-                  <SliderThumb circle/>
-                  <SliderFocusRing/>
-                </SliderContainerThumb>
-              </Slider>
-              <Elevation
-                style={{
-                  'display': 'flex',
-                  'flexFlow': 'column nowrap',
-                }}
-              >
-                <FormField>
-                  <Textfield>
-                    <TextfieldInput
-                      type="number"
-                      value={min}
-                      onChange={({target}) => this.handleOptions('min', target.value)}
-                    />
-                    <TextfieldLabel>Min</TextfieldLabel>
-                  </Textfield>
-                </FormField>
-                <FormField>
-                  <Textfield>
-                    <TextfieldInput
-                      type="number"
-                      value={max}
-                      onChange={({target}) => this.handleOptions('max', target.value)}
-                    />
-                    <TextfieldLabel>Max</TextfieldLabel>
-                  </Textfield>
-                </FormField>
-                <FormField>
-                  <Textfield>
-                    <TextfieldInput
-                      type="number"
-                      value={step}
-                      onChange={({target}) => this.handleOptions('step', target.value)}
-                    />
-                    <TextfieldLabel>Step</TextfieldLabel>
-                  </Textfield>
-                </FormField>
-                <FormField>
-                  <Checkbox
-                    ripple
-                  >
-                    <CheckboxInput
-                      checked={disabled}
-                      onChange={() => this.handleOptions('disabled')}
-                    />
-                    <CheckboxBG/>
-                  </Checkbox>
-                  <CheckboxLabel>
-                    Disabled
-                  </CheckboxLabel>
-                </FormField>
-                <FormField>
-                  <Checkbox
-                    ripple
-                  >
-                    <CheckboxInput
-                      checked={bgColor}
-                      onChange={() => this.handleOptions('bgColor')}
-                    />
-                    <CheckboxBG/>
-                  </Checkbox>
-                  <CheckboxLabel>
-                    Use Custom BG Color
-                  </CheckboxLabel>
-                </FormField>
-                <FormField>
-                  onSliderInput: {valueInput}
-                </FormField>
-                <FormField>
-                  onSliderChange: {valueChange}
-                </FormField>
-              </Elevation>
-      </div>
-    );
-  }
-}`,
-      }
     };
     this.renderTable = this.renderTable.bind(this);
     this.handleViewCode = this.handleViewCode.bind(this);
@@ -408,8 +243,7 @@ constructor(props) {
         min,
         max,
         step,
-      },
-      used
+      }
     } = this.state;
     return (
       <section
@@ -449,7 +283,7 @@ constructor(props) {
           <TypographyDisplay size="1">Slider</TypographyDisplay>
           <Example
           title="Continuous Slider"
-          code={used.source1}
+          code={code.slider.source1}
           >
             <Slider
               style={{

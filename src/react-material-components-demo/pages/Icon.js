@@ -7,7 +7,7 @@ import {
   Elevation,
   TypographyDisplay,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table} from '../templates'
+import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
 export default class IconPage extends Component {
   constructor(props) {
@@ -27,32 +27,6 @@ export default class IconPage extends Component {
           ]
         }
       ],
-      used: `
-import React, {Component} from 'react'
-import {
-    Icon,
-    Elevation,
-    TypographyDisplay,
-} from '../lib'
-
-class IconDemo extends Component {
-    render() {
-        return (
-            <section>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-                <Elevation
-                    zSpace="2"
-                >
-                    <Icon>favorite</Icon>
-                    <Icon>favorite_border</Icon>
-                    <Icon>menu</Icon>
-                    <Icon>star_border</Icon>
-                    <Icon>star</Icon>
-                </Elevation>
-            </section>
-        )
-    }
-}`
     };
     this.renderTable = this.renderTable.bind(this);
   }
@@ -70,7 +44,6 @@ class IconDemo extends Component {
   }
 
   render() {
-    const {used} = this.state;
     return (
       <section
         className="content"
@@ -93,7 +66,7 @@ class IconDemo extends Component {
           <TypographyDisplay size="1">Icon</TypographyDisplay>
           <Example
             title="Icons"
-            code={used}
+            code={code.icon.source1}
           >
             <Icon>favorite</Icon>
             <Icon>favorite</Icon>
