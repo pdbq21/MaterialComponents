@@ -132,6 +132,14 @@ body {
     background-position: center;
 }
 
-.demo-page_demo-components{
+.demo-page_demo-components {
     padding: 1em;
+}
+
+.toolbar-view_example {
+    z-index: 0;
+}
+
+.demo-navigation > .mdc-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }

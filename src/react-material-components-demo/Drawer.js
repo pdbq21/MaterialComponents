@@ -219,9 +219,7 @@ export default class Drawer extends Component {
         onClose={handleClose}
       >
         <TemporaryDrawer>
-          <TemporaryHeader
-
-          >
+          <TemporaryHeader>
             <Theme
               primaryBg
               primaryPrimary
@@ -229,7 +227,9 @@ export default class Drawer extends Component {
               <TemporaryHeaderContent>Components</TemporaryHeaderContent>
             </Theme>
           </TemporaryHeader>
-          <TemporaryContent>
+          <TemporaryContent
+            className="demo-navigation"
+          >
             {this.renderListItem(catalogList)}
             <ListDivider
               elementType="hr"

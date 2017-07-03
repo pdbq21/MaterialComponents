@@ -190,7 +190,6 @@ export default class TextfieldPage extends Component {
 
   render() {
     const {
-      todo,
       options: {
         disabled,
         dense,
