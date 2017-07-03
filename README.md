@@ -23,15 +23,4 @@
 - [+] Select
 - [+] Ripple
 - [+] Theme
-
-##ToDo
-- Ripple:
-    - add ripple for material-icons
-- Create Theme
-- component for only material-icons need or not?
-- Add README.md with instruction for all lib elements
-- add Ripple effect on Elevation
-
-- Button
-    - add Theme
     
