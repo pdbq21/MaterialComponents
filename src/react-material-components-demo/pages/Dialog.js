@@ -14,6 +14,12 @@ import {
   Button,
   List,
   ListItem,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarTitle,
+  ToolbarMain,
+  ToolbarIcon,
   TypographyDisplay,
 } from '../lib'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
@@ -24,6 +30,7 @@ export default class DialogPage extends Component {
     this.state = {
       open: false,
       openScroll: false,
+      openFullPage: false,
       components: [
         {
           name: 'Dialog',
@@ -172,6 +179,9 @@ export default class DialogPage extends Component {
     this.handleCloseScroll = this.handleCloseScroll.bind(this);
     this.handleAccept = this.handleAccept.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleFullPage = this.handleFullPage.bind(this);
+    this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
+    this.handleCloseFullPage = this.handleCloseFullPage.bind(this);
   }
 
   renderTable() {
@@ -193,6 +203,9 @@ export default class DialogPage extends Component {
 
   handle() {
     this.setOpen(true);
+  }
+  handleFullPage() {
+    this.setState({openFullPage: true});
   }
 
   handleOpen() {
@@ -218,6 +231,13 @@ export default class DialogPage extends Component {
   handleCloseScroll() {
     this.setOpenScroll(false);
   }
+  handleOpenFullPage() {
+    this.setState({openFullPage: true});
+  }
+
+  handleCloseFullPage() {
+    this.setState({openFullPage: false});
+  }
 
   handleAccept() {
     console.log("Accept");
@@ -227,8 +247,9 @@ export default class DialogPage extends Component {
     console.log("Decline");
   }
 
+
   render() {
-    const {open, openScroll} = this.state;
+    const {open, openScroll, openFullPage} = this.state;
     return (
       <section
         className="content"
@@ -335,6 +356,72 @@ export default class DialogPage extends Component {
                   <DialogFooterButton cancel>Decline</DialogFooterButton>
                   <DialogFooterButton accept>Accept</DialogFooterButton>
                 </DialogFooter>
+              </DialogSurface>
+            </Dialog>
+          </Example>
+          <Example
+            title={'Full Page Dialog'}
+            code={code.dialog.source1}
+          >
+            <Button primary raised ripple onClick={this.handleFullPage}>Show Dialog</Button>
+            <Dialog
+              open={openFullPage}
+              onAccept={this.handleAccept}
+              onCancel={this.handleCancel}
+              onOpen={this.handleOpenFullPage}
+              onClose={this.handleCloseFullPage}
+              fullPage
+            >
+              <DialogSurface>
+                <Toolbar
+                  fixed
+                >
+                  <ToolbarRow>
+                    <ToolbarSection start>
+                      {/*Todo: need this ToolbarIcon +  DialogFooterButton => DialogHeaderButton*/}
+                      <ToolbarIcon
+                        menu
+                        className='mdc-dialog__footer__button mdc-dialog__footer__button--cancel'
+                        style={{
+                          'cursor': 'pointer'
+                        }}
+                      >clear</ToolbarIcon>
+                      <ToolbarTitle>Title</ToolbarTitle>
+                    </ToolbarSection>
+                    <ToolbarSection end>
+                      <DialogFooterButton accept>
+                        Accept
+                      </DialogFooterButton>
+                    </ToolbarSection>
+                  </ToolbarRow>
+                </Toolbar>
+                <ToolbarMain fixed>
+                  <h3>Is Top</h3>
+                  <p>
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                    egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+                    Donec
+                    eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque
+                    habitant
+                    morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
+                    tortor
+                    quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
+                    quam
+                    egestas semper. Aenean ultricies mi vitae est.
+                  </p>
+                  <p>
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                    egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+                    libero
+                    sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+                    quam,
+                    feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+                    egestas
+                    semper. Aenean ultricies mi vitae est.
+                  </p>
+                </ToolbarMain>
               </DialogSurface>
             </Dialog>
           </Example>

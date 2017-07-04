@@ -147,11 +147,14 @@ export default class Dialog extends PureComponent {
       className,
       elementType,
       children,
+      fullPage,
       ...otherProp
     } = ownProps;
 
     const ElementType = elementType || 'aside';
-    const classes = classnames('mdc-dialog', this.state.classNames, className);
+    const classes = classnames('mdc-dialog', {
+      'rmd-dialog--full-page': fullPage
+    },this.state.classNames, className);
     return (
       <ElementType
         ref="root"

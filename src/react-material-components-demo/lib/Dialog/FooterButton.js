@@ -7,31 +7,33 @@ import classnames from 'classnames';
 import {Button} from '../index'
 
 export default class FooterButton extends PureComponent {
-    static propTypes = {
-        className: PropTypes.string,
-    };
+  static propTypes = {
+    className: PropTypes.string,
+  };
 
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
-            children,
-            elementType,
-            accept,
-            cancel,
-            className,
-            ...otherProp
-        } = ownProps;
-        const classes = classnames('mdc-dialog__footer__button', {
-            'mdc-dialog__footer__button--accept': accept,
-            'mdc-dialog__footer__button--cancel': cancel
-        }, className);
-        const ElementType = elementType || Button;
-        return (
-            <ElementType
-                className={classes}
-                {...otherProp}
-            >
-                {children}
-            </ElementType>);
-    }
+  render() {
+    const ownProps = Object.assign({}, this.props);
+    const {
+      children,
+      elementType,
+      accept,
+      cancel,
+      icon,
+      className,
+      ...otherProp
+    } = ownProps;
+    const classes = classnames('mdc-dialog__footer__button', {
+      'mdc-dialog__footer__button--accept': accept,
+      'mdc-dialog__footer__button--cancel': cancel,
+      'material-icons': icon
+    }, className);
+    const ElementType = elementType || Button;
+    return (
+      <ElementType
+        className={classes}
+        {...otherProp}
+      >
+        {children}
+      </ElementType>);
+  }
 }
