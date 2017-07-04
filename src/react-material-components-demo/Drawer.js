@@ -178,6 +178,12 @@ export default class Drawer extends Component {
           link: '/hint_list',
           todo: false
         },
+        {
+          name: 'Table',
+          icon: 'code',
+          link: '/table',
+          todo: true
+        },
 
       ]
     };

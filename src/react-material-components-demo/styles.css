@@ -143,3 +143,25 @@ body {
 .demo-navigation > .mdc-list-item:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+.rmd-table__container{
+
+}
+.rmd-table__header{
+
+}
+.rmd-table__title{
+display: flex;
+    padding: 1em;
+    align-items: center;
+}
+.rmd-table__title__title{
+    font-size: 24px;
+    margin: 0;
+}
+.rmd-table__title__active{
+
+}
+.rmd-table__title__active:first-child{
+    margin-left: auto;
+}

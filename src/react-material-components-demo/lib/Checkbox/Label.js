@@ -26,11 +26,3 @@ const Label = ({
 
 Label.propTypes = propTypes;
 export default Label;
-
-/*function Label(props) {
- const {id, children} = props;
-
- return (
- <label className="mdc-checkbox-label" id={id} htmlFor={controlId}>{children}</label>
- );
- }*/
