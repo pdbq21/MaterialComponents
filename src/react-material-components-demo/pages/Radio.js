@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import {
   Radio,
   RadioInput,
+  RadioBG,
   Elevation,
   FormField,
   TypographyDisplay,
@@ -20,6 +21,13 @@ export default class RadioPage extends Component {
           name: 'Radio',
           property: [
             {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+            {
               name: 'ripple',
               type: 'bool',
               required: 'no',
@@ -34,11 +42,24 @@ export default class RadioPage extends Component {
               description: 'стає не активним'
             },
           ]
-        }, {
+        },
+        {
           name: 'RadioInput',
           property: [
             {
               description: 'no specific props'
+            },
+          ]
+        },
+        {
+          name: 'RadioBG',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
             },
           ]
         },
@@ -69,7 +90,9 @@ export default class RadioPage extends Component {
           >
             <RadioInput
               name="radios"
+              defaultChecked
             />
+            <RadioBG/>
           </Radio>
           <Radio
             ripple
@@ -77,6 +100,7 @@ export default class RadioPage extends Component {
             <RadioInput
               name="radios"
             />
+            <RadioBG/>
           </Radio>
         </Demo>
         {this.renderTable()}
@@ -91,8 +115,8 @@ export default class RadioPage extends Component {
         >
           <TypographyDisplay size="1">Radio</TypographyDisplay>
           <Example
-          title="Radio with Ripple"
-          code={code.radio.source1}
+            title="Radio with Ripple"
+            code={code.radio.source1}
           >
             <FormField>
               <Radio
@@ -101,7 +125,9 @@ export default class RadioPage extends Component {
                 <RadioInput
                   id="my-radio-demo1"
                   name="radios1"
+                  defaultChecked
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label1" htmlFor="my-radio-demo1">Radio 1</label>
             </FormField>
@@ -113,21 +139,23 @@ export default class RadioPage extends Component {
                   id="my-radio-demo2"
                   name="radios1"
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label2" htmlFor="my-radio-demo2">Radio 2</label>
             </FormField>
           </Example>
           <Example
-          title="Radio only CSS"
-          code={code.radio.source2}
+            title="Radio only CSS"
+            code={code.radio.source2}
           >
             <FormField>
               <Radio>
                 <RadioInput
                   id="my-radio-demo3"
                   name="radios2"
-
+                  defaultChecked
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label3" htmlFor="my-radio-demo3">Radio 1</label>
               <Radio>
@@ -135,13 +163,14 @@ export default class RadioPage extends Component {
                   id="my-radio-demo4"
                   name="radios2"
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label4" htmlFor="my-radio-demo4">Radio 2</label>
             </FormField>
           </Example>
           <Example
-          title="Radio only CSS - Disable"
-          code={code.radio.source3}
+            title="Radio only CSS - Disable"
+            code={code.radio.source3}
           >
             <FormField>
               <Radio disabled>
@@ -151,6 +180,7 @@ export default class RadioPage extends Component {
                   disabled
                   checked
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label5" htmlFor="my-radio-demo5">Radio 1</label>
               <Radio disabled>
@@ -159,6 +189,7 @@ export default class RadioPage extends Component {
                   name="radios3"
                   disabled
                 />
+                <RadioBG/>
               </Radio>
               <label id="my-radio-label6" htmlFor="my-radio-demo6">Radio 2</label>
             </FormField>
