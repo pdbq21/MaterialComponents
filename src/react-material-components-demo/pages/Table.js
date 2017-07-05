@@ -27,14 +27,14 @@ import {
 } from '../lib'
 //import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
-const SectionDataRow = ({
-                          // () => (value, id)
-                          handleChange,
-                          // columns => [{ name: 'name', type: 'type' },{}...]
-                          // the name - name current col, the type - type for input
-                          columns,
+const Row = ({
+               // () => (value, id)
+               handleChange,
+               // columns => [{ name: 'name', type: 'type' },{}...]
+               // the name - name current col, the type - type for input
+               columns,
 // other props
-                        }) => {
+             }) => {
   return (
     <LayoutGrid>
       <LayoutGridInner>
@@ -63,15 +63,17 @@ export default class TablePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,
-      openFullPage: false,
-      selectAll: false,
-      selectedItems: [],
+      id: 0,// generation ids for row
+      openFullPage: false, // close/open  fullPage dialog
+      selectAll: false, // all checkbox is checked
+      selectedItems: [], //  all checked row
       dataTable: {
-        id: 'tableId',
-        childrenId: [],
+        id: 'tableId', // now not use!
+        childrenId: [], //  all row ids
       },
+      // rows => {id_1: {id: id_1, active: false, columns: dataNewRow}, id_2: {}, ...}
       childrenTable: {},
+      // data columns => {name: colName, type: text | number}, type - for input
       dataColumns: [
         {
           name: 'Col1',
@@ -94,7 +96,9 @@ export default class TablePage extends Component {
           type: 'number'
         },
       ],
-      dataNewRow: {}
+      dataNewRow: {}, // data for new row  => {col: value},
+      // where col - current column name;
+
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -125,16 +129,21 @@ export default class TablePage extends Component {
   }
 
   handleAccept() {
-    console.log("Accept", this.state.dataNewRow);
-    const {childrenTable, id, dataTable, dataNewRow} = this.state;
+    console.log("Submit", this.state.dataNewRow);
+    const {childrenTable, id, dataTable, dataNewRow, dataColumns} = this.state;
 
     const nodeId = `id_${id}`;
+
+    let newColumns = {};
+    dataColumns.forEach(key => {
+      newColumns[key.name] = (dataNewRow[key.name]) ? dataNewRow[key.name] : '-';
+    });
 
     const newState = Object.assign({}, childrenTable, {
       [nodeId]: {
         id: nodeId,
         active: false,
-        columns: dataNewRow
+        columns: newColumns
       }
     });
     this.setState({
@@ -153,35 +162,35 @@ export default class TablePage extends Component {
     console.log("Decline");
   }
 
-  submitRow() {
-    // add new row to table
-    const {childrenTable, id, dataTable} = this.state;
+  /*submitRow() {
+   // add new row to table
+   const {childrenTable, id, dataTable} = this.state;
 
-    const nodeId = `id_${id}`;
+   const nodeId = `id_${id}`;
 
-    const newState = Object.assign({}, childrenTable, {
-      [nodeId]: {
-        id: nodeId,
-        active: false,
-        columns: {
-          col1: 'Name',
-          col2: 'Type',
-          col3: id,
-          col4: id,
-          col5: id,
-        }
-      }
-    });
+   const newState = Object.assign({}, childrenTable, {
+   [nodeId]: {
+   id: nodeId,
+   active: false,
+   columns: {
+   col1: 'Name',
+   col2: 'Type',
+   col3: id,
+   col4: id,
+   col5: id,
+   }
+   }
+   });
 
-    this.setState({
-      id: id + 1,
-      childrenTable: newState,
-      dataTable: {
-        ...dataTable,
-        childrenId: dataTable.childrenId.concat([nodeId])
-      }
-    });
-  }
+   this.setState({
+   id: id + 1,
+   childrenTable: newState,
+   dataTable: {
+   ...dataTable,
+   childrenId: dataTable.childrenId.concat([nodeId])
+   }
+   });
+   }*/
 
   handleReset() {
 
@@ -191,12 +200,11 @@ export default class TablePage extends Component {
 
   handleCheckbox(id, checked) {
     const {childrenTable, dataTable, selectedItems} = this.state;
-//console.log(dataTable.childrenId.length === newSelectItem);
+    const newSelectedItems = (checked) ? selectedItems.concat([id]) : selectedItems.filter(key => key !== id);
 
     this.setState({
-      // selectedItems.length + 1 => +1 considering current handle
-      selectAll: (dataTable.childrenId.length === selectedItems.length + 1 ),
-      selectedItems: selectedItems.concat([id]),
+      selectAll: (dataTable.childrenId.length === newSelectedItems.length),
+      selectedItems: newSelectedItems,
       childrenTable: {
         ...childrenTable,
         [id]: {
@@ -284,7 +292,6 @@ export default class TablePage extends Component {
 
   handleChangeDataRow(name, value) {
     const {dataNewRow} = this.state;
-    //console.log(name, value);
     this.setState({
       dataNewRow: {
         ...dataNewRow,
@@ -294,7 +301,7 @@ export default class TablePage extends Component {
   }
 
   render() {
-    const {selectAll, selectedItems, openFullPage, dataColumns} = this.state;
+    const {selectAll, selectedItems, openFullPage, dataColumns, dataTable} = this.state;
     return (
       <section className="content">
         <Elevation
@@ -310,19 +317,6 @@ export default class TablePage extends Component {
             <header
               className="rmd-table__header"
             >
-              <div className="rmd-table__title">
-                <h2 className="rmd-table__title__title">title</h2>
-                <Button
-                  ripple
-                  className='rmd-table__title__active'
-                  onClick={this.handleAdd}
-                >Add</Button>
-                <Button
-                  ripple
-                  className='rmd-table__title__active'
-                  onClick={this.handleReset}
-                >Reset</Button>
-              </div>
               {(selectedItems.length) ? <div className="rmd-table__title__context">
                 <h2
                   className="rmd-table__title__title"
@@ -335,7 +329,19 @@ export default class TablePage extends Component {
                   onClick={this.handleRemove}
                 >remove</Button>
               </div> :
-                null
+                <div className="rmd-table__title">
+                  <h2 className="rmd-table__title__title">title</h2>
+                  <Button
+                    ripple
+                    className='rmd-table__title__active'
+                    onClick={this.handleAdd}
+                  >Add</Button>
+                  <Button
+                    ripple
+                    className='rmd-table__title__active'
+                    onClick={this.handleReset}
+                  >Reset</Button>
+                </div>
               }
             </header>
             <main>
@@ -345,6 +351,7 @@ export default class TablePage extends Component {
                   <th>
                     <Checkbox
                       ripple
+                      disabled={(dataTable.childrenId.length === 0)}
                     >
                       <CheckboxInput
                         checked={selectAll}
@@ -365,7 +372,7 @@ export default class TablePage extends Component {
                 </tbody>
               </table>
             </main>
-            {(openFullPage)? <Dialog
+            {(openFullPage) ? <Dialog
               open={true}
               onAccept={this.handleAccept}
               onCancel={this.handleCancel}
@@ -402,7 +409,7 @@ export default class TablePage extends Component {
                   </ToolbarRow>
                 </Toolbar>
                 <ToolbarMain fixed>
-                  <SectionDataRow
+                  <Row
                     columns={dataColumns}
                     handleChange={this.handleChangeDataRow}
                   />
