@@ -171,6 +171,10 @@ export default class Dialog extends PureComponent {
   // so that proper work can be performed.
   componentDidMount() {
     this.foundation.init();
+    // if at first need open dialog
+    if (this.props.open){
+      this.foundation.open();
+    }
   }
 
   componentWillUnmount() {

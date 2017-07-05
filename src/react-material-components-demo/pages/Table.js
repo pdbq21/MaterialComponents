@@ -8,22 +8,93 @@ import {
   Button,
   Checkbox,
   CheckboxInput,
-  CheckboxBG
+  CheckboxBG,
+  Dialog,
+  DialogSurface,
+  Toolbar,
+  ToolbarRow,
+  ToolbarSection,
+  ToolbarIcon,
+  ToolbarTitle,
+  DialogFooterButton,
+  ToolbarMain,
+  LayoutGrid,
+  LayoutGridInner,
+  LayoutGridCell,
+  Textfield,
+  TextfieldInput,
+  TextfieldLabel,
 } from '../lib'
-import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
+//import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
+
+const SectionDataRow = ({
+                          // () => (value, id)
+                          handleChange,
+                          // columns => [{ name: 'name', type: 'type' },{}...]
+                          // the name - name current col, the type - type for input
+                          columns,
+// other props
+                        }) => {
+  return (
+    <LayoutGrid>
+      <LayoutGridInner>
+        {/* title => New Row # */}
+        <LayoutGridCell columns='12'>New Row</LayoutGridCell>
+        {/* ? need dynamic # for columns */}
+        {columns.map(({type, name,}, index) => (
+          <LayoutGridCell
+            columns="4"
+            key={`key-new_row-${index}`}
+          >
+            <Textfield>
+              {/* type => text | number | ? may be select list */}
+              <TextfieldInput onBlur={({target}) => handleChange(name, target.value)} type={type}/>
+              {/* label => name current col */}
+              <TextfieldLabel>{name}</TextfieldLabel>
+            </Textfield>
+          </LayoutGridCell>
+        ))}
+      </LayoutGridInner>
+    </LayoutGrid>
+  )
+};
 
 export default class TablePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: 0,
+      openFullPage: false,
       selectAll: false,
       selectedItems: [],
       dataTable: {
         id: 'tableId',
         childrenId: [],
       },
-      childrenTable: {}
+      childrenTable: {},
+      dataColumns: [
+        {
+          name: 'Col1',
+          type: 'text'
+        },
+        {
+          name: 'Col2',
+          type: 'text'
+        },
+        {
+          name: 'Col3',
+          type: 'number'
+        },
+        {
+          name: 'Col4',
+          type: 'number'
+        },
+        {
+          name: 'Col5',
+          type: 'number'
+        },
+      ],
+      dataNewRow: {}
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -32,10 +103,58 @@ export default class TablePage extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
+    this.handleCloseFullPage = this.handleCloseFullPage.bind(this);
+    this.handleAccept = this.handleAccept.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
   }
 
   handleAdd() {
-// add new row to table
+    this.setState({
+      openFullPage: true,
+    });
+  }
+
+  handleOpenFullPage() {
+    this.setState({openFullPage: true});
+  }
+
+  handleCloseFullPage() {
+    this.setState({openFullPage: false});
+  }
+
+  handleAccept() {
+    console.log("Accept", this.state.dataNewRow);
+    const {childrenTable, id, dataTable, dataNewRow} = this.state;
+
+    const nodeId = `id_${id}`;
+
+    const newState = Object.assign({}, childrenTable, {
+      [nodeId]: {
+        id: nodeId,
+        active: false,
+        columns: dataNewRow
+      }
+    });
+    this.setState({
+      id: id + 1,
+      childrenTable: newState,
+      dataTable: {
+        ...dataTable,
+        childrenId: dataTable.childrenId.concat([nodeId])
+      },
+      dataNewRow: {}
+    });
+
+  }
+
+  handleCancel() {
+    console.log("Decline");
+  }
+
+  submitRow() {
+    // add new row to table
     const {childrenTable, id, dataTable} = this.state;
 
     const nodeId = `id_${id}`;
@@ -76,7 +195,7 @@ export default class TablePage extends Component {
 
     this.setState({
       // selectedItems.length + 1 => +1 considering current handle
-      selectAll: (dataTable.childrenId.length === selectedItems.length +1 ),
+      selectAll: (dataTable.childrenId.length === selectedItems.length + 1 ),
       selectedItems: selectedItems.concat([id]),
       childrenTable: {
         ...childrenTable,
@@ -163,8 +282,19 @@ export default class TablePage extends Component {
     //console.log('dataTable', dataTable.childrenId)
   }
 
+  handleChangeDataRow(name, value) {
+    const {dataNewRow} = this.state;
+    //console.log(name, value);
+    this.setState({
+      dataNewRow: {
+        ...dataNewRow,
+        [name]: value
+      }
+    })
+  }
+
   render() {
-    const {selectAll, selectedItems} = this.state;
+    const {selectAll, selectedItems, openFullPage, dataColumns} = this.state;
     return (
       <section className="content">
         <Elevation
@@ -223,11 +353,11 @@ export default class TablePage extends Component {
                       <CheckboxBG/>
                     </Checkbox>
                   </th>
-                  <th>col 1</th>
-                  <th>col 2</th>
-                  <th>col 3</th>
-                  <th>col 4</th>
-                  <th>col 5</th>
+                  {dataColumns.map(({name}, index) => (
+                    <th
+                      key={`key-table_column-${index}`}
+                    >{name}</th>
+                  ))}
                 </tr>
                 </thead>
                 <tbody>
@@ -235,10 +365,54 @@ export default class TablePage extends Component {
                 </tbody>
               </table>
             </main>
+            {(openFullPage)? <Dialog
+              open={true}
+              onAccept={this.handleAccept}
+              onCancel={this.handleCancel}
+              onOpen={this.handleOpenFullPage}
+              onClose={this.handleCloseFullPage}
+              fullPage
+            >
+              <DialogSurface>
+                <Toolbar
+                  fixed
+                >
+                  <ToolbarRow>
+                    <ToolbarSection start>
+                      {/*Todo: need this ToolbarIcon +  DialogFooterButton => DialogHeaderButton*/}
+                      <ToolbarIcon
+                        menu
+                        className='mdc-dialog__footer__button mdc-dialog__footer__button--cancel'
+                        style={{
+                          'cursor': 'pointer'
+                        }}
+                      >clear</ToolbarIcon>
+                      <ToolbarTitle>Title</ToolbarTitle>
+                    </ToolbarSection>
+                    <ToolbarSection end>
+                      <DialogFooterButton
+                        accept
+                        style={{
+                          'color': '#fff'
+                        }}
+                      >
+                        Submit
+                      </DialogFooterButton>
+                    </ToolbarSection>
+                  </ToolbarRow>
+                </Toolbar>
+                <ToolbarMain fixed>
+                  <SectionDataRow
+                    columns={dataColumns}
+                    handleChange={this.handleChangeDataRow}
+                  />
+                </ToolbarMain>
+              </DialogSurface>
+            </Dialog> : null}
+
           </Elevation>
 
         </Elevation>
-        <Footer/>
       </section>
     )
   }
