@@ -184,3 +184,6 @@ export {
   TabBarScrollFrame,
   TabBarScroll
 } from './Tabs'
+export {
+  Table
+} from './Table'
