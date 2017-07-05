@@ -18,7 +18,7 @@ export default class TablePage extends Component {
     this.state = {
       id: 0,
       selectAll: false,
-      selectedItem: 0,
+      selectedItems: [],
       dataTable: {
         id: 'tableId',
         childrenId: [],
@@ -31,6 +31,7 @@ export default class TablePage extends Component {
     this.renderRows = this.renderRows.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleAdd() {
@@ -70,13 +71,13 @@ export default class TablePage extends Component {
   }
 
   handleCheckbox(id, checked) {
-    const {childrenTable, selectedItem, dataTable} = this.state;
-    const newSelectItem = (checked) ? selectedItem + 1 : selectedItem - 1;
+    const {childrenTable, dataTable, selectedItems} = this.state;
 //console.log(dataTable.childrenId.length === newSelectItem);
 
     this.setState({
-      selectAll: (dataTable.childrenId.length === newSelectItem),
-      selectedItem: newSelectItem,
+      // selectedItems.length + 1 => +1 considering current handle
+      selectAll: (dataTable.childrenId.length === selectedItems.length +1 ),
+      selectedItems: selectedItems.concat([id]),
       childrenTable: {
         ...childrenTable,
         [id]: {
@@ -129,13 +130,41 @@ export default class TablePage extends Component {
 
     this.setState({
       selectAll: checked,
-      selectedItem: (checked) ? dataTable.childrenId.length : 0,
+      selectedItems: (checked) ? dataTable.childrenId : [],
       childrenTable: this.activeItems(checked)
     })
   }
 
+  handleRemove() {
+    const {selectedItems, childrenTable, dataTable} = this.state;
+    //console.log('selectedItems', selectedItems);
+    // will to remove in:
+    // + childrenTable {}, / delete childrenTable[id]
+    // + dataTable.childrenId [] / .filter
+    // + selectedItems => [] empty
+
+    let newChildrenTable = childrenTable;
+    let newChildrenId = dataTable.childrenId;
+
+    selectedItems.forEach(id => {
+      delete newChildrenTable[id];
+      newChildrenId = newChildrenId.filter(key => key !== id);
+    });
+
+    this.setState({
+      selectAll: false,
+      selectedItems: [],
+      dataTable: {
+        ...dataTable,
+        childrenId: newChildrenId
+      },
+      childrenTable: newChildrenTable
+    });
+    //console.log('dataTable', dataTable.childrenId)
+  }
+
   render() {
-const { selectAll } = this.state;
+    const {selectAll, selectedItems} = this.state;
     return (
       <section className="content">
         <Elevation
@@ -164,6 +193,20 @@ const { selectAll } = this.state;
                   onClick={this.handleReset}
                 >Reset</Button>
               </div>
+              {(selectedItems.length) ? <div className="rmd-table__title__context">
+                <h2
+                  className="rmd-table__title__title"
+                >
+                  {`${selectedItems.length} selected ${(selectedItems.length > 1) ? `items` : `item` }`}
+                </h2>
+                <Button
+                  ripple
+                  className='rmd-table__title__active'
+                  onClick={this.handleRemove}
+                >remove</Button>
+              </div> :
+                null
+              }
             </header>
             <main>
               <table className="table-props">

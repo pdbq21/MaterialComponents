@@ -150,7 +150,8 @@ body {
 .rmd-table__header{
 
 }
-.rmd-table__title{
+.rmd-table__title,
+.rmd-table__title__context{
 display: flex;
     padding: 1em;
     align-items: center;

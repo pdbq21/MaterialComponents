@@ -54,9 +54,13 @@ export default class Button extends PureComponent {
       return supportsCssVariables(window);
     },
     isSurfaceActive: () => this.refs.root[MATCHES](':active'),
-    addClass: className => this.setState(({classNamesRipple}) => ({
-      classNamesRipple: classNamesRipple.concat([className])
-    })),
+    addClass: className => {
+      if (this.refs.root) {
+        this.setState(({classNamesRipple}) => ({
+          classNamesRipple: classNamesRipple.concat([className])
+        }))
+      }
+    },
     removeClass: className => {
       if (this.refs.root) {
         this.setState(({classNamesRipple}) => ({
@@ -105,7 +109,12 @@ export default class Button extends PureComponent {
         return this.refs.root.style.setProperty(varName, value);
       }
     },
-    computeBoundingRect: () => this.refs.root.getBoundingClientRect(),
+    computeBoundingRect: () => {
+      if (this.refs.root) {
+        return this.refs.root.getBoundingClientRect()
+      }
+    },
+
     getWindowPageOffset: () => ({
       x: window.pageXOffset,
       y: window.pageYOffset
