@@ -67,6 +67,11 @@ export default class Table extends PureComponent {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+
+
+    this.renderHeader = this.renderHeader.bind(this);
+    this.renderMain = this.renderMain.bind(this);
+    this.renderDialog = this.renderDialog.bind(this);
   }
 
   handleAdd() {
@@ -90,8 +95,8 @@ export default class Table extends PureComponent {
     console.log("Submit", dataNewRow);
 // if add / else edit
 
-console.log('selectedItems', selectedItems.length);
-    if (typeof childrenTable[selectedItems[0]] === 'undefined'){
+    console.log('selectedItems', selectedItems.length);
+    if (typeof childrenTable[selectedItems[0]] === 'undefined') {
       const nodeId = `id_${id}`;
       let newColumns = {};
       dataColumns.forEach(key => {
@@ -190,7 +195,6 @@ console.log('selectedItems', selectedItems.length);
     })
   }
 
-
   activeItems(checked) {
     const {childrenTable} = this.state;
     const newChildrenTable = Object.assign({}, childrenTable);
@@ -281,45 +285,74 @@ console.log('selectedItems', selectedItems.length);
 
   }
 
+
+  renderHeader() {
+    //const { selectedItems } = this.state;
+    const {header} = this.props;
+
+    //const selectedRow = selectedItems.length;
+
+    return (
+      <Header
+        /*
+         items, => Number - selected items length
+         title, => String
+         action, => []
+         multiSelected, => []
+         singleSelected, => []
+         */
+
+        {...header}
+      />
+    );
+  }
+
+  renderMain() {
+    const {main} = this.props;
+    return (
+      <Main
+        /*
+         selectedAll => bool
+         columns => [{}, {}]
+         */
+        {...main}
+      >
+        {this.renderRows()}
+      </Main>
+    )
+  }
+
+  renderDialog() {
+    console.log(25)
+    const {openFullPage} = this.props;
+    return (openFullPage) ?
+      <FullPageDialog
+        onAccept={this.handleAccept}
+        onCancel={this.handleCancel}
+        onOpen={this.handleOpenFullPage}
+        onClose={this.handleCloseFullPage}
+      >
+        {/* new Row container */}
+        <DialogMain
+          title="New Row"
+          onBlur={this.handleChangeDataRow}
+        />
+      </FullPageDialog> : null;
+
+  }
+
   render() {
-    const {selectAll, selectedItems, openFullPage, dataNewRow, dataColumns} = this.state;
-    const selectedRow = selectedItems.length;
+    console.log(26)
     return (<Elevation
         zSpace="2"
         className="rmd-table__container"
       >
         {/* Header */}
-        <Header
-          title="Title"
-          items={selectedRow}
-          onAdd={this.handleAdd}
-          onRemove={this.handleRemove}
-          onEdit={this.handleEdit}
-        />
+        {this.renderHeader()}
         {/* Main */}
-        <Main
-          dataColumns={dataColumns}
-          selectAll={selectAll}
-          onSelectAll={this.handleSelectAll}
-        >
-          {this.renderRows()}
-        </Main>
-
-        {(openFullPage) ?
-          <FullPageDialog
-            onAccept={this.handleAccept}
-            onCancel={this.handleCancel}
-            onOpen={this.handleOpenFullPage}
-            onClose={this.handleCloseFullPage}
-          >
-            {/* new Row container */}
-            <DialogMain
-              title="New Row"
-              onBlur={this.handleChangeDataRow}
-              columns={dataColumns}
-              dataRow={dataNewRow}
-            />
-          </FullPageDialog> : null}
+        {this.renderMain()}
+        {/* Dialog */}
+        {this.renderDialog()}
 
       </Elevation>
     )

@@ -13,9 +13,7 @@ export default class Main extends PureComponent {
   render() {
     const {
       children,
-      dataColumns,
-      selectAll,
-      onSelectAll
+      columns,
     } = this.props;
     return (
       <main>
@@ -28,13 +26,13 @@ export default class Main extends PureComponent {
                 /*disabled={(dataTable.childrenId.length === 0)}*/
               >
                 <CheckboxInput
-                  checked={selectAll}
-                  onChange={({target}) => onSelectAll(target.checked)}
+                /*  checked={selectAll}
+                  onChange={({target}) => onSelectAll(target.checked)}*/
                 />
                 <CheckboxBG/>
               </Checkbox>
             </th>
-            {dataColumns.map(({name}, index) => (
+            {columns.map(({name}, index) => (
               <th
                 key={`key-table_column-${index}`}
               >{name}</th>
