@@ -70,46 +70,66 @@ export default class Table extends PureComponent {
   }
 
   handleAdd() {
-    this.setState({
-      openFullPage: true,
-    });
+    this.setOpenFullPage(true)
+  }
+
+  setOpenFullPage(openFullPage) {
+    this.setState({openFullPage});
   }
 
   handleOpenFullPage() {
-    this.setState({openFullPage: true});
+    this.setOpenFullPage(true)
   }
 
   handleCloseFullPage() {
-    this.setState({openFullPage: false});
+    this.setOpenFullPage(false)
   }
 
   handleAccept() {
-    console.log("Submit", this.state.dataNewRow);
-    const {childrenTable, id, dataTable, dataNewRow, dataColumns} = this.state;
+    const {childrenTable, id, dataTable, dataNewRow, dataColumns, selectedItems} = this.state;
+    console.log("Submit", dataNewRow);
+// if add / else edit
 
-    const nodeId = `id_${id}`;
+console.log('selectedItems', selectedItems.length);
+    if (typeof childrenTable[selectedItems[0]] === 'undefined'){
+      const nodeId = `id_${id}`;
+      let newColumns = {};
+      dataColumns.forEach(key => {
+        newColumns[key.name] = (dataNewRow[key.name]) ? dataNewRow[key.name] : '-';
+      });
 
-    let newColumns = {};
-    dataColumns.forEach(key => {
-      newColumns[key.name] = (dataNewRow[key.name]) ? dataNewRow[key.name] : '-';
-    });
+      const newState = Object.assign({}, childrenTable, {
+        [nodeId]: {
+          id: nodeId,
+          active: false,
+          columns: newColumns
+        }
+      });
+      this.setState({
+        id: id + 1,
+        childrenTable: newState,
+        dataTable: {
+          ...dataTable,
+          childrenId: dataTable.childrenId.concat([nodeId])
+        },
+        dataNewRow: {}
+      });
+    } else {
+      console.log(25)
+      this.setState({
+        selectedItems: [],
+        childrenTable: {
+          ...childrenTable,
+          [selectedItems[0]]: {
+            ...childrenTable[selectedItems[0]],
+            active: false,
+            columns: dataNewRow
+          }
+        },
+        dataNewRow: {}
+      });
+    }
 
-    const newState = Object.assign({}, childrenTable, {
-      [nodeId]: {
-        id: nodeId,
-        active: false,
-        columns: newColumns
-      }
-    });
-    this.setState({
-      id: id + 1,
-      childrenTable: newState,
-      dataTable: {
-        ...dataTable,
-        childrenId: dataTable.childrenId.concat([nodeId])
-      },
-      dataNewRow: {}
-    });
 
   }
 
@@ -243,13 +263,26 @@ export default class Table extends PureComponent {
       />)
     })
   }
-  handleEdit(){
-  //empty
+
+  handleEdit() {
+    //empty
     // edit selected row / open dialog
+    const {selectedItems, childrenTable} = this.state;
+    if (selectedItems.length === 1) {
+      this.setOpenFullPage(true);
+// dataNewRow => {} with data current selected row
+      this.setState({
+        dataNewRow: childrenTable[selectedItems[0]].columns
+      });
+
+    } else {
+      console.error('Error: This work with only one selected element.')
+    }
+
   }
 
   render() {
-    const {selectAll, selectedItems, openFullPage, dataColumns} = this.state;
+    const {selectAll, selectedItems, openFullPage, dataNewRow, dataColumns} = this.state;
     const selectedRow = selectedItems.length;
     return (<Elevation
         zSpace="2"
@@ -284,6 +317,7 @@ export default class Table extends PureComponent {
               title="New Row"
               onBlur={this.handleChangeDataRow}
               columns={dataColumns}
+              dataRow={dataNewRow}
             />
           </FullPageDialog> : null}
 

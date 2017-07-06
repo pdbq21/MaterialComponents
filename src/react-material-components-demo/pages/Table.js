@@ -21,7 +21,9 @@ export default class TablePage extends Component {
         >
           <TypographyDisplay size="1">Table</TypographyDisplay>
 
-          <Table/>
+          <Table
+// props data = { name, type, sortable
+          />
 
         </Elevation>
       </section>

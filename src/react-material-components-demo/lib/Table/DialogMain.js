@@ -17,9 +17,10 @@ export default class DialogMain extends PureComponent {
       title,
       onBlur,
       columns,
+      dataRow,
       ...otherProps
     } = this.props;
-    console.log(onBlur);
+    console.log(dataRow);
     return (
       <LayoutGrid
         {...otherProps}
@@ -35,7 +36,8 @@ export default class DialogMain extends PureComponent {
             >
               <Textfield>
                 {/* type => text | number | ? may be select list */}
-                <TextfieldInput onBlur={({target}) => onBlur(name, target.value)} type={type}/>
+                {/* defaultValue => if dataRow empty and type text === '-' if type number === '' */}
+                <TextfieldInput defaultValue={(dataRow)? dataRow[name] : ''} onBlur={({target}) => onBlur(name, target.value)} type={type}/>
                 {/* label => name current col */}
                 <TextfieldLabel>{name}</TextfieldLabel>
               </Textfield>
