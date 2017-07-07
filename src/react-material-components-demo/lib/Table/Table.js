@@ -11,7 +11,7 @@ import Header from './Header'
 import Main from './Main'
 import FullPageDialog from './Dialog'
 import DialogMain from './DialogMain'
-import Row from './Row'
+
 
 export default class Table extends PureComponent {
   constructor(props) {
@@ -55,16 +55,10 @@ export default class Table extends PureComponent {
 
     };
 
-    this.handleAdd = this.handleAdd.bind(this);
     this.handleReset = this.handleReset.bind(this);
-    this.renderRows = this.renderRows.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
-    this.handleCloseFullPage = this.handleCloseFullPage.bind(this);
-    this.handleAccept = this.handleAccept.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
 
@@ -74,73 +68,71 @@ export default class Table extends PureComponent {
     this.renderDialog = this.renderDialog.bind(this);
   }
 
-  handleAdd() {
-    this.setOpenFullPage(true)
-  }
 
-  setOpenFullPage(openFullPage) {
-    this.setState({openFullPage});
-  }
+  /*setOpenFullPage(openFullPage) {
+   this.setState({openFullPage});
+   }*/
 
-  handleOpenFullPage() {
-    this.setOpenFullPage(true)
-  }
+  /*  handleOpenFullPage() {
+   this.setOpenFullPage(true)
+   }
 
-  handleCloseFullPage() {
-    this.setOpenFullPage(false)
-  }
+   handleCloseFullPage() {
+   this.setOpenFullPage(false)
+   }
 
-  handleAccept() {
-    const {childrenTable, id, dataTable, dataNewRow, dataColumns, selectedItems} = this.state;
-    console.log("Submit", dataNewRow);
-// if add / else edit
+   handleAccept() {
+   const {childrenTable, id, dataTable, dataNewRow, dataColumns, selectedItems} = this.state;
+   console.log("Submit", dataNewRow);
+   // if add / else edit
 
-    console.log('selectedItems', selectedItems.length);
-    if (typeof childrenTable[selectedItems[0]] === 'undefined') {
-      const nodeId = `id_${id}`;
-      let newColumns = {};
-      dataColumns.forEach(key => {
-        newColumns[key.name] = (dataNewRow[key.name]) ? dataNewRow[key.name] : '-';
-      });
+   console.log('selectedItems', selectedItems.length);
+   if (typeof childrenTable[selectedItems[0]] === 'undefined') {
+   const nodeId = `id_${id}`;
+   let newColumns = {};
+   dataColumns.forEach(key => {
+   newColumns[key.name] = (dataNewRow[key.name]) ? dataNewRow[key.name] : '-';
+   });
 
-      const newState = Object.assign({}, childrenTable, {
-        [nodeId]: {
-          id: nodeId,
-          active: false,
-          columns: newColumns
-        }
-      });
-      this.setState({
-        id: id + 1,
-        childrenTable: newState,
-        dataTable: {
-          ...dataTable,
-          childrenId: dataTable.childrenId.concat([nodeId])
-        },
-        dataNewRow: {}
-      });
-    } else {
-      console.log(25)
-      this.setState({
-        selectedItems: [],
-        childrenTable: {
-          ...childrenTable,
-          [selectedItems[0]]: {
-            ...childrenTable[selectedItems[0]],
-            active: false,
-            columns: dataNewRow
-          }
-        },
-        dataNewRow: {}
-      });
-    }
+   const newState = Object.assign({}, childrenTable, {
+   [nodeId]: {
+   id: nodeId,
+   active: false,
+   columns: newColumns
+   }
+   });
+   this.setState({
+   id: id + 1,
+   childrenTable: newState,
+   dataTable: {
+   ...dataTable,
+   childrenId: dataTable.childrenId.concat([nodeId])
+   },
+   dataNewRow: {}
+   });
+   } else {
+   console.log(25)
+   this.setState({
+   selectedItems: [],
+   childrenTable: {
+   ...childrenTable,
+   [selectedItems[0]]: {
+   ...childrenTable[selectedItems[0]],
+   active: false,
+   columns: dataNewRow
+   }
+   },
+   dataNewRow: {}
+   });
+   }
 
 
-  }
+   }
 
-  handleCancel() {
-    console.log("Decline");
-  }
+   handleCancel() {
+   console.log("Decline");
+
+   }*/
 
   /*submitRow() {
    // add new row to table
@@ -246,25 +238,13 @@ export default class Table extends PureComponent {
 
   handleChangeDataRow(name, value) {
     const {dataNewRow} = this.state;
+    //console.log('handleChangeDataRow', name, value);
+
     this.setState({
       dataNewRow: {
         ...dataNewRow,
         [name]: value
       }
-    })
-  }
-
-  renderRows() {
-    const {childrenTable} = this.state;//
-    return Object.keys(childrenTable).map((row, index) => {
-      const dataRow = childrenTable[row];
-      // console.log('row', dataRow);
-      return (<Row
-        key={`key-table_row-${index}`}
-        checked={dataRow.active}
-        onCheckbox={({target}) => this.handleCheckbox(dataRow.id, target.checked)}
-        columns={dataRow.columns}
-      />)
     })
   }
 
@@ -285,13 +265,10 @@ export default class Table extends PureComponent {
 
   }
 
-
   renderHeader() {
     //const { selectedItems } = this.state;
     const {header} = this.props;
-
     //const selectedRow = selectedItems.length;
-
     return (
       <Header
         /*
@@ -316,25 +293,32 @@ export default class Table extends PureComponent {
          columns => [{}, {}]
          */
         {...main}
-      >
-        {this.renderRows()}
-      </Main>
+      />
     )
   }
 
   renderDialog() {
-    console.log(25)
-    const {openFullPage} = this.props;
-    return (openFullPage) ?
+    const {dialog, main} = this.props;
+    const {dataNewRow} = this.state;
+    const {openDialog, title, onAccept, onCancel, onOpen, onClose} = dialog;
+    const {columns} = main;
+    let row = {};
+
+    columns.forEach(({name, defaultValue}) => {
+      row[name] = dataNewRow[name] || defaultValue
+    });
+
+    return (openDialog) ?
       <FullPageDialog
-        onAccept={this.handleAccept}
-        onCancel={this.handleCancel}
-        onOpen={this.handleOpenFullPage}
-        onClose={this.handleCloseFullPage}
+        onAccept={() => onAccept(row)}
+        onCancel={onCancel}
+        onOpen={onOpen}
+        onClose={onClose}
       >
         {/* new Row container */}
         <DialogMain
-          title="New Row"
+          title={title}
+          columns={columns}
           onBlur={this.handleChangeDataRow}
         />
       </FullPageDialog> : null;
@@ -342,7 +326,6 @@ export default class Table extends PureComponent {
   }
 
   render() {
-    console.log(26)
     return (<Elevation
         zSpace="2"
         className="rmd-table__container"

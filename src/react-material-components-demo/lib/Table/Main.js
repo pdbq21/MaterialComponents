@@ -7,13 +7,15 @@ import {
   CheckboxInput,
   CheckboxBG
 } from '../index'
+import Row from './Row'
 
 export default class Main extends PureComponent {
 
   render() {
     const {
-      children,
+      rows,
       columns,
+      onSelectRow
     } = this.props;
     return (
       <main>
@@ -27,7 +29,7 @@ export default class Main extends PureComponent {
               >
                 <CheckboxInput
                 /*  checked={selectAll}
-                  onChange={({target}) => onSelectAll(target.checked)}*/
+                  onChange={({target}) => onSelectRow('', target.checked)}*/
                 />
                 <CheckboxBG/>
               </Checkbox>
@@ -40,7 +42,16 @@ export default class Main extends PureComponent {
           </tr>
           </thead>
           <tbody>
-          {children}
+          {(rows)? rows.map((row, index) => {
+           // const dataRow = childrenTable[row];
+            // console.log('row', dataRow);
+            return (<Row
+              key={`key-table_row-${index}`}
+              //checked={dataRow.active}
+              onCheckbox={({target}) => onSelectRow({index: index, checked: target.checked})}
+              columns={row}
+            />)}) : null
+          }
           </tbody>
         </table>
       </main>

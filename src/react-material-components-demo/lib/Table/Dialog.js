@@ -22,7 +22,7 @@ export default class FullPageDialog extends PureComponent {
       onOpen,
       onClose,
     } = this.props;
-    console.log(this.props);
+
     return (
       <Dialog
         open={true}
@@ -38,7 +38,7 @@ export default class FullPageDialog extends PureComponent {
           >
             <ToolbarRow>
               <ToolbarSection start>
-                {/*Todo: need this ToolbarIcon +  DialogFooterButton => DialogHeaderButton*/}
+                {/*Todo: need this ToolbarIcon + DialogFooterButton => DialogHeaderButton*/}
                 <ToolbarIcon
                   menu
                   className='mdc-dialog__footer__button mdc-dialog__footer__button--cancel'

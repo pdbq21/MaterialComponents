@@ -11,9 +11,10 @@ import {
 } from '../lib'
 //import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
-const Add = () => {
+const Add = (props) => {
   return (
     <Button
+      {...props}
       ripple
     ><Icon>
       add
@@ -59,16 +60,82 @@ export default class TablePage extends Component {
       id: 0,// generation ids for row
       openFullPage: false, // close/open  fullPage dialog
       selectAll: false, // all checkbox is checked
+      columns: [
+        {
+          name: 'Col 1',
+          type: 'string',// string | number | ?
+          sortable: false,
+          defaultValue: 'name'
+        },//col 1 type/name/sortable/
+        {
+          name: 'Col 2',
+          type: 'string',
+          defaultValue: 'type'
+        },//col 2
+        {
+          name: 'Col 3',
+          type: 'number',
+          defaultValue: '0'
+        },//col 3
+        {
+          name: 'Col 4',
+          type: 'string',
+          defaultValue: 'id'
+        },//col 4
+        {
+          name: 'Col 5',
+          type: 'number',
+          defaultValue: '0'
+        },//col 5
+        {
+          name: 'Col 6',
+          type: 'number',
+          defaultValue: '0'
+        },//col 6
+      ],
+      rows: []
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
+    this.handleCloseFullPage = this.handleCloseFullPage.bind(this);
+    this.handleAccept = this.handleAccept.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.setOpenFullPage = this.setOpenFullPage.bind(this);
+  }
+
+  setOpenFullPage(openFullPage) {
+    this.setState({openFullPage});
   }
 
   handleAdd() {
-    this.setState({openFullPage: true})
+    this.setOpenFullPage(true)
+  }
+
+  handleOpenFullPage() {
+    this.setOpenFullPage(true)
+  }
+
+  handleCloseFullPage() {
+    this.setOpenFullPage(false)
+  }
+
+  handleAccept(data) {
+    //const {} = this.state;
+    console.log("Submit");
+//this.state.rows;
+this.setState({
+  rows: this.state.rows.concat(data)
+})
+
+  }
+
+  handleCancel() {
+    console.log("Decline");
+
   }
 
   render() {
-    const { openFullPage } = this.state;
+    const {openFullPage, columns, rows} = this.state;
     return (
       <section className="content">
         <Elevation
@@ -76,7 +143,7 @@ export default class TablePage extends Component {
           className="demo-page-table"
         >
           <TypographyDisplay size="1">Table</TypographyDisplay>
-          <Add/>
+
           <Table
             // props data = { name, type, sortable
             /* Todo:
@@ -90,9 +157,8 @@ export default class TablePage extends Component {
 
              */
             // table header columns
-            onAction={(name, data) => console.log(name, data)}
-            onSelectRow={(data) => console.log(data)}
-            openDialog={openFullPage}
+            onAction={(name, data) => console.log('onAction', name, data)}
+
 
             header={{
               title: 'Title Table',
@@ -120,40 +186,22 @@ export default class TablePage extends Component {
             }}
 
             main={{
-              columns: [
-                {
-                  name: 'Col 1',
-                  type: 'string',// string | number | ?
-                  sortable: false,
-                  defaultValue: 'name'
-                },//col 1 type/name/sortable/
-                {
-                  name: 'Col 2',
-                  type: 'string',
-                  defaultValue: 'type'
-                },//col 2
-                {
-                  name: 'Col 3',
-                  type: 'number',
-                  defaultValue: '0'
-                },//col 3
-                {
-                  name: 'Col 4',
-                  type: 'string',
-                  defaultValue: 'id'
-                },//col 4
-                {
-                  name: 'Col 5',
-                  type: 'number',
-                  defaultValue: '0'
-                },//col 5
-                {
-                  name: 'Col 6',
-                  type: 'number',
-                  defaultValue: '0'
-                },//col 6
-              ],
+              columns: columns,
+              rows: rows,
+              // data => {index: Number, checked: Bool}
+              onSelectRow: (data) => console.log('onSelectRow', data)
             }}
+
+            dialog={{
+              openDialog: openFullPage,
+              title: 'New Row',
+              onAccept: this.handleAccept,
+              onCancel: this.handleCancel,
+              onOpen: this.handleOpenFullPage,
+              onClose: this.handleCloseFullPage
+            }}
+
+
           />
 
         </Elevation>

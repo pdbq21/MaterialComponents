@@ -17,10 +17,8 @@ export default class DialogMain extends PureComponent {
       title,
       onBlur,
       columns,
-      dataRow,
       ...otherProps
     } = this.props;
-    console.log(dataRow);
     return (
       <LayoutGrid
         {...otherProps}
@@ -29,15 +27,14 @@ export default class DialogMain extends PureComponent {
           {/* title => New Row # */}
           <LayoutGridCell columns='12'>{title}</LayoutGridCell>
           {/* ? need dynamic # for columns */}
-          {columns.map(({type, name,}, index) => (
+          {columns.map(({type, name, defaultValue}, index) => (
             <LayoutGridCell
               columns="4"
               key={`key-new_row-${index}`}
             >
               <Textfield>
                 {/* type => text | number | ? may be select list */}
-                {/* defaultValue => if dataRow empty and type text === '-' if type number === '' */}
-                <TextfieldInput defaultValue={(dataRow)? dataRow[name] : ''} onBlur={({target}) => onBlur(name, target.value)} type={type}/>
+                <TextfieldInput defaultValue={defaultValue || ''} onBlur={({target}) => onBlur(name, target.value)} type={type}/>
                 {/* label => name current col */}
                 <TextfieldLabel>{name}</TextfieldLabel>
               </Textfield>
