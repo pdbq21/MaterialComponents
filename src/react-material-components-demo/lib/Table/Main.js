@@ -16,10 +16,9 @@ export default class Main extends PureComponent {
       rows,
       columns,
       onCheckbox,
-      dataRows,
       selectAll,
       onSelectAll,
-      selectedItems
+      selectedItems,
     } = this.props;
 
     return (

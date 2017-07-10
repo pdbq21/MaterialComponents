@@ -17,6 +17,7 @@ export default class DialogMain extends PureComponent {
       title,
       onBlur,
       columns,
+      row,
       ...otherProps
     } = this.props;
     return (
@@ -34,7 +35,11 @@ export default class DialogMain extends PureComponent {
             >
               <Textfield>
                 {/* type => text | number | ? may be select list */}
-                <TextfieldInput defaultValue={defaultValue || ''} onBlur={({target}) => onBlur(name, target.value)} type={type}/>
+                <TextfieldInput
+                  defaultValue={row[name] || defaultValue || ''}
+                  onBlur={({target}) => onBlur(name, target.value)}
+                  type={type}
+                />
                 {/* label => name current col */}
                 <TextfieldLabel>{name}</TextfieldLabel>
               </Textfield>

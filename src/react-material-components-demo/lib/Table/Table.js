@@ -3,7 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 //import classnames from 'classnames';
-import update from 'react-addons-update'; // ES6
+//import update from 'react-addons-update'; // ES6
 
 import {
   Elevation,
@@ -37,13 +37,13 @@ export default class Table extends PureComponent {
       selectAll: false, // all checkbox is checked
       selectedItems: [], //  all checked row
 
-      dataRows1: []
+      selectedItems1: []
+
     };
 
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
 
 
     this.renderHeader = this.renderHeader.bind(this);
@@ -167,16 +167,6 @@ export default class Table extends PureComponent {
     })
   }
 
-  activeItems(checked) {
-    const {childrenTable} = this.state;
-    const newChildrenTable = Object.assign({}, childrenTable);
-
-    Object.keys(newChildrenTable).forEach(key => {
-      newChildrenTable[key].active = checked;
-    });
-
-    return newChildrenTable;
-  }
 
   handleSelectAll(checked) {
     const {dataRows} = this.state;
@@ -250,38 +240,23 @@ export default class Table extends PureComponent {
     /*selectAll: ,
      selectedItems: newSelectedItems,*/
 
-    let newState = update(dataRows, {
-      [data.index]: {
-        checked: {
-          $set: data.checked
-        }
-      }
-    });
+    /*let newState = update(dataRows, {
+     [data.index]: {
+     checked: {
+     $set: data.checked
+     }
+     }
+     });*/
+
     //console.log(newState.length, newSelectedItems.length);
     this.setState({
-      dataRows: newState,
-      selectAll: (newState.length === newSelectedItems.length),
+      //dataRows: newState,
+      selectAll: (dataRows.length === newSelectedItems.length),
       selectedItems: newSelectedItems,
     })
 
   }
 
-  handleEdit() {
-    //empty
-    // edit selected row / open dialog
-    const {selectedItems, childrenTable} = this.state;
-    if (selectedItems.length === 1) {
-      this.setOpenFullPage(true);
-// dataNewRow => {} with data current selected row
-      this.setState({
-        dataNewRow: childrenTable[selectedItems[0]].columns
-      });
-
-    } else {
-      console.error('Error: This work with only one selected element.')
-    }
-
-  }
 
   renderHeader() {
     const {selectedItems} = this.state;
@@ -304,18 +279,13 @@ export default class Table extends PureComponent {
 
   renderMain() {
     const {main} = this.props;
-    const {dataRows, selectAll, selectedItems} = this.state;
+    const {selectAll, selectedItems} = this.state;
 
     return (
       <Main
-        /*
-         selectedAll => bool
-         columns => [{}, {}]
-         */
         selectAll={selectAll}
         onCheckbox={this.onCheckbox}
         onSelectAll={this.handleSelectAll}
-        dataRows={dataRows}
         selectedItems={selectedItems}
         {...main}
       />
@@ -326,7 +296,7 @@ export default class Table extends PureComponent {
     const {dialog, main} = this.props;
     const {onAccept} = dialog;
     const {columns} = main;
-    const {dataNewRow, dataRows} = this.state;
+    const {dataNewRow} = this.state;
 
     let row = {};
 
@@ -338,18 +308,18 @@ export default class Table extends PureComponent {
     onAccept(row);
 
     this.setState({
-      dataRows: dataRows.concat({
-        checked: false,
-        row: row
-      }),
-      //dataRows: dataRows.concat([row]),
+      /*dataRows: dataRows.concat({
+       checked: false,
+       row: row
+       }),*/
+      dataNewRow: {},
       selectAll: false,
     });
   }
 
   renderDialog() {
     const {dialog, main} = this.props;
-    const {openDialog, title, onCancel, onOpen, onClose} = dialog;
+    const {openDialog, title, onCancel, onOpen, onClose, row} = dialog;
     const {columns} = main;
 
     return (openDialog) ?
@@ -363,18 +333,29 @@ export default class Table extends PureComponent {
         <DialogMain
           title={title}
           columns={columns}
+          row={row}
           onBlur={this.handleChangeDataRow}
         />
       </FullPageDialog> : null;
 
   }
-  componentWillReceiveProps(props){
-   const { main } = props;
-   //rows
-    console.log(this.state.dataRows, main.rows)
-  }
+
   componentWillReceiveProps(props) {
-console.log('receive props', props.main.rows, this.state.dataRows);
+    if (props.main.rows !== this.state.dataRows) {
+      let newSelectedItems = [];
+      props.main.rows.forEach((item, index) => {
+        if (item === this.state.dataRows[index] && this.state.selectedItems.indexOf(index) !== -1) {
+          newSelectedItems.concat([index])
+        }
+      });
+console.log(newSelectedItems.length && newSelectedItems.length === props.main.rows.length);
+      this.setState({
+        dataRows: props.main.rows,
+        selectedItems: newSelectedItems,
+        selectAll: newSelectedItems.length && newSelectedItems.length === props.main.rows.length
+      })
+    }
+
   }
 
   render() {

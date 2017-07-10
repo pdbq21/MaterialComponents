@@ -2,6 +2,7 @@
  * Created by ruslan on 04.07.17.
  */
 import React, {Component} from 'react'
+import update from 'react-addons-update'; // ES6
 import {
   Elevation,
   TypographyDisplay,
@@ -44,9 +45,10 @@ const Delete = (props) => {
   );
 };
 
-const Edit = () => {
+const Edit = (props) => {
   return (
     <Button
+      {...props}
       ripple
     ><Icon>
       mode_edit
@@ -95,7 +97,8 @@ export default class TablePage extends Component {
         },//col 6
       ],
       rows: [],
-      selectedItems: []
+      selectedItems: [],
+      edit: {}
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
@@ -106,6 +109,7 @@ export default class TablePage extends Component {
     this.handleSelectRow = this.handleSelectRow.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   setOpenFullPage(openFullPage) {
@@ -125,11 +129,21 @@ export default class TablePage extends Component {
   }
 
   handleAccept(data) {
-    //const {} = this.state;
-    console.log("Submit", data);
+    const {rows, selectedItems} = this.state;
+
+    //console.log("Submit", data, rows[selectedItems[0]],);
+
+    let newState = update(rows, {
+      [selectedItems[0]]: {
+        $set: data
+      }
+    });
+    //console.log(newState);
 //this.state.rows;
     this.setState({
-      rows: this.state.rows.concat(data)
+      rows: (Object.keys(this.state.edit).length) ? newState : this.state.rows.concat(data),
+      selectedItems: [],
+      edit: {}
     })
 
   }
@@ -157,12 +171,12 @@ export default class TablePage extends Component {
     })
   }
 
-  remove (arr, indexes) {
+  remove(arr, indexes) {
     let arrayOfIndexes = [].slice.call(arguments, 1);
-    return arr.filter((item, index) => arrayOfIndexes.indexOf(index) == -1);
+    return arr.filter((item, index) => arrayOfIndexes.indexOf(index) === -1);
   }
 
-  handleDeleteSelected(){
+  handleDeleteSelected() {
     const {selectedItems, rows} = this.state;
     console.log('Delete selected', rows);
 
@@ -172,8 +186,25 @@ export default class TablePage extends Component {
     })
   }
 
+  handleEdit() {
+    console.log('Edit');
+    const {selectedItems, rows} = this.state;
+
+    /*  {
+     name: '',
+     value: '',
+
+     },*/
+
+    this.setState({
+      openFullPage: true,
+      edit: rows[selectedItems[0]]
+    });
+  }
+
   render() {
-    const {openFullPage, columns, rows} = this.state;
+    const {openFullPage, columns, rows, edit} = this.state;
+    console.log(edit)
     return (
       <section className="content">
         <Elevation
@@ -212,11 +243,11 @@ export default class TablePage extends Component {
               // if selected > 1
               // if need for 2 one actions and 3 other actions, here ()? : ;
               multi: [
-                <Delete key="delete"  onClick={this.handleDeleteSelected}/>
+                <Delete key="delete" onClick={this.handleDeleteSelected}/>
               ],
               // selected === 1
               single: [
-                <Edit key="edit"/>,
+                <Edit key="edit" onClick={this.handleEdit}/>,
                 <Delete
                   key="delete"
                   onClick={this.handleDelete}
@@ -236,6 +267,7 @@ export default class TablePage extends Component {
             dialog={{
               openDialog: openFullPage,
               title: 'New Row',
+              row: edit,
               onAccept: this.handleAccept,
               onCancel: this.handleCancel,
               onOpen: this.handleOpenFullPage,
