@@ -16,7 +16,6 @@ export default class Header extends PureComponent {
         className="rmd-table__header"
       >
         {(items) ?
-
             <div
               className="rmd-table__title__context"
             >
@@ -27,12 +26,13 @@ export default class Header extends PureComponent {
               </h2>
               {(items === 1) ? single : multi}
             </div>
-
           :
           <div className="rmd-table__title">
-            <h2 className="rmd-table__title__title">{title}</h2>
-            {/* buttons for actions */}
-            {action}
+            <h2 className="rmd-table__title__text">{title}</h2>
+            <div className="rmd-table__title-action">
+              {/* buttons for actions */}
+              {action}
+            </div>
           </div>
         }
       </header>

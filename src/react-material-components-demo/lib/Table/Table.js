@@ -348,7 +348,7 @@ export default class Table extends PureComponent {
           newSelectedItems.concat([index])
         }
       });
-console.log(newSelectedItems.length && newSelectedItems.length === props.main.rows.length);
+      console.log(newSelectedItems.length && newSelectedItems.length === props.main.rows.length);
       this.setState({
         dataRows: props.main.rows,
         selectedItems: newSelectedItems,
