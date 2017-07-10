@@ -5,11 +5,11 @@ import React, {PureComponent} from 'react';
 export default class Header extends PureComponent {
   render() {
     const {
-      items,
+      items, //  selected row length
       title,
       action,
-      multiSelected,
-      singleSelected,
+      multi,
+      single,
     } = this.props;
     return (
       <header
@@ -17,13 +17,15 @@ export default class Header extends PureComponent {
       >
         {(items) ?
 
-            <div className="rmd-table__title__context">
+            <div
+              className="rmd-table__title__context"
+            >
               <h2
                 className="rmd-table__title__title"
               >
                 {`${items} item${items > 1 ? 's' : ''} selected`}
               </h2>
-              (items === 1) ? {singleSelected} : {multiSelected}
+              {(items === 1) ? single : multi}
             </div>
 
           :

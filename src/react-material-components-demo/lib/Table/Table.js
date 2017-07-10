@@ -19,15 +19,15 @@ export default class Table extends PureComponent {
     super(props);
     this.state = {
       id: 0,// generation ids for row
-      openFullPage: false, // close/open  fullPage dialog
+      // openFullPage: false, // close/open  fullPage dialog
 
 
-      dataTable: {
-        id: 'tableId', // now not use!
-        childrenId: [], //  all row ids
-      },
+      /* dataTable: {
+       id: 'tableId', // now not use!
+       childrenId: [], //  all row ids
+       },*/
       // rows => {id_1: {id: id_1, active: false, columns: dataNewRow}, id_2: {}, ...}
-      childrenTable: {},
+      //childrenTable: {},
       dataNewRow: {}, // data for new row  => {col: value},
       // where col - current column name;
 
@@ -36,6 +36,8 @@ export default class Table extends PureComponent {
       dataRows: [],
       selectAll: false, // all checkbox is checked
       selectedItems: [], //  all checked row
+
+      dataRows1: []
     };
 
     this.handleCheckbox = this.handleCheckbox.bind(this);
@@ -181,14 +183,14 @@ export default class Table extends PureComponent {
 
     //const selectedItems = dataRows.map(index => console.log(index));
 //console.log(selectedItems)
-let newSelectedItems = [];
-let newDataRows = dataRows;
+    let newSelectedItems = [];
+    let newDataRows = dataRows;
     dataRows.forEach((item, index) => {
       newSelectedItems = newSelectedItems.concat([index]);
       newDataRows[index].checked = checked;
     });
 
-console.log(newSelectedItems,newDataRows );
+    console.log(newSelectedItems, newDataRows);
     this.setState({
       selectAll: checked,
       selectedItems: (checked) ? newSelectedItems : [],
@@ -282,7 +284,7 @@ console.log(newSelectedItems,newDataRows );
   }
 
   renderHeader() {
-    //const { selectedItems } = this.state;
+    const {selectedItems} = this.state;
     const {header} = this.props;
     //const selectedRow = selectedItems.length;
     return (
@@ -294,7 +296,7 @@ console.log(newSelectedItems,newDataRows );
          multiSelected, => []
          singleSelected, => []
          */
-
+        items={selectedItems.length}
         {...header}
       />
     );
@@ -302,7 +304,8 @@ console.log(newSelectedItems,newDataRows );
 
   renderMain() {
     const {main} = this.props;
-    const {dataRows, selectAll} = this.state;
+    const {dataRows, selectAll, selectedItems} = this.state;
+
     return (
       <Main
         /*
@@ -313,11 +316,11 @@ console.log(newSelectedItems,newDataRows );
         onCheckbox={this.onCheckbox}
         onSelectAll={this.handleSelectAll}
         dataRows={dataRows}
+        selectedItems={selectedItems}
         {...main}
       />
     )
   }
-
 
   onAccept() {
     const {dialog, main} = this.props;
@@ -339,9 +342,9 @@ console.log(newSelectedItems,newDataRows );
         checked: false,
         row: row
       }),
-      selectAll: false
+      //dataRows: dataRows.concat([row]),
+      selectAll: false,
     });
-    console.log(25)
   }
 
   renderDialog() {
@@ -364,6 +367,14 @@ console.log(newSelectedItems,newDataRows );
         />
       </FullPageDialog> : null;
 
+  }
+  componentWillReceiveProps(props){
+   const { main } = props;
+   //rows
+    console.log(this.state.dataRows, main.rows)
+  }
+  componentWillReceiveProps(props) {
+console.log('receive props', props.main.rows, this.state.dataRows);
   }
 
   render() {

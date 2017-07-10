@@ -33,9 +33,10 @@ const Reset = ({...props}) => {
   );
 };
 
-const Delete = () => {
+const Delete = (props) => {
   return (
     <Button
+      {...props}
       ripple
     ><Icon>
       delete
@@ -57,9 +58,9 @@ export default class TablePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,// generation ids for row
+      //id: 0,// generation ids for row
       openFullPage: false, // close/open  fullPage dialog
-      selectAll: false, // all checkbox is checked
+      // selectAll: false, // all checkbox is checked
       columns: [
         {
           name: 'Col 1',
@@ -93,7 +94,8 @@ export default class TablePage extends Component {
           defaultValue: '0'
         },//col 6
       ],
-      rows: []
+      rows: [],
+      selectedItems: []
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
@@ -102,6 +104,8 @@ export default class TablePage extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.setOpenFullPage = this.setOpenFullPage.bind(this);
     this.handleSelectRow = this.handleSelectRow.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
   }
 
   setOpenFullPage(openFullPage) {
@@ -134,8 +138,38 @@ export default class TablePage extends Component {
     console.log("Decline");
   }
 
-  handleSelectRow(data){
+  handleSelectRow(data) {
     console.log('handleSelectRow', data);
+    // data => {index: Number, checked: Bool}
+    const {selectedItems} = this.state;
+
+    this.setState({
+      selectedItems: (data.checked) ? selectedItems.concat([data.index]) : selectedItems.filter(key => key !== data.index)
+    })
+  }
+
+  handleDelete() {
+    const {selectedItems, rows} = this.state;
+    console.log('Delete');
+    this.setState({
+      rows: rows.filter(key => key !== rows[selectedItems[0]]),
+      selectedItems: []
+    })
+  }
+
+  remove (arr, indexes) {
+    let arrayOfIndexes = [].slice.call(arguments, 1);
+    return arr.filter((item, index) => arrayOfIndexes.indexOf(index) == -1);
+  }
+
+  handleDeleteSelected(){
+    const {selectedItems, rows} = this.state;
+    console.log('Delete selected', rows);
+
+    this.setState({
+      rows: this.remove(rows, ...selectedItems),
+      selectedItems: []
+    })
   }
 
   render() {
@@ -157,9 +191,8 @@ export default class TablePage extends Component {
              -
 
              <Table  {...data} onAction={() => (actionName, actionData)} />
-
-
              */
+
             // table header columns
             onAction={(name, data) => console.log('onAction', name, data)}
 
@@ -178,12 +211,16 @@ export default class TablePage extends Component {
               ],
               // if selected > 1
               // if need for 2 one actions and 3 other actions, here ()? : ;
-              multiSelected: [
-                <Delete/>
+              multi: [
+                <Delete key="delete"  onClick={this.handleDeleteSelected}/>
               ],
               // selected === 1
-              singleSelected: [
-                <Edit key="edit"/>, <Delete key="delete"/>
+              single: [
+                <Edit key="edit"/>,
+                <Delete
+                  key="delete"
+                  onClick={this.handleDelete}
+                />
               ]
 
               // () => (name, data)

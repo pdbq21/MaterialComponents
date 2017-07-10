@@ -18,9 +18,10 @@ export default class Main extends PureComponent {
       onCheckbox,
       dataRows,
       selectAll,
-      onSelectAll
+      onSelectAll,
+      selectedItems
     } = this.props;
-    console.log('dataRows', dataRows, selectAll);
+
     return (
       <main>
         <table className="table-props">
@@ -47,11 +48,13 @@ export default class Main extends PureComponent {
           </thead>
           <tbody>
           {(rows)? rows.map((row, index) => {
-           // const dataRow = childrenTable[row];
-            // console.log('row', dataRow);
+
+           //const dataRow = (dataRows[index])? dataRows[index].row === row : 'null';
+
+//const isChecked = (dataRows[index])? dataRows[index].row === row && selectedItems.indexOf(index) !== -1 : false;
             return (<Row
               key={`key-table_row-${index}`}
-              checked={(dataRows[index])? dataRows[index].checked : false}
+              checked={ selectedItems.indexOf(index) !== -1 }
               onCheckbox={({target}) => onCheckbox({index: index, checked: target.checked})}
               columns={row}
             />)}) : null
