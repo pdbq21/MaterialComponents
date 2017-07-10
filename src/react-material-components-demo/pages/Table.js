@@ -101,6 +101,7 @@ export default class TablePage extends Component {
     this.handleAccept = this.handleAccept.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.setOpenFullPage = this.setOpenFullPage.bind(this);
+    this.handleSelectRow = this.handleSelectRow.bind(this);
   }
 
   setOpenFullPage(openFullPage) {
@@ -121,17 +122,20 @@ export default class TablePage extends Component {
 
   handleAccept(data) {
     //const {} = this.state;
-    console.log("Submit");
+    console.log("Submit", data);
 //this.state.rows;
-this.setState({
-  rows: this.state.rows.concat(data)
-})
+    this.setState({
+      rows: this.state.rows.concat(data)
+    })
 
   }
 
   handleCancel() {
     console.log("Decline");
+  }
 
+  handleSelectRow(data){
+    console.log('handleSelectRow', data);
   }
 
   render() {
@@ -189,7 +193,7 @@ this.setState({
               columns: columns,
               rows: rows,
               // data => {index: Number, checked: Bool}
-              onSelectRow: (data) => console.log('onSelectRow', data)
+              onSelectRow: this.handleSelectRow
             }}
 
             dialog={{

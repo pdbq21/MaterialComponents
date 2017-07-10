@@ -3,6 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 //import classnames from 'classnames';
+import update from 'react-addons-update'; // ES6
 
 import {
   Elevation,
@@ -27,35 +28,14 @@ export default class Table extends PureComponent {
       },
       // rows => {id_1: {id: id_1, active: false, columns: dataNewRow}, id_2: {}, ...}
       childrenTable: {},
-      // data columns => {name: colName, type: text | number}, type - for input
-      dataColumns: [
-        {
-          name: 'Col1',
-          type: 'text'
-        },
-        {
-          name: 'Col2',
-          type: 'text'
-        },
-        {
-          name: 'Col3',
-          type: 'number'
-        },
-        {
-          name: 'Col4',
-          type: 'number'
-        },
-        {
-          name: 'Col5',
-          type: 'number'
-        },
-      ],
       dataNewRow: {}, // data for new row  => {col: value},
       // where col - current column name;
 
+      dataRows: []
+
+
     };
 
-    this.handleReset = this.handleReset.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -66,6 +46,8 @@ export default class Table extends PureComponent {
     this.renderHeader = this.renderHeader.bind(this);
     this.renderMain = this.renderMain.bind(this);
     this.renderDialog = this.renderDialog.bind(this);
+    this.onAccept = this.onAccept.bind(this);
+    this.onCheckbox = this.onCheckbox.bind(this);
   }
 
 
@@ -164,12 +146,6 @@ export default class Table extends PureComponent {
    });
    }*/
 
-  handleReset() {
-
-
-    // reset to default data
-  }
-
   handleCheckbox(id, checked) {
     const {childrenTable, dataTable, selectedItems} = this.state;
     const newSelectedItems = (checked) ? selectedItems.concat([id]) : selectedItems.filter(key => key !== id);
@@ -248,6 +224,27 @@ export default class Table extends PureComponent {
     })
   }
 
+  onCheckbox(data) {
+    const {dataRows} = this.state;
+    const {main} = this.props;
+    const {onSelectRow} = main;
+
+    onSelectRow(data);
+
+    let newState = update(dataRows, {
+      [data.index]: {
+        checked: {
+          $set: data.checked
+        }
+      }
+    });
+    //console.log(newState);
+    this.setState({
+      dataRows: newState
+    })
+
+  }
+
   handleEdit() {
     //empty
     // edit selected row / open dialog
@@ -286,31 +283,53 @@ export default class Table extends PureComponent {
 
   renderMain() {
     const {main} = this.props;
+    const {dataRows} = this.state;
     return (
       <Main
         /*
          selectedAll => bool
          columns => [{}, {}]
          */
+        onCheckbox={this.onCheckbox}
+        dataRows={dataRows}
         {...main}
       />
     )
   }
 
-  renderDialog() {
+
+  onAccept() {
     const {dialog, main} = this.props;
-    const {dataNewRow} = this.state;
-    const {openDialog, title, onAccept, onCancel, onOpen, onClose} = dialog;
+    const {onAccept} = dialog;
     const {columns} = main;
+    const {dataNewRow, dataRows} = this.state;
+
     let row = {};
 
     columns.forEach(({name, defaultValue}) => {
       row[name] = dataNewRow[name] || defaultValue
     });
 
+
+    onAccept(row);
+
+    this.setState({
+      dataRows: dataRows.concat({
+        checked: false,
+        row: row
+      })
+    });
+    console.log(25)
+  }
+
+  renderDialog() {
+    const {dialog, main} = this.props;
+    const {openDialog, title, onCancel, onOpen, onClose} = dialog;
+    const {columns} = main;
+
     return (openDialog) ?
       <FullPageDialog
-        onAccept={() => onAccept(row)}
+        onAccept={this.onAccept}
         onCancel={onCancel}
         onOpen={onOpen}
         onClose={onClose}

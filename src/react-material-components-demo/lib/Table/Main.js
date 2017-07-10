@@ -15,8 +15,10 @@ export default class Main extends PureComponent {
     const {
       rows,
       columns,
-      onSelectRow
+      onCheckbox,
+      dataRows
     } = this.props;
+    console.log('dataRows', dataRows);
     return (
       <main>
         <table className="table-props">
@@ -47,8 +49,8 @@ export default class Main extends PureComponent {
             // console.log('row', dataRow);
             return (<Row
               key={`key-table_row-${index}`}
-              //checked={dataRow.active}
-              onCheckbox={({target}) => onSelectRow({index: index, checked: target.checked})}
+              checked={(dataRows[index])? dataRows[index].checked : false}
+              onCheckbox={({target}) => onCheckbox({index: index, checked: target.checked})}
               columns={row}
             />)}) : null
           }
