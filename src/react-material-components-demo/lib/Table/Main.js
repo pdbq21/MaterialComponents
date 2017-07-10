@@ -16,9 +16,11 @@ export default class Main extends PureComponent {
       rows,
       columns,
       onCheckbox,
-      dataRows
+      dataRows,
+      selectAll,
+      onSelectAll
     } = this.props;
-    console.log('dataRows', dataRows);
+    console.log('dataRows', dataRows, selectAll);
     return (
       <main>
         <table className="table-props">
@@ -30,8 +32,8 @@ export default class Main extends PureComponent {
                 /*disabled={(dataTable.childrenId.length === 0)}*/
               >
                 <CheckboxInput
-                /*  checked={selectAll}
-                  onChange={({target}) => onSelectRow('', target.checked)}*/
+                  checked={selectAll}
+                  onChange={({target}) => onSelectAll(target.checked)}
                 />
                 <CheckboxBG/>
               </Checkbox>

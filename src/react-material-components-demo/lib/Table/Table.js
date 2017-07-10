@@ -20,8 +20,8 @@ export default class Table extends PureComponent {
     this.state = {
       id: 0,// generation ids for row
       openFullPage: false, // close/open  fullPage dialog
-      selectAll: false, // all checkbox is checked
-      selectedItems: [], //  all checked row
+
+
       dataTable: {
         id: 'tableId', // now not use!
         childrenId: [], //  all row ids
@@ -31,13 +31,14 @@ export default class Table extends PureComponent {
       dataNewRow: {}, // data for new row  => {col: value},
       // where col - current column name;
 
-      dataRows: []
 
-
+      // new State
+      dataRows: [],
+      selectAll: false, // all checkbox is checked
+      selectedItems: [], //  all checked row
     };
 
     this.handleCheckbox = this.handleCheckbox.bind(this);
-    this.handleSelectAll = this.handleSelectAll.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -48,6 +49,7 @@ export default class Table extends PureComponent {
     this.renderDialog = this.renderDialog.bind(this);
     this.onAccept = this.onAccept.bind(this);
     this.onCheckbox = this.onCheckbox.bind(this);
+    this.handleSelectAll = this.handleSelectAll.bind(this);
   }
 
 
@@ -175,12 +177,22 @@ export default class Table extends PureComponent {
   }
 
   handleSelectAll(checked) {
-    const {dataTable} = this.state;
+    const {dataRows} = this.state;
 
+    //const selectedItems = dataRows.map(index => console.log(index));
+//console.log(selectedItems)
+let newSelectedItems = [];
+let newDataRows = dataRows;
+    dataRows.forEach((item, index) => {
+      newSelectedItems = newSelectedItems.concat([index]);
+      newDataRows[index].checked = checked;
+    });
+
+console.log(newSelectedItems,newDataRows );
     this.setState({
       selectAll: checked,
-      selectedItems: (checked) ? dataTable.childrenId : [],
-      childrenTable: this.activeItems(checked)
+      selectedItems: (checked) ? newSelectedItems : [],
+      dataRows: newDataRows
     })
   }
 
@@ -225,11 +237,16 @@ export default class Table extends PureComponent {
   }
 
   onCheckbox(data) {
-    const {dataRows} = this.state;
+    const {dataRows, selectedItems} = this.state;
     const {main} = this.props;
     const {onSelectRow} = main;
 
     onSelectRow(data);
+
+    const newSelectedItems = (data.checked) ? selectedItems.concat([data.index]) : selectedItems.filter(key => key !== data.index);
+
+    /*selectAll: ,
+     selectedItems: newSelectedItems,*/
 
     let newState = update(dataRows, {
       [data.index]: {
@@ -238,9 +255,11 @@ export default class Table extends PureComponent {
         }
       }
     });
-    //console.log(newState);
+    //console.log(newState.length, newSelectedItems.length);
     this.setState({
-      dataRows: newState
+      dataRows: newState,
+      selectAll: (newState.length === newSelectedItems.length),
+      selectedItems: newSelectedItems,
     })
 
   }
@@ -283,14 +302,16 @@ export default class Table extends PureComponent {
 
   renderMain() {
     const {main} = this.props;
-    const {dataRows} = this.state;
+    const {dataRows, selectAll} = this.state;
     return (
       <Main
         /*
          selectedAll => bool
          columns => [{}, {}]
          */
+        selectAll={selectAll}
         onCheckbox={this.onCheckbox}
+        onSelectAll={this.handleSelectAll}
         dataRows={dataRows}
         {...main}
       />
@@ -317,7 +338,8 @@ export default class Table extends PureComponent {
       dataRows: dataRows.concat({
         checked: false,
         row: row
-      })
+      }),
+      selectAll: false
     });
     console.log(25)
   }
