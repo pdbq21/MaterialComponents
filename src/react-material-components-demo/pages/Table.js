@@ -36,7 +36,7 @@ export default class TablePage extends Component {
     this.state = {
       //id: 0,// generation ids for row
       openFullPage: false, // close/open  fullPage dialog
-      // selectAll: false, // all checkbox is checked
+      selectAll: false, // all checkbox is checked
       columns: [
         {
           name: 'Col 1',
@@ -124,6 +124,7 @@ export default class TablePage extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleSelectedAll = this.handleSelectedAll.bind(this);
   }
 
   setOpenFullPage(openFullPage) {
@@ -191,11 +192,11 @@ export default class TablePage extends Component {
   }
 
   handleDeleteSelected() {
-    const {selectedItems, rows} = this.state;
-    console.log('Delete selected', rows);
+    const {selectedItems, rows, selectAll} = this.state;
+    console.log('Delete selected', rows, selectedItems);
 
     this.setState({
-      rows: this.remove(rows, ...selectedItems),
+      rows: (selectAll)? [] : this.remove(rows, ...selectedItems),
       selectedItems: []
     })
   }
@@ -209,7 +210,12 @@ export default class TablePage extends Component {
       edit: rows[selectedItems[0]]
     });
   }
-
+  handleSelectedAll(checked){
+    //console.log('selected all', checked)
+    this.setState({
+      selectAll: checked
+    })
+  }
   render() {
     const {openFullPage, columns, rows, edit} = this.state;
 
@@ -286,7 +292,8 @@ export default class TablePage extends Component {
               columns: columns,
               rows: rows,
               // data => {index: Number, checked: Bool}
-              onSelectRow: this.handleSelectRow
+              onSelectRow: this.handleSelectRow,
+              onSelectedAll: this.handleSelectedAll
             }}
 
             dialog={{

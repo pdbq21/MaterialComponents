@@ -167,7 +167,8 @@ export default class Table extends PureComponent {
 
   handleSelectAll(checked) {
     const {dataRows} = this.state;
-
+    const {main} = this.props;
+    main.onSelectedAll(checked);
     //const selectedItems = dataRows.map(index => console.log(index));
 //console.log(selectedItems)
     let newSelectedItems = [];
@@ -177,7 +178,6 @@ export default class Table extends PureComponent {
       newDataRows[index].checked = checked;
     });
 
-    console.log(newSelectedItems, newDataRows);
     this.setState({
       selectAll: checked,
       selectedItems: (checked) ? newSelectedItems : [],
