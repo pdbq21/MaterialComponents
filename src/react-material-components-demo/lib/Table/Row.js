@@ -17,7 +17,10 @@ export default class Row extends PureComponent {
     } = this.props;
     return (
       <tr>
-        <td><Checkbox
+        <td
+          className="rmg-table_main__checkbox"
+        >
+          <Checkbox
           ripple
         >
           <CheckboxInput

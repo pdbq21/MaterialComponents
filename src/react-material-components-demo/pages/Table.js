@@ -11,50 +11,24 @@ import {
   Icon
 } from '../lib'
 //import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
+import {cssTable} from '../styles';
 
-const Add = (props) => {
+const Action = ({
+                  icon,
+                  name,
+                  ...props
+                }) => {
   return (
     <Button
+      style={cssTable.action}
       {...props}
       ripple
-    ><Icon>
-      add
-    </Icon>Add</Button>
+    ><Icon style={cssTable.actionIcon}>
+      {icon}
+    </Icon>{name}</Button>
   );
 };
 
-const Reset = ({...props}) => {
-  return (
-    <Button
-      {...props}
-      ripple
-    ><Icon>
-      autorenew
-    </Icon>Reset</Button>
-  );
-};
-
-const Delete = (props) => {
-  return (
-    <Button
-      {...props}
-      ripple
-    ><Icon>
-      delete
-    </Icon>Delete</Button>
-  );
-};
-
-const Edit = (props) => {
-  return (
-    <Button
-      {...props}
-      ripple
-    ><Icon>
-      mode_edit
-    </Icon>Edit</Button>
-  );
-};
 
 export default class TablePage extends Component {
   constructor(props) {
@@ -95,6 +69,46 @@ export default class TablePage extends Component {
           type: 'number',
           defaultValue: '0'
         },//col 6
+        {
+          name: 'Col 7',
+          type: 'number',
+          defaultValue: '0'
+        },//col 7
+        {
+          name: 'Col 8',
+          type: 'number',
+          defaultValue: '0'
+        },//col 8
+        {
+          name: 'Col 9',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
+        {
+          name: 'Col 10',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
+        {
+          name: 'Col 11',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
+        {
+          name: 'Col 12',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
+        {
+          name: 'Col 13',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
+        {
+          name: 'Col 14',
+          type: 'number',
+          defaultValue: '0'
+        },//col 9
       ],
       rows: [],
       selectedItems: [],
@@ -190,12 +204,6 @@ export default class TablePage extends Component {
     console.log('Edit');
     const {selectedItems, rows} = this.state;
 
-    /*  {
-     name: '',
-     value: '',
-
-     },*/
-
     this.setState({
       openFullPage: true,
       edit: rows[selectedItems[0]]
@@ -204,7 +212,7 @@ export default class TablePage extends Component {
 
   render() {
     const {openFullPage, columns, rows, edit} = this.state;
-    console.log(edit)
+
     return (
       <section className="content">
         <Elevation
@@ -233,24 +241,41 @@ export default class TablePage extends Component {
               // show if not selected
               action: [
                 // props for button | react component
-                <Add key="add"
-                     onClick={this.handleAdd}
+                <Action
+                  name="Add"
+                  icon="add"
+                  key="add"
+                  onClick={this.handleAdd}
                 />,
-                <Reset key="reset"
-
+                <Action
+                  key="reset"
+                  name="Reset"
+                  icon="autorenew"
                 />
               ],
               // if selected > 1
               // if need for 2 one actions and 3 other actions, here ()? : ;
               multi: [
-                <Delete key="delete" onClick={this.handleDeleteSelected}/>
+                <Action
+                  key="delete"
+                  onClick={this.handleDeleteSelected}
+                  name="Delete"
+                  icon="delete"
+                />
               ],
               // selected === 1
               single: [
-                <Edit key="edit" onClick={this.handleEdit}/>,
-                <Delete
+                <Action
+                  key="edit"
+                  onClick={this.handleEdit}
+                  name="Edit"
+                  icon="mode_edit"
+                />,
+                <Action
                   key="delete"
                   onClick={this.handleDelete}
+                  name="Delete"
+                  icon="delete"
                 />
               ]
 

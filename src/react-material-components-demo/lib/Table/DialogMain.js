@@ -12,6 +12,7 @@ import {
 } from '../index'
 
 export default class DialogMain extends PureComponent {
+
   render() {
     const {
       title,

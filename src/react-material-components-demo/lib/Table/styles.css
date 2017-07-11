@@ -12,6 +12,60 @@
     -ms-flex-align: center;
     align-items: center;
 }
-.rmd-table__title-action{
 
+.rmd-table__title-action{
+    margin-left: auto;
+    display: flex;
+}
+.rmg-table_main__secondary{
+    color: rgba(0,0,0,.54);
+}
+.rmg-table_main__checkbox{
+
+}
+.rmg-table_main__column{
+    line-height: normal;
+    padding-right: 24px;
+    white-space: nowrap;
+}
+.rmg-table_main__header{
+    font-size: 12px;
+    font-weight: 500;
+}
+.rmg-table_main__align-left{
+    text-align: left;
+}
+.rmg-table_main__align-right{
+    text-align: right;
+}
+
+.rmd-table__title__context{
+    background: #fff3e0;
+    left: 0;
+    line-height: 80px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    right: 0;
+    -webkit-animation: slide-down .3s linear;
+    -moz-animation: slide-down .3s linear;
+}
+
+.rmd-table__title__context .rmd-table__title__text{
+    padding-left: 1.5em;
+    color: #ff6e40;
+    font-size: 16px;
+    font-weight: 500;
+}
+@-webkit-keyframes slide-down {
+    0% { height: 0 }
+    100% {height: 67px }
+}
+@-moz-keyframes slide-down {
+    0% { height: 0 }
+    100% {height: 67px }
+}
+.rmd-table__main{
+    overflow-x: auto;
+    overflow-y: hidden;
 }

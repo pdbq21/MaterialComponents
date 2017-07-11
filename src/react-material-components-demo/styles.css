@@ -8,8 +8,8 @@ body {
     border-collapse: collapse;
     font-size: 0.8em;
     text-align: left;
-    margin-top: 24px;
-    margin-bottom: 24px;
+    /*margin-top: 24px;
+    margin-bottom: 24px;*/
 }
 
 .table-props thead tr:last-child {
@@ -144,25 +144,17 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.rmd-table__container{
+.rmd-table__container {
 
 }
-.rmd-table__header{
+
+.rmd-table__header {
 
 }
+
 .rmd-table__title,
-.rmd-table__title__context{
-display: flex;
+.rmd-table__title__context {
+    display: flex;
     padding: 1em;
     align-items: center;
-}
-.rmd-table__title__title{
-    font-size: 24px;
-    margin: 0;
-}
-.rmd-table__title__active{
-
-}
-.rmd-table__title__active:first-child{
-    margin-left: auto;
 }

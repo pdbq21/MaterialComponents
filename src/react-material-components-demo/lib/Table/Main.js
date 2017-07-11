@@ -5,7 +5,7 @@ import React, {PureComponent} from 'react';
 import {
   Checkbox,
   CheckboxInput,
-  CheckboxBG
+  CheckboxBG,
 } from '../index'
 import Row from './Row'
 
@@ -22,11 +22,13 @@ export default class Main extends PureComponent {
     } = this.props;
 
     return (
-      <main>
+      <main className="rmd-table__main">
         <table className="table-props">
           <thead>
           <tr>
-            <th>
+            <th
+            className="rmg-table_main__checkbox"
+            >
               <Checkbox
                 ripple
                 /*disabled={(dataTable.childrenId.length === 0)}*/
@@ -38,9 +40,13 @@ export default class Main extends PureComponent {
                 <CheckboxBG/>
               </Checkbox>
             </th>
-            {columns.map(({name}, index) => (
+            {columns.map(({name, type}, index) => (
               <th
+                className={`rmg-table_main__secondary
+                rmg-table_main__column
+                rmg-table_main__header`}
                 key={`key-table_column-${index}`}
+
               >{name}</th>
             ))}
           </tr>

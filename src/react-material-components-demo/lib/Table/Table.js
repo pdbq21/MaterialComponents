@@ -12,7 +12,7 @@ import Header from './Header'
 import Main from './Main'
 import FullPageDialog from './Dialog'
 import DialogMain from './DialogMain'
-
+import './styles.css'
 
 export default class Table extends PureComponent {
   constructor(props) {
@@ -36,9 +36,6 @@ export default class Table extends PureComponent {
       dataRows: [],
       selectAll: false, // all checkbox is checked
       selectedItems: [], //  all checked row
-
-      selectedItems1: []
-
     };
 
     this.handleCheckbox = this.handleCheckbox.bind(this);
@@ -218,7 +215,6 @@ export default class Table extends PureComponent {
 
   handleChangeDataRow(name, value) {
     const {dataNewRow} = this.state;
-    //console.log('handleChangeDataRow', name, value);
 
     this.setState({
       dataNewRow: {
@@ -256,7 +252,6 @@ export default class Table extends PureComponent {
     })
 
   }
-
 
   renderHeader() {
     const {selectedItems} = this.state;
@@ -296,12 +291,13 @@ export default class Table extends PureComponent {
     const {dialog, main} = this.props;
     const {onAccept} = dialog;
     const {columns} = main;
-    const {dataNewRow} = this.state;
+    const {dataNewRow, dataRows, selectedItems} = this.state;
 
     let row = {};
 
     columns.forEach(({name, defaultValue}) => {
-      row[name] = dataNewRow[name] || defaultValue
+      const value = (dataRows[selectedItems[0]]) ? dataRows[selectedItems[0]][name] : defaultValue;
+      row[name] = dataNewRow[name] || value;
     });
 
 
@@ -338,6 +334,14 @@ export default class Table extends PureComponent {
         />
       </FullPageDialog> : null;
 
+  }
+
+  componentWillMount() {
+    if (this.props.main.rows) {
+      this.setState({
+        dataRows: this.props.main.rows,
+      })
+    }
   }
 
   componentWillReceiveProps(props) {
