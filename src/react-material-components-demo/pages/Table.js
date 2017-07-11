@@ -39,76 +39,81 @@ export default class TablePage extends Component {
       selectAll: false, // all checkbox is checked
       columns: [
         {
-          name: 'Col 1',
+          name: 'Column 1 string',
           type: 'string',// string | number | ?
           sortable: false,
-          defaultValue: 'name'
+          defaultValue: 'name',
+          align: 'left', // left | right | center | default center
+          //order: 0,
         },//col 1 type/name/sortable/
         {
-          name: 'Col 2',
+          name: 'Column 2 string',
           type: 'string',
-          defaultValue: 'type'
+          defaultValue: 'type',
+          align: 'left',
         },//col 2
         {
-          name: 'Col 3',
+          name: 'Column 3 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '8985',
+          align: 'right',
         },//col 3
         {
-          name: 'Col 4',
+          name: 'Column 4 string',
           type: 'string',
-          defaultValue: 'id'
+          defaultValue: 'id',
         },//col 4
+
         {
-          name: 'Col 5',
+          name: 'Column 5 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '1111',
+          align: 'right',
         },//col 5
         {
-          name: 'Col 6',
+          name: 'Column 6 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '0.222',
+          align: 'right',
         },//col 6
         {
-          name: 'Col 7',
+          name: 'Column 7 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '789',
+          align: 'right',
         },//col 7
         {
-          name: 'Col 8',
+          name: 'Column 8 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '8.69',
+          align: 'right',
         },//col 8
         {
-          name: 'Col 9',
+          name: 'Column 9 number',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '586',
+          align: 'right',
         },//col 9
         {
-          name: 'Col 10',
+          name: 'Column 10',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '333',
+          align: 'right',
         },//col 9
         {
-          name: 'Col 11',
+          name: 'Column 11',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '200',
+          align: 'right',
         },//col 9
         {
           name: 'Cod fgfd gl 12',
           type: 'number',
-          defaultValue: '0'
+          defaultValue: '100',
+          align: 'right',
         },//col 9
-        {
-          name: 'Coldf gdf gdf 13',
-          type: 'number',
-          defaultValue: '0'
-        },//col 9
-        {
-          name: 'Coldf gdf g 14',
-          type: 'number',
-          defaultValue: '0'
-        },//col 9
+
+
       ],
       rows: [],
       selectedItems: [],

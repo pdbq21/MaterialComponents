@@ -23,7 +23,7 @@ export default class Main extends PureComponent {
 
     return (
       <main className="rmd-table__main">
-        <table className="table-props">
+        <table className="table-props rmd-table__table">
           <thead>
           <tr>
             <th
@@ -40,11 +40,14 @@ export default class Main extends PureComponent {
                 <CheckboxBG/>
               </Checkbox>
             </th>
-            {columns.map(({name, type}, index) => (
+            {columns.map(({name, type, align}, index) => (
               <th
                 className={`rmg-table_main__secondary
                 rmg-table_main__column
-                rmg-table_main__header`}
+                rmg-table_main__header
+                rmg-table__align-text-${(align)? align : 'center'}
+                ${(index === 0)? 'rmg-table__grow' : ''}
+                `}
                 key={`key-table_column-${index}`}
 
               >{name}</th>
@@ -61,7 +64,8 @@ export default class Main extends PureComponent {
               key={`key-table_row-${index}`}
               checked={ selectedItems.indexOf(index) !== -1 }
               onCheckbox={({target}) => onCheckbox({index: index, checked: target.checked})}
-              columns={row}
+              dataRow={row}
+              columns={columns}
             />)}) : null
           }
           </tbody>

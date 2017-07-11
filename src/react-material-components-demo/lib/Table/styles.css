@@ -21,7 +21,7 @@
     color: rgba(0,0,0,.54);
 }
 .rmg-table_main__checkbox{
-
+    width: 1em;
 }
 .rmg-table_main__column{
     line-height: normal;
@@ -68,4 +68,24 @@
 .rmd-table__main{
     overflow-x: auto;
     overflow-y: hidden;
+}
+.rmg-table_main__row-active{
+    background-color: #f4f4f4;
+}
+.rmg-table__align-text-left{
+    text-align: left;
+}
+.rmg-table__align-text-right{
+    text-align: right;
+}
+.rmg-table__align-text-center{
+    text-align: center;
+}
+
+.rmd-table__table td, .rmd-table__table th {
+    padding: 8px 24px 8px 8px;
+}
+
+.rmg-table__grow{
+    width: 100%;
 }

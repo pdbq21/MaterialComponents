@@ -14,11 +14,14 @@ export default class Row extends PureComponent {
       checked,
       onCheckbox,
       columns,
+      dataRow
     } = this.props;
     return (
-      <tr>
+      <tr
+      className={`rmg-table_main__row ${(checked)? 'rmg-table_main__row-active' : ''}`}
+      >
         <td
-          className="rmg-table_main__checkbox"
+          className={`rmg-table_main__checkbox `}
         >
           <Checkbox
           ripple
@@ -29,10 +32,14 @@ export default class Row extends PureComponent {
           />
           <CheckboxBG/>
         </Checkbox></td>
-        {Object.keys(columns).map((col, index) => {
+        {Object.keys(dataRow).map((col, index) => {
           return (<td
+            className={`
+            rmg-table__align-text-${(columns[index].align)? columns[index].align : 'center'}
+            ${(index === 0)? 'rmg-table__grow' : ''}
+            `}
             key={`key-table_col-${index}`}
-          >{columns[col]}</td>)
+          >{dataRow[col]}</td>)
         })}
       </tr>
     );
