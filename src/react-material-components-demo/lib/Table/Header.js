@@ -2,7 +2,7 @@
  * Created by ruslan on 05.07.17.
  */
 import React, {PureComponent} from 'react';
-import {TypographySubheading} from '../index'
+import {TypographySubheading, TypographyTitle} from '../index'
 export default class Header extends PureComponent {
   render() {
     const {
@@ -31,7 +31,7 @@ export default class Header extends PureComponent {
           </div>
           : null }
           <div className="rmd-table__title">
-            <h2 className="rmd-table__title__text">{title}</h2>
+            <TypographyTitle className="rmd-table__title__text">{title}</TypographyTitle>
             <div className="rmd-table__title-action">
               {/* buttons for actions */}
               {action}

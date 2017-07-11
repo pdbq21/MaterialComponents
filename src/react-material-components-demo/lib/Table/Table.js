@@ -318,12 +318,12 @@ export default class Table extends PureComponent {
     const {openDialog, title, onCancel, onOpen, onClose, row} = dialog;
     const {columns} = main;
 
-    return (openDialog) ?
-      <FullPageDialog
+    return <FullPageDialog
         onAccept={this.onAccept}
         onCancel={onCancel}
         onOpen={onOpen}
         onClose={onClose}
+        openDialog={openDialog}
       >
         {/* new Row container */}
         <DialogMain
@@ -332,7 +332,7 @@ export default class Table extends PureComponent {
           row={row}
           onBlur={this.handleChangeDataRow}
         />
-      </FullPageDialog> : null;
+      </FullPageDialog>
 
   }
 

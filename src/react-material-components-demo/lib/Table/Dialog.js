@@ -21,11 +21,12 @@ export default class FullPageDialog extends PureComponent {
       onCancel,
       onOpen,
       onClose,
+      openDialog
     } = this.props;
 
     return (
       <Dialog
-        open={true}
+        open={openDialog}
         onAccept={onAccept}
         onCancel={onCancel}
         onOpen={onOpen}
