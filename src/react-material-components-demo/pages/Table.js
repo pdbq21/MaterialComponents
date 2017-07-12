@@ -95,28 +95,99 @@ export default class TablePage extends Component {
           defaultValue: '586',
           align: 'right',
         },//col 9
-        {
-          name: 'Column 10',
-          type: 'number',
-          defaultValue: '333',
-          align: 'right',
-        },//col 9
-        {
-          name: 'Column 11',
-          type: 'number',
-          defaultValue: '200',
-          align: 'right',
-        },//col 9
-        {
-          name: 'Cod fgfd gl 12',
-          type: 'number',
-          defaultValue: '100',
-          align: 'right',
-        },//col 9
 
 
       ],
-      rows: [],
+      rows: [
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+        {
+          'Column 1 string': 'string',
+          'Column 2 string': 'string',
+          'Column 3 number': 100,
+          'Column 4 string': 'string',
+          'Column 5 number': 100,
+          'Column 6 number': 100,
+          'Column 7 number': 100,
+          'Column 8 number': 100,
+          'Column 9 number': 100,
+        },
+      ],
       selectedItems: [],
       edit: {},
 
@@ -248,6 +319,14 @@ export default class TablePage extends Component {
 
             // table header columns
             //onAction={(name, data) => console.log('onAction', name, data)}
+table={{
+insert: <Action
+  name="Add"
+  icon="add"
+  key="add"
+  onClick={this.handleAdd}
+/>
+}}
 
             header={{
               title: 'Title Table',

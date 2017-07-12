@@ -4,6 +4,7 @@
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 //import update from 'react-addons-update'; // ES6
+import ReactDOM from 'react-dom'
 
 import {
   Elevation,
@@ -26,6 +27,11 @@ export default class Table extends PureComponent {
       selectAll: false, // all checkbox is checked
       selectedItems: [], //  all checked row
       toggle: false, // for sort
+
+      focusRow: {
+        index: '',
+        checked: false
+      }
     };
 
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
@@ -36,6 +42,8 @@ export default class Table extends PureComponent {
     this.onCheckbox = this.onCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.onSort = this.onSort.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   handleSelectAll(checked) {
@@ -66,6 +74,7 @@ export default class Table extends PureComponent {
   }
 
   onCheckbox(data) {
+    //console.log('onCheckbox', data);
     const {dataRows, selectedItems} = this.state;
     const {main} = this.props;
     const {onSelectRow} = main;
@@ -94,18 +103,56 @@ export default class Table extends PureComponent {
     );
   }
 
+
+  handleKeyDown({currentTarget, keyCode}) {
+    //console.log('handleKeyDown',keyCode )
+    if (keyCode === 40 || keyCode === 38 || keyCode === 32) {
+      const {focusRow} = this.state;
+      const rows = currentTarget.children;
+      let newFocus = focusRow.index;
+
+      if (keyCode === 32) {
+        console.dir(rows[newFocus].children[0].childNodes[0].childNodes[0].checked);
+        this.onCheckbox({checked: !rows[newFocus].children[0].childNodes[0].childNodes[0].checked, index: newFocus});
+      } else {
+        if (keyCode === 40) {
+          newFocus = (newFocus === rows.length - 1) ? 0 : newFocus + 1;
+        } else {
+          newFocus = (newFocus === 0) ? rows.length - 1 : newFocus - 1;
+        }
+
+        rows[newFocus].focus();
+      }
+    } else if (keyCode === 45){
+      console.log('insert')
+//this.props.table.insert()
+    }
+  }
+
+  handleFocus(index) {
+    //   console.log('focus', index);
+    this.setState({
+      focusRow: {
+        index: index
+      }
+    });
+  }
+
   renderMain() {
     const {main} = this.props;
-    const {selectAll, selectedItems, toggle} = this.state;
+    const {selectAll, selectedItems, toggle, focusRow} = this.state;
 
     return (
       <Main
+        onKeyDown={this.handleKeyDown}
         selectAll={selectAll}
         toggle={toggle}
         onSort={this.onSort}
         onCheckbox={this.onCheckbox}
         onSelectAll={this.handleSelectAll}
+        onFocus={this.handleFocus}
         selectedItems={selectedItems}
+        focusRow={focusRow}
         {...main}
       />
     )
@@ -207,8 +254,10 @@ export default class Table extends PureComponent {
       'rmd-table__container', className
     );
     return (<Elevation
+        tabIndex="0"
         zSpace="2"
         className={classes}
+onKeyDown={this.handleKeyDown}
         {...otherProp}
       >
         {/* Header */}

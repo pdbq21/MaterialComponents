@@ -22,7 +22,10 @@ export default class Main extends PureComponent {
       selectedItems,
       toggle,
       onSort,
-      checkbox
+      checkbox,
+      onKeyDown,
+      focusRow,
+      onFocus
     } = this.props;
 
     return (
@@ -74,15 +77,19 @@ export default class Main extends PureComponent {
             ))}
           </tr>
           </thead>
-          <tbody>
+          <tbody
+            onKeyDown={onKeyDown}
+          >
           {(rows) ? rows.map((row, index) => {
             return (<Row
+              onFocus={() => onFocus(index)}
               key={`key-table_row-${index}`}
               checked={ selectedItems.indexOf(index) !== -1 }
               onCheckbox={({target}) => onCheckbox({index: index, checked: target.checked})}
               dataRow={row}
               columns={columns}
               checkbox={checkbox}
+              focusRow={focusRow}
             />)
           }) : null
           }

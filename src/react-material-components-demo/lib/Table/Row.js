@@ -15,10 +15,14 @@ export default class Row extends PureComponent {
       onCheckbox,
       columns,
       dataRow,
-      checkbox
+      checkbox,
+      onFocus,
+      focusRow,
     } = this.props;
     return (
       <tr
+        onFocus={onFocus}
+        tabIndex="0"
         className={`rmg-table_main__row ${(checked) ? 'rmg-table_main__row-active' : ''}`}
       >
         {(checkbox)? <td

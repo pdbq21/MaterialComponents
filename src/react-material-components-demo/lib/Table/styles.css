@@ -1,7 +1,8 @@
-.rmd-table__header{
+.rmd-table__header {
     position: relative;
 }
-.rmd-table__title{
+
+.rmd-table__title {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -13,33 +14,39 @@
     align-items: center;
 }
 
-.rmd-table__title-action{
+.rmd-table__title-action {
     margin-left: auto;
     display: flex;
 }
-.rmg-table_main__secondary{
-    color: rgba(0,0,0,.54);
+
+.rmg-table_main__secondary {
+    color: rgba(0, 0, 0, .54);
 }
-.rmg-table_main__checkbox{
+
+.rmg-table_main__checkbox {
     width: 1em;
 }
-.rmg-table_main__column{
+
+.rmg-table_main__column {
     line-height: normal;
     padding-right: 24px;
     white-space: nowrap;
 }
-.rmg-table_main__header{
+
+.rmg-table_main__header {
     font-size: 12px;
     font-weight: 500;
 }
-.rmg-table_main__align-left{
+
+.rmg-table_main__align-left {
     text-align: left;
 }
-.rmg-table_main__align-right{
+
+.rmg-table_main__align-right {
     text-align: right;
 }
 
-.rmd-table__title__context{
+.rmd-table__title__context {
     background: #fff3e0;
     left: 0;
     line-height: 80px;
@@ -51,34 +58,49 @@
     -moz-animation: slide-down .3s linear;
 }
 
-.rmd-table__title__context .rmd-table__title__text{
+.rmd-table__title__context .rmd-table__title__text {
     padding-left: 1.5em;
     color: #ff6e40;
     font-size: 16px;
     font-weight: 500;
 }
+
 @-webkit-keyframes slide-down {
-    0% { height: 0 }
-    100% {height: 67px }
+    0% {
+        height: 0
+    }
+    100% {
+        height: 67px
+    }
 }
+
 @-moz-keyframes slide-down {
-    0% { height: 0 }
-    100% {height: 67px }
+    0% {
+        height: 0
+    }
+    100% {
+        height: 67px
+    }
 }
-.rmd-table__main{
+
+.rmd-table__main {
     overflow-x: auto;
     overflow-y: hidden;
 }
-.rmg-table_main__row-active{
-    background-color: #f4f4f4;
+
+.rmg-table_main__row-active {
+    /*background-color: #f4f4f4;*/
 }
-.rmg-table__align-text-left{
+
+.rmg-table__align-text-left {
     text-align: left;
 }
-.rmg-table__align-text-right{
+
+.rmg-table__align-text-right {
     text-align: right;
 }
-.rmg-table__align-text-center{
+
+.rmg-table__align-text-center {
     text-align: center;
 }
 
@@ -86,14 +108,18 @@
     padding: 8px 24px 8px 8px;
 }
 
-.rmg-table__grow{
+.rmg-table__grow {
     width: 100%;
 }
-.rmg-table_main__toggle{
+
+.rmg-table_main__toggle {
     font-size: 16px;
     width: 16px;
     height: 16px;
     display: inline-table;
-margin-right: 5px;
+    margin-right: 5px;
     vertical-align: bottom;
+}
+.rmd-table__container:focus{
+    outline: none;
 }
