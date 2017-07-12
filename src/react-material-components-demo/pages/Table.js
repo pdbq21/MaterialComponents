@@ -149,19 +149,18 @@ export default class TablePage extends Component {
   }
 
   handleAccept(data) {
-    const {rows, selectedItems} = this.state;
+    const {rows, selectedItems, edit} = this.state;
 
-    //console.log("Submit", data, rows[selectedItems[0]],);
+    console.log("Submit", data, rows, selectedItems);
 
     let newState = update(rows, {
       [selectedItems[0]]: {
         $set: data
       }
     });
-    //console.log(newState);
 //this.state.rows;
     this.setState({
-      rows: (Object.keys(this.state.edit).length) ? newState : this.state.rows.concat(data),
+      rows: (Object.keys(edit).length) ? newState : rows.concat(data),
       selectedItems: [],
       edit: {}
     })
@@ -216,14 +215,16 @@ export default class TablePage extends Component {
     });
   }
   handleSelectedAll(checked){
-    //console.log('selected all', checked)
+    console.log('selected all', checked, Object.keys(this.state.rows[0]));
     this.setState({
       selectAll: checked
     })
   }
   render() {
     const {openFullPage, columns, rows, edit} = this.state;
-
+if (this.state.rows.length){
+  console.log(Object.keys(this.state.rows[0]))
+}
     return (
       <section className="content">
         <Elevation

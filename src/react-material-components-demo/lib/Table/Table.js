@@ -170,18 +170,17 @@ export default class Table extends PureComponent {
     const {main} = this.props;
     main.onSelectedAll(checked);
     //const selectedItems = dataRows.map(index => console.log(index));
-//console.log(selectedItems)
+
     let newSelectedItems = [];
-    let newDataRows = dataRows;
+    //let newDataRows = dataRows;
     dataRows.forEach((item, index) => {
       newSelectedItems = newSelectedItems.concat([index]);
-      newDataRows[index].checked = checked;
+      //newDataRows[index].checked = checked;
     });
-
     this.setState({
       selectAll: checked,
       selectedItems: (checked) ? newSelectedItems : [],
-      dataRows: newDataRows
+      //dataRows: newDataRows
     })
   }
 
@@ -299,7 +298,6 @@ export default class Table extends PureComponent {
       const value = (dataRows[selectedItems[0]]) ? dataRows[selectedItems[0]][name] : defaultValue;
       row[name] = dataNewRow[name] || value;
     });
-
 
     onAccept(row);
 

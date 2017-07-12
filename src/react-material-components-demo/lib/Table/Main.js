@@ -56,7 +56,7 @@ export default class Main extends PureComponent {
           </thead>
           <tbody>
           {(rows)? rows.map((row, index) => {
-
+//console.log(row)
            //const dataRow = (dataRows[index])? dataRows[index].row === row : 'null';
 
 //const isChecked = (dataRows[index])? dataRows[index].row === row && selectedItems.indexOf(index) !== -1 : false;
