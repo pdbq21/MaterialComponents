@@ -164,7 +164,9 @@ export {
   SliderContainerThumb,
   SliderFocusRing,
   SliderThumb,
-  SliderTrack
+  SliderTrack,
+  SliderPin,
+  SliderPinMarker
 } from './Slider'
 export {
   LinearProgress,

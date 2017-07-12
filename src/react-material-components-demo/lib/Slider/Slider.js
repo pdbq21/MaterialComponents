@@ -177,11 +177,15 @@ export default class Slider extends PureComponent {
       className,
       tabIndex,
       role,
+      discrete,
       children,
       ...otherProps
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider',
+      {
+        'mdc-slider--discrete': discrete
+      },
       this.state.classNames,
       className
     );

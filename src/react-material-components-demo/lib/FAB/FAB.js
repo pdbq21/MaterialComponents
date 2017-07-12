@@ -159,39 +159,3 @@ export default class FAB extends PureComponent {
         }
     }
 }
-
-/*
- const propTypes = {
- children: PropTypes.node,
- className: PropTypes.string,
- icon: PropTypes.bool,
- mini: PropTypes.bool,
- plain: PropTypes.bool,
- };
- const FAB = ({
- children,
- className,
- elementType,
- icon,
- mini,
- plain,
- ...otherProp
- }) => {
- const classes = classnames(
- 'mdc-fab', {
- 'material-icons': icon,
- 'mdc-fab--mini': mini,
- 'mdc-fab--plain': plain,
- }, className);
- const ElementType = elementType || 'button';
- return (
- <ElementType className={classes}
- {...otherProp}
- >
- {children}
- </ElementType>);
- };
-
- FAB.propTypes = propTypes;
- export default FAB;
- */

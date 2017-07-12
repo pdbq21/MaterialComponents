@@ -14,13 +14,14 @@ export default class Row extends PureComponent {
       checked,
       onCheckbox,
       columns,
-      dataRow
+      dataRow,
+      checkbox
     } = this.props;
     return (
       <tr
         className={`rmg-table_main__row ${(checked) ? 'rmg-table_main__row-active' : ''}`}
       >
-        <td
+        {(checkbox)? <td
           className={`rmg-table_main__checkbox `}
         >
           <Checkbox
@@ -32,7 +33,8 @@ export default class Row extends PureComponent {
             />
             <CheckboxBG/>
           </Checkbox>
-        </td>
+        </td> : null}
+
         {Object.keys(dataRow).map((col, index) => {
          // console.log(col, dataRow)
           return (<td

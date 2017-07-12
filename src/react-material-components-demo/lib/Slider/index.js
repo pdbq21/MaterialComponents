@@ -8,3 +8,5 @@ export {default as SliderContainerThumb} from './ContainerThumb';
 export {default as SliderFocusRing} from './FocusRing';
 export {default as SliderThumb} from './Thumb';
 export {default as SliderTrack} from './Track';
+export {default as SliderPin} from './Pin';
+export {default as SliderPinMarker} from './Marker';

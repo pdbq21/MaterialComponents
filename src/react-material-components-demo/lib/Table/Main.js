@@ -21,7 +21,8 @@ export default class Main extends PureComponent {
       onSelectAll,
       selectedItems,
       toggle,
-      onSort
+      onSort,
+      checkbox
     } = this.props;
 
     return (
@@ -29,7 +30,7 @@ export default class Main extends PureComponent {
         <table className="table-props rmd-table__table">
           <thead>
           <tr>
-            <th
+            {(checkbox)?  <th
               className="rmg-table_main__checkbox"
             >
               <Checkbox
@@ -42,7 +43,8 @@ export default class Main extends PureComponent {
                 />
                 <CheckboxBG/>
               </Checkbox>
-            </th>
+            </th> : null }
+
             {columns.map(({name, type, align, sort}, index) => (
               <th
                 className={`rmg-table_main__secondary
@@ -55,7 +57,7 @@ export default class Main extends PureComponent {
               >
                 {(sort) ?
                   <IconToggle
-                    className="rmg-table_main__toggle mdc-ripple-bg-radius mdc-ripple-fg-radius"
+                    className="rmg-table_main__toggle"
                     icon
                     toggle={toggle}
                     ripple
@@ -74,16 +76,13 @@ export default class Main extends PureComponent {
           </thead>
           <tbody>
           {(rows) ? rows.map((row, index) => {
-//console.log(row)
-            //const dataRow = (dataRows[index])? dataRows[index].row === row : 'null';
-
-//const isChecked = (dataRows[index])? dataRows[index].row === row && selectedItems.indexOf(index) !== -1 : false;
             return (<Row
               key={`key-table_row-${index}`}
               checked={ selectedItems.indexOf(index) !== -1 }
               onCheckbox={({target}) => onCheckbox({index: index, checked: target.checked})}
               dataRow={row}
               columns={columns}
+              checkbox={checkbox}
             />)
           }) : null
           }

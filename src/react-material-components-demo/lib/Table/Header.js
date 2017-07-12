@@ -42,9 +42,3 @@ export default class Header extends PureComponent {
     );
   }
 }
-
-/*<Button
- ripple
- className='rmd-table__title__active'
- onClick={onAdd}
- >Add</Button>*/

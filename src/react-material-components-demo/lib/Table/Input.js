@@ -33,7 +33,7 @@ export default class Input extends PureComponent {
     } = this.props;
     return (
       <Textfield>
-        {/* type => text | number | ? may be select list */}
+        {/* type => text | number */}
         <TextfieldInput
           value={this.state.value}
           onChange={({target}) => this.setState({

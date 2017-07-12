@@ -11,6 +11,8 @@ import {
   SliderFocusRing,
   SliderThumb,
   SliderTrack,
+  SliderPin,
+  SliderPinMarker,
   FormField,
   Checkbox,
   CheckboxInput,
@@ -380,6 +382,39 @@ export default class SliderPage extends Component {
                 onSliderChange: {valueChange}
               </FormField>
             </Elevation>
+          </Example>
+          <Example
+          title="Discrete Slider"
+          code=''
+          >
+            <Slider
+              discrete
+              style={{
+                'backgroundColor': (bgColor) ? '#eeefff' : '',
+              }}
+              disabled={disabled}
+              onSliderInput={(value) => this.setState({
+                valueInput: value
+              })}
+              onSliderChange={(value) => this.setState({
+                valueChange: value
+              })}
+              aria-valuemin={min}
+              aria-valuemax={max}
+              data-step={step}
+              aria-label="Select Value"
+            >
+              <SliderContainerTrack>
+                <SliderTrack/>
+              </SliderContainerTrack>
+              <SliderContainerThumb>
+                <SliderPin>
+                <SliderPinMarker/>
+                </SliderPin>
+                <SliderThumb circle/>
+                <SliderFocusRing/>
+              </SliderContainerThumb>
+            </Slider>
           </Example>
         </Elevation>
         <Footer/>

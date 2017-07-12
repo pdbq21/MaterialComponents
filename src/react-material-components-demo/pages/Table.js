@@ -118,7 +118,8 @@ export default class TablePage extends Component {
       ],
       rows: [],
       selectedItems: [],
-      edit: {}
+      edit: {},
+
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleOpenFullPage = this.handleOpenFullPage.bind(this);
@@ -186,7 +187,7 @@ export default class TablePage extends Component {
     const {selectedItems, rows, selectAll} = this.state;
     console.log('Delete', selectAll);
     this.setState({
-      rows: (selectAll)? [] : rows.filter(key => key !== rows[selectedItems[0]]),
+      rows: (selectAll) ? [] : rows.filter(key => key !== rows[selectedItems[0]]),
       selectedItems: []
     })
   }
@@ -201,7 +202,7 @@ export default class TablePage extends Component {
     console.log('Delete selected', rows, selectedItems);
 
     this.setState({
-      rows: (selectAll)? [] : this.remove(rows, ...selectedItems),
+      rows: (selectAll) ? [] : this.remove(rows, ...selectedItems),
       selectedItems: []
     })
   }
@@ -215,12 +216,14 @@ export default class TablePage extends Component {
       edit: rows[selectedItems[0]]
     });
   }
-  handleSelectedAll(checked){
+
+  handleSelectedAll(checked) {
     console.log('selected all', checked);
     this.setState({
       selectAll: checked
     })
   }
+
   render() {
     const {openFullPage, columns, rows, edit} = this.state;
 
@@ -244,8 +247,7 @@ export default class TablePage extends Component {
              */
 
             // table header columns
-            onAction={(name, data) => console.log('onAction', name, data)}
-
+            //onAction={(name, data) => console.log('onAction', name, data)}
 
             header={{
               title: 'Title Table',
@@ -298,7 +300,8 @@ export default class TablePage extends Component {
               rows: rows,
               // data => {index: Number, checked: Bool}
               onSelectRow: this.handleSelectRow,
-              onSelectedAll: this.handleSelectedAll
+              onSelectedAll: this.handleSelectedAll,
+              checkbox: true
             }}
 
             dialog={{
@@ -310,9 +313,8 @@ export default class TablePage extends Component {
               onOpen: this.handleOpenFullPage,
               onClose: this.handleCloseFullPage
             }}
-
-
           />
+
 
         </Elevation>
         <div/>
