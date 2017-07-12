@@ -44,6 +44,7 @@ export default class TablePage extends Component {
           sortable: false,
           defaultValue: 'name',
           align: 'left', // left | right | center | default center
+          sort: true
           //order: 0,
         },//col 1 type/name/sortable/
         {
@@ -151,7 +152,7 @@ export default class TablePage extends Component {
   handleAccept(data) {
     const {rows, selectedItems, edit} = this.state;
 
-    console.log("Submit", data, rows, selectedItems);
+    console.log("Submit");
 
     let newState = update(rows, {
       [selectedItems[0]]: {
@@ -215,7 +216,7 @@ export default class TablePage extends Component {
     });
   }
   handleSelectedAll(checked){
-    console.log('selected all', checked, Object.keys(this.state.rows[0]));
+    console.log('selected all', checked);
     this.setState({
       selectAll: checked
     })

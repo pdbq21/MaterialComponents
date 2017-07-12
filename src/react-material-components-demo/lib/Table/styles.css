@@ -89,3 +89,11 @@
 .rmg-table__grow{
     width: 100%;
 }
+.rmg-table_main__toggle{
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    display: inline-table;
+margin-right: 5px;
+    vertical-align: bottom;
+}

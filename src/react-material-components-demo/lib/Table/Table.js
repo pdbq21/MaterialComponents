@@ -36,6 +36,7 @@ export default class Table extends PureComponent {
       dataRows: [],
       selectAll: false, // all checkbox is checked
       selectedItems: [], //  all checked row
+      toggle: false, // for sort
     };
 
     this.handleCheckbox = this.handleCheckbox.bind(this);
@@ -49,6 +50,7 @@ export default class Table extends PureComponent {
     this.onAccept = this.onAccept.bind(this);
     this.onCheckbox = this.onCheckbox.bind(this);
     this.handleSelectAll = this.handleSelectAll.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
 
@@ -273,11 +275,13 @@ export default class Table extends PureComponent {
 
   renderMain() {
     const {main} = this.props;
-    const {selectAll, selectedItems} = this.state;
+    const {selectAll, selectedItems, toggle} = this.state;
 
     return (
       <Main
         selectAll={selectAll}
+        toggle={toggle}
+        onSort={this.onSort}
         onCheckbox={this.onCheckbox}
         onSelectAll={this.handleSelectAll}
         selectedItems={selectedItems}
@@ -329,9 +333,30 @@ export default class Table extends PureComponent {
           columns={columns}
           row={row}
           onBlur={this.handleChangeDataRow}
+          openDialog={openDialog}
         />
       </FullPageDialog>
 
+  }
+
+  sorted(array, name, highest){
+    return (highest)? array[0][name] < array[1][name] : array[0][name] > array[1][name]
+  }
+
+  onSort(isOn, name){
+    const {dataRows} = this.state;
+    console.log('Sort', isOn);
+// current col
+    // data columns
+    // up or down
+
+    // [{}, {}] -> key === name
+
+    dataRows.sort((...e) => this.sorted(e, name, isOn));
+
+    this.setState({
+      toggle: isOn,
+    })
   }
 
   componentWillMount() {
@@ -359,6 +384,7 @@ export default class Table extends PureComponent {
     }
 
   }
+
 
   render() {
     return (<Elevation
