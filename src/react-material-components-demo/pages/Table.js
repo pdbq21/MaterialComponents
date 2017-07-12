@@ -182,10 +182,10 @@ export default class TablePage extends Component {
   }
 
   handleDelete() {
-    const {selectedItems, rows} = this.state;
-    console.log('Delete');
+    const {selectedItems, rows, selectAll} = this.state;
+    console.log('Delete', selectAll);
     this.setState({
-      rows: rows.filter(key => key !== rows[selectedItems[0]]),
+      rows: (selectAll)? [] : rows.filter(key => key !== rows[selectedItems[0]]),
       selectedItems: []
     })
   }
@@ -222,9 +222,7 @@ export default class TablePage extends Component {
   }
   render() {
     const {openFullPage, columns, rows, edit} = this.state;
-if (this.state.rows.length){
-  console.log(Object.keys(this.state.rows[0]))
-}
+
     return (
       <section className="content">
         <Elevation
