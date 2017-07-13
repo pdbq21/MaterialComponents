@@ -320,12 +320,8 @@ export default class TablePage extends Component {
             // table header columns
             //onAction={(name, data) => console.log('onAction', name, data)}
 table={{
-insert: <Action
-  name="Add"
-  icon="add"
-  key="add"
-  onClick={this.handleAdd}
-/>
+insert: this.handleAdd,
+  enter: this.handleEdit
 }}
 
             header={{

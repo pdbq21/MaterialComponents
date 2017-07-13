@@ -17,7 +17,6 @@ export default class Row extends PureComponent {
       dataRow,
       checkbox,
       onFocus,
-      focusRow,
     } = this.props;
     return (
       <tr

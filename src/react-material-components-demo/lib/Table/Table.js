@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 //import update from 'react-addons-update'; // ES6
-import ReactDOM from 'react-dom'
+//import ReactDOM from 'react-dom'
 
 import {
   Elevation,
@@ -105,7 +105,8 @@ export default class Table extends PureComponent {
 
 
   handleKeyDown({currentTarget, keyCode}) {
-    //console.log('handleKeyDown',keyCode )
+    console.log('handleKeyDown',keyCode );
+
     if (keyCode === 40 || keyCode === 38 || keyCode === 32) {
       const {focusRow} = this.state;
       const rows = currentTarget.children;
@@ -123,9 +124,10 @@ export default class Table extends PureComponent {
 
         rows[newFocus].focus();
       }
-    } else if (keyCode === 45){
-      console.log('insert')
-//this.props.table.insert()
+    } else if (keyCode === 45) {
+      this.props.table.insert()
+    } else if (keyCode === 13){
+      //this.props.table.enter()
     }
   }
 
@@ -246,6 +248,8 @@ export default class Table extends PureComponent {
 
   render() {
     const ownProps = Object.assign({}, this.props.table);
+    delete ownProps.insert;
+    delete ownProps.enter;
     const {
       className,
       ...otherProp
@@ -257,7 +261,7 @@ export default class Table extends PureComponent {
         tabIndex="0"
         zSpace="2"
         className={classes}
-onKeyDown={this.handleKeyDown}
+        onKeyDown={this.handleKeyDown}
         {...otherProp}
       >
         {/* Header */}
