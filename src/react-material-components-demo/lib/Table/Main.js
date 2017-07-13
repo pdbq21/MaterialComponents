@@ -24,7 +24,6 @@ export default class Main extends PureComponent {
       onSort,
       checkbox,
       onKeyDown,
-      focusRow,
       onFocus
     } = this.props;
 
@@ -89,7 +88,6 @@ export default class Main extends PureComponent {
               dataRow={row}
               columns={columns}
               checkbox={checkbox}
-              focusRow={focusRow}
             />)
           }) : null
           }

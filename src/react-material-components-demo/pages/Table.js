@@ -278,14 +278,21 @@ export default class TablePage extends Component {
     })
   }
 
-  handleEdit() {
+  handleEdit(index) {
     console.log('Edit');
     const {selectedItems, rows} = this.state;
 
+    const newEdit = (index) ? rows[index] : rows[selectedItems[0]];
+    const newSelectedItems = (index) ? update(selectedItems, {
+      $unshift: [index]
+    }) : selectedItems;
+//console.log(newSelectedItems)
     this.setState({
       openFullPage: true,
-      edit: rows[selectedItems[0]]
-    });
+      edit: newEdit,
+      selectedItems: newSelectedItems
+    })
+
   }
 
   handleSelectedAll(checked) {
@@ -319,10 +326,10 @@ export default class TablePage extends Component {
 
             // table header columns
             //onAction={(name, data) => console.log('onAction', name, data)}
-table={{
-insert: this.handleAdd,
-  enter: this.handleEdit
-}}
+            table={{
+              insert: this.handleAdd,
+              enter: this.handleEdit
+            }}
 
             header={{
               title: 'Title Table',

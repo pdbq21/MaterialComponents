@@ -28,10 +28,7 @@ export default class Table extends PureComponent {
       selectedItems: [], //  all checked row
       toggle: false, // for sort
 
-      focusRow: {
-        index: '',
-        checked: false
-      }
+      focusRowIndex: ''
     };
 
     this.handleChangeDataRow = this.handleChangeDataRow.bind(this);
@@ -44,6 +41,7 @@ export default class Table extends PureComponent {
     this.onSort = this.onSort.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleKeyDownTable = this.handleKeyDownTable.bind(this);
   }
 
   handleSelectAll(checked) {
@@ -103,18 +101,26 @@ export default class Table extends PureComponent {
     );
   }
 
+  handleKeyDownTable({keyCode}){
+    if (keyCode === 45) {
+      this.props.table.insert()
+    }
+  }
 
   handleKeyDown({currentTarget, keyCode}) {
-    console.log('handleKeyDown',keyCode );
-
-    if (keyCode === 40 || keyCode === 38 || keyCode === 32) {
-      const {focusRow} = this.state;
+    //console.log('handleKeyDown',keyCode );
+    if (keyCode === 40 || keyCode === 38 || keyCode === 32 || keyCode === 13) {
+      const {focusRowIndex} = this.state;
       const rows = currentTarget.children;
-      let newFocus = focusRow.index;
+      let newFocus = focusRowIndex;
 
       if (keyCode === 32) {
         console.dir(rows[newFocus].children[0].childNodes[0].childNodes[0].checked);
         this.onCheckbox({checked: !rows[newFocus].children[0].childNodes[0].childNodes[0].checked, index: newFocus});
+      } else if (keyCode === 13){
+        console.log(focusRowIndex);
+        // focus index
+        this.props.table.enter(focusRowIndex)
       } else {
         if (keyCode === 40) {
           newFocus = (newFocus === rows.length - 1) ? 0 : newFocus + 1;
@@ -124,25 +130,19 @@ export default class Table extends PureComponent {
 
         rows[newFocus].focus();
       }
-    } else if (keyCode === 45) {
-      this.props.table.insert()
-    } else if (keyCode === 13){
-      //this.props.table.enter()
     }
   }
 
   handleFocus(index) {
     //   console.log('focus', index);
     this.setState({
-      focusRow: {
-        index: index
-      }
+      focusRowIndex: index
     });
   }
 
   renderMain() {
     const {main} = this.props;
-    const {selectAll, selectedItems, toggle, focusRow} = this.state;
+    const {selectAll, selectedItems, toggle} = this.state;
 
     return (
       <Main
@@ -154,7 +154,6 @@ export default class Table extends PureComponent {
         onSelectAll={this.handleSelectAll}
         onFocus={this.handleFocus}
         selectedItems={selectedItems}
-        focusRow={focusRow}
         {...main}
       />
     )
@@ -261,7 +260,7 @@ export default class Table extends PureComponent {
         tabIndex="0"
         zSpace="2"
         className={classes}
-        onKeyDown={this.handleKeyDown}
+        onKeyDown={this.handleKeyDownTable}
         {...otherProp}
       >
         {/* Header */}
