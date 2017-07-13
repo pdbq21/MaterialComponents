@@ -15,11 +15,15 @@ export default class Track extends PureComponent {
     const {
       elementType,
       children,
+      marker,
       className,
       ...otherProps
     } = this.props;
     const ElementType = elementType || 'div';
-    const classes = classnames('mdc-slider__track', className);
+    const classes = classnames({
+      'mdc-slider__track': !marker,
+      'mdc-slider__track-marker-container': marker
+    }, className);
     return (
       <ElementType
         className={classes}

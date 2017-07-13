@@ -36,7 +36,22 @@ export default class SliderPage extends Component {
         min: 0,
         max: 100,
         step: 0,
+        bgColor1: false,
+        disabled1: false,
+        min1: 0,
+        max1: 100,
+        step1: 0,
+        bgColor2: false,
+        disabled2: false,
+        min2: 0,
+        max2: 100,
+        step2: 0,
       },
+      valueInput1: 0,
+      valueChange1: 0,
+      valueInput2: 0,
+      valueChange2: 0,
+
       components: [
         {
           name: 'Slider',
@@ -245,7 +260,21 @@ export default class SliderPage extends Component {
         min,
         max,
         step,
-      }
+        bgColor1,
+        disabled1,
+        min1,
+        max1,
+        step1,
+        bgColor2,
+        disabled2,
+        min2,
+        max2,
+        step2,
+      },
+      valueInput1,
+      valueChange1,
+      valueInput2,
+      valueChange2,
     } = this.state;
     return (
       <section
@@ -385,23 +414,23 @@ export default class SliderPage extends Component {
           </Example>
           <Example
           title="Discrete Slider"
-          code=''
+          code={code.slider.source2}
           >
             <Slider
               discrete
               style={{
-                'backgroundColor': (bgColor) ? '#eeefff' : '',
+                'backgroundColor': (bgColor1) ? '#eeefff' : '',
               }}
-              disabled={disabled}
+              disabled={disabled1}
               onSliderInput={(value) => this.setState({
-                valueInput: value
+                valueInput1: value
               })}
               onSliderChange={(value) => this.setState({
-                valueChange: value
+                valueChange1: value
               })}
-              aria-valuemin={min}
-              aria-valuemax={max}
-              data-step={step}
+              aria-valuemin={min1}
+              aria-valuemax={max1}
+              data-step={step1}
               aria-label="Select Value"
             >
               <SliderContainerTrack>
@@ -415,6 +444,183 @@ export default class SliderPage extends Component {
                 <SliderFocusRing/>
               </SliderContainerThumb>
             </Slider>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'column nowrap',
+              }}
+            >
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={min1}
+                    onChange={({target}) => this.handleOptions('min1', target.value)}
+                  />
+                  <TextfieldLabel>Min</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={max1}
+                    onChange={({target}) => this.handleOptions('max1', target.value)}
+                  />
+                  <TextfieldLabel>Max</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={step1}
+                    onChange={({target}) => this.handleOptions('step1', target.value)}
+                  />
+                  <TextfieldLabel>Step</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={disabled1}
+                    onChange={() => this.handleOptions('disabled1')}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Disabled
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={bgColor1}
+                    onChange={() => this.handleOptions('bgColor1')}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Use Custom BG Color
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                onSliderInput: {valueInput1}
+              </FormField>
+              <FormField>
+                onSliderChange: {valueChange1}
+              </FormField>
+            </Elevation>
+          </Example>
+          <Example
+          title="Discrete Slider with markers"
+          code={code.slider.source3}
+          >
+            <Slider
+              discrete
+              markers
+              style={{
+                'backgroundColor': (bgColor2) ? '#eeefff' : '',
+              }}
+              disabled={disabled2}
+              onSliderInput={(value) => this.setState({
+                valueInput2: value
+              })}
+              onSliderChange={(value) => this.setState({
+                valueChange2: value
+              })}
+              aria-valuemin={min2}
+              aria-valuemax={max2}
+              data-step={step2}
+              aria-label="Select Value"
+            >
+              <SliderContainerTrack>
+                <SliderTrack/>
+                <SliderTrack marker/>
+              </SliderContainerTrack>
+              <SliderContainerThumb>
+                <SliderPin>
+                <SliderPinMarker/>
+                </SliderPin>
+                <SliderThumb circle/>
+                <SliderFocusRing/>
+              </SliderContainerThumb>
+            </Slider>
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'column nowrap',
+              }}
+            >
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={min2}
+                    onChange={({target}) => this.handleOptions('min2', target.value)}
+                  />
+                  <TextfieldLabel>Min</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={max2}
+                    onChange={({target}) => this.handleOptions('max2', target.value)}
+                  />
+                  <TextfieldLabel>Max</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Textfield>
+                  <TextfieldInput
+                    type="number"
+                    value={step2}
+                    onChange={({target}) => this.handleOptions('step2', target.value)}
+                  />
+                  <TextfieldLabel>Step</TextfieldLabel>
+                </Textfield>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={disabled2}
+                    onChange={() => this.handleOptions('disabled2')}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Disabled
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={bgColor2}
+                    onChange={() => this.handleOptions('bgColor2')}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Use Custom BG Color
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                onSliderInput: {valueInput2}
+              </FormField>
+              <FormField>
+                onSliderChange: {valueChange2}
+              </FormField>
+            </Elevation>
           </Example>
         </Elevation>
         <Footer/>
