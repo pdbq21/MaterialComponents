@@ -36,7 +36,6 @@ export default class TablePage extends Component {
     this.state = {
       //id: 0,// generation ids for row
       openFullPage: false, // close/open  fullPage dialog
-      selectAll: false, // all checkbox is checked
       columns: [
         {
           name: 'Column 1 string',
@@ -45,7 +44,6 @@ export default class TablePage extends Component {
           defaultValue: 'name',
           align: 'left', // left | right | center | default center
           sort: true
-          //order: 0,
         },//col 1 type/name/sortable/
         {
           name: 'Column 2 string',
@@ -245,20 +243,21 @@ export default class TablePage extends Component {
   }
 
   handleSelectRow(data) {
-    console.log('handleSelectRow', data);
     // data => {index: Number, checked: Bool}
     const {selectedItems} = this.state;
 
+    //console.log('handleSelectRow', data);
+
     this.setState({
-      selectedItems: (data.checked) ? selectedItems.concat([data.index]) : selectedItems.filter(key => key !== data.index)
+      selectedItems: (data.checked) ? selectedItems.concat([data.index]) : selectedItems.filter(key => key !== data.index),
     })
   }
 
   handleDelete() {
-    const {selectedItems, rows, selectAll} = this.state;
-    console.log('Delete', selectAll);
+    const {selectedItems, rows} = this.state;
+    console.log('Delete');
     this.setState({
-      rows: (selectAll) ? [] : rows.filter(key => key !== rows[selectedItems[0]]),
+      rows: (rows.length === selectedItems.length) ? [] : rows.filter(key => key !== rows[selectedItems[0]]),
       selectedItems: []
     })
   }
@@ -269,36 +268,42 @@ export default class TablePage extends Component {
   }
 
   handleDeleteSelected() {
-    const {selectedItems, rows, selectAll} = this.state;
-    console.log('Delete selected', rows, selectedItems);
+    const {selectedItems, rows} = this.state;
+    //console.log('Delete selected', rows, selectedItems);
 
     this.setState({
-      rows: (selectAll) ? [] : this.remove(rows, ...selectedItems),
-      selectedItems: []
+      rows: (selectedItems.length === rows.length) ? [] : this.remove(rows, ...selectedItems),
+      selectedItems: [],
     })
   }
 
   handleEdit(index) {
-    console.log('Edit');
+    // index -> row index, for if key down Enter
+    console.log('Edit', index);
     const {selectedItems, rows} = this.state;
 
-    const newEdit = (index) ? rows[index] : rows[selectedItems[0]];
-    const newSelectedItems = (index) ? update(selectedItems, {
-      $unshift: [index]
-    }) : selectedItems;
-//console.log(newSelectedItems)
-    this.setState({
-      openFullPage: true,
-      edit: newEdit,
-      selectedItems: newSelectedItems
-    })
-
+    if (typeof index === 'number') {
+      this.setState({
+        openFullPage: true,
+        edit: rows[index],
+        selectedItems: update(selectedItems, {
+          $unshift: [index]
+        })
+      })
+    } else {
+      this.setState({
+        openFullPage: true,
+        edit: rows[selectedItems[0]],
+      })
+    }
   }
 
   handleSelectedAll(checked) {
-    console.log('selected all', checked);
+    //console.log('selected all', checked);
+    const {rows} = this.state;
     this.setState({
-      selectAll: checked
+      // [...rows.keys()] => [0, 1, 2, 3...]
+      selectedItems: (checked)? [...rows.keys()] : []
     })
   }
 

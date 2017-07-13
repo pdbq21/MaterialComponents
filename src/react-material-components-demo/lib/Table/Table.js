@@ -75,15 +75,20 @@ export default class Table extends PureComponent {
     //console.log('onCheckbox', data);
     const {dataRows, selectedItems} = this.state;
     const {main} = this.props;
-    const {onSelectRow} = main;
+    const {onSelectRow, onSelectedAll} = main;
 
     onSelectRow(data);
 
     const newSelectedItems = (data.checked) ?
       selectedItems.concat([data.index]) : selectedItems.filter(key => key !== data.index);
+    const isSelectedAll = dataRows.length === newSelectedItems.length;
+
+    if (isSelectedAll) {
+      onSelectedAll(true);
+    }
 
     this.setState({
-      selectAll: (dataRows.length === newSelectedItems.length),
+      selectAll: isSelectedAll,
       selectedItems: newSelectedItems,
     })
 
@@ -101,7 +106,7 @@ export default class Table extends PureComponent {
     );
   }
 
-  handleKeyDownTable({keyCode}){
+  handleKeyDownTable({keyCode}) {
     if (keyCode === 45) {
       this.props.table.insert()
     }
@@ -117,7 +122,7 @@ export default class Table extends PureComponent {
       if (keyCode === 32) {
         console.dir(rows[newFocus].children[0].childNodes[0].childNodes[0].checked);
         this.onCheckbox({checked: !rows[newFocus].children[0].childNodes[0].childNodes[0].checked, index: newFocus});
-      } else if (keyCode === 13){
+      } else if (keyCode === 13) {
         console.log(focusRowIndex);
         // focus index
         this.props.table.enter(focusRowIndex)
