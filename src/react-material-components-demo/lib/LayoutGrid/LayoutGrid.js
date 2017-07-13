@@ -12,7 +12,8 @@ export default class LayoutGrid extends PureComponent {
   };
 
   setPropertyLayoutGrid(margin, gutter, marginDesktop,
-                        gutterDesktop, marginTablet, gutterTablet, marginPhone, gutterPhone) {
+                        gutterDesktop, marginTablet, gutterTablet, marginPhone, gutterPhone,
+                        columnPhone, columnDesktop, columnTablet) {
 
     if (this.refs.root) {
       if (margin){
@@ -43,6 +44,15 @@ export default class LayoutGrid extends PureComponent {
       if (gutterPhone) {
         this.refs.root.style.setProperty('--mdc-layout-grid-gutter-phone', gutterPhone);
       }
+      if (columnPhone) {
+        this.refs.root.style.setProperty('--mdc-layout-grid-column-width-phone', columnPhone);
+      }
+      if (columnDesktop) {
+        this.refs.root.style.setProperty('--mdc-layout-grid-column-width-desktop', columnDesktop);
+      }
+      if (columnTablet) {
+        this.refs.root.style.setProperty('--mdc-layout-grid-column-width-tablet', columnTablet);
+      }
     }
   }
 
@@ -71,10 +81,14 @@ export default class LayoutGrid extends PureComponent {
       marginTablet,
       gutterTablet,
       marginPhone,
-      gutterPhone
+      gutterPhone,
+      columnPhone,
+      columnDesktop,
+      columnTablet
     } = props;
     this.setPropertyLayoutGrid(
-      margin, gutter, marginDesktop, gutterDesktop, marginTablet, gutterTablet, marginPhone, gutterPhone
+      margin, gutter, marginDesktop, gutterDesktop, marginTablet, gutterTablet, marginPhone, gutterPhone,
+      columnPhone, columnDesktop, columnTablet
     );
   }
 
@@ -88,14 +102,24 @@ export default class LayoutGrid extends PureComponent {
     delete ownProps.gutterTablet;
     delete ownProps.marginPhone;
     delete ownProps.gutterPhone;
+    delete ownProps.columnPhone;
+    delete ownProps.columnDesktop;
+    delete ownProps.columnTablet;
     const {
       children,
       className,
       elementType,
+      fixed,
+      left,
+      right,
       ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
-    const classes = classnames('mdc-layout-grid', className);
+    const classes = classnames('mdc-layout-grid', {
+      'mdc-layout-grid--fixed-column-width': fixed,
+      'mdc-layout-grid--align-left': left,
+      'mdc-layout-grid--align-right': right,
+    }, className);
     return (
       <ElementType
         ref="root"

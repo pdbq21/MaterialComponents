@@ -28,6 +28,7 @@ export default class SnackbarPage extends Component {
       open: false,
       checkedMultiline: false,
       checkedAction: false,
+      checkedAlign: false,
       valueMessage: 'default message',
       valueAction: 'action',
       valueTimeout: '2750',//default
@@ -131,6 +132,7 @@ export default class SnackbarPage extends Component {
     this.handleChangeTimeout = this.handleChangeTimeout.bind(this);
     this.handleChangeCheckedMultiline = this.handleChangeCheckedMultiline.bind(this);
     this.handleChangeCheckedAction = this.handleChangeCheckedAction.bind(this);
+    this.handleChangeCheckedAlign = this.handleChangeCheckedAlign.bind(this);
   }
 
   renderTable() {
@@ -180,6 +182,11 @@ export default class SnackbarPage extends Component {
       checkedAction: !this.state.checkedAction
     })
   }
+  handleChangeCheckedAlign() {
+    this.setState({
+      checkedAlign: !this.state.checkedAlign
+    })
+  }
 
   handelAction() {
     console.log('action')
@@ -199,6 +206,7 @@ export default class SnackbarPage extends Component {
       valueMessage,
       valueAction,
       valueTimeout,
+      checkedAlign,
     } = this.state;
 
     return (
@@ -240,6 +248,7 @@ export default class SnackbarPage extends Component {
 
             <Snackbar
               open={open}
+              start={checkedAlign}
               message={valueMessage}
               timeout={valueTimeout}
               actionHandler={this.handelAction}
@@ -288,6 +297,20 @@ export default class SnackbarPage extends Component {
                 </Checkbox>
                 <CheckboxLabel>
                   Action On Bottom
+                </CheckboxLabel>
+              </FormField>
+              <FormField>
+                <Checkbox
+                  ripple
+                >
+                  <CheckboxInput
+                    checked={checkedAlign}
+                    onChange={this.handleChangeCheckedAlign}
+                  />
+                  <CheckboxBG/>
+                </Checkbox>
+                <CheckboxLabel>
+                  Start Aligned
                 </CheckboxLabel>
               </FormField>
               <FormField>

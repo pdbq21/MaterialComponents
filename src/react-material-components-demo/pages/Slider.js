@@ -117,6 +117,18 @@ export default class SliderPage extends Component {
               required: 'no',
               defaultValue: '0',
               description: '-'
+            }, {
+              name: 'discrete',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            }, {
+              name: 'markers',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             },
           ]
         }, {
@@ -208,7 +220,13 @@ export default class SliderPage extends Component {
               required: 'no',
               defaultValue: 'svg',
               description: 'задає тег елемента'
-            }
+            }, {
+              name: 'marker',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            },
           ]
         },
       ],
@@ -313,8 +331,8 @@ export default class SliderPage extends Component {
         >
           <TypographyDisplay size="1">Slider</TypographyDisplay>
           <Example
-          title="Continuous Slider"
-          code={code.slider.source1}
+            title="Continuous Slider"
+            code={code.slider.source1}
           >
             <Slider
               style={{
@@ -413,8 +431,8 @@ export default class SliderPage extends Component {
             </Elevation>
           </Example>
           <Example
-          title="Discrete Slider"
-          code={code.slider.source2}
+            title="Discrete Slider"
+            code={code.slider.source2}
           >
             <Slider
               discrete
@@ -438,7 +456,7 @@ export default class SliderPage extends Component {
               </SliderContainerTrack>
               <SliderContainerThumb>
                 <SliderPin>
-                <SliderPinMarker/>
+                  <SliderPinMarker/>
                 </SliderPin>
                 <SliderThumb circle/>
                 <SliderFocusRing/>
@@ -517,8 +535,8 @@ export default class SliderPage extends Component {
             </Elevation>
           </Example>
           <Example
-          title="Discrete Slider with markers"
-          code={code.slider.source3}
+            title="Discrete Slider with markers"
+            code={code.slider.source3}
           >
             <Slider
               discrete
@@ -544,7 +562,7 @@ export default class SliderPage extends Component {
               </SliderContainerTrack>
               <SliderContainerThumb>
                 <SliderPin>
-                <SliderPinMarker/>
+                  <SliderPinMarker/>
                 </SliderPin>
                 <SliderThumb circle/>
                 <SliderFocusRing/>

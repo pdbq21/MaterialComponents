@@ -29,6 +29,10 @@ export default class LayoutGridPage extends Component {
       gutterTablet: '16px',
       marginPhone: '16px',
       gutterPhone: '16px',
+      columnPhone: '72px',
+      columnDesktop: '72px',
+      columnTablet: '72px',
+      columnAlign: 'Default Center',
       select: [
         {
           name: 'Desktop Margin:',
@@ -303,6 +307,24 @@ export default class LayoutGridPage extends Component {
               required: 'no',
               defaultValue: '16px',
               description: '8px | 16px | 24px | 40px'
+            }, {
+              name: 'fixed',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            }, {
+              name: 'left',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            }, {
+              name: 'right',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             },
           ]
         },
@@ -476,6 +498,14 @@ export default class LayoutGridPage extends Component {
       option = 'marginPhone';
     } else if (name === 'Phone Gutter:') {
       option = 'gutterPhone';
+    } else if (name === 'Desktop Column Width:') {
+      option = 'columnDesktop';
+    } else if (name === 'Tablet Column Width:') {
+      option = 'columnTablet';
+    } else if (name === 'Phone Column Width:') {
+      option = 'columnPhone';
+    } else if (name === 'Alignment of grid:') {
+      option = 'columnAlign';
     }
     this.setState({
       [option]: value
@@ -521,7 +551,12 @@ export default class LayoutGridPage extends Component {
   }
 
   render() {
-
+    const {
+      columnPhone,
+      columnDesktop,
+      columnTablet,
+      columnAlign
+    } = this.state;
     return (
       <section
         className="content"
@@ -585,6 +620,165 @@ export default class LayoutGridPage extends Component {
             {this.renderSelect()}
           </Elevation>
           {this.renderExapmle()}
+
+          <Example
+            title={'Fixed column width layout grid'}
+            code={code.layoutGrid.source8}
+          >
+            <Elevation
+              style={{
+                'display': 'flex',
+                'flexFlow': 'column nowrap',
+              }}
+            >
+
+
+              <FormField
+                style={{
+                  'margin': '.5em'
+                }}
+              >
+                Alignment of grid:
+                <Select
+                  onSelected={({item}) => this.handleSelect(item.innerText, 'Alignment of grid:')}
+                >
+                  <SelectText>{columnAlign}</SelectText>
+                  <SelectMenu>
+                    <SelectItems>
+                      <SelectItem>
+                        Default Center
+                      </SelectItem>
+                      <SelectItem>
+                        Left
+                      </SelectItem>
+                      <SelectItem>
+                        Right
+                      </SelectItem>
+                    </SelectItems>
+                  </SelectMenu>
+                </Select>
+              </FormField>
+              <FormField
+                style={{
+                  'margin': '.5em'
+                }}
+              >
+                Desktop Column Width:
+                <Select
+                  onSelected={({item}) => this.handleSelect(item.innerText, 'Desktop Column Width:')}
+                >
+                  <SelectText>{columnDesktop}</SelectText>
+                  <SelectMenu>
+                    <SelectItems>
+                      <SelectItem>
+                        72px
+                      </SelectItem>
+                      <SelectItem>
+                        84px
+                      </SelectItem>
+                    </SelectItems>
+                  </SelectMenu>
+                </Select>
+              </FormField>
+              <FormField
+                style={{
+                  'margin': '.5em'
+                }}
+              >
+                Tablet Column Width:
+                <Select
+                  onSelected={({item}) => this.handleSelect(item.innerText, 'Tablet Column Width:')}
+                >
+                  <SelectText>{columnTablet}</SelectText>
+                  <SelectMenu>
+                    <SelectItems>
+                      <SelectItem>
+                        72px
+                      </SelectItem>
+                      <SelectItem>
+                        84px
+                      </SelectItem>
+                    </SelectItems>
+                  </SelectMenu>
+                </Select>
+              </FormField>
+              <FormField
+                style={{
+                  'margin': '.5em'
+                }}
+              >
+                Phone Column Width:
+                <Select
+                  onSelected={({item}) => this.handleSelect(item.innerText, 'Phone Column Width:')}
+                >
+                  <SelectText>{columnPhone}</SelectText>
+                  <SelectMenu>
+                    <SelectItems>
+                      <SelectItem>
+                        72px
+                      </SelectItem>
+                      <SelectItem>
+                        84px
+                      </SelectItem>
+                    </SelectItems>
+                  </SelectMenu>
+                </Select>
+              </FormField>
+            </Elevation>
+            <LayoutGrid
+              style={{
+                'backgroundColor': '#DDDDDD',
+              }}
+              left={columnAlign === 'Left'}
+              right={columnAlign === 'Right'}
+              columnPhone={columnPhone}
+              columnDesktop={columnDesktop}
+              columnTablet={columnTablet}
+              fixed
+            >
+              <LayoutGridInner>
+                <LayoutGridCell
+                  columns="1"
+                  style={{
+                    'boxSizing': 'border-box',
+                    'height': '200px',
+                    'padding': '8px',
+                    'color': 'white',
+                    'fontSize': '1.5em',
+                    'backgroundColor': '#666666'
+                  }}
+                >
+
+                </LayoutGridCell>
+                <LayoutGridCell
+                  columns="1"
+                  style={{
+                    'boxSizing': 'border-box',
+                    'height': '200px',
+                    'padding': '8px',
+                    'color': 'white',
+                    'fontSize': '1.5em',
+                    'backgroundColor': '#666666'
+                  }}
+                >
+
+                </LayoutGridCell>
+                <LayoutGridCell
+                  columns="1"
+                  style={{
+                    'boxSizing': 'border-box',
+                    'height': '200px',
+                    'padding': '8px',
+                    'color': 'white',
+                    'fontSize': '1.5em',
+                    'backgroundColor': '#666666'
+                  }}
+                >
+
+                </LayoutGridCell>
+              </LayoutGridInner>
+            </LayoutGrid>
+          </Example>
         </Elevation>
         <Footer/>
       </section>
