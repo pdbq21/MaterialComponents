@@ -251,6 +251,7 @@ export default class CheckboxPage extends Component {
               style={{
                 'display': 'flex',
                 'flexFlow': 'row nowrap',
+                'marginTop': '1em'
               }}
             >
               <Button

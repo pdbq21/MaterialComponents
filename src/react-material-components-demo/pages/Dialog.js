@@ -47,31 +47,37 @@ export default class DialogPage extends Component {
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: 'значення відповідає за відкриття'
             }, {
               name: 'onOpen',
               type: 'function',
               required: 'no',
               defaultValue: '-',
-              description: '-'
+              description: 'спрацьовує при відкритті, нічого не повертає'
             }, {
               name: 'onClose',
               type: 'function',
               required: 'no',
               defaultValue: '-',
-              description: '-'
+              description: 'спрацьовує при закритті, нічого не повертає'
             }, {
               name: 'onAccept',
               type: 'function',
               required: 'no',
               defaultValue: '-',
-              description: '-'
+              description: `спрацьовує при натиску <DialogFooterButton accept/>, нічого не повертає`
             }, {
-              name: 'onOpen',
+              name: 'onCancel',
               type: 'function',
               required: 'no',
               defaultValue: '-',
-              description: '-'
+              description: `спрацьовує при натиску <DialogFooterButton cancel/>, нічого не повертає`
+            }, {
+              name: 'fullPage',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: `*Custom. значення відповідає за відкриття на весь екран`
             },
           ]
         },
@@ -102,7 +108,7 @@ export default class DialogPage extends Component {
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: 'надає властивість прокрутки'
             }
           ]
         },
@@ -133,14 +139,14 @@ export default class DialogPage extends Component {
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: ''
+              description: 'відповідає за тип кнопки для виклику onAccept'
             },
             {
               name: 'cancel',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: ''
+              description: 'відповідає за тип кнопки для виклику onCancel'
             }
           ]
         },
@@ -204,6 +210,7 @@ export default class DialogPage extends Component {
   handle() {
     this.setOpen(true);
   }
+
   handleFullPage() {
     this.setState({openFullPage: true});
   }
@@ -231,6 +238,7 @@ export default class DialogPage extends Component {
   handleCloseScroll() {
     this.setOpenScroll(false);
   }
+
   handleOpenFullPage() {
     this.setState({openFullPage: true});
   }
@@ -389,7 +397,12 @@ export default class DialogPage extends Component {
                       <ToolbarTitle>Title</ToolbarTitle>
                     </ToolbarSection>
                     <ToolbarSection end>
-                      <DialogFooterButton accept>
+                      <DialogFooterButton
+                        accept
+                        style={{
+                          'color': '#fff'
+                        }}
+                      >
                         Accept
                       </DialogFooterButton>
                     </ToolbarSection>

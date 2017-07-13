@@ -1,6 +1,7 @@
 /* rmd - react material design */
 .rmd-dialog--full-page{
     align-items: stretch;
+    z-index: 10;
 }
 .rmd-dialog--full-page .mdc-dialog__surface{
     width: 100vw;

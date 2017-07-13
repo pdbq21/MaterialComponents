@@ -28,7 +28,7 @@ export default class FormFieldPage extends Component {
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: `тег <label/> стає напочатку`
             },
           ]
         }

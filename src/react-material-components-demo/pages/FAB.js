@@ -31,19 +31,19 @@ export default class FABPage extends Component {
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: 'для підтримки material-icons'
             }, {
               name: 'mini',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: 'змінює розмір'
             }, {
               name: 'plain',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: '-'
+              description: 'змінює колір'
             }, {
               name: 'ripple',
               type: 'bool',

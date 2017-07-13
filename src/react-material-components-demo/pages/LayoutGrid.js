@@ -307,6 +307,24 @@ export default class LayoutGridPage extends Component {
               required: 'no',
               defaultValue: '16px',
               description: '8px | 16px | 24px | 40px'
+            },  {
+              name: 'columnPhone',
+              type: 'string',
+              required: 'no',
+              defaultValue: '72px',
+              description: '72px | 84px'
+            },  {
+              name: 'columnDesktop',
+              type: 'string',
+              required: 'no',
+              defaultValue: '72px',
+              description: '72px | 84px'
+            },  {
+              name: 'columnTablet',
+              type: 'string',
+              required: 'no',
+              defaultValue: '72px',
+              description: '72px | 84px'
             }, {
               name: 'fixed',
               type: 'bool',
