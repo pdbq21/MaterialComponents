@@ -171,6 +171,7 @@ export default class DrawerTemporaryPage extends Component {
           <TypographyDisplay size="1">Drawer Temporary</TypographyDisplay>
 
           <Example
+            flex
             title="Temporary with ToolbarSpacer"
             code={code.drawer.temporary.source1}
           >
@@ -182,6 +183,7 @@ export default class DrawerTemporaryPage extends Component {
             />
           </Example>
           <Example
+            flex
             title="Temporary with Header"
             code={code.drawer.temporary.source2}
           >

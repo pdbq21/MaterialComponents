@@ -14,12 +14,14 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpenMenu: false
+      isOpenMenu: false,
+      darkMode: false
     };
 
     this.handleShowMenu = this.handleShowMenu.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDarkMode = this.handleDarkMode.bind(this);
   }
 
   handleShowMenu() {
@@ -40,19 +42,26 @@ export default class App extends Component {
     this.setOpen(false);
   }
 
+  handleDarkMode({target}) {
+    this.setState({
+      darkMode: target.checked
+    })
+  }
+
   render() {
-    const {isOpenMenu} = this.state;
+    const {isOpenMenu, darkMode} = this.state;
     return (
-      <div>
+      <div className={(darkMode && 'mdc-theme--dark') || null}>
         <Header
           handleShowMenu={this.handleShowMenu}
+          handleDarkMode={this.handleDarkMode}
         />
         <Drawer
           isOpenMenu={isOpenMenu}
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
         />
-        <Main />
+        <Main/>
       </div>
     )
   }

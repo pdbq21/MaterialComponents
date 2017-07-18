@@ -136,6 +136,19 @@ body {
     padding: 1em;
 }
 
+.demo__flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.demo-components__fab{
+    display: flex;
+    flex-direction: column;
+}
+.demo-components__fab>*{
+    align-self: center;
+}
 .toolbar-view_example {
     z-index: 0;
 }
@@ -157,4 +170,8 @@ body {
     display: flex;
     padding: 1em;
     align-items: center;
+}
+.mdc-theme--dark{
+    background-color: #333333;
+    color: white;
 }

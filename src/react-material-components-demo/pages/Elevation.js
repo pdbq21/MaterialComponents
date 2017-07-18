@@ -102,6 +102,7 @@ export default class ElevationPage extends Component {
           <Example
             title="Elevation"
             code={code.elevation.source1}
+            flex
           >
             {(function (blocks, i, len) {
               while (++i <= len) {

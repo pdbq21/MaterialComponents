@@ -214,6 +214,7 @@ export default class CardPage extends Component {
           <Example
             title="Cards"
             code={code.card.source1}
+            flex
           >
             <Card
               style={{

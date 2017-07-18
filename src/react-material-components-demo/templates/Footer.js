@@ -4,8 +4,10 @@
 import React, {Component} from 'react'
 import {
   Elevation,
+  FAB,
+  FABIcon
 } from '../lib'
-
+import Logo from '../static/GitHub-Mark-64px.png'
 export default class Footer extends Component {
   render() {
     const {
@@ -20,11 +22,25 @@ export default class Footer extends Component {
           'display': 'flex',
           'alignItems': 'center',
           'justifyContent': 'center',
-          'marginTop': '1em'
+          'marginTop': '1em',
+          'padding': '0.5em'
         }}
         {...otherProps}
       >
-        footer
+        <FAB
+          ripple
+          plain
+          elementType="a"
+          href="https://github.com/pdbq21/MaterialComponents"
+        >
+          <FABIcon
+            style={{
+              'backgroundImage': `url(${Logo})`,
+              'backgroundRepeat': 'round',
+              'height': 'inherit',
+            }}
+          />
+        </FAB>
       </Elevation>
     )
   }

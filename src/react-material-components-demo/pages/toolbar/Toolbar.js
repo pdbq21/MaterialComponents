@@ -218,8 +218,9 @@ export default class ToolbarPage extends Component {
           <TypographyDisplay size="1">Toolbar</TypographyDisplay>
 
           <Example
-          title="Normal Toolbar"
-          code={code.toolbar.source1}
+            flex
+            title="Normal Toolbar"
+            code={code.toolbar.source1}
           >
             <iframe
               src="/toolbar_normal"
@@ -229,8 +230,9 @@ export default class ToolbarPage extends Component {
             />
           </Example>
           <Example
-          title="Fixed Toolbar"
-          code={code.toolbar.source2}
+            flex
+            title="Fixed Toolbar"
+            code={code.toolbar.source2}
           >
             <iframe
               src="/toolbar_fixed"
@@ -240,8 +242,9 @@ export default class ToolbarPage extends Component {
             />
           </Example>
           <Example
-          title="Waterfall Toolbar"
-          code={code.toolbar.source3}
+            flex
+            title="Waterfall Toolbar"
+            code={code.toolbar.source3}
           >
             <iframe
               src="/toolbar_waterfall"
@@ -251,8 +254,9 @@ export default class ToolbarPage extends Component {
             />
           </Example>
           <Example
-          title="Default Flexible Toolbar"
-          code={code.toolbar.source4}
+            flex
+            title="Default Flexible Toolbar"
+            code={code.toolbar.source4}
           >
             <iframe
               src="/toolbar_flexible"
@@ -262,8 +266,9 @@ export default class ToolbarPage extends Component {
             />
           </Example>
           <Example
-          title="Waterfall Flexible Toolbar"
-          code={code.toolbar.source5}
+            flex
+            title="Waterfall Flexible Toolbar"
+            code={code.toolbar.source5}
           >
             <iframe
               src="/toolbar_wf"
@@ -273,8 +278,9 @@ export default class ToolbarPage extends Component {
             />
           </Example>
           <Example
-          title="Waterfall Toolbar Fix Last Row"
-          code={code.toolbar.source6}
+            flex
+            title="Waterfall Toolbar Fix Last Row"
+            code={code.toolbar.source6}
           >
             <iframe
               src="/toolbar_wflr"

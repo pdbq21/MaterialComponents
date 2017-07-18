@@ -73,6 +73,7 @@ export default class FormFieldPage extends Component {
         >
           <TypographyDisplay size="1">FormField</TypographyDisplay>
           <Example
+            flex
             title="FormField"
             code={code.formField.source1}
           >
@@ -82,6 +83,7 @@ export default class FormFieldPage extends Component {
             </FormField>
           </Example>
           <Example
+            flex
             title="Form Field Align End"
             code={code.formField.source2}
           >

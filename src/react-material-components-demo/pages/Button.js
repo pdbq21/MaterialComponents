@@ -119,6 +119,7 @@ export default class ButtonPage extends Component {
           <TypographyDisplay size="1">Buttons</TypographyDisplay>
 
           <Example
+            flex
             title="Buttons with Ripple"
             code={code.button.source1}
             className="demo-page-button_demo-components"
@@ -136,6 +137,7 @@ export default class ButtonPage extends Component {
             <Button elementType="div" raised ripple>div raised</Button>
           </Example>
           <Example
+            flex
             title="Buttons CSS Only"
             code={code.button.source2}
             className="demo-page-button_demo-components"
@@ -153,6 +155,7 @@ export default class ButtonPage extends Component {
             <Button elementType="div" raised>div raised</Button>
           </Example>
           <Example
+            flex
             title="Buttons Disabled"
             code={code.button.source3}
             className="demo-page-button_demo-components"

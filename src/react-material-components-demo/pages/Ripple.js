@@ -92,6 +92,7 @@ export default class RipplePage extends Component {
         >
           <TypographyDisplay size="1">Ripple</TypographyDisplay>
           <Example
+            flex
             title="Ripple - Bounded"
             code={code.ripple.source1}
           >
@@ -111,6 +112,7 @@ export default class RipplePage extends Component {
             </Ripple>
           </Example>
           <Example
+            flex
             title="Ripple - Unbounded"
             code={code.ripple.source2}
           >
@@ -137,6 +139,7 @@ export default class RipplePage extends Component {
             </Ripple>
           </Example>
           <Example
+            flex
             title="Ripple - Theme Styles"
             code={code.ripple.source3}
           >
@@ -176,6 +179,7 @@ export default class RipplePage extends Component {
 
           <TypographyDisplay size="1">Ripple only CSS</TypographyDisplay>
           <Example
+            flex
             title="Ripple only CSS - Bounded"
             code={code.ripple.source4}
           >
@@ -197,6 +201,7 @@ export default class RipplePage extends Component {
             </Ripple>
           </Example>
           <Example
+            flex
             title="Ripple only CSS - Unbounded"
             code={code.ripple.source5}
           >
@@ -224,6 +229,7 @@ export default class RipplePage extends Component {
             </Ripple>
           </Example>
           <Example
+            flex
             title="Ripple only CSS - Theme Styles"
             code={code.ripple.source6}
           >

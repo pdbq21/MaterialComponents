@@ -115,6 +115,7 @@ export default class RadioPage extends Component {
         >
           <TypographyDisplay size="1">Radio</TypographyDisplay>
           <Example
+            flex
             title="Radio with Ripple"
             code={code.radio.source1}
           >
@@ -130,8 +131,6 @@ export default class RadioPage extends Component {
                 <RadioBG/>
               </Radio>
               <label id="my-radio-label1" htmlFor="my-radio-demo1">Radio 1</label>
-            </FormField>
-            <FormField>
               <Radio
                 ripple
               >
@@ -145,6 +144,7 @@ export default class RadioPage extends Component {
             </FormField>
           </Example>
           <Example
+            flex
             title="Radio only CSS"
             code={code.radio.source2}
           >
@@ -169,6 +169,7 @@ export default class RadioPage extends Component {
             </FormField>
           </Example>
           <Example
+            flex
             title="Radio only CSS - Disable"
             code={code.radio.source3}
           >

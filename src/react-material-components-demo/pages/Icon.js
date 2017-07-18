@@ -65,6 +65,7 @@ export default class IconPage extends Component {
         >
           <TypographyDisplay size="1">Icon</TypographyDisplay>
           <Example
+            flex
             title="Icons"
             code={code.icon.source1}
           >

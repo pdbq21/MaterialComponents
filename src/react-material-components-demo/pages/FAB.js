@@ -103,44 +103,72 @@ export default class FABPage extends Component {
         >
           <TypographyDisplay size="1">Floating Action Buttons</TypographyDisplay>
           <Example
+            flex
             title="Normal FABs"
             code={code.fab.source1}
           >
-            <TypographyHeadline size="1">FAB Default</TypographyHeadline>
-            <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB mini</TypographyHeadline>
-            <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            <div className="demo-components__fab">
+              <TypographyHeadline size="1">FAB Default</TypographyHeadline>
+              <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB mini</TypographyHeadline>
+              <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain</TypographyHeadline>
+              <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
+              <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            </div>
           </Example>
 
           <Example
+            flex
             title="CSS Only FABs"
             code={code.fab.source2}
           >
-            <TypographyHeadline>FAB Default</TypographyHeadline>
-            <FAB icon><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB mini</TypographyHeadline>
-            <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB Default</TypographyHeadline>
+              <FAB icon><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB mini</TypographyHeadline>
+              <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain</TypographyHeadline>
+              <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
+              <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            </div>
           </Example>
           <Example
+            flex
             title="Disabled FABs"
             code={code.fab.source3}
           >
-            <TypographyHeadline>FAB Default</TypographyHeadline>
-            <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB mini</TypographyHeadline>
-            <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB Default</TypographyHeadline>
+              <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB mini</TypographyHeadline>
+              <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
+            </div>
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain</TypographyHeadline>
+              <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
+            </div>
+
+            <div className="demo-components__fab">
+              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
+              <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+            </div>
           </Example>
         </Elevation>
         <Footer/>

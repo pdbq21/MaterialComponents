@@ -7,6 +7,7 @@ import {
   TypographyDisplay,
 } from '../../lib/index'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../../templates'
+
 export default class DrawerPersistentPage extends Component {
   constructor(props) {
     super(props);
@@ -145,10 +146,10 @@ export default class DrawerPersistentPage extends Component {
   renderTable() {
     const {components} = this.state;
     return components.map(({name, property}, index) => (<Table
-        key={`key-table-${index}`}
-        name={name}
-        property={property}
-      />
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
       )
     )
   }
@@ -161,8 +162,8 @@ export default class DrawerPersistentPage extends Component {
         </Demo>
         {this.renderTable()}
         <OriginalDoc
-        name="Drawer"
-        href="mdc-drawer"
+          name="Drawer"
+          href="mdc-drawer"
         />
 
         <Elevation
@@ -171,26 +172,28 @@ export default class DrawerPersistentPage extends Component {
         >
           <TypographyDisplay size="1">Persistent Drawer</TypographyDisplay>
           <Example
-          title="Persistent with ToolbarSpacer"
-          code={code.drawer.persistent.source1}
+            flex
+            title="Persistent with ToolbarSpacer"
+            code={code.drawer.persistent.source1}
           >
             <iframe
-            src="/drawer/persistent_toolbar_spacer"
-            frameBorder="0"
-            width='640px'
-            height='420px'
-          />
+              src="/drawer/persistent_toolbar_spacer"
+              frameBorder="0"
+              width='640px'
+              height='420px'
+            />
           </Example>
           <Example
-          title="Persistent with Header"
-          code={code.drawer.persistent.source2}
+            flex
+            title="Persistent with Header"
+            code={code.drawer.persistent.source2}
           >
             <iframe
-            src="/drawer/persistent_header"
-            frameBorder="0"
-            width='640px'
-            height='420px'
-          />
+              src="/drawer/persistent_header"
+              frameBorder="0"
+              width='640px'
+              height='420px'
+            />
           </Example>
 
         </Elevation>

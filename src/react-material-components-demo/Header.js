@@ -17,7 +17,7 @@ import {
 export default class Header extends Component {
 
   render() {
-    const {handleShowMenu} = this.props;
+    const {handleShowMenu, handleDarkMode} = this.props;
     return (
       <Toolbar
         fixed
@@ -56,11 +56,11 @@ export default class Header extends Component {
                 'marginRight': '1em'
               }}
             >
-              <SwitchLabel>
+              <SwitchLabel htmlFor="dark-mode_switch">
                 Dark Mode
               </SwitchLabel>
-              <Switch>
-                <SwitchInput/>
+              <Switch id="dark-mode_switch">
+                <SwitchInput onChange={handleDarkMode} />
               </Switch>
             </FormField>
           </ToolbarSection>

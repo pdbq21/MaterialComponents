@@ -95,6 +95,7 @@ export default class SwitchPage extends Component {
         >
           <TypographyDisplay size="1">Switch</TypographyDisplay>
           <Example
+            flex
           title="Switch only CSS"
           code={code.switch.source1}
           >
@@ -108,6 +109,7 @@ export default class SwitchPage extends Component {
             <SwitchLabel>{(isSwitch) ? 'On' : 'Off'}</SwitchLabel>
           </Example>
           <Example
+            flex
             title="Switch only CSS - Disabled"
             code={code.switch.source2}
           >

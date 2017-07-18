@@ -7,6 +7,7 @@ import {
   TypographyDisplay,
 } from '../../lib/index'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../../templates'
+
 export default class DrawerPersistentPage extends Component {
   constructor(props) {
     super(props);
@@ -111,10 +112,10 @@ export default class DrawerPersistentPage extends Component {
   renderTable() {
     const {components} = this.state;
     return components.map(({name, property}, index) => (<Table
-        key={`key-table-${index}`}
-        name={name}
-        property={property}
-      />
+          key={`key-table-${index}`}
+          name={name}
+          property={property}
+        />
       )
     )
   }
@@ -137,26 +138,28 @@ export default class DrawerPersistentPage extends Component {
         >
           <TypographyDisplay size="1">Permanent Drawer</TypographyDisplay>
           <Example
+            flex
             title="Permanent Above Toolbar"
-           code={code.drawer.permanent.source1}
+            code={code.drawer.permanent.source1}
           >
             <iframe
-            src="/drawer/permanent_above_toolbar"
-            frameBorder="0"
-            width='640px'
-            height='420px'
-          />
+              src="/drawer/permanent_above_toolbar"
+              frameBorder="0"
+              width='640px'
+              height='420px'
+            />
           </Example>
           <Example
+            flex
             title="Permanent Below Toolbar"
-           code={code.drawer.permanent.source2}
+            code={code.drawer.permanent.source2}
           >
             <iframe
-            src="/drawer/permanent_below_toolbar"
-            frameBorder="0"
-            width='640px'
-            height='420px'
-          />
+              src="/drawer/permanent_below_toolbar"
+              frameBorder="0"
+              width='640px'
+              height='420px'
+            />
           </Example>
         </Elevation>
         <Footer/>

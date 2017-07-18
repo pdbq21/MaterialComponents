@@ -127,6 +127,7 @@ export default class IconTogglePage extends Component {
         >
           <TypographyDisplay size="1">Icon Toggle</TypographyDisplay>
           <Example
+            flex
           title="Using material-icons"
           code={code.iconToggle.source1}
           >
@@ -149,6 +150,7 @@ export default class IconTogglePage extends Component {
           </Example>
 
           <Example
+            flex
             title="Using Font Awesome"
             code={code.iconToggle.source2}
           >
@@ -170,6 +172,7 @@ export default class IconTogglePage extends Component {
             </IconToggle>
           </Example>
           <Example
+            flex
             title="Primary Colored Icons"
             code={code.iconToggle.source3}
           >
@@ -191,6 +194,7 @@ export default class IconTogglePage extends Component {
             </IconToggle>
           </Example>
           <Example
+            flex
             title="Accent Colored Icons"
             code={code.iconToggle.source4}
           >
@@ -212,6 +216,7 @@ export default class IconTogglePage extends Component {
             </IconToggle>
           </Example>
           <Example
+            flex
             title="Without Ripple"
             code={code.iconToggle.source5}
           >
@@ -231,6 +236,7 @@ export default class IconTogglePage extends Component {
             </IconToggle>
           </Example>
           <Example
+            flex
             title="Disabled Icons"
             code={code.iconToggle.source6}
           >

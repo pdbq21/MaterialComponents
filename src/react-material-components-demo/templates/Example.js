@@ -34,6 +34,7 @@ export default class Example extends Component {
       children,
       title,
       code,
+      flex,
       className,
       ...otherProps
     } = this.props;
@@ -72,7 +73,7 @@ export default class Example extends Component {
           </Highlight>
         </Elevation>
         <ToolbarMain
-          className="demo-page_demo-components"
+          className={`demo-page_demo-components ${(flex)? 'demo__flex' : null}`}
         >
           {children}
         </ToolbarMain>
