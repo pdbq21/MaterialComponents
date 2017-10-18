@@ -4,10 +4,11 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
 import {iconToggle}  from 'material-components-web/dist/material-components-web';
-const {MDCIconToggleFoundation} = iconToggle;
 import {ripple} from 'material-components-web/dist/material-components-web';
+
+const {MDCIconToggleFoundation} = iconToggle;
+
 const {MDCRippleFoundation} = ripple;
 const {
   strings: {

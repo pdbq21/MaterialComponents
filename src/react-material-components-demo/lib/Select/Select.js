@@ -3,10 +3,10 @@
  */
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
-
-import {select}  from 'material-components-web/dist/material-components-web';
-const {MDCSelectFoundation} = select;
 import {menu}  from 'material-components-web/dist/material-components-web';
+import {select}  from 'material-components-web/dist/material-components-web';
+
+const {MDCSelectFoundation} = select;
 const {MDCSimpleMenuFoundation} = menu;
 const {
   strings: {

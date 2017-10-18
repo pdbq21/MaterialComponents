@@ -143,6 +143,7 @@ export default class DrawerPersistentPage extends Component {
             code={code.drawer.permanent.source1}
           >
             <iframe
+              title="Permanent Above Toolbar"
               src="/drawer/permanent_above_toolbar"
               frameBorder="0"
               width='640px'
@@ -155,6 +156,7 @@ export default class DrawerPersistentPage extends Component {
             code={code.drawer.permanent.source2}
           >
             <iframe
+              title="Permanent Below Toolbar"
               src="/drawer/permanent_below_toolbar"
               frameBorder="0"
               width='640px'
