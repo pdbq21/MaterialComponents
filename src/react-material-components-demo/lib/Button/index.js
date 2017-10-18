@@ -4,3 +4,4 @@
 import '@material/button/dist/mdc.button.min.css';
 import '@material/ripple/dist/mdc.ripple.min.css';
 export { default as Button } from './Button';
+export { default as ButtonIcon } from './Icon';

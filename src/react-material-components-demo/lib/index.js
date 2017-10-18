@@ -1,7 +1,10 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-export {Button} from './Button';
+export {
+  Button,
+  ButtonIcon
+} from './Button';
 export {Elevation} from './Elevation';
 export {Ripple} from './Ripple';
 export {

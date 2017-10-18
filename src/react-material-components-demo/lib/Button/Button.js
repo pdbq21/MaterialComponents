@@ -127,10 +127,10 @@ export default class Button extends PureComponent {
     const {
       elementType,
       className,
-      accent,
+      unelevated,
+      stroked,
       compact,
       dense,
-      primary,
       raised,
       children,
       ...otherProp
@@ -142,10 +142,10 @@ export default class Button extends PureComponent {
         className={
           classnames(
             'mdc-button', {
-              'mdc-button--accent': accent,
+              'mdc-button--unelevated': unelevated,
+              'mdc-button--stroked': stroked,
               'mdc-button--compact': compact,
               'mdc-button--dense': dense,
-              'mdc-button--primary': primary,
               'mdc-button--raised': raised,
             },
             this.state.classNamesRipple,
