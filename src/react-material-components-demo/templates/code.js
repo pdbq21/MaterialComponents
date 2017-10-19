@@ -6828,25 +6828,21 @@ class CardDemo extends Component {
   'button': {
     source1: `import React, {Component} from 'react'
 import {
-  Button
+  Button,
+  ButtonIcon
 } from '../lib'
 
-export default class ButtonWithRipple extends Component {
+export default class ButtonWithRippleText extends Component {
 
   render() {
     return (
       <div>
-         <Button ripple>Default</Button>
-         <Button raised ripple>Raised</Button>
-         <Button dense ripple>Dense</Button>
-         <Button dense raised ripple>Dense Raised</Button>
-         <Button compact ripple>Compact</Button>
-         <Button compact raised ripple>Compact Raised</Button>
-         <Button primary ripple>Primary</Button>
-         <Button primary raised ripple>primary raised</Button>
-         <Button accent ripple>accent</Button>
-         <Button accent raised ripple>accent raised</Button>
-         <Button elementType="div" raised ripple>div raised</Button>
+            <Button disabled={disabled} ripple>Default</Button>
+            <Button compact disabled={disabled} ripple>Compact</Button>
+            <Button dense disabled={disabled} ripple>Dense</Button>
+            <Button disabled={disabled} ripple><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button elementType="a" disabled={disabled} ripple>link</Button>
+            <Button elementType="div" disabled={disabled} ripple>div</Button>
       </div>
     );
   }
@@ -6854,53 +6850,155 @@ export default class ButtonWithRipple extends Component {
 `,
     source2: `import React, {Component} from 'react'
 import {
-  Button
+  Button,
+  ButtonIcon
 } from '../lib'
 
-export default class ButtonOnlyCSS extends Component {
+export default class ButtonWithRippleRaised extends Component {
 
   render() {
     return (
       <div>
-              <Button>Default</Button>
-              <Button raised>Raised</Button>
-              <Button dense>Dense</Button>
-              <Button dense raised>Dense Raised</Button>
-              <Button compact>Compact</Button>
-              <Button compact raised>Compact Raised</Button>
-              <Button primary>Primary</Button>
-              <Button primary>primary raised</Button>
-              <Button accent>accent</Button>
-              <Button accent raised>accent raised</Button>
-              <Button elementType="div" raised>div raised</Button>
+            <Button raised disabled={disabled} ripple>Default</Button>
+            <Button raised compact disabled={disabled} ripple>Compact</Button>
+            <Button raised dense disabled={disabled} ripple>Dense</Button>
+            <Button raised disabled={disabled} ripple><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button raised elementType="a" disabled={disabled} ripple>link</Button>
+            <Button raised elementType="div" disabled={disabled} ripple>div</Button>
+      </div>
+    );
+  }
+}
+`,
+    source3: `import React, {Component} from 'react'
+import {
+  Button,
+  ButtonIcon
+} from '../lib'
+
+export default class ButtonWithRippleUnelevated extends Component {
+
+  render() {
+    return (
+      <div>
+            <Button unelevated disabled={disabled} ripple>Default</Button>
+            <Button unelevated compact disabled={disabled} ripple>Compact</Button>
+            <Button unelevated dense disabled={disabled} ripple>Dense</Button>
+            <Button unelevated disabled={disabled} ripple><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button unelevated elementType="a" disabled={disabled} ripple>link</Button>
+            <Button unelevated elementType="div" disabled={disabled} ripple>div</Button>
+      </div>
+    );
+  }
+}
+`,
+    source4: `import React, {Component} from 'react'
+import {
+  Button,
+  ButtonIcon
+} from '../lib'
+
+export default class ButtonWithRippleStroked extends Component {
+
+  render() {
+    return (
+      <div>
+            <Button stroked disabled={disabled} ripple>Default</Button>
+            <Button stroked compact disabled={disabled} ripple>Compact</Button>
+            <Button stroked dense disabled={disabled} ripple>Dense</Button>
+            <Button stroked disabled={disabled} ripple><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button stroked elementType="a" disabled={disabled} ripple>link</Button>
+            <Button stroked elementType="div" disabled={disabled} ripple>div</Button>
+      </div>
+    );
+  }
+}
+`,
+    source5: `import React, {Component} from 'react'
+import {
+  Button,
+  ButtonIcon
+} from '../lib'
+
+export default class ButtonOnlyCSSText extends Component {
+
+  render() {
+    return (
+      <div>
+            <Button disabled={disabled}>Default</Button>
+            <Button disabled={disabled} compact>Compact</Button>
+            <Button disabled={disabled} dense>Dense</Button>
+            <Button disabled={disabled}><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button disabled={disabled} elementType="a">link</Button>
+            <Button disabled={disabled} elementType="div">div</Button>
       </div>
     );
   }
 }`,
-    source3: `import React, {Component} from 'react'
+    source6: `import React, {Component} from 'react'
 import {
-  Button
+  Button,
+  ButtonIcon
 } from '../lib'
 
-export default class ButtonDisabled extends Component {
+export default class ButtonOnlyCSSRaised extends Component {
 
   render() {
     return (
       <div>
-              <Button disabled>Default</Button>
-              <Button raised disabled>Raised</Button>
-              <Button dense disabled>Dense</Button>
-              <Button dense raised disabled>Dense Raised</Button>
-              <Button compact disabled>Compact</Button>
-              <Button compact raised disabled>Compact Raised</Button>
-              <Button primary disabled>Primary</Button>
-              <Button primary raised disabled>primary raised</Button>
-              <Button accent disabled>accent</Button>
-              <Button accent raised disabled>accent raised</Button>
+            <Button disabled={disabled} raised>Default</Button>
+            <Button disabled={disabled} raised compact>Compact</Button>
+            <Button disabled={disabled} raised dense>Dense</Button>
+            <Button disabled={disabled} raised><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button disabled={disabled} raised elementType="a">link</Button>
+            <Button disabled={disabled} raised elementType="div">div</Button>
       </div>
     );
   }
-}`
+}`,
+    source7: `import React, {Component} from 'react'
+import {
+  Button,
+  ButtonIcon
+} from '../lib'
+
+export default class ButtonOnlyCSSUnelevated extends Component {
+
+  render() {
+    return (
+      <div>
+            <Button disabled={disabled} unelevated>Default</Button>
+            <Button disabled={disabled} unelevated compact>Compact</Button>
+            <Button disabled={disabled} unelevated dense>Dense</Button>
+            <Button disabled={disabled} unelevated><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button disabled={disabled} unelevated elementType="a">link</Button>
+            <Button disabled={disabled} unelevated elementType="div">div</Button>
+      </div>
+    );
+  }
+}`,
+    source8: `import React, {Component} from 'react'
+import {
+  Button,
+  ButtonIcon
+} from '../lib'
+
+export default class ButtonOnlyCSSStroked extends Component {
+
+  render() {
+    return (
+      <div>
+            <Button disabled={disabled} stroked>Default</Button>
+            <Button disabled={disabled} stroked compact>Compact</Button>
+            <Button disabled={disabled} stroked dense>Dense</Button>
+            <Button disabled={disabled} stroked><ButtonIcon>favorite</ButtonIcon>Icon</Button>
+            <Button disabled={disabled} stroked elementType="a">link</Button>
+            <Button disabled={disabled} stroked elementType="div">div</Button>
+      </div>
+    );
+  }
+}`,
+
   },
   'toolbar': {
     source1: `import React, {Component} from 'react'

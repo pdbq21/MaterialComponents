@@ -32,17 +32,17 @@ export default class ButtonPage extends Component {
               description: 'задає тег елемента'
             },
             {
-              name: 'primary',
+              name: 'unelevated',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: 'кнопка з кольором primary'
+              description: 'кнопка з типом unelevated'
             }, {
-              name: 'accent',
+              name: 'stroked',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: 'кнопка з кольором accent'
+              description: 'кнопка з типом stroked'
             }, {
               name: 'compact',
               type: 'bool',
@@ -163,7 +163,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons with Ripple - Raised"
-            code={code.button.source1}
+            code={code.button.source2}
             className="demo-page-button_demo-components"
           >
             <Button raised disabled={disabled} ripple>Default</Button>
@@ -176,7 +176,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons with Ripple - Unelevated"
-            code={code.button.source1}
+            code={code.button.source3}
             className="demo-page-button_demo-components"
           >
             <Button unelevated disabled={disabled} ripple>Default</Button>
@@ -189,7 +189,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons with Ripple - Stroked"
-            code={code.button.source1}
+            code={code.button.source4}
             className="demo-page-button_demo-components"
           >
             <Button stroked disabled={disabled} ripple>Default</Button>
@@ -202,7 +202,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons CSS Only - Text"
-            code={code.button.source1}
+            code={code.button.source5}
             className="demo-page-button_demo-components"
           >
             <Button disabled={disabled}>Default</Button>
@@ -215,7 +215,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons CSS Only - Raised"
-            code={code.button.source1}
+            code={code.button.source6}
             className="demo-page-button_demo-components"
           >
             <Button disabled={disabled} raised>Default</Button>
@@ -228,7 +228,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons CSS Only - Unelevated"
-            code={code.button.source1}
+            code={code.button.source7}
             className="demo-page-button_demo-components"
           >
             <Button disabled={disabled} unelevated>Default</Button>
@@ -241,7 +241,7 @@ export default class ButtonPage extends Component {
           <Example
             flex
             title="Buttons CSS Only - Stroked"
-            code={code.button.source1}
+            code={code.button.source8}
             className="demo-page-button_demo-components"
           >
             <Button disabled={disabled} stroked>Default</Button>
