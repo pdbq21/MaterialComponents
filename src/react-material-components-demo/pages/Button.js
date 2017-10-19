@@ -75,6 +75,18 @@ export default class ButtonPage extends Component {
               description: 'кнопка не активна. працює якщо тип кнопки button'
             },
           ]
+        },
+        {
+          name: 'ButtonIcon',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'Icon',
+              description: 'задає тег елемента'
+            }
+          ]
         }
       ],
     };
