@@ -8,3 +8,4 @@ export { default as TextfieldInput} from './Input';
 export { default as TextfieldLabel} from './Label';
 export { default as TextfieldHelptext} from './Helptext';
 export { default as TextfieldLine} from './Line';
+export { default as TextfieldIcon} from './Icon';

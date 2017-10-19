@@ -123,7 +123,6 @@ export default class ButtonPage extends Component {
           <Button
             ripple
             raised
-            primary
             style={{
               'marginLeft': '15px',
             }}

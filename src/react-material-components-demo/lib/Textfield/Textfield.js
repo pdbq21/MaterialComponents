@@ -10,7 +10,9 @@ const {MDCRippleFoundation} = ripple;
 const {
   strings: {
     LABEL_SELECTOR: LABEL_SELECTOR_NAME,
-    INPUT_SELECTOR: INPUT_SELECTOR_NAME
+    INPUT_SELECTOR: INPUT_SELECTOR_NAME,
+    ICON_SELECTOR: ICON_SELECTOR_NAME,
+    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME
   },
 } = MDCTextfieldFoundation;
 let supportsPassive_;
@@ -72,6 +74,9 @@ export default class Textfield extends PureComponent {
   rootInput_ = () => this.refs.root.querySelector(INPUT_SELECTOR_NAME);
   rootLabel_ = () => this.refs.root.querySelector(LABEL_SELECTOR_NAME);
 
+  icon_ = () => this.refs.root.querySelector(ICON_SELECTOR_NAME);
+  bottomLine_ = () => this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
+
   helptextElement = () => {
     const rootInput = this.rootInput_();
     if (rootInput) {
@@ -100,91 +105,115 @@ export default class Textfield extends PureComponent {
         return rootLabel.classList.remove(className);
       }
     },
-    registerInputFocusHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.addEventListener('focus', handler, {passive: true});
+    eventTargetHasClass: (target, className) => target.classList.contains(className),
+    registerTextFieldInteractionHandler: (evtType, handler) => {
+      if (this.refs.root) {
+        this.refs.root.addEventListener(evtType, handler);
       }
     },
-    registerInputBlurHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.addEventListener('blur', handler, {passive: true});
+    deregisterTextFieldInteractionHandler: (evtType, handler) => {
+      if (this.refs.root) {
+        this.refs.root.removeEventListener(evtType, handler);
       }
     },
-    registerInputInputHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.addEventListener('input', handler, {passive: true});
+    notifyIconAction: () => {
+      if (typeof this.props.onIcon !== 'undefined') {
+        this.props.onIcon({});
       }
+/*      if (this.refs.root) {
+        return this.emit(this.refs.root, ICON_EVENT, {})
+      }*/
     },
-    registerInputKeydownHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.addEventListener('keydown', handler, {passive: true});
-      }
-    },
-    deregisterInputFocusHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.removeEventListener('focus', handler);
-      }
-    },
-    deregisterInputBlurHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.removeEventListener('blur', handler);
-      }
-    },
-    deregisterInputInputHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.removeEventListener('input', handler);
-      }
-    },
-    deregisterInputKeydownHandler: handler => {
-      const rootInput = this.rootInput_();
-      if (rootInput) {
-        return rootInput.removeEventListener('keydown', handler);
-      }
-    },
+    // input
     getNativeInput: () => {
       const rootInput = this.rootInput_();
       if (rootInput) {
         return rootInput;
       }
     },
+    registerInputInteractionHandler: (evtType, handler) => {
+      const rootInput = this.rootInput_();
+      if (rootInput) {
+        return rootInput.addEventListener(evtType, handler);
+      }
+    },
+    deregisterInputInteractionHandler: (evtType, handler) => {
+      const rootInput = this.rootInput_();
+      if (rootInput) {
+        return rootInput.removeEventListener(evtType, handler);
+      }
+  },
+    // Helptext
     addClassToHelptext: className => {
-      if (this.helptextElement()) {
-        const helptext = this.helptextElement();
+      const helptext = this.helptextElement();
+      if (helptext) {
         return helptext.classList.add(className);
       }
     },
     removeClassFromHelptext: className => {
-      if (this.helptextElement()) {
-        const helptext = this.helptextElement();
+      const helptext = this.helptextElement();
+      if (helptext) {
         return helptext.classList.remove(className);
       }
     },
     helptextHasClass: className => {
-      if (!this.helptextElement()) {
+      const helptext = this.helptextElement();
+      if (!helptext) {
         return false;
       }
-      const helptext = this.helptextElement();
       return helptext.classList.contains(className);
     },
     setHelptextAttr: (name, value) => {
-      if (this.helptextElement()) {
-        const helptext = this.helptextElement();
+      const helptext = this.helptextElement();
+      if (helptext) {
         return helptext.setAttribute(name, value);
       }
     },
     removeHelptextAttr: name => {
-      if (this.helptextElement()) {
-        const helptext = this.helptextElement();
+      const helptext = this.helptextElement();
+      if (helptext) {
         return helptext.removeAttribute(name);
       }
     },
+    // Line
+    addClassToBottomLine: (className) => {
+      const bottomLine_ = this.bottomLine_();
+      if (bottomLine_) {
+        bottomLine_.classList.add(className);
+      }
+    },
+    removeClassFromBottomLine: (className) => {
+      const bottomLine_ = this.bottomLine_();
+      if (bottomLine_) {
+        bottomLine_.classList.remove(className);
+      }
+    },
+    setBottomLineAttr: (attr, value) => {
+      const bottomLine_ = this.bottomLine_();
+      if (bottomLine_) {
+        bottomLine_.setAttribute(attr, value);
+      }
+    },
+    registerTransitionEndHandler: (handler) => {
+      const bottomLine_ = this.bottomLine_();
+      if (bottomLine_) {
+        bottomLine_.addEventListener('transitionend', handler);
+      }
+    },
+    deregisterTransitionEndHandler: (handler) => {
+      const bottomLine_ = this.bottomLine_();
+      if (bottomLine_) {
+        bottomLine_.removeEventListener('transitionend', handler);
+      }
+    },
+// Icon
+    setIconAttr: (name, value) => {
+      const icon_ = this.icon_();
+      if (icon_) {
+        return icon_.setAttribute(name, value);
+      }
+    },
+
 
   });
 
@@ -272,6 +301,7 @@ export default class Textfield extends PureComponent {
   render() {
     const ownProps = Object.assign({}, this.props);
     delete ownProps.cssOnly;
+    delete ownProps.onIcon;
     const {
       disabled,
       upgraded,
@@ -279,6 +309,9 @@ export default class Textfield extends PureComponent {
       fullwidth,
       dense,
       box,
+      leadingIcon,
+      trailingIcon,
+      textarea,
       children,
       elementType,
       className,
@@ -293,6 +326,9 @@ export default class Textfield extends PureComponent {
         'mdc-textfield--fullwidth': fullwidth,
         'mdc-textfield--dense': dense,
         'mdc-textfield--box': box,
+        'mdc-textfield--with-leading-icon': leadingIcon,
+        'mdc-textfield--with-trailing-icon': trailingIcon,
+        'mdc-textfield--textarea': textarea,
       }, this.state.classNames, this.state.classNamesRipple, className);
     const ElementType = elementType || 'div';
     return (

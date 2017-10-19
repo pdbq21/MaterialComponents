@@ -8,6 +8,11 @@ import {
   Elevation,
   TypographyHeadline,
   TypographyDisplay,
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxBG,
+  FormField
 } from '../lib'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
@@ -15,6 +20,7 @@ export default class FABPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      exited: false,
       components: [
         {
           name: 'FAB',
@@ -39,11 +45,11 @@ export default class FABPage extends Component {
               defaultValue: 'false',
               description: 'змінює розмір'
             }, {
-              name: 'plain',
+              name: 'exited',
               type: 'bool',
               required: 'no',
               defaultValue: 'false',
-              description: 'змінює колір'
+              description: '-'
             }, {
               name: 'ripple',
               type: 'bool',
@@ -83,6 +89,7 @@ export default class FABPage extends Component {
   }
 
   render() {
+    const {exited} = this.state;
     return (
       <section
         className="content"
@@ -102,6 +109,17 @@ export default class FABPage extends Component {
           className="demo-page-fab"
         >
           <TypographyDisplay size="1">Floating Action Buttons</TypographyDisplay>
+          <FormField>
+            <Checkbox>
+              <CheckboxInput
+              onChange={({target}) => (this.setState({
+                exited: target.checked
+              }))}
+              />
+              <CheckboxBG/>
+            </Checkbox>
+            <CheckboxLabel>Exited</CheckboxLabel>
+          </FormField>
           <Example
             flex
             title="Normal FABs"
@@ -116,12 +134,12 @@ export default class FABPage extends Component {
               <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
             </div>
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain</TypographyHeadline>
-              <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited</TypographyHeadline>
+              <FAB ripple icon exited={exited}><FABIcon>favorite</FABIcon></FAB>
             </div>
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-              <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+              <FAB ripple icon exited={exited} mini><FABIcon>favorite</FABIcon></FAB>
             </div>
           </Example>
 
@@ -139,12 +157,12 @@ export default class FABPage extends Component {
               <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
             </div>
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain</TypographyHeadline>
-              <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited</TypographyHeadline>
+              <FAB icon exited={exited}><FABIcon>favorite</FABIcon></FAB>
             </div>
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-              <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+              <FAB icon exited={exited} mini><FABIcon>favorite</FABIcon></FAB>
             </div>
           </Example>
           <Example
@@ -161,13 +179,13 @@ export default class FABPage extends Component {
               <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
             </div>
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain</TypographyHeadline>
-              <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited</TypographyHeadline>
+              <FAB icon exited={exited} disabled><FABIcon>favorite</FABIcon></FAB>
             </div>
 
             <div className="demo-components__fab">
-              <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-              <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+              <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+              <FAB icon exited={exited} mini disabled><FABIcon>favorite</FABIcon></FAB>
             </div>
           </Example>
         </Elevation>

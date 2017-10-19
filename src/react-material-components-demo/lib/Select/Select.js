@@ -126,12 +126,7 @@ export default class Select extends PureComponent {
         menuEl.removeEventListener(type, handler);
       }
     },
-    /*registerDocumentClickHandler: handler => {
-      return document.addEventListener('click', handler, {passive: true});
-    },
-    deregisterDocumentClickHandler: handler => {
-      return document.removeEventListener('click', handler);
-    },*/
+
     getYParamsForItemAtIndex: index => {
       const items = this.items();
       if (items) {
@@ -259,7 +254,6 @@ export default class Select extends PureComponent {
         return this.refs.root.getBoundingClientRect();
       }
     },
-
     registerInteractionHandler: (type, handler) => {
       if (this.refs.root) {
         return this.refs.root.addEventListener(type, handler)
@@ -275,7 +269,6 @@ export default class Select extends PureComponent {
         return this.refs.root.focus()
       }
     },
-
     makeTabbable: () => {
       if (this.refs.root) {
         return this.refs.root.tabIndex = 0;
@@ -321,14 +314,12 @@ export default class Select extends PureComponent {
         return menuEl.offsetHeight;
       }
     },
-
     setSelectedTextContent: selectedTextContent => {
       if (this.selectedText_()) {
         return this.selectedText_().textContent = selectedTextContent;
       }
     },
     getWindowInnerHeight: () => window.innerHeight,
-
     notifyChange: () => {
       if (typeof this.props.onChange !== 'undefined') {
         this.props.onChange(this);
@@ -337,7 +328,6 @@ export default class Select extends PureComponent {
         return this.emit(this.refs.root, CHANGE_EVENT_NAME, this)
       }
     },
-
     openMenu: (focusIndex) => this.foundationMenu.open({focusIndex: focusIndex}),
     isMenuOpen: () => this.foundationMenu.open(),
 //items

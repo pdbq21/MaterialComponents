@@ -63,7 +63,8 @@ export {
   TextfieldInput,
   TextfieldLabel,
   TextfieldHelptext,
-  TextfieldLine
+  TextfieldLine,
+  TextfieldIcon
 } from './Textfield';
 export {FormField} from './FormField';
 export {

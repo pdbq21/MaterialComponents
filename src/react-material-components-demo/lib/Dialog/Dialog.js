@@ -28,6 +28,7 @@ export default class Dialog extends PureComponent {
   acceptSelector_ = () => (this.refs.root.querySelector(
     ACCEPT_SELECTOR_CLASSNAME
   ));
+  //footerBtnRipples_ = () => ;
 
   foundation = new MDCDialogFoundation({
     addClass: className => {
@@ -134,6 +135,8 @@ export default class Dialog extends PureComponent {
         return el === dialogSurface
       }
     },
+
+    //layoutFooterRipples: () => this.footerBtnRipples_.forEach((ripple) => ripple.layout()),
   });
 
   render() {

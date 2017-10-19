@@ -10,6 +10,7 @@ import {
   Button,
   Radio,
   RadioInput,
+  RadioBG,
   FormField,
   Elevation,
   TypographyDisplay,
@@ -198,7 +199,7 @@ export default class MenuPage extends Component {
             code={code.menu.source1}
           >
             <Button
-              primary raised
+              raised
               onClick={() => this.setState({
                 open: !open,
               })}
@@ -243,7 +244,7 @@ export default class MenuPage extends Component {
                 style={styles}
               >
                 <Button
-                  primary raised onClick={() => this.setState({
+                  raised onClick={() => this.setState({
                   openAnchor: !openAnchor,
                 })}>Open Menu</Button>
                 <SimpleMenu
@@ -283,8 +284,10 @@ export default class MenuPage extends Component {
                 >
                   <RadioInput
                     name="radios"
+                    defaultChecked
                     data-position="top left"
                   />
+                  <RadioBG/>
                 </Radio>
                 Top right
                 <Radio
@@ -294,6 +297,7 @@ export default class MenuPage extends Component {
                     name="radios"
                     data-position="top right"
                   />
+                  <RadioBG/>
                 </Radio>
                 Bottom left
                 <Radio
@@ -303,6 +307,7 @@ export default class MenuPage extends Component {
                     name="radios"
                     data-position="bottom left"
                   />
+                  <RadioBG/>
                 </Radio>
                 Bottom right
                 <Radio
@@ -312,6 +317,7 @@ export default class MenuPage extends Component {
                     name="radios"
                     data-position="bottom right"
                   />
+                  <RadioBG/>
                 </Radio>
               </FormField>
             </div>

@@ -19,13 +19,15 @@ export default class FooterButton extends PureComponent {
       accept,
       cancel,
       icon,
+      action,
       className,
       ...otherProp
     } = ownProps;
     const classes = classnames('mdc-dialog__footer__button', {
       'mdc-dialog__footer__button--accept': accept,
       'mdc-dialog__footer__button--cancel': cancel,
-      'material-icons': icon
+      'material-icons': icon,
+      'mdc-dialog__action': action,
     }, className);
     const ElementType = elementType || Button;
     return (

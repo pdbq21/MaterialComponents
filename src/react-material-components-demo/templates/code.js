@@ -6145,10 +6145,10 @@ export default class FABDemo extends Component {
             <FAB ripple icon><FABIcon>favorite</FABIcon></FAB>
             <TypographyHeadline>FAB mini</TypographyHeadline>
             <FAB ripple icon mini><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB ripple icon plain><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB ripple icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited</TypographyHeadline>
+            <FAB ripple icon exited><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+            <FAB ripple icon exited mini><FABIcon>favorite</FABIcon></FAB>
             </section>
         )
     }
@@ -6169,10 +6169,10 @@ export default class FABDemo extends Component {
             <FAB icon><FABIcon>favorite</FABIcon></FAB>
             <TypographyHeadline>FAB mini</TypographyHeadline>
             <FAB icon mini><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB icon plain><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB icon plain mini><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited</TypographyHeadline>
+            <FAB icon exited><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+            <FAB icon exited mini><FABIcon>favorite</FABIcon></FAB>
             </section>
         )
     }
@@ -6193,10 +6193,10 @@ export default class FABDemo extends Component {
             <FAB icon disabled><FABIcon>favorite</FABIcon></FAB>
             <TypographyHeadline>FAB mini</TypographyHeadline>
             <FAB icon mini disabled><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain</TypographyHeadline>
-            <FAB icon plain disabled><FABIcon>favorite</FABIcon></FAB>
-            <TypographyHeadline>FAB plain + mini</TypographyHeadline>
-            <FAB icon plain mini disabled><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited</TypographyHeadline>
+            <FAB icon exited disabled><FABIcon>favorite</FABIcon></FAB>
+            <TypographyHeadline>FAB exited + mini</TypographyHeadline>
+            <FAB icon exited mini disabled><FABIcon>favorite</FABIcon></FAB>
             </section>
         )
     }
@@ -6355,7 +6355,7 @@ constructor(props) {
                 </DialogBody>
                 <DialogFooter>
                   <DialogFooterButton cancel>Decline</DialogFooterButton>
-                  <DialogFooterButton accept>Accept</DialogFooterButton>
+                  <DialogFooterButton accept action>Accept</DialogFooterButton>
                 </DialogFooter>
               </DialogSurface>
             </Dialog>

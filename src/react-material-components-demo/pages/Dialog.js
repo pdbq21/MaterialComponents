@@ -147,6 +147,13 @@ export default class DialogPage extends Component {
               required: 'no',
               defaultValue: 'false',
               description: 'відповідає за тип кнопки для виклику onCancel'
+            },
+            {
+              name: 'action',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             }
           ]
         },
@@ -328,7 +335,7 @@ export default class DialogPage extends Component {
                 </DialogBody>
                 <DialogFooter>
                   <DialogFooterButton cancel>Decline</DialogFooterButton>
-                  <DialogFooterButton accept>Accept</DialogFooterButton>
+                  <DialogFooterButton accept action>Accept</DialogFooterButton>
                 </DialogFooter>
               </DialogSurface>
             </Dialog>
