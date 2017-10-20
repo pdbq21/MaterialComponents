@@ -18,7 +18,7 @@ export default class Icon extends PureComponent {
       ...otherProps
     } = ownProps;
 
-    const classes = classnames((menu)? 'mdc-toolbar__icon--menu' : 'mdc-toolbar__icon', className);
+    const classes = classnames((menu)? 'mdc-toolbar__menu-icon' : 'mdc-toolbar__icon', className);
     const ElementType = elementType || (menu)? 'i' : 'a';
 
     return (
