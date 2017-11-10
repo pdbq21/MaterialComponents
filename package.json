@@ -1,5 +1,5 @@
 {
-  "name": "MaterialComponents",
+  "name": "ReactMaterialComponents",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -97,5 +97,16 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://pdbq21.github.io/MaterialComponents"
+  "homepage": "https://pdbq21.github.io/MaterialComponents",
+  "description": "- [+] Button - [+] Card - [+] Dialog - [+] Elevation - [+] FAB - [+] Typography - [+] List - [+] Radio - [+] Switch - [+] LayoutGrid - [+] FormField - [+] Grid List - [+] Drawer Permanent - [+] Drawer Temporary - [+] Drawer Persistent - [+] Snackbar - [+] Simple Menu - [+] Toolbar - [+] IconToggle - [+] Checkbox - [+] Textfield - [+] Select - [+] Ripple - [+] Theme",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdbq21/MaterialComponents.git"
+  },
+  "author": "ruslan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pdbq21/MaterialComponents/issues"
+  }
 }
