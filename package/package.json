@@ -1,10 +1,11 @@
 {
   "name": "react-mc-lite",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "React material design components lite",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,5 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "material-components-web": "^0.24.0"
-  },
-  "devDependencies": {}
+  }
 }
