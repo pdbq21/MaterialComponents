@@ -1,11 +1,12 @@
 /**
  * Created by ruslan on 20.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {textfield, ripple}  from 'material-components-web/dist/material-components-web';
-const {MDCTextfieldFoundation} = textfield;
+import {textField, ripple}  from 'material-components-web/dist/material-components-web';
+console.log(textField)
+const {MDCTextFieldFoundation} = textField;
 const {MDCRippleFoundation} = ripple;
 const {
   strings: {
@@ -14,7 +15,7 @@ const {
     ICON_SELECTOR: ICON_SELECTOR_NAME,
     BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME
   },
-} = MDCTextfieldFoundation;
+} = MDCTextFieldFoundation;
 let supportsPassive_;
 
 function applyPassive(globalObj = window, forceRefresh = false) {
@@ -56,7 +57,7 @@ function supportsCssVariables(windowObj) {
 }
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
 
-export default class Textfield extends PureComponent {
+export default class Textfield extends Component {
   static propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
@@ -86,7 +87,7 @@ export default class Textfield extends PureComponent {
     }
   };
 
-  foundation = new MDCTextfieldFoundation({
+  foundation = new MDCTextFieldFoundation({
     addClass: className => this.setState(({classNames}) => ({
       classNames: classNames.concat([className])
     })),
