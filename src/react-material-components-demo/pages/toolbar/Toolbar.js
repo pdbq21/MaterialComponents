@@ -223,6 +223,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source1}
           >
             <iframe
+              title="Normal Toolbar"
               src="/toolbar_normal"
               frameBorder="0"
               width='320px'
@@ -235,6 +236,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source2}
           >
             <iframe
+              title="Fixed Toolbar"
               src="/toolbar_fixed"
               frameBorder="0"
               width='320px'
@@ -247,6 +249,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source3}
           >
             <iframe
+              title="Waterfall Toolbar"
               src="/toolbar_waterfall"
               frameBorder="0"
               width='320px'
@@ -259,6 +262,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source4}
           >
             <iframe
+              title="Default Flexible Toolbar"
               src="/toolbar_flexible"
               frameBorder="0"
               width='320px'
@@ -271,6 +275,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source5}
           >
             <iframe
+              title="Waterfall Flexible Toolbar"
               src="/toolbar_wf"
               frameBorder="0"
               width='320px'
@@ -283,6 +288,7 @@ export default class ToolbarPage extends Component {
             code={code.toolbar.source6}
           >
             <iframe
+              title="Waterfall Toolbar Fix Last Row"
               src="/toolbar_wflr"
               frameBorder="0"
               width='320px'

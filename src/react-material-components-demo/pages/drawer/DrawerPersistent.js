@@ -177,6 +177,7 @@ export default class DrawerPersistentPage extends Component {
             code={code.drawer.persistent.source1}
           >
             <iframe
+              title="Persistent with ToolbarSpacer"
               src="/drawer/persistent_toolbar_spacer"
               frameBorder="0"
               width='640px'
@@ -189,6 +190,7 @@ export default class DrawerPersistentPage extends Component {
             code={code.drawer.persistent.source2}
           >
             <iframe
+              title="Persistent with Header"
               src="/drawer/persistent_header"
               frameBorder="0"
               width='640px'

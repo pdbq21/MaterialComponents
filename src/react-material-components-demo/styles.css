@@ -137,6 +137,7 @@ body {
 }
 
 .demo__flex{
+    align-items: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

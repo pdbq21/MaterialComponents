@@ -176,6 +176,7 @@ export default class DrawerTemporaryPage extends Component {
             code={code.drawer.temporary.source1}
           >
             <iframe
+              title="Temporary with ToolbarSpacer"
               src="/drawer/temporary_toolbar_spacer"
               frameBorder="0"
               width='320px'
@@ -188,6 +189,7 @@ export default class DrawerTemporaryPage extends Component {
             code={code.drawer.temporary.source2}
           >
             <iframe
+              title="Temporary with Header"
               src="/drawer/temporary_header"
               frameBorder="0"
               width='320px'

@@ -242,6 +242,7 @@ export default class TextfieldPage extends Component {
               >
                 Email Address
               </TextfieldLabel>
+              <TextfieldLine/>
             </Textfield>
             <TextfieldHelptext
               style={{
@@ -405,6 +406,7 @@ export default class TextfieldPage extends Component {
             <Textfield>
               <TextfieldInput id="demo-label-above" type="text"/>
               <TextfieldLabel htmlFor="demo-label-above">Label float above</TextfieldLabel>
+              <TextfieldLine/>
             </Textfield>
           </Example>
           <Example
