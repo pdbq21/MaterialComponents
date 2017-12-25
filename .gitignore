@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /package/node_modules
+/package/lib
 # testing
 /coverage
 

@@ -2,8 +2,9 @@
  * Created by ruslan on 05.06.17.
  */
 import React, {Component} from 'react'
+import {Button} from 'react-mc-lite/lib'
 import {
-  Button,
+  //Button,
   ButtonIcon,
   Elevation,
   TypographyDisplay,

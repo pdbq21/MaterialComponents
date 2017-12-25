@@ -143,4 +143,4 @@ export {
   TabBarScrollFrame,
   TabBarScroll,
   Table,
-} from './lib'
+} from './src'

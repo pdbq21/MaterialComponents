@@ -55,6 +55,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-jsonschema-form": "^0.51.0",
+    "react-mc-lite": "^1.0.13",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1"
   },
