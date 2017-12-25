@@ -97,12 +97,6 @@ export default class Menu extends PureComponent {
         return this.refs.root.removeEventListener(type, handler);
       }
     },
-/*    registerDocumentClickHandler: handler => {
-      return document.addEventListener('click', handler, {passive: true});
-    },
-    deregisterDocumentClickHandler: handler => {
-      return document.removeEventListener('click', handler);
-    },*/
     getYParamsForItemAtIndex: index => {
       const items = this.items_();
       if (items) {

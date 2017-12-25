@@ -1,19 +1,15 @@
 /**
  * Created by ruslan on 12.04.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Drawer extends PureComponent {
-
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function Drawer ({
             className,
             children,
             elementType,
             ...otherProps
-        } = ownProps;
+        }){
         const ElementType = elementType || 'nav';
         const classes = classnames('mdc-persistent-drawer__drawer', className);
         return (
@@ -23,5 +19,4 @@ export default class Drawer extends PureComponent {
             >
                 {children}
             </ElementType>);
-    }
 }

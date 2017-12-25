@@ -1,25 +1,17 @@
 /**
  * Created by ruslan on 22.06.17.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Bar extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  };
-
-  render() {
-    const {
+export default function Bar ({
       elementType,
       children,
       className,
       primary,
       secondary,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-linear-progress__bar', {
       'mdc-linear-progress__primary-bar': primary,
@@ -33,5 +25,4 @@ export default class Bar extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

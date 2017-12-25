@@ -1,23 +1,15 @@
 /**
  * Created by ruslan on 05.05.17.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Items extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-    };
-
-    render() {
-        const {
+export default function Items ({
             elementType,
             children,
             className,
             ...otherProps
-        } = this.props;
+        }){
         const ElementType = elementType || 'ul';
         const classes = classnames('mdc-list mdc-simple-menu__items', className);
         return (
@@ -28,5 +20,4 @@ export default class Items extends PureComponent {
                 {children}
             </ElementType>
         );
-    }
 }

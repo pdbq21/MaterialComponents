@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 14.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {radio, ripple}  from 'material-components-web/dist/material-components-web';
@@ -33,7 +33,7 @@ function supportsCssVariables(windowObj) {
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-export default class Radio extends PureComponent {
+export default class Radio extends Component {
   static propTypes = {
     checked: PropTypes.bool,
     disabled: PropTypes.bool,

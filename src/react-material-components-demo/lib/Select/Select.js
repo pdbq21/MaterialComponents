@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 16.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import {menu}  from 'material-components-web/dist/material-components-web';
 import {select}  from 'material-components-web/dist/material-components-web';
@@ -25,7 +25,7 @@ function getTransformPropertyName(globalObj, forceRefresh = false) {
   return storedTransformPropertyName_;
 }
 
-export default class Select extends PureComponent {
+export default class Select extends Component {
 
   constructor(props, context) {
     super(props, context);

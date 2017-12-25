@@ -9,3 +9,7 @@ export {default as SelectMenu} from './Menu';
 export {default as SelectText} from './Text';
 export {default as SelectItems} from './Items';
 export {default as SelectItem} from './Item';
+export {default as SelectSurface} from './Surface';
+export {default as SelectLine} from './Line';
+export {default as SelectLabel} from './Label';
+export {default as SelectSelectedText} from './SelectedText';

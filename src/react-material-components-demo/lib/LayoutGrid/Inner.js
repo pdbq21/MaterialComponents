@@ -1,23 +1,15 @@
 /**
  * Created by ruslan on 26.06.17.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Inner extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  };
-
-  render() {
-    const {
+export default function Inner ({
       children,
       className,
       elementType,
       ...otherProp
-    } = this.props;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-layout-grid__inner', className);
     return (
@@ -28,5 +20,4 @@ export default class Inner extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

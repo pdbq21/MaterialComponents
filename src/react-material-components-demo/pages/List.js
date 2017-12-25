@@ -173,6 +173,18 @@ export default class ListPage extends Component {
               required: 'no',
               defaultValue: 'false',
               description: '-'
+            },{
+              name: 'graphic',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
+            },{
+              name: 'meta',
+              type: 'bool',
+              required: 'no',
+              defaultValue: 'false',
+              description: '-'
             },
           ]
         },

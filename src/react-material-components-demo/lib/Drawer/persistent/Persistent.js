@@ -128,18 +128,18 @@ export default class Persistent extends PureComponent {
     makeElementUntabbable: el => {
       return el.setAttribute('tabindex', -1);
     },
-    isRtl: () => (getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl'),
+    isRtl: () => getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl',
     isDrawer: el => {
       const drawer = this.drawer_();
       return el === drawer;
     },
     notifyOpen: () => {
-      if (this.props.onOpen !== null) {
+      if (typeof this.props.onOpen !== 'undefined') {
         this.props.onOpen(this);
       }
     },
     notifyClose: () => {
-      if (this.props.onClose !== null) {
+      if (typeof this.props.onClose !== "undefined") {
         this.props.onClose(this);
       }
     },
