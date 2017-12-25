@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {textField, ripple}  from 'material-components-web/dist/material-components-web';
-console.log(textField)
+
 const {MDCTextFieldFoundation} = textField;
 const {MDCRippleFoundation} = ripple;
 const {

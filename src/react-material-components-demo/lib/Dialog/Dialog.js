@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 29.04.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import {dialog}  from 'material-components-web/dist/material-components-web';
 const {util, MDCDialogFoundation} = dialog;
@@ -16,7 +16,7 @@ const {
   }
 } = MDCDialogFoundation;
 
-export default class Dialog extends PureComponent {
+export default class Dialog extends Component {
   static defaultProps = {
     open: false,
   };

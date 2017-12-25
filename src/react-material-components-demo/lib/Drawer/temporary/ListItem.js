@@ -1,19 +1,11 @@
 /**
  * Created by ruslan on 12.04.17.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import DrawerListItem from '../DrawerListItem';
 
-class ListItem extends PureComponent {
-    static propTypes = {
-        children: PropTypes.node,
-        className: PropTypes.string,
-    };
-
-    render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+function ListItem({elementType, children, className, ...otherProps}){
         const ElementType = elementType || 'a';
         return (
             <DrawerListItem
@@ -25,7 +17,6 @@ class ListItem extends PureComponent {
                 {children}
             </DrawerListItem>
         );
-    }
 }
 
 export default ListItem;

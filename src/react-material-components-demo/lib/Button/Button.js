@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 08.03.17.
  */
-import React, {PureComponent}from 'react';
+import React, {Component}from 'react';
 import classnames from 'classnames';
 // After (15.5)
 import PropTypes from 'prop-types';
@@ -32,7 +32,7 @@ function supportsCssVariables(windowObj) {
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-export default class Button extends PureComponent {
+export default class Button extends Component {
   static propTypes = {
     accent: PropTypes.bool,
     children: PropTypes.node,
@@ -68,16 +68,6 @@ export default class Button extends PureComponent {
         }))
       }
     },
-    /*addClass: (className) => {
-     if (this.refs.root) {
-     return this.refs.root.classList.add(className);
-     }
-     },
-     removeClass: (className) => {
-     if (this.refs.root) {
-     return this.refs.root.classList.remove(className);
-     }
-     },*/
     registerInteractionHandler: (evtType, handler) => {
       if (this.refs.root) {
         this.refs.root.addEventListener(evtType, handler, {passive: true});
@@ -94,16 +84,6 @@ export default class Button extends PureComponent {
     deregisterResizeHandler: handler => {
       window.removeEventListener('resize', handler);
     },
-    /*updateCssVariable: (varName, value) => {
-     if (this.refs.root) {
-     this.setState(({rippleCss}) => ({
-     rippleCss: {
-     ...rippleCss,
-     [varName]: value
-     }
-     }))
-     }
-     },*/
     updateCssVariable: (varName, value) => {
       if (this.refs.root) {
         return this.refs.root.style.setProperty(varName, value);
@@ -170,15 +150,5 @@ export default class Button extends PureComponent {
     if (this.props.ripple) {
       this.foundationRipple.destroy();
     }
-  }
-
-  componentDidUpdate() {
-    /*if (this.props.ripple && this.refs.root) {
-     for (let key in this.state.rippleCss) {
-     if (this.state.rippleCss.hasOwnProperty(key)) {
-     this.refs.root.style.setProperty(key, this.state.rippleCss[key]);
-     }
-     }
-     }*/
   }
 }

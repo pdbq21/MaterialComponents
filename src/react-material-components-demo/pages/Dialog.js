@@ -315,7 +315,7 @@ export default class DialogPage extends Component {
             title={'Dialog'}
             code={code.dialog.source1}
           >
-            <Button primary raised ripple onClick={this.handle}>Show Dialog</Button>
+            <Button raised ripple onClick={this.handle}>Show Dialog</Button>
             <Dialog
               open={open}
               onAccept={this.handleAccept}
@@ -344,7 +344,7 @@ export default class DialogPage extends Component {
             title={'Dialog with List'}
             code={code.dialog.source2}
           >
-            <Button primary raised ripple onClick={this.handleScroll}>Show Scrolling Dialog</Button>
+            <Button raised ripple onClick={this.handleScroll}>Show Scrolling Dialog</Button>
             <Dialog
               open={openScroll}
               onAccept={this.handleAccept}
@@ -378,7 +378,7 @@ export default class DialogPage extends Component {
             title={'Full Page Dialog'}
             code={code.dialog.source1}
           >
-            <Button primary raised ripple onClick={this.handleFullPage}>Show Dialog</Button>
+            <Button raised ripple onClick={this.handleFullPage}>Show Dialog</Button>
             <Dialog
               open={openFullPage}
               onAccept={this.handleAccept}

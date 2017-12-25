@@ -29,7 +29,6 @@ export default class Footer extends Component {
       >
         <FAB
           ripple
-          plain
           elementType="a"
           href="https://github.com/pdbq21/MaterialComponents"
         >

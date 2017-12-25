@@ -255,13 +255,12 @@ export default class CheckboxPage extends Component {
               }}
             >
               <Button
-                primary
                 raised
                 ripple
                 onClick={this.handelIndeterminate}
                 style={{'marginRight': '0.5em'}}
               >Make indeterminate</Button>
-              <Button primary raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
+              <Button raised ripple onClick={this.handelDisabled}>Toggle Disabled</Button>
             </Elevation>
           </Example>
           <Example
