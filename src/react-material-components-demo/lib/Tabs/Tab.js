@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import {tabs, ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCTabFoundation} = tabs;
@@ -53,7 +53,7 @@ function supportsCssVariables(windowObj) {
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
-export default class Tab extends PureComponent {
+export default class Tab extends Component {
   state = {
     classNames: [],
     classNamesRipple: [],
