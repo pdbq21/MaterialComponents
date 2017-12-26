@@ -1,9 +1,10 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
-import {tabs}  from 'material-components-web/dist/material-components-web';
+import {tabs} from 'material-components-web/dist/material-components-web';
+
 const {MDCTabBarFoundation, MDCTabFoundation} = tabs;
 
 const {
@@ -66,9 +67,11 @@ function eventFoundInMaps(eventType) {
 function hasProperShape(windowObj) {
   return (windowObj['document'] !== undefined && typeof windowObj['document']['createElement'] === 'function');
 }
+
 function getJavaScriptEventName(eventType, map, el) {
   return map[eventType].styleProperty in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
 }
+
 function getAnimationName(windowObj, eventType) {
   if (!hasProperShape(windowObj) || !eventFoundInMaps(eventType)) {
     return eventType;
@@ -94,7 +97,7 @@ function getCorrectPropertyName(windowObj, eventType) {
 }
 
 
-export default class TabBar extends PureComponent {
+export default class TabBar extends Component {
   state = {
     classNames: [],
     activeTabIndex: 0,
@@ -126,7 +129,7 @@ export default class TabBar extends PureComponent {
   }
 
   switchToTabAtIndex(index, shouldNotify) {
-    const { activeTabIndex } = this.state;
+    const {activeTabIndex} = this.state;
     if (index === activeTabIndex) {
       return;
     }
@@ -151,7 +154,7 @@ export default class TabBar extends PureComponent {
   };
 
   layoutIndicator_() {
-    const { activeTabIndex } = this.state;
+    const {activeTabIndex} = this.state;
     //const isIndicatorFirstRender = !isIndicatorShown;
 
     // Ensure that indicator appears in the right position immediately for correct first render.
@@ -179,7 +182,6 @@ export default class TabBar extends PureComponent {
   }
 
 
-
   indicator_ = () => this.refs.root.querySelector(INDICATOR_SELECTOR_NAME);
 
   emit = (root, evtType, evtData) => {
@@ -205,50 +207,50 @@ export default class TabBar extends PureComponent {
     deregisterResizeHandler: (handler) => window.removeEventListener('resize', handler),
 
     getOffsetWidth: () => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.offsetWidth
       }
     },
 
     bindOnMDCTabSelectedEvent: () => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.addEventListener(SELECTED_EVENT_NAME, this.tabSelectedHandler_);
       }
     },
     unbindOnMDCTabSelectedEvent: () => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.removeEventListener(SELECTED_EVENT_NAME, this.tabSelectedHandler_);
       }
     },
 
     setStyleForIndicator: (propertyName, value) => {
       const indicator = this.indicator_();
-      if (indicator) {
+      if (!!indicator) {
         return indicator.style.setProperty(propertyName, value)
       }
     },
     getOffsetWidthForIndicator: () => {
       const indicator = this.indicator_();
-      if (indicator) {
+      if (!!indicator) {
         return indicator.offsetWidth
       }
     },
     getNumberOfTabs: () => {
       const tabs = this.tabs();
-      if (tabs) {
+      if (!!tabs) {
         return tabs.length;
       }
     },
 
     isTabActiveAtIndex: index => {
       const tabs = this.tabs();
-      if (tabs) {
+      if (!!tabs) {
         return tabs[index].classList.contains(ACTIVE_NAME)
       }
     },
     setTabActiveAtIndex: (index, isActive) => {
       const tabs = this.tabs();
-      if (tabs) {
+      if (!!tabs) {
         if (isActive) {
           tabs[index].classList.add(ACTIVE_NAME);
         } else {
@@ -258,15 +260,13 @@ export default class TabBar extends PureComponent {
     },
     isDefaultPreventedOnClickForTabAtIndex: index => {
       const tabs = this.tabs();
-      console.log('preventDefaultOnClick', tabs[index]);
-      if (tabs) {
+      if (!!tabs) {
         return tabs[index].preventDefaultOnClick;
       }
     },
     setPreventDefaultOnClickForTabAtIndex: (index, preventDefaultOnClick) => {
       const tabs = this.tabs();
-      console.log('setPreventDefaultOnClickForTabAtIndex', tabs[index]);
-      if (tabs) {
+      if (!!tabs) {
         return tabs[index].preventDefaultOnClick = preventDefaultOnClick;
       }
     },
@@ -282,7 +282,7 @@ export default class TabBar extends PureComponent {
     },*/
     getComputedWidthForTabAtIndex: index => {
       const tabs = this.tabs();
-      if (tabs) {
+      if (!!tabs) {
         //return tabs[index].foundation_.adapter_.getOffsetWidth();
         return tabs[index].offsetWidth;
       }
@@ -290,7 +290,7 @@ export default class TabBar extends PureComponent {
 
     getComputedLeftForTabAtIndex: index => {
       const tabs = this.tabs();
-      if (tabs) {
+      if (!!tabs) {
         //return tabs[index].foundation_.adapter_.getOffsetLeft();
         return tabs[index].offsetLeft;
       }
@@ -307,7 +307,7 @@ export default class TabBar extends PureComponent {
 
   componentDidMount() {
 
-    if (!this.props.cssOnly){
+    if (!this.props.cssOnly) {
       this.tabs_ = [].slice.call(this.refs.root.querySelectorAll(TAB_SELECTOR_NAME));
       //this.tabs_ = this.gatherTabs_((el) => new MDCTab(el));
       //this.isActive = this.root_.classList.contains(ACTIVE_NAME);

@@ -2,6 +2,7 @@
  * Created by ruslan on 16.03.17.
  */
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import '@material/ripple/dist/mdc.ripple.min.css';
 import {ripple} from 'material-components-web/dist/material-components-web';
@@ -33,6 +34,13 @@ function supportsCssVariables(windowObj) {
 }
 
 export default class FAB extends PureComponent {
+  static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    icon: PropTypes.bool,
+    mini: PropTypes.bool,
+    plain: PropTypes.bool,
+  };
 
   state = {
     classNamesRipple: [],

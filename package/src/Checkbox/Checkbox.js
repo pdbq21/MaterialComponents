@@ -2,8 +2,8 @@
  * Created by ruslan on 13.03.17.
  */
 
-import React, {PureComponent} from 'react';
-
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {checkbox, ripple}  from 'material-components-web/dist/material-components-web';
 const {MDCCheckboxFoundation} = checkbox;
@@ -105,7 +105,15 @@ function supportsCssVariables(windowObj) {
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-class Checkbox extends PureComponent {
+class Checkbox extends Component {
+  static propTypes = {
+    id: PropTypes.string,
+    labelId: PropTypes.string,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    indeterminate: PropTypes.bool,
+    onChange: PropTypes.func
+  }
 
   state = {
     classes: [],

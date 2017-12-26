@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 12.04.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import {drawer} from 'material-components-web/dist/material-components-web';
 
@@ -25,7 +25,7 @@ const {
   }
 } = MDCTemporaryDrawerFoundation;
 
-export default class Temporary extends PureComponent {
+export default class Temporary extends Component {
   static defaultProps = {
     open: false,
   };
@@ -157,6 +157,9 @@ export default class Temporary extends PureComponent {
 
     addBodyClass: (className) => document.body.classList.add(className),
     removeBodyClass: (className) => document.body.classList.remove(className),
+
+
+    eventTargetHasClass: (target, className) => target.classList.contains(className),
   });
 
   componentDidMount() {

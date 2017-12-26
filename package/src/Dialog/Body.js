@@ -2,8 +2,13 @@
  * Created by ruslan on 29.04.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
 const Body = ({
                   children,
                   className,
@@ -24,4 +29,5 @@ const Body = ({
         </ElementType>);
 };
 
+Body.propTypes = propTypes;
 export default Body;

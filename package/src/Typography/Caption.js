@@ -2,8 +2,14 @@
  * Created by ruslan on 14.03.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+    adjustMargin: PropTypes.bool,
+};
 const Caption = ({
     children,
     className,
@@ -25,4 +31,5 @@ const Caption = ({
         </ElementType>);
 };
 
+Caption.propTypes = propTypes;
 export default Caption;

@@ -2,8 +2,13 @@
  * Created by ruslan on 02.05.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
 const SupportText = ({
                    children,
                    className,
@@ -21,4 +26,5 @@ const SupportText = ({
         </ElementType>);
 };
 
+SupportText.propTypes = propTypes;
 export default SupportText;

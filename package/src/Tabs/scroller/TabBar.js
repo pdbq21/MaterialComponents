@@ -1,9 +1,10 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
-import {tabs}  from 'material-components-web/dist/material-components-web';
+import {tabs} from 'material-components-web/dist/material-components-web';
+
 const {MDCTabBarScrollerFoundation, MDCTabBarFoundation} = tabs;
 const {
   strings: {
@@ -63,9 +64,11 @@ function eventFoundInMaps(eventType) {
 function hasProperShape(windowObj) {
   return (windowObj['document'] !== undefined && typeof windowObj['document']['createElement'] === 'function');
 }
+
 function getJavaScriptEventName(eventType, map, el) {
   return map[eventType].styleProperty in el.style ? map[eventType].noPrefix : map[eventType].webkitPrefix;
 }
+
 function getAnimationName(windowObj, eventType) {
   if (!hasProperShape(windowObj) || !eventFoundInMaps(eventType)) {
     return eventType;
@@ -90,7 +93,7 @@ function getCorrectPropertyName(windowObj, eventType) {
   return getAnimationName(windowObj, eventType);
 }
 
-export default class TabBar extends PureComponent {
+export default class TabBar extends Component {
   state = {
     classNames: [],
   };
@@ -114,59 +117,59 @@ export default class TabBar extends PureComponent {
     eventTargetHasClass: (target, className) => target.classList.contains(className),
     addClassToForwardIndicator: (className) => {
       const forwardIndicator = this.forwardIndicator_();
-      if (forwardIndicator) {
+      if (!!forwardIndicator) {
         return forwardIndicator.classList.add(className)
       }
     },
     removeClassFromForwardIndicator: (className) => {
       const forwardIndicator = this.forwardIndicator_();
-      if (forwardIndicator) {
+      if (!!forwardIndicator) {
         return forwardIndicator.classList.remove(className)
       }
     },
     addClassToBackIndicator: (className) => {
       const backIndicator = this.backIndicator_();
-      if (backIndicator) {
+      if (!!backIndicator) {
         return backIndicator.classList.add(className)
       }
     },
     removeClassFromBackIndicator: (className) => {
       const backIndicator = this.backIndicator_();
-      if (backIndicator) {
+      if (!!backIndicator) {
         return backIndicator.classList.remove(className)
       }
     },
     registerBackIndicatorClickHandler: (handler) => {
       const backIndicator = this.backIndicator_();
-      if (backIndicator) {
+      if (!!backIndicator) {
         return backIndicator.addEventListener('click', handler)
       }
     },
     deregisterBackIndicatorClickHandler: (handler) => {
       const backIndicator = this.backIndicator_();
-      if (backIndicator) {
+      if (!!backIndicator) {
         return backIndicator.removeEventListener('click', handler)
       }
     },
     registerForwardIndicatorClickHandler: (handler) => {
       const forwardIndicator = this.forwardIndicator_();
-      if (forwardIndicator) {
+      if (!!forwardIndicator) {
         return forwardIndicator.addEventListener('click', handler)
       }
     },
     deregisterForwardIndicatorClickHandler: (handler) => {
       const forwardIndicator = this.forwardIndicator_();
-      if (forwardIndicator) {
+      if (!!forwardIndicator) {
         return forwardIndicator.removeEventListener('click', handler)
       }
     },
     registerCapturedInteractionHandler: (evt, handler) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.addEventListener(evt, handler, {passive: true})
       }
     },
     deregisterCapturedInteractionHandler: (evt, handler) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.removeEventListener(evt, handler, {passive: true})
       }
     },
@@ -176,54 +179,54 @@ export default class TabBar extends PureComponent {
       window.removeEventListener('resize', handler),
     getNumberOfTabs: () => {
       const tabBar = this.tabBar();
-      if (tabBar) {
+      if (!!tabBar) {
         return tabBar.length;
       }
     },
     getComputedWidthForTabAtIndex: index => {
       const tabBar = this.tabBar();
-      if (tabBar) {
+      if (!!tabBar) {
         return tabBar[index].offsetWidth;
       }
     },
     getComputedLeftForTabAtIndex: index => {
       const tabBar = this.tabBar();
-      if (tabBar) {
+      if (!!tabBar) {
         return tabBar[index].offsetLeft;
       }
     },
     getOffsetWidthForScrollFrame: () => {
       const scrollFrame = this.scrollFrame_();
-      if (scrollFrame) {
+      if (!!scrollFrame) {
         return scrollFrame.offsetWidth;
       }
     },
     getScrollLeftForScrollFrame: () => {
       const scrollFrame = this.scrollFrame_();
-      if (scrollFrame) {
+      if (!!scrollFrame) {
         return scrollFrame.scrollLeft;
       }
     },
     setScrollLeftForScrollFrame: scrollLeftAmount => {
       const scrollFrame = this.scrollFrame_();
-      if (scrollFrame) {
+      if (!!scrollFrame) {
         return scrollFrame.scrollLeft = scrollLeftAmount;
       }
     },
     getOffsetWidthForTabBar: () => {
       const tabBarEl = this.tabBarEl_();
-      if (tabBarEl) {
+      if (!!tabBarEl) {
         return tabBarEl.offsetWidth;
       }
     },
     setTransformStyleForTabBar: value => {
       const tabBarEl = this.tabBarEl_();
-      if (tabBarEl) {
+      if (!!tabBarEl) {
         return tabBarEl.style.setProperty(getCorrectPropertyName(window, 'transform'), value);
       }
     },
     isRTL: () =>
-    getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl',
+      getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl',
     getOffsetLeftForEventTarget: (target) => target.offsetLeft,
     getOffsetWidthForEventTarget: (target) => target.offsetWidth,
   });
@@ -236,7 +239,7 @@ export default class TabBar extends PureComponent {
   }
 
   componentWillUnmount() {
-    if (!this.props.cssOnly){
+    if (!this.props.cssOnly) {
       this.foundation.destroy();
     }
   }
@@ -248,7 +251,7 @@ export default class TabBar extends PureComponent {
       elementType,
       className,
       children,
-    ...otherProp
+      ...otherProp
     } = ownProps;
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller', this.state.classNames, className);

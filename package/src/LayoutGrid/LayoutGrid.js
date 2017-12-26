@@ -1,10 +1,15 @@
 /**
  * Created by ruslan on 15.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default class LayoutGrid extends PureComponent {
+export default class LayoutGrid extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+  };
 
   setPropertyLayoutGrid(margin, gutter, marginDesktop,
                         gutterDesktop, marginTablet, gutterTablet, marginPhone, gutterPhone,

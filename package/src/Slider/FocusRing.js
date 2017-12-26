@@ -1,18 +1,15 @@
 /**
  * Created by ruslan on 22.06.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class FocusRing extends PureComponent {
-
-  render() {
-    const {
+export default function FocusRing ({
       elementType,
       children,
       className,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider__focus-ring', className);
     return (
@@ -23,5 +20,4 @@ export default class FocusRing extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

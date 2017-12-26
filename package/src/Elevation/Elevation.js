@@ -2,8 +2,16 @@
  * Created by ruslan on 13.03.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
+const propTypes = {
+    children: PropTypes.node,
+    zSpace: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    className: PropTypes.string,
+};
 const Elevation = ({
                        children,
                        zSpace,
@@ -27,4 +35,5 @@ const Elevation = ({
         </ElementType>);
 };
 
+Elevation.propTypes = propTypes;
 export default Elevation;

@@ -2,14 +2,14 @@
  * Created by ruslan on 16.03.17.
  */
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
-import {toolbar}  from 'material-components-web/dist/material-components-web';
+import {toolbar} from 'material-components-web/dist/material-components-web';
+
 const {util, MDCToolbarFoundation} = toolbar;
 const {applyPassive} = util;
 
-export default class Toolbar extends PureComponent {
-
+export default class Toolbar extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -41,84 +41,76 @@ export default class Toolbar extends PureComponent {
       classNames: classNames.filter(cn => cn !== className)
     })),
 
-    registerScrollHandler: handler => {
-      return window.addEventListener('scroll', handler, applyPassive());
-    },
-    deregisterScrollHandler: handler => {
-      return window.removeEventListener('scroll', handler, applyPassive());
-    },
-    registerResizeHandler: handler => {
-      return window.addEventListener('resize', handler, {passive: true});
-    },
-    deregisterResizeHandler: handler => {
-      return window.removeEventListener('resize', handler);
-    },
-    getViewportWidth: () => {
-      return window.innerWidth;
-    },
-    getViewportScrollY: () => {
-      return window.pageYOffset;
-    },
+    registerScrollHandler: handler =>
+      window.addEventListener('scroll', handler, applyPassive()),
+    deregisterScrollHandler: handler =>
+      window.removeEventListener('scroll', handler, applyPassive()),
+    registerResizeHandler: handler =>
+      window.addEventListener('resize', handler, {passive: true}),
+    deregisterResizeHandler: handler =>
+      window.removeEventListener('resize', handler),
+    getViewportWidth: () => window.innerWidth,
+    getViewportScrollY: () => window.pageYOffset,
     getOffsetHeight: () => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.offsetHeight;
       }
     },
     getFirstRowElementOffsetHeight: () => {
       if (this.refs.root) {
         const firstRowElement = this.refs.root.querySelector('.mdc-toolbar__row:first-child');
-        if (firstRowElement) {
+        if (!!firstRowElement) {
           return firstRowElement.offsetHeight;
         }
       }
     },
     notifyChange: evtData => {
-      if (this.props.onChange !== undefined) {
+      if (typeof this.props.onChange !== 'undefined') {
         this.props.onChange(evtData);
       }
+      this.emit(this.refs.root, MDCToolbarFoundation.strings.CHANGE_EVENT, evtData);
     },
     setStyle: (property, value) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         return this.refs.root.style.setProperty(property, value);
       }
     },
     setStyleForTitleElement: (property, value) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         const titleElement = this.refs.root.querySelector('.mdc-toolbar__title');
-        if (titleElement) {
+        if (!!titleElement) {
           return titleElement.style.setProperty(property, value);
         }
       }
     },
     setStyleForFlexibleRowElement: (property, value) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         const firstRowElement = this.refs.root.querySelector('.mdc-toolbar__row:first-child');
-        if (firstRowElement) {
+        if (!!firstRowElement) {
           return firstRowElement.style.setProperty(property, value);
         }
       }
     },
     setStyleForFixedAdjustElement: (property, value) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         const fixedAdjustElement = this.refs.root.parentNode.querySelector('.mdc-toolbar-fixed-adjust');
-        if (fixedAdjustElement) {
+        if (!!fixedAdjustElement) {
           return fixedAdjustElement.style.setProperty(property, value);
         }
       }
     },
-
   });
 
   componentDidMount() {
     const {waterfall, lastRow, flexible} = this.props;
-    if (waterfall || lastRow || flexible){
+    if (waterfall || lastRow || flexible) {
       this.foundation.init();
     }
   }
 
   componentWillUnmount() {
     const {waterfall, lastRow, flexible} = this.props;
-    if (waterfall || lastRow || flexible){
+    if (waterfall || lastRow || flexible) {
       this.foundation.destroy();
     }
   }

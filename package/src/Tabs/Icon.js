@@ -1,20 +1,16 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import {Icon} from '../base'
 
-export default class TabIcon extends PureComponent {
-
-  render() {
-    const ownProps = Object.assign({}, this.props);
-    const {
+export default function TabIcon ({
       elementType,
       className,
       children,
     ...otherProp
-    } = ownProps;
+    }){
     const ElementType = elementType || Icon;
     const classes = classnames('mdc-tab__icon', className);
     return (
@@ -25,5 +21,4 @@ export default class TabIcon extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

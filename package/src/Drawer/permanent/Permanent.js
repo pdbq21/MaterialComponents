@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 20.03.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-class Permanent extends PureComponent {
-
-    render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+function Permanent ({elementType, children, className, ...otherProps}){
         const ElementType = elementType || 'nav';
         const classes = classnames('mdc-permanent-drawer', className);
         return (
@@ -18,7 +15,6 @@ class Permanent extends PureComponent {
                 {children}
             </ElementType>
         );
-    }
 }
 
 export default Permanent;

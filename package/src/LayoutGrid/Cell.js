@@ -2,7 +2,11 @@
  * Created by ruslan on 15.03.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
+const propTypes = {
+  className: PropTypes.string,
+};
 const Cell = ({
                 children,
                 className,
@@ -41,4 +45,5 @@ ${classNames}`
     </ElementType>);
 };
 
+Cell.propTypes = propTypes;
 export default Cell;

@@ -1,18 +1,15 @@
 /**
  * Created by ruslan on 22.06.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class ContainerThumb extends PureComponent {
-
-  render() {
-    const {
+export default function ContainerThumb ({
       elementType,
       children,
       className,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider__thumb-container', className);
     return (
@@ -23,5 +20,4 @@ export default class ContainerThumb extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

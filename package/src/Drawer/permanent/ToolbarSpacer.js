@@ -1,14 +1,11 @@
 /**
  * Created by ruslan on 12.04.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 
 import DrawerToolbarSpacer from '../DrawerToolbarSpacer';
 
-class ToolbarSpacer extends PureComponent {
-
-    render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+function ToolbarSpacer ({elementType, children, className, ...otherProps}){
         const ElementType =  elementType || 'div';
         return (
             <DrawerToolbarSpacer
@@ -20,7 +17,6 @@ class ToolbarSpacer extends PureComponent {
                 {children}
             </DrawerToolbarSpacer>
         );
-    }
 }
 
 export default ToolbarSpacer;

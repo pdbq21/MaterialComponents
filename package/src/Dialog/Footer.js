@@ -1,20 +1,15 @@
 /**
  * Created by ruslan on 29.04.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Footer extends PureComponent {
-
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function Footer ({
             children,
             className,
             elementType,
             ...otherProp
-        } = ownProps;
-
+        }){
         const classes = classnames('mdc-dialog__footer', className);
         const ElementType = elementType || 'footer';
         return (
@@ -24,5 +19,4 @@ export default class Footer extends PureComponent {
             >
                 {children}
             </ElementType>);
-    }
 }

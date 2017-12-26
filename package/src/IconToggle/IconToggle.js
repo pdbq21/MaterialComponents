@@ -1,7 +1,8 @@
 /**
  * Created by ruslan on 04.05.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {iconToggle}  from 'material-components-web/dist/material-components-web';
 import {ripple} from 'material-components-web/dist/material-components-web';
@@ -43,7 +44,11 @@ function supportsCssVariables(windowObj) {
 }
 
 
-export default class IconToggle extends PureComponent {
+export default class IconToggle extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+  };
+
   state = {
     classNamesRipple: [],
     rippleCss: {},

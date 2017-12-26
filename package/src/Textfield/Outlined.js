@@ -2,23 +2,32 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import {textField} from 'material-components-web/dist/material-components-web';
 
-const {MDCTextFieldLabelFoundation} = textField;
+const {MDCTextFieldOutlineFoundation} = textField;
+const {
+  strings: {
+    PATH_SELECTOR: PATH_SELECTOR_NAME
+  }
+} = MDCTextFieldOutlineFoundation;
 
-export default class Label extends Component {
-  state = {
-    classNames: [],
-  };
+export default class Outlined extends Component {
 
-  foundation = new MDCTextFieldLabelFoundation({
-    addClass: className => this.setState(({classNames}) => ({
-      classNames: classNames.concat([className])
-    })),
-    removeClass: className => this.setState(({classNames}) => ({
-      classNames: classNames.filter(cn => cn !== className)
-    })),
+  path_ = () => this.refs.root.querySelector(PATH_SELECTOR_NAME);
+
+  foundation = new MDCTextFieldOutlineFoundation({
     getWidth: () => {
       if (!!this.refs.root) {
         return this.refs.root.offsetWidth
+      }
+    },
+    getHeight: () => {
+      if (!!this.refs.root) {
+        return this.refs.root.offsetHeight
+      }
+    },
+    setOutlinePathAttr: (value) => {
+      const path = this.path_();
+      if (!!path) {
+        path.setAttribute('d', value);
       }
     },
   });
@@ -41,25 +50,21 @@ export default class Label extends Component {
       elementType,
       className,
       children,
-      floatAbove,
-      shake,
       ...otherProp
     } = ownProps;
-    const classes = classnames(
-      'mdc-text-field__label', {
-        'mdc-text-field__label--float-above': floatAbove,
-        'mdc-text-field__label--shake': shake,
-      },
-      this.state.classNames,
-      className
-    );
-    const ElementType = elementType || 'label';
+
+    const classes = classnames('mdc-text-field__outline', className);
+    const ElementType = elementType || 'div';
+
     return (
       <ElementType
         ref="root"
         className={classes}
         {...otherProp}
       >
+        <svg>
+          <path className="mdc-text-field__outline-path"/>
+        </svg>
         {children}
       </ElementType>
     );

@@ -1,18 +1,14 @@
 /**
  * Created by ruslan on 04.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Background extends PureComponent {
-
-  render() {
-    const ownProps = Object.assign({}, this.props);
-    const {
+export default function Background ({
       className,
       elementType,
       ...otherProps
-    } = ownProps;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-radio__background', className);
     return (
@@ -23,6 +19,4 @@ export default class Background extends PureComponent {
         <div className="mdc-radio__outer-circle"/>
         <div className="mdc-radio__inner-circle"/>
       </ElementType>);
-  }
-
 }

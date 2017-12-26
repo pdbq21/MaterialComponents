@@ -2,6 +2,7 @@
  * Created by ruslan on 16.03.17.
  */
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {menu}  from 'material-components-web/dist/material-components-web';
 const {MDCSimpleMenuFoundation} = menu;
@@ -17,6 +18,10 @@ function getTransformPropertyName(globalObj, forceRefresh = false) {
   return storedTransformPropertyName_;
 }
 export default class Menu extends PureComponent {
+  static propTypes = {
+    children: PropTypes.node,
+  };
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -92,12 +97,6 @@ export default class Menu extends PureComponent {
         return this.refs.root.removeEventListener(type, handler);
       }
     },
-/*    registerDocumentClickHandler: handler => {
-      return document.addEventListener('click', handler, {passive: true});
-    },
-    deregisterDocumentClickHandler: handler => {
-      return document.removeEventListener('click', handler);
-    },*/
     getYParamsForItemAtIndex: index => {
       const items = this.items_();
       if (items) {

@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 22.06.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Thumb extends PureComponent {
-
-  render() {
-    const {
+export default function Thumb ({
       elementType,
       children,
       className,
@@ -18,7 +15,7 @@ export default class Thumb extends PureComponent {
       cy,
       r,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'svg';
     const classes = classnames('mdc-slider__thumb', className);
     return (
@@ -35,5 +32,4 @@ export default class Thumb extends PureComponent {
         /> : children}
       </ElementType>
     );
-  }
 }

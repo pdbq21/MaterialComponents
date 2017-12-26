@@ -1,14 +1,11 @@
 /**
  * Created by ruslan on 12.04.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 
 import DrawerList from '../DrawerList';
 
-class List extends PureComponent {
-
-    render() {
-        const {elementType, children, className, ...otherProps} = this.props;
+function List ({elementType, children, className, ...otherProps}){
         const ElementType = elementType || 'nav';
         return (
             <DrawerList
@@ -19,7 +16,6 @@ class List extends PureComponent {
                 {children}
             </DrawerList>
         );
-    }
 }
 
 export default List;

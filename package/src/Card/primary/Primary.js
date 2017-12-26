@@ -2,8 +2,13 @@
  * Created by ruslan on 14.03.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
 const Primary = ({
     children,
     className,
@@ -22,4 +27,5 @@ const Primary = ({
         </ElementType>);
 };
 
+Primary.propTypes = propTypes;
 export default Primary;

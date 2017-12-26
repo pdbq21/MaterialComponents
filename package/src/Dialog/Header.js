@@ -2,8 +2,13 @@
  * Created by ruslan on 29.04.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+const propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
 const Header = ({
                     children,
                     className,
@@ -21,4 +26,5 @@ const Header = ({
         </ElementType>);
 };
 
+Header.propTypes = propTypes;
 export default Header;

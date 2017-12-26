@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 05.05.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Item extends PureComponent {
-
-  render() {
-    const {
+export default function Item ({
       elementType,
       children,
       className,
@@ -15,7 +12,7 @@ export default class Item extends PureComponent {
       tabIndex,
       disabled,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'li';
     const classes = classnames('mdc-list-item', className);
     return (
@@ -29,5 +26,4 @@ export default class Item extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }

@@ -1,19 +1,15 @@
 /**
  * Created by ruslan on 27.06.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class ScrollFrame extends PureComponent {
-
-  render() {
-    const ownProps = Object.assign({}, this.props);
-    const {
+export default function ScrollFrame ({
       elementType,
       className,
       children,
     ...otherProp
-    } = ownProps;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-tab-bar-scroller__scroll-frame', className);
     return (
@@ -24,5 +20,4 @@ export default class ScrollFrame extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }
