@@ -1,28 +1,25 @@
 /**
  * Created by ruslan on 02.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Line extends PureComponent {
-
-  render() {
-    const ownProps = Object.assign({}, this.props);
-    const {
-      children,
-      elementType,
-      className,
-      ...otherProps
-    } = ownProps;
-
-    const classes = classnames('mdc-textfield__bottom-line', className);
-    const ElementType = elementType || 'div';
-    return (
-      <ElementType
-        className={classes}
-        {...otherProps}
-      >
-        {children}
-      </ElementType>);
-  }
+export default function Line({
+                               children,
+                               elementType,
+                               className,
+                               active,
+                               ...otherProps
+                             }) {
+  const classes = classnames('mdc-text-field__bottom-line', {
+    'mdc-text-field-bottom-line--active': active
+  }, className);
+  const ElementType = elementType || 'div';
+  return (
+    <ElementType
+      className={classes}
+      {...otherProps}
+    >
+      {children}
+    </ElementType>);
 }

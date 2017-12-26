@@ -4,9 +4,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {textField, ripple}  from 'material-components-web/dist/material-components-web';
+import {textField, ripple} from 'material-components-web/dist/material-components-web';
 
-const {MDCTextFieldFoundation} = textField;
+const {
+  MDCTextFieldFoundation,
+  MDCTextFieldBottomLineFoundation
+} = textField;
 const {MDCRippleFoundation} = ripple;
 const {
   strings: {
@@ -35,11 +38,13 @@ function applyPassive(globalObj = window, forceRefresh = false) {
 
   return supportsPassive_ ? {passive: true} : false;
 }
+
 function getMatchesProperty(HTMLElementPrototype) {
   return [
     'webkitMatchesSelector', 'msMatchesSelector', 'matches',
   ].filter((p) => p in HTMLElementPrototype).pop();
 }
+
 function supportsCssVariables(windowObj) {
   const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === 'function';
   if (!supportsFunctionPresent) {
@@ -55,6 +60,7 @@ function supportsCssVariables(windowObj) {
   );
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
+
 const MATCHES = getMatchesProperty(HTMLElement.prototype);
 
 export default class Textfield extends Component {
@@ -70,6 +76,20 @@ export default class Textfield extends Component {
   state = {
     classNames: [],
     classNamesRipple: [],
+  };
+
+  emit = (root, evtType, evtData, shouldBubble = false) => {
+    let evt;
+    if (typeof CustomEvent === 'function') {
+      evt = new CustomEvent(evtType, {
+        detail: evtData,
+        bubbles: shouldBubble
+      });
+    } else {
+      evt = document.createEvent('CustomEvent');
+      evt.initCustomEvent(evtType, shouldBubble, false, evtData);
+    }
+    root.dispatchEvent(evt);
   };
 
   rootInput_ = () => this.refs.root.querySelector(INPUT_SELECTOR_NAME);
@@ -94,66 +114,65 @@ export default class Textfield extends Component {
     removeClass: className => this.setState(({classNames}) => ({
       classNames: classNames.filter(cn => cn !== className)
     })),
-    addClassToLabel: className => {
-      const rootLabel = this.rootLabel_();
-      if (rootLabel) {
-        return rootLabel.classList.add(className);
-      }
-    },
-    removeClassFromLabel: className => {
-      const rootLabel = this.rootLabel_();
-      if (rootLabel) {
-        return rootLabel.classList.remove(className);
-      }
-    },
-    eventTargetHasClass: (target, className) => target.classList.contains(className),
     registerTextFieldInteractionHandler: (evtType, handler) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         this.refs.root.addEventListener(evtType, handler);
       }
     },
     deregisterTextFieldInteractionHandler: (evtType, handler) => {
-      if (this.refs.root) {
+      if (!!this.refs.root) {
         this.refs.root.removeEventListener(evtType, handler);
       }
     },
-    notifyIconAction: () => {
-      if (typeof this.props.onIcon !== 'undefined') {
-        this.props.onIcon({});
-      }
-/*      if (this.refs.root) {
-        return this.emit(this.refs.root, ICON_EVENT, {})
-      }*/
-    },
+
+    /* addClassToLabel: className => {
+       const rootLabel = this.rootLabel_();
+       if (rootLabel) {
+         return rootLabel.classList.add(className);
+       }
+     },
+     removeClassFromLabel: className => {
+       const rootLabel = this.rootLabel_();
+       if (rootLabel) {
+         return rootLabel.classList.remove(className);
+       }
+     },
+     eventTargetHasClass: (target, className) => target.classList.contains(className),
+
+     notifyIconAction: () => {
+       if (typeof this.props.onIcon !== 'undefined') {
+         this.props.onIcon({});
+       }
+     },*/
     // input
     getNativeInput: () => {
       const rootInput = this.rootInput_();
-      if (rootInput) {
+      if (!!rootInput) {
         return rootInput;
       }
     },
     registerInputInteractionHandler: (evtType, handler) => {
       const rootInput = this.rootInput_();
-      if (rootInput) {
+      if (!!rootInput) {
         return rootInput.addEventListener(evtType, handler);
       }
     },
     deregisterInputInteractionHandler: (evtType, handler) => {
       const rootInput = this.rootInput_();
-      if (rootInput) {
+      if (!!rootInput) {
         return rootInput.removeEventListener(evtType, handler);
       }
-  },
+    },
     // Helptext
-    addClassToHelptext: className => {
+    /*addClassToHelptext: className => {
       const helptext = this.helptextElement();
-      if (helptext) {
+      if (!!helptext) {
         return helptext.classList.add(className);
       }
     },
     removeClassFromHelptext: className => {
       const helptext = this.helptextElement();
-      if (helptext) {
+      if (!!helptext) {
         return helptext.classList.remove(className);
       }
     },
@@ -213,8 +232,35 @@ export default class Textfield extends Component {
       if (icon_) {
         return icon_.setAttribute(name, value);
       }
+    },*/
+
+
+
+
+    registerBottomLineEventHandler: (evtType, handler) => {
+      const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        bottomLine.addEventListener(evtType, handler, {passive: true});
+      }
+    },
+    deregisterBottomLineEventHandler: (evtType, handler) => {
+      const bottomLine = this.bottomLine_();
+      if (bottomLine) {
+        bottomLine.removeEventListener(evtType, handler);
+      }
     },
 
+
+    getIdleOutlineStyleValue: (propertyName) => {
+      const idleOutlineElement = this.root_.querySelector(strings.IDLE_OUTLINE_SELECTOR);
+      if (idleOutlineElement) {
+        return window.getComputedStyle(idleOutlineElement).getPropertyValue(propertyName);
+      }
+    },
+    isFocused: () => {
+      return document.activeElement === this.root_.querySelector(strings.INPUT_SELECTOR);
+    },
+    isRtl: () => window.getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
 
   });
 
@@ -281,8 +327,34 @@ export default class Textfield extends Component {
      */
   });
 
+  foundationBottomLine = new MDCTextFieldBottomLineFoundation({
+    addClass: (className) => this.bottomLine_().classList.add(className),
+    removeClass: (className) => this.bottomLine_().classList.remove(className),
+    setAttr: (attr, value) => this.bottomLine_().setAttribute(attr, value),
+    registerEventHandler: (evtType, handler) => this.bottomLine_().addEventListener(evtType, handler),
+    deregisterEventHandler: (evtType, handler) => this.bottomLine_().removeEventListener(evtType, handler),
+    notifyAnimationEnd: () => {
+      this.emit(this.bottomLine_(), MDCTextFieldBottomLineFoundation.strings.ANIMATION_END_EVENT, {});
+    },
+  });
+
   componentDidMount() {
+    console.log(textField);
+    /*
+        bottomLine: this.bottomLine_() ? this.foundationBottomLine.init() : undefined,
+          helperText: this.helperText_ ? this.helperText_.foundation : undefined,
+          icon: this.icon_ ? this.icon_.foundation : undefined,
+          label: this.label_ ? this.label_.foundation : undefined,
+          outline: this.outline_ ? this.outline_.foundation : undefined,
+          */
     if (!this.props.cssOnly) {
+
+      this.tabs_ = [].slice.call(this.refs.root.querySelectorAll(TAB_SELECTOR_NAME));
+
+      /*const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        this.foundationBottomLine.init();
+      }*/
       this.foundation.init();
       if (this.props.box) {
         this.foundationRipple.init();
@@ -295,6 +367,10 @@ export default class Textfield extends Component {
       if (this.props.box) {
         this.foundationRipple.destroy();
       }
+      const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        this.foundationBottomLine.destroy();
+      }
       this.foundation.destroy();
     }
   }
@@ -306,13 +382,14 @@ export default class Textfield extends Component {
     const {
       disabled,
       upgraded,
-      multiline,
       fullwidth,
       dense,
       box,
       leadingIcon,
       trailingIcon,
       textarea,
+      outlined,
+      focused,
       children,
       elementType,
       className,
@@ -320,16 +397,17 @@ export default class Textfield extends Component {
     } = ownProps;
 
     const classes = classnames(
-      'mdc-textfield', {
-        'mdc-textfield--disabled': disabled,
-        'mdc-textfield--upgraded': upgraded,
-        'mdc-textfield--multiline': multiline,
-        'mdc-textfield--fullwidth': fullwidth,
-        'mdc-textfield--dense': dense,
-        'mdc-textfield--box': box,
-        'mdc-textfield--with-leading-icon': leadingIcon,
-        'mdc-textfield--with-trailing-icon': trailingIcon,
-        'mdc-textfield--textarea': textarea,
+      'mdc-text-field', {
+        'mdc-text-field--disabled': disabled,
+        'mdc-text-field--upgraded': upgraded,
+        'mdc-text-field--fullwidth': fullwidth,
+        'mdc-text-field--dense': dense,
+        'mdc-text-field--box': box,
+        'mdc-text-field--with-leading-icon': leadingIcon,
+        'mdc-text-field--with-trailing-icon': trailingIcon,
+        'mdc-text-field--textarea': textarea,
+        'mdc-text-field--outlined': outlined,
+        'mdc-text-field--focused': focused,
       }, this.state.classNames, this.state.classNamesRipple, className);
     const ElementType = elementType || 'div';
     return (

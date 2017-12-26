@@ -20,9 +20,9 @@ const Helptext = ({
     ...otherProp
 }) => {
     const classes = classnames(
-        'mdc-textfield-helptext', {
-            'mdc-textfield-helptext--persistent': persistent,
-            'mdc-textfield-helptext--validation-msg': validation
+        'mdc-text-field-helptext', {
+            'mdc-text-field-helptext--persistent': persistent,
+            'mdc-text-field-helptext--validation-msg': validation
         }, className);
     const ElementType = elementType || 'p';
     return (

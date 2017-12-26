@@ -8,7 +8,7 @@ const Icon = ({
                  className,
                  ...otherProps
                }) => {
-  const classes = classnames('mdc-textfield__icon', className);
+  const classes = classnames('mdc-text-field__icon', className);
   const ElementType = elementType || i;
   return (
     <ElementType
