@@ -158,7 +158,7 @@ export {
 export {
   Icon
 } from './base'
-export {
+/*export {
   Hint,
   HintElevation,
   HintTextfield,
@@ -166,7 +166,7 @@ export {
   HintLabel,
   HintList,
   HintTags
-} from './Hint'
+} from './Hint'*/
 export {
   Slider,
   SliderContainerTrack,
@@ -195,6 +195,6 @@ export {
   TabBarScrollFrame,
   TabBarScroll
 } from './Tabs'
-export {
+/*export {
   Table
-} from './Table'
+} from './Table'*/
