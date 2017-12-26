@@ -244,7 +244,7 @@ export default class SnackbarPage extends Component {
             title="Snackbar"
             code={code.snackbar.source1}
           >
-            <Button primary raised onClick={this.handel}>Show Snackbar</Button>
+            <Button raised onClick={this.handel}>Show Snackbar</Button>
 
             <Snackbar
               open={open}
