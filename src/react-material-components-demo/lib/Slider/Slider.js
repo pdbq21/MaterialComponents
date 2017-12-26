@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 22.06.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 
 import {slider} from 'material-components-web/dist/material-components-web';
@@ -16,7 +16,7 @@ const {
   }
 } = MDCSliderFoundation;
 
-export default class Slider extends PureComponent {
+export default class Slider extends Component {
 
   state = {
     classNames: [],
@@ -77,13 +77,13 @@ export default class Slider extends PureComponent {
 
     registerThumbContainerInteractionHandler: (type, handler) => {
       const thumbContainer = this.thumbContainer_();
-      if (thumbContainer) {
+      if (!!thumbContainer) {
         return thumbContainer.addEventListener(type, handler, {passive: true});
       }
     },
     deregisterThumbContainerInteractionHandler: (type, handler) => {
       const thumbContainer = this.thumbContainer_();
-      if (thumbContainer) {
+      if (!!thumbContainer) {
         return thumbContainer.removeEventListener(type, handler);
       }
     },
@@ -112,13 +112,13 @@ export default class Slider extends PureComponent {
     },
     setThumbContainerStyleProperty: (propertyName, value) => {
       const thumbContainer = this.thumbContainer_();
-      if (thumbContainer) {
+      if (!!thumbContainer) {
         return thumbContainer.style.setProperty(propertyName, value);
       }
     },
     setTrackStyleProperty: (propertyName, value) => {
       const track = this.track_();
-      if (track) {
+      if (!!track) {
         return track.style.setProperty(propertyName, value);
       }
     },
@@ -136,38 +136,35 @@ export default class Slider extends PureComponent {
     },
     setMarkerValue: (value) => {
       const pinValueMarker = this.pinValueMarker_();
-      if (pinValueMarker) {
+      if (!!pinValueMarker) {
         return pinValueMarker.innerText = value;
       }
     },
 
     appendTrackMarkers: (numMarkers) => {
       const trackMarkerContainer = this.trackMarkerContainer_();
-      if (trackMarkerContainer) {
+      if (!!trackMarkerContainer) {
         const frag = document.createDocumentFragment();
         for (let i = 0; i < numMarkers; i++) {
           const marker = document.createElement('div');
           marker.classList.add('mdc-slider__track-marker');
           frag.appendChild(marker);
         }
-
         return trackMarkerContainer.appendChild(frag);
       }
-
     },
     removeTrackMarkers: () => {
       const trackMarkerContainer = this.trackMarkerContainer_();
-      if (trackMarkerContainer) {
+      if (!!trackMarkerContainer) {
         while (trackMarkerContainer.firstChild) {
           trackMarkerContainer.removeChild(trackMarkerContainer.firstChild);
         }
       }
-
     },
     setLastTrackMarkersStyleProperty: (propertyName, value) => {
       // We remove and append new nodes, thus, the last track marker must be dynamically found.
       const lastTrackMarker = this.lastTrackMarker_();
-      if (lastTrackMarker) {
+      if (!!lastTrackMarker) {
         return lastTrackMarker.style.setProperty(propertyName, value);
       }
     },

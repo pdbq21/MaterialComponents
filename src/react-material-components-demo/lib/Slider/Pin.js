@@ -1,23 +1,15 @@
 /**
  * Created by ruslan on 12.07.17.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Pin extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  };
-
-  render() {
-    const {
+export default function Pin ({
       elementType,
       children,
       className,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || 'div';
     const classes = classnames('mdc-slider__pin', className);
     return (
@@ -28,5 +20,4 @@ export default class Pin extends PureComponent {
         {children}
       </ElementType>
     );
-  }
 }
