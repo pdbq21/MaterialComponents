@@ -3,9 +3,11 @@
  */
 import '@material/textfield/dist/mdc.textfield.min.css';
 import '@material/ripple/dist/mdc.ripple.min.css';
-export { default as Textfield} from './Textfield';
-export { default as TextfieldInput} from './Input';
-export { default as TextfieldLabel} from './Label';
-export { default as TextfieldHelptext} from './Helptext';
-export { default as TextfieldLine} from './Line';
-export { default as TextfieldIcon} from './Icon';
+export { default as TextField} from './Textfield';
+export { default as TextFieldInput} from './Input';
+export { default as TextFieldLabel} from './Label';
+export { default as TextFieldHelperText} from './HelperText';
+export { default as TextFieldLine} from './Line';
+export { default as TextFieldIcon} from './Icon';
+export { default as TextFieldOutlined} from './Outlined';
+export { default as TextFieldIdleOutlined} from './Idle';

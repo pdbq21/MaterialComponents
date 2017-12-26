@@ -8,7 +8,6 @@ import {textField, ripple} from 'material-components-web/dist/material-component
 
 const {
   MDCTextFieldFoundation,
-  MDCTextFieldBottomLineFoundation
 } = textField;
 const {MDCRippleFoundation} = ripple;
 const {
@@ -16,7 +15,8 @@ const {
     LABEL_SELECTOR: LABEL_SELECTOR_NAME,
     INPUT_SELECTOR: INPUT_SELECTOR_NAME,
     ICON_SELECTOR: ICON_SELECTOR_NAME,
-    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME
+    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME,
+    IDLE_OUTLINE_SELECTOR: IDLE_OUTLINE_SELECTOR_NAME
   },
 } = MDCTextFieldFoundation;
 let supportsPassive_;
@@ -96,7 +96,6 @@ export default class Textfield extends Component {
   rootLabel_ = () => this.refs.root.querySelector(LABEL_SELECTOR_NAME);
 
   icon_ = () => this.refs.root.querySelector(ICON_SELECTOR_NAME);
-  bottomLine_ = () => this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
 
   helptextElement = () => {
     const rootInput = this.rootInput_();
@@ -124,26 +123,6 @@ export default class Textfield extends Component {
         this.refs.root.removeEventListener(evtType, handler);
       }
     },
-
-    /* addClassToLabel: className => {
-       const rootLabel = this.rootLabel_();
-       if (rootLabel) {
-         return rootLabel.classList.add(className);
-       }
-     },
-     removeClassFromLabel: className => {
-       const rootLabel = this.rootLabel_();
-       if (rootLabel) {
-         return rootLabel.classList.remove(className);
-       }
-     },
-     eventTargetHasClass: (target, className) => target.classList.contains(className),
-
-     notifyIconAction: () => {
-       if (typeof this.props.onIcon !== 'undefined') {
-         this.props.onIcon({});
-       }
-     },*/
     // input
     getNativeInput: () => {
       const rootInput = this.rootInput_();
@@ -163,80 +142,7 @@ export default class Textfield extends Component {
         return rootInput.removeEventListener(evtType, handler);
       }
     },
-    // Helptext
-    /*addClassToHelptext: className => {
-      const helptext = this.helptextElement();
-      if (!!helptext) {
-        return helptext.classList.add(className);
-      }
-    },
-    removeClassFromHelptext: className => {
-      const helptext = this.helptextElement();
-      if (!!helptext) {
-        return helptext.classList.remove(className);
-      }
-    },
-    helptextHasClass: className => {
-      const helptext = this.helptextElement();
-      if (!helptext) {
-        return false;
-      }
-      return helptext.classList.contains(className);
-    },
-    setHelptextAttr: (name, value) => {
-      const helptext = this.helptextElement();
-      if (helptext) {
-        return helptext.setAttribute(name, value);
-      }
-    },
-    removeHelptextAttr: name => {
-      const helptext = this.helptextElement();
-      if (helptext) {
-        return helptext.removeAttribute(name);
-      }
-    },
-    // Line
-    addClassToBottomLine: (className) => {
-      const bottomLine_ = this.bottomLine_();
-      if (bottomLine_) {
-        bottomLine_.classList.add(className);
-      }
-    },
-    removeClassFromBottomLine: (className) => {
-      const bottomLine_ = this.bottomLine_();
-      if (bottomLine_) {
-        bottomLine_.classList.remove(className);
-      }
-    },
-    setBottomLineAttr: (attr, value) => {
-      const bottomLine_ = this.bottomLine_();
-      if (bottomLine_) {
-        bottomLine_.setAttribute(attr, value);
-      }
-    },
-    registerTransitionEndHandler: (handler) => {
-      const bottomLine_ = this.bottomLine_();
-      if (bottomLine_) {
-        bottomLine_.addEventListener('transitionend', handler);
-      }
-    },
-    deregisterTransitionEndHandler: (handler) => {
-      const bottomLine_ = this.bottomLine_();
-      if (bottomLine_) {
-        bottomLine_.removeEventListener('transitionend', handler);
-      }
-    },
-// Icon
-    setIconAttr: (name, value) => {
-      const icon_ = this.icon_();
-      if (icon_) {
-        return icon_.setAttribute(name, value);
-      }
-    },*/
-
-
-
-
+    // bottom line
     registerBottomLineEventHandler: (evtType, handler) => {
       const bottomLine = this.bottomLine_();
       if (!!bottomLine) {
@@ -249,19 +155,22 @@ export default class Textfield extends Component {
         bottomLine.removeEventListener(evtType, handler);
       }
     },
-
-
     getIdleOutlineStyleValue: (propertyName) => {
-      const idleOutlineElement = this.root_.querySelector(strings.IDLE_OUTLINE_SELECTOR);
+      const idleOutlineElement = this.refs.root.querySelector(IDLE_OUTLINE_SELECTOR_NAME);
       if (idleOutlineElement) {
         return window.getComputedStyle(idleOutlineElement).getPropertyValue(propertyName);
       }
     },
     isFocused: () => {
-      return document.activeElement === this.root_.querySelector(strings.INPUT_SELECTOR);
+      if (!!this.refs.root) {
+        return document.activeElement === this.refs.root.querySelector(INPUT_SELECTOR_NAME);
+      }
     },
-    isRtl: () => window.getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
-
+    isRtl: () => {
+      if (!!this.refs.root) {
+        return window.getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl';
+      }
+    }
   });
 
   foundationRipple = new MDCRippleFoundation({
@@ -327,35 +236,21 @@ export default class Textfield extends Component {
      */
   });
 
-  foundationBottomLine = new MDCTextFieldBottomLineFoundation({
-    addClass: (className) => this.bottomLine_().classList.add(className),
-    removeClass: (className) => this.bottomLine_().classList.remove(className),
-    setAttr: (attr, value) => this.bottomLine_().setAttribute(attr, value),
-    registerEventHandler: (evtType, handler) => this.bottomLine_().addEventListener(evtType, handler),
-    deregisterEventHandler: (evtType, handler) => this.bottomLine_().removeEventListener(evtType, handler),
-    notifyAnimationEnd: () => {
-      this.emit(this.bottomLine_(), MDCTextFieldBottomLineFoundation.strings.ANIMATION_END_EVENT, {});
-    },
-  });
-
   componentDidMount() {
     console.log(textField);
-    /*
-        bottomLine: this.bottomLine_() ? this.foundationBottomLine.init() : undefined,
-          helperText: this.helperText_ ? this.helperText_.foundation : undefined,
-          icon: this.icon_ ? this.icon_.foundation : undefined,
-          label: this.label_ ? this.label_.foundation : undefined,
-          outline: this.outline_ ? this.outline_.foundation : undefined,
-          */
+
     if (!this.props.cssOnly) {
+      /*
+               helperText: this.helperText_ ? this.helperText_.foundation : undefined,
+              icon: this.icon_ ? this.icon_.foundation : undefined,
+              label: this.label_ ? this.label_.foundation : undefined,
+              outline: this.outline_ ? this.outline_.foundation : undefined,
+      */
+      this.bottomLine_ = this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
+      //this.helperText_ = this.refs.root.querySelector()
 
-      this.tabs_ = [].slice.call(this.refs.root.querySelectorAll(TAB_SELECTOR_NAME));
 
-      /*const bottomLine = this.bottomLine_();
-      if (!!bottomLine) {
-        this.foundationBottomLine.init();
-      }*/
-      this.foundation.init();
+        this.foundation.init();
       if (this.props.box) {
         this.foundationRipple.init();
       }

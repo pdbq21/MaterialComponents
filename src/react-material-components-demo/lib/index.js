@@ -59,12 +59,14 @@ export {
   SwitchLabel
 } from './Switch';
 export {
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
-  TextfieldHelptext,
-  TextfieldLine,
-  TextfieldIcon
+  TextField,
+  TextFieldInput,
+  TextFieldLabel,
+  TextFieldHelperText,
+  TextFieldLine,
+  TextFieldIcon,
+  TextFieldOutlined,
+  TextFieldIdleOutlined
 } from './Textfield';
 export {FormField} from './FormField';
 export {

@@ -1,36 +1,72 @@
-import React from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
+import {textField} from 'material-components-web/dist/material-components-web';
 
-export default function Outline({
-                                  children,
-                                  idel,
-                                  elementType,
-                                  className,
-                                  ...otherProps
-                                }) {
+const {MDCTextFieldOutlineFoundation} = textField;
+const {
+  strings: {
+    PATH_SELECTOR: PATH_SELECTOR_NAME
+  }
+} = MDCTextFieldOutlineFoundation;
 
-  if (idel){
-    const classes = classnames('mdc-text-field__idle-outline', className);
-    const ElementType = elementType || 'div';
-    return (
-      <ElementType
-        className={classes}
-        {...otherProps}
-      >
-        {children}
-      </ElementType>);
-  } else {
+export default class Outlined extends Component {
+
+  path_ = () => this.refs.root.querySelector(PATH_SELECTOR_NAME);
+
+  foundation = new MDCTextFieldOutlineFoundation({
+    getWidth: () => {
+      if (!!this.refs.root) {
+        return this.refs.root.offsetWidth
+      }
+    },
+    getHeight: () => {
+      if (!!this.refs.root) {
+        return this.refs.root.offsetHeight
+      }
+    },
+    setOutlinePathAttr: (value) => {
+      const path = this.path_();
+      if (!!path) {
+        path.setAttribute('d', value);
+      }
+    },
+  });
+
+  componentDidMount() {
+    if (!this.props.cssOnly) {
+      this.foundation.init();
+    }
+  }
+
+  componentWillUnmount() {
+    if (!this.props.cssOnly) {
+      this.foundation.destroy();
+    }
+  }
+
+  render() {
+    const ownProps = Object.assign({}, this.props);
+    const {
+      elementType,
+      className,
+      children,
+      ...otherProp
+    } = ownProps;
+
     const classes = classnames('mdc-text-field__outline', className);
     const ElementType = elementType || 'div';
+
     return (
       <ElementType
+        ref="root"
         className={classes}
-        {...otherProps}
+        {...otherProp}
       >
         <svg>
           <path className="mdc-text-field__outline-path"/>
         </svg>
-      </ElementType>);
+        {children}
+      </ElementType>
+    );
   }
-
 }
