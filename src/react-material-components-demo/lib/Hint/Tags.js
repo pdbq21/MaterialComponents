@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 16.05.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {List, ListItem, ListItemDetail, Elevation, Theme} from '../index'
-//primaryBg
-export default class Tags extends PureComponent {
 
-    render() {
-        const {activeItems, handleTagRemove, ...otherProps} = this.props;
+export default function Tags ({activeItems, handleTagRemove, ...otherProps}){
         return (
             <List
                 {...otherProps}
@@ -54,5 +51,4 @@ export default class Tags extends PureComponent {
                 }
             </List>
         );
-    }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 05.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   Checkbox,
   CheckboxInput,
@@ -10,10 +10,7 @@ import {
 } from '../index'
 import Row from './Row'
 
-export default class Main extends PureComponent {
-
-  render() {
-    const {
+export default function Main ({
       rows,
       columns,
       onCheckbox,
@@ -25,7 +22,7 @@ export default class Main extends PureComponent {
       checkbox,
       onKeyDown,
       onFocus
-    } = this.props;
+    }){
 
     return (
       <main className="rmd-table__main">
@@ -95,5 +92,4 @@ export default class Main extends PureComponent {
         </table>
       </main>
     );
-  }
 }

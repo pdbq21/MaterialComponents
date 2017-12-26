@@ -1,33 +1,30 @@
 /**
  * Created by ruslan on 15.05.17.
  */
-import React, {PureComponent} from 'react';
-import {TextfieldInput} from '../index'
+import React from 'react';
+import {TextFieldInput} from '../index'
 
-export default class Input extends PureComponent {
-
-    render() {
-        const {
-            children,
-            handleInput,
-            onChange,
-            value,
-            onClick,
-            handleClickInput,
-            handleInputBlur,
-            valueInput,
-            onBlur,
-            ...otherProps} = this.props;
-        return (
-            <TextfieldInput
-                onClick={onClick || handleClickInput}
-                onChange={onChange || handleInput}
-                value={value || valueInput}
-                onBlur={onBlur || handleInputBlur}
-                {...otherProps}
-            >
-                {children}
-            </TextfieldInput>
-        );
-    }
+export default function Input({
+                                children,
+                                handleInput,
+                                onChange,
+                                value,
+                                onClick,
+                                handleClickInput,
+                                handleInputBlur,
+                                valueInput,
+                                onBlur,
+                                ...otherProps
+                              }) {
+  return (
+    <TextFieldInput
+      onClick={onClick || handleClickInput}
+      onChange={onChange || handleInput}
+      value={value || valueInput}
+      onBlur={onBlur || handleInputBlur}
+      {...otherProps}
+    >
+      {children}
+    </TextFieldInput>
+  );
 }

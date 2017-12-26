@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 16.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import '@material/ripple/dist/mdc.ripple.min.css';
@@ -33,7 +33,7 @@ function supportsCssVariables(windowObj) {
   return explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
 }
 
-export default class FAB extends PureComponent {
+export default class FAB extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,

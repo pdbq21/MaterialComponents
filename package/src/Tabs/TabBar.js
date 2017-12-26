@@ -270,20 +270,10 @@ export default class TabBar extends Component {
         return tabs[index].preventDefaultOnClick = preventDefaultOnClick;
       }
     },
-    /*measureTabAtIndex: index => {
-      const tabs = this.tabs();
-      if (tabs) {
-        //console.log(tabs[index].offsetWidth);
-        //tabs[index].foundation_.computedWidth_ = tabs[index].foundation_.adapter_.getOffsetWidth();
-       // tabs[index].foundation_.computedWidth_ = tabs[index].offsetWidth;
-        //tabs[index].foundation_.computedLeft_ = tabs[index].foundation_.adapter_.getOffsetLeft();
-        //tabs[index].foundation_.computedLeft_ = tabs[index].offsetLeft;
-      }
-    },*/
+
     getComputedWidthForTabAtIndex: index => {
       const tabs = this.tabs();
       if (!!tabs) {
-        //return tabs[index].foundation_.adapter_.getOffsetWidth();
         return tabs[index].offsetWidth;
       }
     },
@@ -291,7 +281,6 @@ export default class TabBar extends Component {
     getComputedLeftForTabAtIndex: index => {
       const tabs = this.tabs();
       if (!!tabs) {
-        //return tabs[index].foundation_.adapter_.getOffsetLeft();
         return tabs[index].offsetLeft;
       }
     },

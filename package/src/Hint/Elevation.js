@@ -1,14 +1,10 @@
 /**
  * Created by ruslan on 15.05.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {Elevation} from '../index'
 
-export default class HintElevation extends PureComponent {
-
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function HintElevation ({
             isOpen,
             handelItem,
             data,
@@ -18,7 +14,7 @@ export default class HintElevation extends PureComponent {
             style,
             children,
             ...otherProps
-        } = ownProps;
+        }){
         const zSpaceNumber = zSpace || '2';
 
         const childElement = child => {
@@ -34,7 +30,7 @@ export default class HintElevation extends PureComponent {
         };
 
         let renderChildren = React.Children.map(children, childElement);
-        return ((isOpen) ? <Elevation
+        return (isOpen) ? (<Elevation
                 style={{
                     'width': widthInput,
                     ...style
@@ -43,7 +39,5 @@ export default class HintElevation extends PureComponent {
                 {...otherProps}
             >
                 {renderChildren}
-            </Elevation> : null
-        );
-    }
+            </Elevation>) : null;
 }

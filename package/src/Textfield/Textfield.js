@@ -12,10 +12,7 @@ const {
 const {MDCRippleFoundation} = ripple;
 const {
   strings: {
-    LABEL_SELECTOR: LABEL_SELECTOR_NAME,
     INPUT_SELECTOR: INPUT_SELECTOR_NAME,
-    ICON_SELECTOR: ICON_SELECTOR_NAME,
-    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME,
     IDLE_OUTLINE_SELECTOR: IDLE_OUTLINE_SELECTOR_NAME
   },
 } = MDCTextFieldFoundation;
@@ -93,18 +90,6 @@ export default class Textfield extends Component {
   };
 
   rootInput_ = () => this.refs.root.querySelector(INPUT_SELECTOR_NAME);
-  rootLabel_ = () => this.refs.root.querySelector(LABEL_SELECTOR_NAME);
-
-  icon_ = () => this.refs.root.querySelector(ICON_SELECTOR_NAME);
-
-  helptextElement = () => {
-    const rootInput = this.rootInput_();
-    if (rootInput) {
-      return (rootInput.hasAttribute('aria-controls')) ?
-        document.getElementById(rootInput.getAttribute('aria-controls')) :
-        null;
-    }
-  };
 
   foundation = new MDCTextFieldFoundation({
     addClass: className => this.setState(({classNames}) => ({
@@ -228,29 +213,11 @@ export default class Textfield extends Component {
         y: window.pageYOffset
       }
     },
-
-    /*
-     Whether or not the ripple is attached to a disabled component. If true, the ripple will not activate.
-     isSurfaceDisabled: () => {disabled},
-
-     */
   });
 
   componentDidMount() {
-    console.log(textField);
-
     if (!this.props.cssOnly) {
-      /*
-               helperText: this.helperText_ ? this.helperText_.foundation : undefined,
-              icon: this.icon_ ? this.icon_.foundation : undefined,
-              label: this.label_ ? this.label_.foundation : undefined,
-              outline: this.outline_ ? this.outline_.foundation : undefined,
-      */
-      this.bottomLine_ = this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
-      //this.helperText_ = this.refs.root.querySelector()
-
-
-        this.foundation.init();
+      this.foundation.init();
       if (this.props.box) {
         this.foundationRipple.init();
       }
@@ -261,10 +228,6 @@ export default class Textfield extends Component {
     if (!this.props.cssOnly) {
       if (this.props.box) {
         this.foundationRipple.destroy();
-      }
-      const bottomLine = this.bottomLine_();
-      if (!!bottomLine) {
-        this.foundationBottomLine.destroy();
       }
       this.foundation.destroy();
     }

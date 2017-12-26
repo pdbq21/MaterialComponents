@@ -3,9 +3,9 @@
  */
 import React, {PureComponent} from 'react';
 import {
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
+  TextField,
+  TextFieldInput,
+  TextFieldLabel,
 } from '../index'
 
 export default class Input extends PureComponent {
@@ -32,9 +32,9 @@ export default class Input extends PureComponent {
       name,
     } = this.props;
     return (
-      <Textfield>
+      <TextField>
         {/* type => text | number */}
-        <TextfieldInput
+        <TextFieldInput
           value={this.state.value}
           onChange={({target}) => this.setState({
             value: target.value
@@ -43,8 +43,8 @@ export default class Input extends PureComponent {
           type={type}
         />
         {/* label => name current col */}
-        <TextfieldLabel>{name}</TextfieldLabel>
-      </Textfield>
+        <TextFieldLabel>{name}</TextFieldLabel>
+      </TextField>
     );
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 05.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   LayoutGrid,
   LayoutGridInner,
@@ -9,17 +9,14 @@ import {
 } from '../index'
 import Input from './Input';
 
-export default class DialogMain extends PureComponent {
-
-  render() {
-    const {
+export default function DialogMain ({
       title,
       onBlur,
       columns,
       row,
       openDialog,
       ...otherProps
-    } = this.props;
+    }){
     return (
       <LayoutGrid
         {...otherProps}
@@ -44,5 +41,4 @@ export default class DialogMain extends PureComponent {
 
       </LayoutGrid>
     );
-  }
 }

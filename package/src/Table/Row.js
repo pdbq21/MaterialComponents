@@ -1,23 +1,21 @@
 /**
  * Created by ruslan on 05.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   Checkbox,
   CheckboxInput,
   CheckboxBG
 } from '../index'
 
-export default class Row extends PureComponent {
-  render() {
-    const {
+export default function Row ({
       checked,
       onCheckbox,
       columns,
       dataRow,
       checkbox,
       onFocus,
-    } = this.props;
+    }){
     return (
       <tr
         onFocus={onFocus}
@@ -39,7 +37,6 @@ export default class Row extends PureComponent {
         </td> : null}
 
         {Object.keys(dataRow).map((col, index) => {
-         // console.log(col, dataRow)
           return (<td
             className={`
             rmg-table__align-text-${(columns[index].align) ? columns[index].align : 'center'}
@@ -50,5 +47,4 @@ export default class Row extends PureComponent {
         })}
       </tr>
     );
-  }
 }

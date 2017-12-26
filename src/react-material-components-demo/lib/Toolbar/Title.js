@@ -1,19 +1,15 @@
 /**
  * Created by ruslan on 16.03.17.
  */
-
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Title extends PureComponent {
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function Title ({
             children,
             elementType,
             className,
             ...otherProp
-        } = ownProps;
+        }){
         const classes = classnames('mdc-toolbar__title', className);
         const ElementType = elementType || 'span';
         return (
@@ -23,5 +19,4 @@ export default class Title extends PureComponent {
             >
                 {children}
             </ElementType>);
-    }
 }

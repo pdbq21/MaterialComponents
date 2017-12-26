@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 16.03.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {menu}  from 'material-components-web/dist/material-components-web';
@@ -17,7 +17,7 @@ function getTransformPropertyName(globalObj, forceRefresh = false) {
 
   return storedTransformPropertyName_;
 }
-export default class Menu extends PureComponent {
+export default class Menu extends Component {
   static propTypes = {
     children: PropTypes.node,
   };

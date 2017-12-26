@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 05.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogSurface,
@@ -13,16 +13,14 @@ import {
   DialogFooterButton,
   ToolbarMain,
 } from '../index'
-export default class FullPageDialog extends PureComponent {
-  render() {
-    const {
+export default function FullPageDialog ({
       children,
       onAccept,
       onCancel,
       onOpen,
       onClose,
       openDialog
-    } = this.props;
+    }){
 
     return (
       <Dialog
@@ -68,5 +66,4 @@ export default class FullPageDialog extends PureComponent {
         </DialogSurface>
       </Dialog>
     );
-  }
 }

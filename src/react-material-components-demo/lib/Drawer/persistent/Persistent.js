@@ -1,7 +1,7 @@
 /**
  * Created by ruslan on 02.05.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import {drawer} from 'material-components-web/dist/material-components-web';
 
@@ -23,7 +23,7 @@ const {
   }
 } = MDCPersistentDrawerFoundation;
 
-export default class Persistent extends PureComponent {
+export default class Persistent extends Component {
   static defaultProps = {
     open: false,
   };
@@ -31,7 +31,7 @@ export default class Persistent extends PureComponent {
     classNameDrawer: [],
     open: false
   };
-  drawer_ = () => (this.refs.root.querySelector('.mdc-persistent-drawer__drawer'));
+  drawer_ = () => this.refs.root.querySelector('.mdc-persistent-drawer__drawer');
 
   foundation = new MDCPersistentDrawerFoundation({
     addClass: className => {

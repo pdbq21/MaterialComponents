@@ -1,22 +1,17 @@
 /**
  * Created by ruslan on 15.05.17.
  */
-import React, {PureComponent} from 'react';
-import {Textfield} from '../index'
+import React from 'react';
+import {TextField} from '../index'
 
-export default class HintTextfield extends PureComponent {
-
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function HintTextfield ({
             valueInput,
             handleInput,
             handleClickInput,
             handleInputBlur,
             children,
             ...otherProps
-        } = ownProps;
-
+        }){
         const childElement = child => {
             if (child.type.name === 'Input') {
                 return React.cloneElement(child, {
@@ -33,11 +28,10 @@ export default class HintTextfield extends PureComponent {
         let renderChildren = React.Children.map(children, childElement);
 
         return (
-            <Textfield
+            <TextField
                 {...otherProps}
             >
                 {renderChildren}
-            </Textfield>
+            </TextField>
         );
-    }
 }

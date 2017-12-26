@@ -2,13 +2,10 @@
  * Created by ruslan on 16.03.17.
  */
 
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Section extends PureComponent {
-    render() {
-        const ownProps = Object.assign({}, this.props);
-        const {
+export default function Section ({
             elementType,
             className,
             children,
@@ -16,8 +13,7 @@ export default class Section extends PureComponent {
             end,
             shrink,
             ...otherProps
-        } = ownProps;
-
+        }){
         const classes = classnames(
             'mdc-toolbar__section', {
                 'mdc-toolbar__section--align-start': start,
@@ -34,5 +30,4 @@ export default class Section extends PureComponent {
                 {children}
             </ElementType>
         );
-    }
 }

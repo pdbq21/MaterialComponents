@@ -1,13 +1,13 @@
 /**
  * Created by ruslan on 02.05.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 
 import {gridList} from 'material-components-web/dist/material-components-web';
 const {MDCGridListFoundation} = gridList;
 
-export default class Radio extends PureComponent {
+export default class Radio extends Component {
 
     foundation = new MDCGridListFoundation({
         getOffsetWidth: () => {

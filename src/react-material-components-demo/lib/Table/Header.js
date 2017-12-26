@@ -1,17 +1,15 @@
 /**
  * Created by ruslan on 05.07.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {TypographySubheading, TypographyTitle} from '../index'
-export default class Header extends PureComponent {
-  render() {
-    const {
+export default function Header ({
       items, //  selected row length
       title,
       action,
       multi,
       single,
-    } = this.props;
+    }){
     return (
       <header
         className="rmd-table__header"
@@ -40,5 +38,4 @@ export default class Header extends PureComponent {
 
       </header>
     );
-  }
 }

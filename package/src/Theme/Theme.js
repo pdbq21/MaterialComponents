@@ -1,13 +1,10 @@
 /**
  * Created by ruslan on 11.05.17.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-export default class Theme extends PureComponent {
-
-  render() {
-    const {
+export default function Theme ({
       children,
       className,
       elementType,
@@ -27,7 +24,7 @@ export default class Theme extends PureComponent {
       textStyle,
       themeColor,
       ...otherProps
-    } = this.props;
+    }){
     const ElementType = elementType || null;
 
     const classes = classnames(
@@ -57,5 +54,4 @@ export default class Theme extends PureComponent {
       React.cloneElement(children, {
         className: `${classes} ${(children.props.className) ? children.props.className : ''}`,
       });
-  }
 }

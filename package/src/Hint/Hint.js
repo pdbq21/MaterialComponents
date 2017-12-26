@@ -1,11 +1,11 @@
 /**
  * Created by ruslan on 15.05.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default class Hint extends PureComponent {
+export default class Hint extends Component {
     static propTypes = {
         children: PropTypes.node,
     };
@@ -29,7 +29,6 @@ export default class Hint extends PureComponent {
     }
 
     handleClickInput() {
-        console.log('click');
         this.setState({
             isOpen: false
         });

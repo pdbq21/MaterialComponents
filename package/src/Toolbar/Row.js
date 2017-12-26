@@ -1,10 +1,10 @@
 /**
  * Created by ruslan on 03.05.17.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 
-export default class Row extends PureComponent {
+export default class Row extends Component {
     render() {
         const ownProps = Object.assign({}, this.props);
         const {

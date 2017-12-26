@@ -62,7 +62,6 @@ export default class Table extends PureComponent {
 
   handleChangeDataRow(name, value) {
     const {dataNewRow} = this.state;
-    console.log('handleChangeDataRow');
     this.setState({
       dataNewRow: {
         ...dataNewRow,
@@ -72,7 +71,6 @@ export default class Table extends PureComponent {
   }
 
   onCheckbox(data) {
-    //console.log('onCheckbox', data);
     const {dataRows, selectedItems} = this.state;
     const {main} = this.props;
     const {onSelectRow, onSelectedAll} = main;
@@ -113,7 +111,6 @@ export default class Table extends PureComponent {
   }
 
   handleKeyDown({currentTarget, keyCode}) {
-    //console.log('handleKeyDown',keyCode );
     if (keyCode === 40 || keyCode === 38 || keyCode === 32 || keyCode === 13) {
       const {focusRowIndex} = this.state;
       const rows = currentTarget.children;
@@ -123,7 +120,6 @@ export default class Table extends PureComponent {
         console.dir(rows[newFocus].children[0].childNodes[0].childNodes[0].checked);
         this.onCheckbox({checked: !rows[newFocus].children[0].childNodes[0].childNodes[0].checked, index: newFocus});
       } else if (keyCode === 13) {
-        console.log(focusRowIndex);
         // focus index
         this.props.table.enter(focusRowIndex)
       } else {
@@ -139,7 +135,6 @@ export default class Table extends PureComponent {
   }
 
   handleFocus(index) {
-    //   console.log('focus', index);
     this.setState({
       focusRowIndex: index
     });
@@ -211,8 +206,6 @@ export default class Table extends PureComponent {
 
   onSort(isOn, name) {
     const {dataRows} = this.state;
-    console.log('Sort', isOn);
-
     // [{}, {}] -> key === name
     // isOn ? lower : highest
     dataRows.sort((...array) => ((isOn) ? array[0][name] < array[1][name] : array[0][name] > array[1][name]));
