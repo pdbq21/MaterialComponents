@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react';
 import classnames from 'classnames';
-import {menu}  from 'material-components-web/dist/material-components-web';
-import {select}  from 'material-components-web/dist/material-components-web';
+import {menu} from 'material-components-web/dist/material-components-web';
+import {select} from 'material-components-web/dist/material-components-web';
 
 const {MDCSelectFoundation} = select;
 const {MDCSimpleMenuFoundation} = menu;
@@ -13,8 +13,16 @@ const {
     CHANGE_EVENT: CHANGE_EVENT_NAME
   }
 } = MDCSimpleMenuFoundation;
+const {
+  strings: {
+    LABEL_SELECTOR: LABEL_SELECTOR_NAME,
+    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME,
+    SURFACE_SELECTOR: SURFACE_SELECTOR_NAME
+  }
+} = MDCSelectFoundation;
 
 let storedTransformPropertyName_;
+
 // Returns the name of the correct transform property to use on the current browser.
 function getTransformPropertyName(globalObj, forceRefresh = false) {
   if (storedTransformPropertyName_ === undefined || forceRefresh) {
@@ -51,9 +59,11 @@ export default class Select extends Component {
   items_ = () => this.refs.root.querySelector('.mdc-list.mdc-simple-menu__items');
   menuEl_ = () => this.refs.root.querySelector('.mdc-select__menu.mdc-simple-menu');
   selectedText_ = () => this.refs.root.querySelector('.mdc-select__selected-text');
-
   items = () => [].slice.call(this.refs.root.querySelectorAll('.mdc-list-item[role]'));
 
+  label_ = () => this.refs.root.querySelector(LABEL_SELECTOR_NAME);
+  bottomLine_ = () => this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
+  surface_ = () => this.refs.root.querySelector(SURFACE_SELECTOR_NAME);
 
   foundationMenu = new MDCSimpleMenuFoundation({
     addClass: className => {
@@ -228,13 +238,13 @@ export default class Select extends Component {
     },
     getAccurateTime: () => window.performance.now(),
     getAttributeForEventTarget: (target, attributeName) => target.getAttribute(attributeName),
-    registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler,{passive: true}),
+    registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler, {passive: true}),
     deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
   });
 
   foundation = new MDCSelectFoundation({
     addClass: className => {
-        this.setState(({classNames}) => ({classNames: classNames.concat([className])}))
+      this.setState(({classNames}) => ({classNames: classNames.concat([className])}))
     },
     removeClass: className => this.setState(({classNames}) => ({
       classNames: classNames.filter(cn => cn !== className)
@@ -262,31 +272,6 @@ export default class Select extends Component {
     deregisterInteractionHandler: (type, handler) => {
       if (this.refs.root) {
         return this.refs.root.removeEventListener(type, handler)
-      }
-    },
-    focus: () => {
-      if (this.refs.root) {
-        return this.refs.root.focus()
-      }
-    },
-    makeTabbable: () => {
-      if (this.refs.root) {
-        return this.refs.root.tabIndex = 0;
-      }
-    },
-    makeUntabbable: () => {
-      if (this.refs.root) {
-        return this.refs.root.tabIndex = -1;
-      }
-    },
-    getComputedStyleValue: prop => {
-      if (this.refs.root) {
-        return window.getComputedStyle(this.refs.root).getPropertyValue(prop);
-      }
-    },
-    setStyle: (propertyName, value) => {
-      if (this.refs.root) {
-        return this.refs.root.style.setProperty(propertyName, value);
       }
     },
     create2dRenderingContext: () => document.createElement('canvas').getContext('2d'),
@@ -374,6 +359,68 @@ export default class Select extends Component {
         menuEl.removeEventListener(type, handler);
       }
     },
+    addClassToLabel: (className) => {
+      const label = this.label_();
+      if (!!label) {
+        return label.classList.add(className)
+      }
+    },
+    removeClassFromLabel: (className) => {
+      const label = this.label_();
+      if (!!label) {
+        return label.classList.remove(className)
+      }
+    },
+    addClassToBottomLine: (className) => {
+      const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        return bottomLine.classList.add(className)
+      }
+    },
+    removeClassFromBottomLine: (className) => {
+      const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        return bottomLine.classList.remove(className)
+      }
+    },
+    setBottomLineAttr: (attr, value) => {
+      const bottomLine = this.bottomLine_();
+      if (!!bottomLine) {
+        return bottomLine.setAttribute(attr, value)
+      }
+    },
+    focus: () => {
+      const surface = this.surface_();
+      if (!!surface) {
+        return surface.focus()
+      }
+    },
+    makeTabbable: () => {
+      const surface = this.surface_();
+      if (!!surface) {
+        return surface.tabIndex = 0;
+      }
+    },
+    makeUntabbable: () => {
+      const surface = this.surface_();
+      if (!!surface) {
+        return surface.tabIndex = -1;
+      }
+    },
+    getComputedStyleValue: (prop) => {
+      const surface = this.surface_();
+      if (!!surface) {
+        return window.getComputedStyle(surface).getPropertyValue(prop)
+      }
+    },
+    setStyle: (propertyName, value) => {
+      const surface = this.surface_();
+      if (!!surface) {
+        return surface.style.setProperty(propertyName, value)
+      }
+    },
+    addBodyClass: (className) => document.body.classList.add(className),
+    removeBodyClass: (className) => document.body.classList.remove(className),
 
   });
 

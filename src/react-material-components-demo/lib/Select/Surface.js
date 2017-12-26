@@ -5,7 +5,7 @@ export default function Surface ({
                                 elementType,
                                 children,
                                 className,
-                                   tabindex,
+                                   tabIndex,
                                 ...otherProps
                               }){
   const ElementType = elementType || 'div';
@@ -13,7 +13,7 @@ export default function Surface ({
   return (
     <ElementType
       className={classes}
-      tabindex={tabindex || '0'}
+      tabIndex={tabIndex || '0'}
       {...otherProps}
     >
       {children}

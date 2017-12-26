@@ -145,7 +145,10 @@ export {
   SelectMenu,
   SelectText,
   SelectItems,
-  SelectItem
+  SelectItem,
+  SelectSurface,
+  SelectLine,
+  SelectLabel,
 } from './Select'
 export {
   Theme

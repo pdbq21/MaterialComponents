@@ -8,6 +8,9 @@ import {
   SelectText,
   SelectItems,
   SelectItem,
+  SelectSurface,
+  SelectLine,
+  SelectLabel,
   ListGroup,
   ListItem,
   FormField,
@@ -78,6 +81,42 @@ export default class SelectPage extends Component {
           ]
         }, {
           name: 'SelectMenu',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectSurface',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectLine',
+          property: [
+            {
+              name: 'elementType',
+              type: 'string | React Component',
+              required: 'no',
+              defaultValue: 'div',
+              description: 'задає тег елемента'
+            },
+          ]
+        },
+        {
+          name: 'SelectLabel',
           property: [
             {
               name: 'elementType',
@@ -182,7 +221,11 @@ export default class SelectPage extends Component {
         <Demo
         >
           <Select>
-            <SelectText>Pick a food group</SelectText>
+            <SelectSurface>
+              <SelectLabel>Pick a food group</SelectLabel>
+              <SelectText/>
+              <SelectLine/>
+            </SelectSurface>
             <SelectMenu>
               <SelectItems>
                 <SelectItem
@@ -196,7 +239,7 @@ export default class SelectPage extends Component {
                 <SelectItem>
                   Vegetables
                 </SelectItem>
-                <SelectItem>
+                <SelectItem aria-selected>
                   Fruit
                 </SelectItem>
                 <SelectItem>
@@ -235,7 +278,11 @@ export default class SelectPage extends Component {
               onCancel={(event) => console.log(event)}
               onChange={(event) => console.log(event)}
             >
-              <SelectText>Pick a food group</SelectText>
+              <SelectSurface>
+                <SelectLabel>Pick a food group</SelectLabel>
+                <SelectText/>
+                <SelectLine/>
+              </SelectSurface>
               <SelectMenu>
                 <SelectItems>
                   <SelectItem disabled>
@@ -325,7 +372,6 @@ export default class SelectPage extends Component {
                 <ListItem elementType='option'>Cheese</ListItem>
                 <ListItem elementType='option'>More Cheese</ListItem>
               </ListGroup>
-
             </Select>
           </Example>
         </Elevation>
