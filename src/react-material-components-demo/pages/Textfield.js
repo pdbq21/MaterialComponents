@@ -3,11 +3,11 @@
  */
 import React, {Component} from 'react'
 import {
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
-  TextfieldHelptext,
-  TextfieldLine,
+  TextField,
+  TextFieldInput,
+  TextFieldLabel,
+  TextFieldHelperText,
+  TextFieldLine,
   Elevation,
   FormField,
   Checkbox,
@@ -18,7 +18,7 @@ import {
 } from '../lib'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
-export default class TextfieldPage extends Component {
+export default class TextFieldPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ export default class TextfieldPage extends Component {
       },
       components: [
         {
-          name: 'Textfield',
+          name: 'TextField',
           property: [
             {
               name: 'elementType',
@@ -96,7 +96,7 @@ export default class TextfieldPage extends Component {
           ]
         },
         {
-          name: 'TextfieldInput',
+          name: 'TextFieldInput',
           property: [
             {
               name: 'elementType',
@@ -108,7 +108,7 @@ export default class TextfieldPage extends Component {
           ]
         },
         {
-          name: 'TextfieldLabel',
+          name: 'TextFieldLabel',
           property: [
             {
               name: 'elementType',
@@ -126,7 +126,7 @@ export default class TextfieldPage extends Component {
           ]
         },
         {
-          name: 'TextfieldHelptext',
+          name: 'TextFieldHelperText',
           property: [
             {
               name: 'elementType',
@@ -150,7 +150,7 @@ export default class TextfieldPage extends Component {
           ]
         },
         {
-          name: 'TextfieldLine',
+          name: 'TextFieldLine',
           property: [
             {
               name: 'elementType',
@@ -204,14 +204,15 @@ export default class TextfieldPage extends Component {
     return (
       <section className="content">
         <Demo>
-          <Textfield>
-            <TextfieldInput type="text"/>
-            <TextfieldLabel >Text Field</TextfieldLabel>
-          </Textfield>
+          <TextField>
+            <TextFieldInput type="text"/>
+            <TextFieldLabel >Text Field</TextFieldLabel>
+            <TextFieldLine/>
+          </TextField>
         </Demo>
         {this.renderTable()}
         <OriginalDoc
-          name="Textfield"
+          name="TextField"
           href="mdc-textfield"
         />
         <Elevation
@@ -220,31 +221,31 @@ export default class TextfieldPage extends Component {
         >
           <TypographyDisplay
             size="1"
-          >Textfield</TypographyDisplay>
+          >TextField</TypographyDisplay>
 
           <Example
             title="Full Functionality JS Component"
             code={code.textfield.source1}
           >
-            <Textfield
+            <TextField
               upgraded
               disabled={disabled}
               dense={dense}
             >
-              <TextfieldInput
+              <TextFieldInput
                 id="demo-full-textfield"
                 name="email"
                 aria-controls="my-textfield-helptext"
                 required={required}
               />
-              <TextfieldLabel
+              <TextFieldLabel
                 htmlFor="demo-full-textfield"
               >
                 Email Address
-              </TextfieldLabel>
-              <TextfieldLine/>
-            </Textfield>
-            <TextfieldHelptext
+              </TextFieldLabel>
+              <TextFieldLine/>
+            </TextField>
+            <TextFieldHelperText
               style={{
                 'display': (helper) ? 'block' : 'none'
               }}
@@ -253,7 +254,7 @@ export default class TextfieldPage extends Component {
               validation={validation}
             >
               Help Text (possibly validation message)
-            </TextfieldHelptext>
+            </TextFieldHelperText>
             <Elevation
               style={{
                 'display': 'flex',
@@ -354,15 +355,15 @@ export default class TextfieldPage extends Component {
             title="Text Field Boxes"
             code={code.textfield.source2}
           >
-            <Textfield
+            <TextField
               box
               disabled={disabledBox}
               dense={denseBox}
             >
-              <TextfieldInput type="text" id="tf-box"/>
-              <TextfieldLabel htmlFor="tf-box">Your Name</TextfieldLabel>
-              <TextfieldLine />
-            </Textfield>
+              <TextFieldInput type="text" id="tf-box"/>
+              <TextFieldLabel htmlFor="tf-box">Your Name</TextFieldLabel>
+              <TextFieldLine />
+            </TextField>
             <Elevation
               style={{
                 'display': 'flex',
@@ -403,61 +404,61 @@ export default class TextfieldPage extends Component {
             title="Label float above"
             code={code.textfield.source3}
           >
-            <Textfield>
-              <TextfieldInput id="demo-label-above" type="text"/>
-              <TextfieldLabel htmlFor="demo-label-above">Label float above</TextfieldLabel>
-              <TextfieldLine/>
-            </Textfield>
+            <TextField>
+              <TextFieldInput id="demo-label-above" type="text"/>
+              <TextFieldLabel htmlFor="demo-label-above">Label float above</TextFieldLabel>
+              <TextFieldLine/>
+            </TextField>
           </Example>
           <Example
-            title="Multi-line Textfields"
+            title="Multi-line TextFields"
             code={code.textfield.source4}
           >
-            <Textfield
+            <TextField
               multiline
               upgraded
             >
-              <TextfieldInput
+              <TextFieldInput
                 elementType="textarea"
                 rows="8"
                 cols="40"
                 id="multi-line-demo"
               />
-              <TextfieldLabel htmlFor="multi-line-demo">Multi-line Label</TextfieldLabel>
-            </Textfield>
+              <TextFieldLabel htmlFor="multi-line-demo">Multi-line Label</TextFieldLabel>
+            </TextField>
           </Example>
           <Example
             title="Password field with validation"
             code={code.textfield.source5}
           >
-            <Textfield
+            <TextField
               upgraded
             >
-              <TextfieldInput
+              <TextFieldInput
                 type="password"
                 id="password-validation-demo"
                 aria-controls="pw-validation-msg"
                 required
                 pattern=".{8,}"
               />
-              <TextfieldLabel htmlFor="password-validation-demo">Choose password</TextfieldLabel>
-            </Textfield>
-            <TextfieldHelptext
+              <TextFieldLabel htmlFor="password-validation-demo">Choose password</TextFieldLabel>
+            </TextField>
+            <TextFieldHelperText
               persistent
               validation
               id="pw-validation-msg"
             >
               Must be at least 8 characters long
-            </TextfieldHelptext>
+            </TextFieldHelperText>
           </Example>
           <Example
-            title="Textfields - CSS Only"
+            title="TextFields - CSS Only"
             code={code.textfield.source6}
           >
             <FormField alignEnd>
-              <Textfield cssOnly>
-                <TextfieldInput id="textfield-only-css" placeholder="Hint text"/>
-              </Textfield>
+              <TextField cssOnly>
+                <TextFieldInput id="textfield-only-css" placeholder="Hint text"/>
+              </TextField>
               <label
                 style={{'alignSelf': 'flex-start'}}
                 htmlFor="textfield-only-css"
@@ -465,52 +466,52 @@ export default class TextfieldPage extends Component {
             </FormField>
           </Example>
           <Example
-            title="Multi-line Textfields - CSS Only"
+            title="Multi-line TextFields - CSS Only"
             code={code.textfield.source7}
           >
             <label htmlFor="css-only-multiline">About you:</label>
-            <Textfield
+            <TextField
               multiline
               cssOnly
             >
-              <TextfieldInput
+              <TextFieldInput
                 elementType="textarea"
                 id="css-only-multiline"
                 rows="8"
                 cols="40"
                 placeholder="Tell the world something about yourself!"
               />
-            </Textfield>
+            </TextField>
           </Example>
           <Example
-            title="Full-Width Textfields - CSS Only"
+            title="Full-Width TextFields - CSS Only"
             code={code.textfield.source8}
           >
-            <Textfield upgraded fullwidth cssOnly>
-              <TextfieldInput
+            <TextField upgraded fullwidth cssOnly>
+              <TextFieldInput
                 type="text"
                 placeholder="Subject"
                 aria-label="Subject"
               />
-            </Textfield>
-            <Textfield multiline upgraded fullwidth cssOnly>
-              <TextfieldInput
+            </TextField>
+            <TextField multiline upgraded fullwidth cssOnly>
+              <TextFieldInput
                 elementType="textarea"
                 rows="8"
                 cols="40"
                 placeholder="Message"
                 aria-label="Message"
               />
-            </Textfield>
+            </TextField>
           </Example>
           <Example
             title="CSS-only text field boxes"
             code={code.textfield.source9}
           >
             <label htmlFor="css-only-textfield-box">Your name:</label>
-            <Textfield box cssOnly>
-              <TextfieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
-            </Textfield>
+            <TextField box cssOnly>
+              <TextFieldInput type="text" id="css-only-textfield-box" placeholder="Name"/>
+            </TextField>
           </Example>
         </Elevation>
         <Footer/>

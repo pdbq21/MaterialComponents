@@ -55,7 +55,7 @@ export default class BottomLine extends Component {
     },
     notifyAnimationEnd: () => {
       //todo: onAnimation
-      this.emit(ANIMATION_END_EVENT_NAME, {});
+      this.emit(this.refs.root, ANIMATION_END_EVENT_NAME, {});
     },
   });
 
@@ -76,13 +76,13 @@ export default class BottomLine extends Component {
     const {
       elementType,
       className,
-      active,
+      //active,
       children,
       ...otherProp
     } = ownProps;
 
     const classes = classnames('mdc-text-field__bottom-line', {
-      'mdc-text-field-bottom-line--active': active
+      //'mdc-text-field-bottom-line--active': active
     }, this.state.classNames, className);
     const ElementType = elementType || 'div';
     return (

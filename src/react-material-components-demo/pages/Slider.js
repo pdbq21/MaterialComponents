@@ -18,9 +18,10 @@ import {
   CheckboxInput,
   CheckboxBG,
   CheckboxLabel,
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
+  TextField,
+  TextFieldLine,
+  TextFieldInput,
+  TextFieldLabel,
 } from '../lib'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
 
@@ -365,34 +366,37 @@ export default class SliderPage extends Component {
               }}
             >
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={min}
                     onChange={({target}) => this.handleOptions('min', target.value)}
                   />
-                  <TextfieldLabel>Min</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Min</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={max}
                     onChange={({target}) => this.handleOptions('max', target.value)}
                   />
-                  <TextfieldLabel>Max</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Max</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={step}
                     onChange={({target}) => this.handleOptions('step', target.value)}
                   />
-                  <TextfieldLabel>Step</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Step</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
                 <Checkbox
@@ -469,34 +473,36 @@ export default class SliderPage extends Component {
               }}
             >
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={min1}
                     onChange={({target}) => this.handleOptions('min1', target.value)}
                   />
-                  <TextfieldLabel>Min</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Min</TextFieldLabel>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={max1}
                     onChange={({target}) => this.handleOptions('max1', target.value)}
                   />
-                  <TextfieldLabel>Max</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Max</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={step1}
                     onChange={({target}) => this.handleOptions('step1', target.value)}
                   />
-                  <TextfieldLabel>Step</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Step</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
                 <Checkbox
@@ -575,34 +581,37 @@ export default class SliderPage extends Component {
               }}
             >
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={min2}
                     onChange={({target}) => this.handleOptions('min2', target.value)}
                   />
-                  <TextfieldLabel>Min</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Min</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={max2}
                     onChange={({target}) => this.handleOptions('max2', target.value)}
                   />
-                  <TextfieldLabel>Max</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Max</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="number"
                     value={step2}
                     onChange={({target}) => this.handleOptions('step2', target.value)}
                   />
-                  <TextfieldLabel>Step</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Step</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
                 <Checkbox

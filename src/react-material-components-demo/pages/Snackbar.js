@@ -14,9 +14,10 @@ import {
   CheckboxBG,
   CheckboxLabel,
   FormField,
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
+  TextField,
+  TextFieldLine,
+  TextFieldInput,
+  TextFieldLabel,
   TypographyDisplay,
 } from '../lib'
 import {OriginalDoc, Footer, Example, Demo, Table, code} from '../templates'
@@ -314,34 +315,37 @@ export default class SnackbarPage extends Component {
                 </CheckboxLabel>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="text"
                     value={valueMessage || ''}
                     onChange={this.handleChangeMessage}
                   />
-                  <TextfieldLabel>Message Text</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Message Text</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="text"
                     value={valueAction || ''}
                     onChange={this.handleChangeAction}
                   />
-                  <TextfieldLabel>Action Text</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Action Text</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
               <FormField>
-                <Textfield>
-                  <TextfieldInput
+                <TextField>
+                  <TextFieldInput
                     type="text"
                     value={valueTimeout || ''}
                     onChange={this.handleChangeTimeout}
                   />
-                  <TextfieldLabel>Timeout</TextfieldLabel>
-                </Textfield>
+                  <TextFieldLabel>Timeout</TextFieldLabel>
+                  <TextFieldLine/>
+                </TextField>
               </FormField>
             </Elevation>
           </Example>

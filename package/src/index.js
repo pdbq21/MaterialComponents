@@ -64,9 +64,9 @@ export {
   TextFieldLabel,
   TextFieldHelperText,
   TextFieldLine,
-  TextFieldIcon,
-  TextFieldOutlined,
-  TextFieldIdleOutlined
+  //TextFieldIcon,
+  //TextFieldOutlined,
+  //TextFieldIdleOutlined
 } from './Textfield';
 export {FormField} from './FormField';
 export {

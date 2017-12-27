@@ -117,7 +117,6 @@ export default class Table extends PureComponent {
       let newFocus = focusRowIndex;
 
       if (keyCode === 32) {
-        console.dir(rows[newFocus].children[0].childNodes[0].childNodes[0].checked);
         this.onCheckbox({checked: !rows[newFocus].children[0].childNodes[0].childNodes[0].checked, index: newFocus});
       } else if (keyCode === 13) {
         // focus index

@@ -13,7 +13,10 @@ const {MDCRippleFoundation} = ripple;
 const {
   strings: {
     INPUT_SELECTOR: INPUT_SELECTOR_NAME,
-    IDLE_OUTLINE_SELECTOR: IDLE_OUTLINE_SELECTOR_NAME
+    LABEL_SELECTOR: LABEL_SELECTOR_NAME,
+    ICON_SELECTOR: ICON_SELECTOR_NAME,
+    BOTTOM_LINE_SELECTOR: BOTTOM_LINE_SELECTOR_NAME,
+    //IDLE_OUTLINE_SELECTOR: IDLE_OUTLINE_SELECTOR_NAME
   },
 } = MDCTextFieldFoundation;
 let supportsPassive_;
@@ -90,6 +93,10 @@ export default class Textfield extends Component {
   };
 
   rootInput_ = () => this.refs.root.querySelector(INPUT_SELECTOR_NAME);
+  rootLabel_ = () => this.refs.root.querySelector(LABEL_SELECTOR_NAME);
+
+  icon_ = () => this.refs.root.querySelector(ICON_SELECTOR_NAME);
+  bottomLine_ = () => this.refs.root.querySelector(BOTTOM_LINE_SELECTOR_NAME);
 
   foundation = new MDCTextFieldFoundation({
     addClass: className => this.setState(({classNames}) => ({
@@ -140,7 +147,7 @@ export default class Textfield extends Component {
         bottomLine.removeEventListener(evtType, handler);
       }
     },
-    getIdleOutlineStyleValue: (propertyName) => {
+    /*getIdleOutlineStyleValue: (propertyName) => {
       const idleOutlineElement = this.refs.root.querySelector(IDLE_OUTLINE_SELECTOR_NAME);
       if (idleOutlineElement) {
         return window.getComputedStyle(idleOutlineElement).getPropertyValue(propertyName);
@@ -155,7 +162,35 @@ export default class Textfield extends Component {
       if (!!this.refs.root) {
         return window.getComputedStyle(this.refs.root).getPropertyValue('direction') === 'rtl';
       }
-    }
+    },*/
+    addClassToLabel: className => {
+      const rootLabel = this.rootLabel_();
+      if (rootLabel) {
+        return rootLabel.classList.add(className);
+      }
+    },
+    removeClassFromLabel: className => {
+      const rootLabel = this.rootLabel_();
+      if (rootLabel) {
+        return rootLabel.classList.remove(className);
+      }
+    },
+    eventTargetHasClass: (target, className) => target.classList.contains(className),
+    notifyIconAction: () => {
+      if (typeof this.props.onIcon !== 'undefined') {
+        this.props.onIcon({});
+      }
+      /*      if (this.refs.root) {
+              return this.emit(this.refs.root, ICON_EVENT, {})
+            }*/
+    },
+    setIconAttr: (name, value) => {
+      const icon_ = this.icon_();
+      if (icon_) {
+        return icon_.setAttribute(name, value);
+      }
+    },
+
   });
 
   foundationRipple = new MDCRippleFoundation({

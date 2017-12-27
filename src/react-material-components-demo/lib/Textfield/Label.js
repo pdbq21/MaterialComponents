@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import classnames from 'classnames';
+/* not work for v0.27.0
 import {textField} from 'material-components-web/dist/material-components-web';
 
 const {MDCTextFieldLabelFoundation} = textField;
@@ -64,4 +65,30 @@ export default class Label extends Component {
       </ElementType>
     );
   }
+}
+*/
+export default function Label ({
+      elementType,
+      className,
+      children,
+      floatAbove,
+      shake,
+      ...otherProp
+    }){
+    const classes = classnames(
+      'mdc-text-field__label', {
+        'mdc-text-field__label--float-above': floatAbove,
+        'mdc-text-field__label--shake': shake,
+      },
+      className
+    );
+    const ElementType = elementType || 'label';
+    return (
+      <ElementType
+        className={classes}
+        {...otherProp}
+      >
+        {children}
+      </ElementType>
+    );
 }

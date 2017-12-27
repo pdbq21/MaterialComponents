@@ -12,9 +12,10 @@ import {
   Elevation,
   TypographyDisplay,
   FormField,
-  Textfield,
-  TextfieldInput,
-  TextfieldLabel,
+  TextField,
+  TextFieldLine,
+  TextFieldInput,
+  TextFieldLabel,
   Checkbox,
   CheckboxInput,
   CheckboxBG,
@@ -321,28 +322,30 @@ export default class LinearProgressPage extends Component {
             }}
           >
             <FormField>
-              <Textfield>
-                <TextfieldInput
+              <TextField>
+                <TextFieldInput
                   type="number"
                   value={progress}
                   step="0.01"
                   min="0" max="1"
                   onChange={({target}) => this.handleOptions('progress', target.value)}
                 />
-                <TextfieldLabel>Progress</TextfieldLabel>
-              </Textfield>
+                <TextFieldLabel>Progress</TextFieldLabel>
+                <TextFieldLine/>
+              </TextField>
             </FormField>
             <FormField>
-              <Textfield>
-                <TextfieldInput
+              <TextField>
+                <TextFieldInput
                   type="number"
                   value={buffer}
                   step="0.01"
                   min="0" max="1"
                   onChange={({target}) => this.handleOptions('buffer', target.value)}
                 />
-                <TextfieldLabel>Buffer</TextfieldLabel>
-              </Textfield>
+                <TextFieldLabel>Buffer</TextFieldLabel>
+                <TextFieldLine/>
+              </TextField>
             </FormField>
             <FormField>
               <Checkbox
